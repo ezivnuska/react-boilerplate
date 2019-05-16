@@ -1,6 +1,7 @@
 import React, { Fragment, PureComponent } from 'react'
 import { GET_ALL_USERS } from 'queries'
 import { Query } from 'react-apollo'
+import withSession from 'hoc/withSession'
 import webConfig from 'config'
 import { Helmet } from 'react-helmet'
 import {
@@ -21,6 +22,24 @@ class Users extends PureComponent {
     )
   }
 
+  renderUserSignature = user => {
+    const { username } = this.props.session.getCurrentUser
+    const isCurrentUser = user.username === username
+    return isCurrentUser ? (
+      <UserSignature
+        user={user}
+        size={50}
+        to={'/profile'}
+      />
+    ) : (
+      <UserSignature
+        user={user}
+        size={50}
+        to={`/user/${user.username}`}
+      />
+    )
+  }
+
   render() {
     return (
       <>
@@ -34,21 +53,21 @@ class Users extends PureComponent {
               if (error) return <div>Error</div>
 
               return (
-                <div className='users flexbox'>
+                <div className='users'>
                   {data.getAllUsers.length == 0 &&
-                    <div className='column column_12_12'>
+                    <div>
                       <h3>Empty... check back soon!</h3>
                     </div>
                   }
-                  {data.getAllUsers.map((user, index) => (
-                    <div className='column column_6_12' key={index}>
-                      <UserSignature
-                        user={user}
-                        size={50}
-                        to={`profile/${user.username}`}
-                      />
-                    </div>
-                  ))}
+                  {data.getAllUsers.length &&
+                    <ul className='users'>
+                      {data.getAllUsers.map((user, index) => (
+                        <li key={index}>
+                          {this.renderUserSignature(user)}
+                        </li>
+                      ))}
+                    </ul>
+                  }
                 </div>
               )
             }}
@@ -59,4 +78,4 @@ class Users extends PureComponent {
   }
 }
 
-export default Users
+export default withSession(Users)

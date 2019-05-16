@@ -14,7 +14,7 @@ const UserStatus = ({ session, ...props }) => {
       <UserSignature
         user={user}
         size={30}
-        to={`/profile/${user.username}`}
+        to={`/profile`}
       />
       <div style={{ textAlign: 'right' }}>
         <Signout size={30} />

@@ -1,15 +1,14 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import withSession from 'hoc/withSession'
 
 import { MainLayout } from 'layouts'
 
 import {
-  Dashboard,
   ForgotPassword,
   Home,
-  Signout,
   NotFound,
+  Profile,
   Users,
   User
 } from 'pages'
@@ -31,7 +30,12 @@ const Root = ({ refetch, session }) => (
         <Users {...props} />
       </MainLayout>
     )} />
-    <Route path={['/profile/:URL_Param', '/profile/:URL_Param/edit', '/profile/:URL_Param/account']} render={props => (
+    <Route path={['/profile', '/profile/edit', '/profile/account']} render={props => (
+      <MainLayout>
+        <Profile {...props} session={session} />
+      </MainLayout>
+    )} />
+    <Route path='/user/:URL_Param' render={props => (
       <MainLayout>
         <User {...props} session={session} />
       </MainLayout>

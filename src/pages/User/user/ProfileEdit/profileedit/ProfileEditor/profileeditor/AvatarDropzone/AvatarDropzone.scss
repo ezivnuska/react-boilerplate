@@ -1,0 +1,66 @@
+@import '~scss/main';
+
+#display {
+  position: relative;
+
+  #display-prompt {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.2s linear;
+    text-align: center;
+    color: #fff;
+    // cursor: pointer;
+    &:hover {
+      opacity: 0;
+      transition: opacity 0s linear;
+    }
+  }
+}
+
+#avatar-dropzone-wrapper {
+  display: flex;
+  flex-direction: row;
+
+  & > * {
+    flex: 0 0 auto;
+  }
+
+  .submit-button {
+    font-size: 3em;
+    text-align: center;
+
+    i {
+      color: gray;
+      cursor: pointer;
+
+      &:hover {
+        color: green;
+      }
+    }
+  }
+
+  #dropzone {
+    position: relative;
+    height: 100%;
+    cursor: pointer;
+
+    &:hover {
+      background: #ccc;
+    }
+
+    #avatar-editor-wrapper {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      text-align: center;
+      border: 1px solid #000;
+    }
+  }
+}

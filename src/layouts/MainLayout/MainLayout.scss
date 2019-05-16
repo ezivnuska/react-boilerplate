@@ -1,0 +1,45 @@
+@import '~scss/main';
+
+.main-layout {
+  text-align: center;
+
+  .page-content {
+    margin: 1rem auto;
+    padding: 1rem 0.5rem;
+    max-width: 900px;
+
+    .flex-container {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+
+      aside, section {
+        display: inline-block;
+      }
+      
+      section {
+        flex: 2;
+        margin-left: 1rem;
+        border: 1px solid red;
+      }
+
+      aside {
+        text-align: center;
+        flex: 1;
+        border: 1px solid green;
+      }
+
+      @media only screen and (max-width: 767px) {
+        aside {
+          width: 100%;
+        }
+
+        section {
+          margin-left: 0;
+          flex: 1 0 auto;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

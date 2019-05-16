@@ -1,0 +1,6 @@
+{
+  "siteURL": "http://localhost:3000",
+  "assetURL": "http://localhost:3000/assets",
+  "profileImagesURL": "http://localhost:3000/assets/user-uploads/profile-images",
+  "environment": "development"
+}

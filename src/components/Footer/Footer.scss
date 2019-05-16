@@ -1,0 +1,41 @@
+@import '~scss/main';
+
+footer {
+  height: auto;
+  margin: 6rem auto 0;
+  border: 1px solid #e8e8e8;
+
+  .copyright {
+
+  }
+
+  .social_icons {
+    display: block;
+    text-align: center;
+
+    ul, ul li {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      display: inline-block;
+      width: 100%;
+
+      li {
+        display: inline-block;
+        flex: 0 0 auto;
+        list-style-type: none;
+
+        a {
+          font-size: 2rem;
+          line-height: normal;
+        }
+
+        // &:last-child {
+        //   margin-right: 0;
+        // }
+      }
+    }
+  }
+}

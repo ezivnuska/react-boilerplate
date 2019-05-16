@@ -1,0 +1,17 @@
+@import '~scss/main';
+
+.sidebar {
+
+  .logo_wrapper {
+    display: inline-block;
+    width: 100%;
+    margin: 4rem 0 2rem;
+
+    img {
+      display: block;
+      width: 100%;
+      max-width: 6rem;
+      margin: 0 auto;
+    }
+  }
+}

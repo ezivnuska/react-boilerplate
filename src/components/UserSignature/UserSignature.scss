@@ -1,0 +1,33 @@
+@import '~scss/main';
+
+.user-signature {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  text-align: left;
+
+  > * {
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
+  .profile-image {
+    // display: inline-block;
+    margin-right: 0.5rem;
+    // border-radius: 50%;
+
+    &.small {
+      height: 30px;
+      width: 30px;
+    }
+  }
+
+  .username {
+    // display: inline-block;
+    // padding: 0;
+    // height: 50px;
+    // overflow: hidden;
+    white-space: nowrap;
+    vertical-align: top;
+  }
+}

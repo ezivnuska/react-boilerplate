@@ -1,0 +1,9 @@
+section.form-section {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.5rem 1rem;
+  border-bottom: 1px solid purple;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}

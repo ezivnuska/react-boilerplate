@@ -6,7 +6,6 @@ import {
   PROFILE_PAGE
 } from 'queries'
 import { withRouter } from 'react-router-dom'
-import CKEditor from 'react-ckeditor-wrapper'
 import toastr from 'toastr'
 
 import { Form } from 'components'
@@ -22,13 +21,16 @@ class NameEditor extends PureComponent {
     ...initialState
   }
 
-  componentDidMount() {
-    const { firstname, lastname } = this.props.profile
+  componentWillMount() {
+    const { firstname, lastname } = this.props.session.getCurrentUser
     
     this.setState({
       firstname,
       lastname
     })
+  }
+
+  componentDidMount() {
     
     toastr.options = {
       'closeButton': false,
@@ -86,7 +88,8 @@ class NameEditor extends PureComponent {
         ]}>
 
         {(editProfile, { data, loading, error }) => {
-
+          console.log('firstname', lastname)
+          console.log('lastname', firstname)
           return (
 
             <Form

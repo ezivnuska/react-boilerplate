@@ -9,23 +9,27 @@ import { withRouter } from 'react-router-dom'
 import CKEditor from 'react-ckeditor-wrapper'
 import toastr from 'toastr'
 
+import { Form } from 'components'
+
 const initialState = {
-  bio: ''
+  firstname: '',
+  lastname: ''
 }
 
-class BioEditor extends PureComponent {
+class NameEditor extends PureComponent {
 
   state = {
     ...initialState
   }
 
   componentDidMount() {
-    const { profile } = this.props
-    if (profile) {
-      this.setState({
-        bio: profile.bio
-      })
-    }
+    const { firstname, lastname } = this.props.profile
+    
+    this.setState({
+      firstname,
+      lastname
+    })
+    
     toastr.options = {
       'closeButton': false,
       'debug': false,
@@ -45,13 +49,16 @@ class BioEditor extends PureComponent {
     }
   }
 
-  handleEditorChange(bio) {
+  handleChange = e => {
+    e.preventDefault()
+    const name = e.target.name
+    const value = e.target.value
     this.setState({
-      bio
+      [name]: value,
     })
   }
 
-  handleSaveBio(event, editProfile) {
+  handleSubmit(event, editProfile) {
     event.preventDefault()
     editProfile().then(async ({ data }) => {
       toastr.success('We have updated your profile!', 'Saved!')
@@ -65,9 +72,9 @@ class BioEditor extends PureComponent {
 
   render() {
 
-    const { bio } = this.state
+    const { firstname, lastname } = this.state
     const { session } = this.props
-    const { email, firstname, lastname, username } = session.getCurrentUser
+    const { bio, email, username } = session.getCurrentUser
 
     return (
       <Mutation
@@ -82,30 +89,26 @@ class BioEditor extends PureComponent {
 
           return (
 
-            <form onSubmit={event => this.handleSaveBio(event, editProfile)}>
+            <Form
+              error={error}
+              onSubmit={event => this.handleSubmit(event, editProfile)}
+              title='Edit Name'
+            >
 
-              <div className='form_wrap editBioForm'>
-
-                <div className={{ 'error-label': this.state.error != '' }}>
-                  {this.state.error}
-                </div>
-
-                <div className='form_row'>
-                  <CKEditor
-                    value={bio}
-                    onChange={this.handleEditorChange.bind(this)}
-                    config={{ extraAllowedContent: 'div(*) p(*) strong(*)' }}
-                  />
-                </div>
-
-                <div className='form_buttons'>
-                  <button type='submit' className='btn'
-                    disabled={loading}>
-                    Save changes
-                  </button>
-                </div>
+              <div className='form-input'>
+                <input type='text' name='firstname' placeholder='First name' defaultValue={firstname} onChange={e => this.handleChange(e)} />
               </div>
-            </form>
+
+              <div className='form-input'>
+                <input type='text' name='lastname' placeholder='Last name' defaultValue={lastname} onChange={e => this.handleChange(e)} />
+              </div>
+
+              <div className='form_buttons'>
+                <button type='submit' className='btn' disabled={loading}>
+                  Update
+                </button>
+              </div>
+            </Form>
           )
         }}
 
@@ -114,4 +117,4 @@ class BioEditor extends PureComponent {
   }
 }
 
-export default withRouter(BioEditor)
+export default withRouter(NameEditor)

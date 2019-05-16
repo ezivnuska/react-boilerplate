@@ -14,6 +14,7 @@ class UserProfile extends PureComponent {
 
   render() {
     const { username } = this.props
+    
     return (
       <Query query={PROFILE_PAGE} variables={{ username }}>
 

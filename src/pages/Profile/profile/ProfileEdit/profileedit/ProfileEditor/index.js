@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { withRouter } from 'react-router-dom'
 import AvatarDropzone from './profileeditor/AvatarDropzone'
 import BioEditor from './profileeditor/BioEditor'
+import NameEditor from './profileeditor/NameEditor'
 import { FormSection } from 'components'
 
 import './ProfileEditor.scss'
@@ -36,6 +37,10 @@ class ProfileEditor extends PureComponent {
 
     return (
       <div id='profile-editor'>
+
+        <FormSection title='Name'>
+          <NameEditor {...this.props} />
+        </FormSection>
 
         <FormSection title='Avatar'>
           <AvatarDropzone {...this.props} />

@@ -20,9 +20,11 @@ export const GET_CURRENT_USER = gql`
 `
 
 export const EDIT_PROFILE = gql`
-  mutation($email: String!, $bio: String!){
-    editProfile(email: $email, bio: $bio){
+  mutation($email: String!, $bio: String, $firstname: String, $lastname: String){
+    editProfile(email: $email, bio: $bio, firstname: $firstname, lastname: $lastname) {
       bio
+      firstname
+      lastname
     }
   }
 `

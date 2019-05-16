@@ -64,8 +64,8 @@ const resolvers = {
 
       return { token: createToken(user, process.env.JWT_SECRET, '1hr')}
     },
-    editProfile: async (root, { email, bio }, { User }) => {
-      const user = await User.findOneAndUpdate({ email }, { $set: { bio }}, { new: true })
+    editProfile: async (root, { email, bio, firstname, lastname }, { User }) => {
+      const user = await User.findOneAndUpdate({ email }, { $set: { bio, firstname, lastname }}, { new: true })
       if (!user) {
         throw new Error('User not found')
       }

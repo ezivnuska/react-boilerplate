@@ -20,7 +20,7 @@ class User extends PureComponent {
   render = () => {
     const { match } = this.props
     const username = match.params.URL_Param
-
+    
     return (
       <Fragment>
         {this.head()}

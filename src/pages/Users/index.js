@@ -1,12 +1,10 @@
 import React, { Fragment, PureComponent } from 'react'
 import { GET_ALL_USERS } from 'queries'
 import { Query } from 'react-apollo'
-import withSession from 'hoc/withSession'
-import webConfig from 'config'
 import { Helmet } from 'react-helmet'
+import withAuth from 'hoc/withAuth'
 import {
   Heading,
-  ProfileImage,
   UserSignature
 } from 'components'
 
@@ -25,6 +23,9 @@ class Users extends PureComponent {
   renderUserSignature = user => {
     const { username } = this.props.session.getCurrentUser
     const isCurrentUser = user.username === username
+    
+    if (!user) return null
+
     return isCurrentUser ? (
       <UserSignature
         user={user}
@@ -62,10 +63,11 @@ class Users extends PureComponent {
                   {data.getAllUsers.length &&
                     <ul className='users'>
                       {data.getAllUsers.map((user, index) => (
-                        <li key={index}>
-                          {this.renderUserSignature(user)}
-                        </li>
-                      ))}
+                          <li key={index}>
+                            {this.renderUserSignature(user)}
+                          </li>
+                        )
+                      )}
                     </ul>
                   }
                 </div>
@@ -78,4 +80,4 @@ class Users extends PureComponent {
   }
 }
 
-export default withSession(Users)
+export default withAuth(session => session && session.getCurrentUser)(Users)

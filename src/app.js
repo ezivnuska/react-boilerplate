@@ -27,7 +27,7 @@ const Root = ({ refetch, session }) => (
     )} />
     <Route path='/users' render={props => (
       <MainLayout>
-        <Users {...props} />
+        <Users {...props} session={session} />
       </MainLayout>
     )} />
     <Route path={['/profile', '/profile/edit', '/profile/account']} render={props => (

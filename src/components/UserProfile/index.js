@@ -22,6 +22,14 @@ class UserProfile extends PureComponent {
           if (loading) return <div></div>
           if (error) return <div>Error</div>
 
+          const userInfo = data.profilePage
+          const {
+            bio,
+            firstname,
+            lastname,
+            profileImage
+          } = userInfo
+
           return (
             <Fragment>
               <Heading level={2}>

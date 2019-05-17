@@ -19,8 +19,7 @@ class Profile extends PureComponent {
   }
 
   render = () => {
-    const { match, refetch, ...props } = this.props
-    const { username } = props.session.getCurrentUser
+    const { username } = this.props.session.getCurrentUser
 
     return (
       <>
@@ -37,8 +36,8 @@ class Profile extends PureComponent {
             ]}
           />
           <Route path='/profile' exact render={() => <UserProfile username={username} />} />
-          <Route path='/profile/edit' exact render={() => <ProfileEdit {...props} />} />
-          <Route path='/profile/account' render={() => <UpdateAccount {...props} />} />
+          <Route path='/profile/edit' exact render={() => <ProfileEdit {...this.props} />} />
+          <Route path='/profile/account' render={() => <UpdateAccount {...this.props} />} />
         </div>
       </>
     )

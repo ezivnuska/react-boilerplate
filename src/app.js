@@ -32,7 +32,7 @@ const Root = ({ refetch, session }) => (
     )} />
     <Route path={['/profile', '/profile/edit', '/profile/account']} render={props => (
       <MainLayout>
-        <Profile {...props} session={session} />
+        <Profile {...props} session={session} refetch={refetch} />
       </MainLayout>
     )} />
     <Route path='/user/:URL_Param' render={props => (

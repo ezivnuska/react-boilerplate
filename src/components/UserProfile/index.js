@@ -34,7 +34,7 @@ class UserProfile extends PureComponent {
               {firstname && lastname && <p>{firstname} {lastname}</p>}
               {firstname && !lastname && <p>{firstname}</p>}
               {lastname && !firstname && <p>{lastname}</p>}
-              {profileImage && <ProfileImage src={profileImage} />}
+              {profileImage && <ProfileImage src={profileImage} size={150} />}
               {bio && <div dangerouslySetInnerHTML={{__html: bio}}></div>}
             </Fragment>
           )

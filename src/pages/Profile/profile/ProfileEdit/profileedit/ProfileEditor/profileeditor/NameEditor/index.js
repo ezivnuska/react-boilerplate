@@ -62,9 +62,12 @@ class NameEditor extends PureComponent {
 
   handleSubmit(event, editProfile) {
     event.preventDefault()
-    editProfile().then(async ({ data }) => {
+    editProfile()
+    .then(async ({ data }) => {
+      await this.props.refetch()
       toastr.success('We have updated your profile!', 'Saved!')
     }).catch(error => {
+      console.log('ERROR:', error)
       this.setState({
         error: error.graphQLErrors.map(x => x.message)
       })
@@ -87,33 +90,29 @@ class NameEditor extends PureComponent {
           { query: PROFILE_PAGE, variables: { username } }
         ]}>
 
-        {(editProfile, { data, loading, error }) => {
-          console.log('firstname', lastname)
-          console.log('lastname', firstname)
-          return (
+        {(editProfile, { data, loading, error }) => (
 
-            <Form
-              error={error}
-              onSubmit={event => this.handleSubmit(event, editProfile)}
-              title='Edit Name'
-            >
+          <Form
+            error={error}
+            onSubmit={event => this.handleSubmit(event, editProfile)}
+            title={`Edit Name: ${firstname} ${lastname}`}
+          >
 
-              <div className='form-input'>
-                <input type='text' name='firstname' placeholder='First name' defaultValue={firstname} onChange={e => this.handleChange(e)} />
-              </div>
+            <div className='form-input'>
+              <input type='text' name='firstname' placeholder='First name' defaultValue={firstname} onChange={e => this.handleChange(e)} />
+            </div>
 
-              <div className='form-input'>
-                <input type='text' name='lastname' placeholder='Last name' defaultValue={lastname} onChange={e => this.handleChange(e)} />
-              </div>
+            <div className='form-input'>
+              <input type='text' name='lastname' placeholder='Last name' defaultValue={lastname} onChange={e => this.handleChange(e)} />
+            </div>
 
-              <div className='form_buttons'>
-                <button type='submit' className='btn' disabled={loading}>
-                  Update
-                </button>
-              </div>
-            </Form>
-          )
-        }}
+            <div className='form_buttons'>
+              <button type='submit' className='btn' disabled={loading}>
+                Update
+              </button>
+            </div>
+          </Form>
+        )}
 
       </Mutation>
     )

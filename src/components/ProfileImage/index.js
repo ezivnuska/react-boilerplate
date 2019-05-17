@@ -5,8 +5,9 @@ import webConfig from 'config'
 import './ProfileImage.scss'
 
 const ProfileImage = ({ src, size }) => {
+  const small = size <= 50
   const url = src
-    ? `${webConfig.siteURL}/user-uploads/profile-images/small/${src}`
+    ? `${webConfig.siteURL}/user-uploads/profile-images/${small ? 'small/' : ''}${src}`
     : `${webConfig.siteURL}/assets/graphics/default-avatar-small.png`
   return (
     <img

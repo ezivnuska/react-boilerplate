@@ -1,122 +1,45 @@
 import React, { PureComponent } from 'react'
-import { Mutation } from 'react-apollo'
-import {
-  EDIT_PROFILE,
-  GET_USER_PROFILE,
-  PROFILE_PAGE
-} from 'queries'
-import { withRouter } from 'react-router-dom'
-import toastr from 'toastr'
+import NameForm from './nameeditor/NameForm'
+import { Heading, SplitForm } from 'components'
 
-import { Form } from 'components'
-
-const initialState = {
-  firstname: '',
-  lastname: ''
-}
+import './NameEditor.scss'
 
 class NameEditor extends PureComponent {
-
+  
   state = {
-    ...initialState
+    editing: false
   }
 
   componentWillMount() {
-    const { firstname, lastname } = this.props.session.getCurrentUser
-    
-    this.setState({
-      firstname,
-      lastname
-    })
+    this.toggleEdit = this.toggleEdit.bind(this)
   }
 
-  componentDidMount() {
-    
-    toastr.options = {
-      'closeButton': false,
-      'debug': false,
-      'newestOnTop': true,
-      'progressBar': true,
-      'positionClass': 'toast-bottom-right',
-      'preventDuplicates': false,
-      'onclick': null,
-      'showDuration': '300',
-      'hideDuration': '1000',
-      'timeOut': '5000',
-      'extendedTimeOut': '1000',
-      'showEasing': 'swing',
-      'hideEasing': 'linear',
-      'showMethod': 'fadeIn',
-      'hideMethod': 'fadeOut'
-    }
-  }
-
-  handleChange = e => {
+  toggleEdit = e => {
     e.preventDefault()
-    const name = e.target.name
-    const value = e.target.value
-    this.setState({
-      [name]: value,
-    })
-  }
-
-  handleSubmit(event, editProfile) {
-    event.preventDefault()
-    editProfile()
-    .then(async ({ data }) => {
-      await this.props.refetch()
-      toastr.success('We have updated your profile!', 'Saved!')
-    }).catch(error => {
-      console.log('ERROR:', error)
-      this.setState({
-        error: error.graphQLErrors.map(x => x.message)
-      })
-      console.error('ERR =>', error.graphQLErrors.map(x => x.message))
-    })
+    this.setState({ editing: !this.state.editing })
   }
 
   render() {
-
-    const { firstname, lastname } = this.state
-    const { session } = this.props
-    const { bio, email, username } = session.getCurrentUser
-
+    const { editing } = this.state
+    const { firstname, lastname } = this.props.session.getCurrentUser
+    
     return (
-      <Mutation
-        mutation={EDIT_PROFILE}
-        variables={{ email, bio, firstname, lastname }}
-        refetchQueries={() => [
-          { query: GET_USER_PROFILE },
-          { query: PROFILE_PAGE, variables: { username } }
-        ]}>
-
-        {(editProfile, { data, loading, error }) => (
-
-          <Form
-            error={error}
-            onSubmit={event => this.handleSubmit(event, editProfile)}
-            title={`Edit Name: ${firstname} ${lastname}`}
-          >
-
-            <div className='form-input'>
-              <input type='text' name='firstname' placeholder='First name' defaultValue={firstname} onChange={e => this.handleChange(e)} />
-            </div>
-
-            <div className='form-input'>
-              <input type='text' name='lastname' placeholder='Last name' defaultValue={lastname} onChange={e => this.handleChange(e)} />
-            </div>
-
-            <div className='form_buttons'>
-              <button type='submit' className='btn' disabled={loading}>
-                Update
-              </button>
-            </div>
-          </Form>
-        )}
-
-      </Mutation>
+      <div className='name-editor'>
+        <SplitForm editing={editing}>
+          <div className='preview'>
+            <Heading level={4}>Current Name:</Heading>
+            <p>{firstname} {lastname}</p>
+          </div>
+          {editing && <NameForm split abort={this.toggleEdit} {...this.props} />}
+          {!editing && <div>
+            <button onClick={e => this.toggleEdit(e)}>
+              <i className='fas fa-edit fa-3x'></i>
+            </button>
+          </div>}
+        </SplitForm>
+      </div>
     )
   }
 }
 
-export default withRouter(NameEditor)
+export default NameEditor

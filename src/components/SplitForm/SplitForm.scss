@@ -1,0 +1,33 @@
+@import '~scss/main';
+
+.split-form {
+    display: flex;
+    flex-flow: row wrap;
+
+    > * {
+        display: inline-block;
+        flex: 1 0 60%;
+        min-width: auto;
+        border: 1px dotted green;
+    }
+
+    .preview {
+        flex: 1 0 40%;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    @media only screen and (max-width: 767px) {
+        display: block;
+
+        // .preview {
+        //     flex: 100%;
+        // }
+    
+        // .form {
+        //     min-width: 100%;
+        // }
+    }
+}

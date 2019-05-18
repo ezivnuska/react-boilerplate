@@ -70,6 +70,7 @@ class SignupForm extends PureComponent {
               error={error}
               onSubmit={event => this.handleSubmit(event, signupUser)}
               title='Sign Up'
+              disabled={loading || this.validateForm()}
             >
               <div className='form-input'>
                 <input type='email' name='email' placeholder='Email' value={email} onChange={this.handleChange} />
@@ -85,12 +86,6 @@ class SignupForm extends PureComponent {
 
               <div className='form-input'>
                 <input type='password' name='password_confirm' placeholder='Password' value={password} onChange={this.handleChange} />
-              </div>
-
-              <div className='form_buttons'>
-                <button type='submit' className='btn' disabled={loading || this.validateForm()}>
-                  Sign Up
-                </button>
               </div>
             </Form>
           )

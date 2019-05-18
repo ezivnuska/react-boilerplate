@@ -1,0 +1,12 @@
+@import '~scss/main';
+
+.abort-button {
+    border: none;
+    cursor: pointer;
+    transition: all .25s linear;
+    color: indianred;
+
+    &:hover {
+        color: red;
+    }
+}

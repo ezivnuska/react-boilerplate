@@ -1,21 +1,29 @@
-import React from 'react'
-import { Heading } from 'components'
+import React, { Fragment } from 'react'
+import FieldWrapper from'./form/FieldWrapper'
+import { AbortButton, Heading, SubmitButton } from 'components'
 
 import './Form.scss'
 
-const Form = ({ children, error, onSubmit, title, ...props }) => (
-  <form className='form' onSubmit={onSubmit}>
-    <div className='form-wrapper' {...props}>
-      {title && <Heading level={3}>{title}</Heading>}
-      {error && <div className={(error !== '' ? 'error-label' : '')}>
-        {error}
-      </div>}
-      {(children && children.length) && <ul>
-        {children.map((section, i) => (
-          <li key={i} className='form-section'>{section}</li>
-        ))}
-      </ul>}
+const Form = ({ abort, children, disabled, error, onSubmit, reverse, split, title, ...props }) => (
+  <form className={'form' + (reverse ? ' reverse' : '') + (split ? ' split' : '')} onSubmit={onSubmit}>
+    
+    {title && <Heading level={3}>{title}</Heading>}
+    
+    <div className='form-wrapper'>
+      {error && <div className={(error !== '' ? 'error-label' : '')}>{error}</div>}
+      
+      {(children && children.length) && (
+        <Fragment>
+          <FieldWrapper>{children}</FieldWrapper>
+          <aside>
+            <SubmitButton disabled={disabled} />
+            {abort && <AbortButton abort={abort}>Cancel</AbortButton>}
+          </aside>
+        </Fragment>
+      )}
+
     </div>
+    
   </form>
 )
 

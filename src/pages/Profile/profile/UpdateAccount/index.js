@@ -106,126 +106,111 @@ class UpdateAccount extends PureComponent {
     
     return (
       <>
-        <div className='column column_12_12'>
+      <Mutation
+          mutation={CHANGE_EMAIL}
+          variables={{ currentEmail: getCurrentUser.email, newEmail }}
+          refetchQueries={() => [
+            {query: GET_CURRENT_USER}
+          ]}>
 
-          <Heading level={1}>
-            Update your email
-          </Heading>
+          {(changeEmail, { data, loading, error }) => {
 
-          <Mutation
-            mutation={CHANGE_EMAIL}
-            variables={{ currentEmail: getCurrentUser.email, newEmail }}
-            refetchQueries={() => [
-              {query: GET_CURRENT_USER}
-            ]}>
+            return (
+              <form onSubmit={event => this.handleChangeEmail(event, changeEmail)}>
 
-            {(changeEmail, { data, loading, error }) => {
+                <div className='form_wrap updateAccountEmailForm'>
 
-              return (
-                <form onSubmit={event => this.handleChangeEmail(event, changeEmail)}>
+                  <div className='form_row'>
 
-                  <div className='form_wrap updateAccountEmailForm'>
-
-                    <div className='form_row'>
-
-                      <div className='form_item'>
-                        <p>Account holder: {getCurrentUser.firstname} {this.props.session.getCurrentUser.lastname}</p>
-                        <p>Username: {getCurrentUser.username}</p>
-                        <p>Current email: {getCurrentUser.email}</p>
-                        <div className='form-input'>
-                          <input type='email' name='newEmail' placeholder='Email' value={newEmail} onChange={this.handleChange.bind(this)} />
-                          <span className='bottom_border'></span>
-                        </div>
+                    <div className='form_item'>
+                      <p>Account holder: {getCurrentUser.firstname} {this.props.session.getCurrentUser.lastname}</p>
+                      <p>Username: {getCurrentUser.username}</p>
+                      <p>Current email: {getCurrentUser.email}</p>
+                      <div className='form-input'>
+                        <input type='email' name='newEmail' placeholder='Email' value={newEmail} onChange={this.handleChange.bind(this)} />
+                        <span className='bottom_border'></span>
                       </div>
-
-                    </div>
-
-                    <div className='form_buttons'>
-                      <button className='btn' type='submit'
-                      disabled={ loading || this.validateEmail() }>
-                      Update email</button>
                     </div>
 
                   </div>
 
-                </form>
-              )
+                  <div className='form_buttons'>
+                    <button className='btn' type='submit'
+                    disabled={ loading || this.validateEmail() }>
+                    Update email</button>
+                  </div>
 
-            }}
+                </div>
 
-          </Mutation>
+              </form>
+            )
 
-        </div>
+          }}
 
-        <div className='column column_12_12'>
-          <h1>
-            Change your password
-          </h1>
+        </Mutation>
 
-          <Mutation
-            mutation={CHANGE_PASSWORD}
-            variables={{ email: getCurrentUser.email, password: password }}
-            refetchQueries={() => [
-              {query: GET_CURRENT_USER}
-            ]}>
+        <Mutation
+          mutation={CHANGE_PASSWORD}
+          variables={{ email: getCurrentUser.email, password: password }}
+          refetchQueries={() => [
+            {query: GET_CURRENT_USER}
+          ]}>
 
-            {(changePassword, { data, loading, error }) => {
+          {(changePassword, { data, loading, error }) => {
 
-              return (
-                <form onSubmit={event => this.handleChangePassword(event, changePassword)}>
+            return (
+              <form onSubmit={event => this.handleChangePassword(event, changePassword)}>
 
-                  <div className='form_wrap updateAccountPasswordForm'>
+                <div className='form_wrap updateAccountPasswordForm'>
 
-                    <div className='form_row'>
+                  <div className='form_row'>
 
-                      <div className={'error-label' + (!this.state.passwordMatch ? ' passwordMatch' : '')}>
-                        Please check that your passwords match and are at least 8 characters.
-                      </div>
-
-                      <div className='form_item'>
-
-                        <div className='form-input'>
-                          <input type='password' name='password' placeholder='Password' value={password} onChange={this.handleChange.bind(this)} />
-                          <span className='bottom_border'></span>
-                        </div>
-
-                        <div className='helperText'>
-                          Password must be a minium of 8 characters in length.
-                        </div>
-
-                      </div>
-
+                    <div className={'error-label' + (!this.state.passwordMatch ? ' passwordMatch' : '')}>
+                      Please check that your passwords match and are at least 8 characters.
                     </div>
 
-                    <div className='form_row'>
+                    <div className='form_item'>
 
-                      <div className='form_item'>
-
-                        <div className='form-input'>
-                          <input type='password' name='passwordConfirm' placeholder='Password confirm' value={passwordConfirm} onChange={this.handleChange.bind(this)} onBlur={this.confirmPW.bind(this)} />
-                          <span className='bottom_border'></span>
-                        </div>
-
+                      <div className='form-input'>
+                        <input type='password' name='password' placeholder='Password' value={password} onChange={this.handleChange.bind(this)} />
+                        <span className='bottom_border'></span>
                       </div>
 
-                    </div>
+                      <div className='helperText'>
+                        Password must be a minium of 8 characters in length.
+                      </div>
 
-                    <div className='form_buttons'>
-                      <button className='btn' type='submit'
-                      disabled={ loading || this.validatePassword() }>
-                      Update Password</button>
                     </div>
 
                   </div>
 
-                </form>
-              )
+                  <div className='form_row'>
 
-            }}
+                    <div className='form_item'>
 
-          </Mutation>
+                      <div className='form-input'>
+                        <input type='password' name='passwordConfirm' placeholder='Password confirm' value={passwordConfirm} onChange={this.handleChange.bind(this)} onBlur={this.confirmPW.bind(this)} />
+                        <span className='bottom_border'></span>
+                      </div>
 
-        </div>
+                    </div>
+
+                  </div>
+
+                  <div className='form_buttons'>
+                    <button className='btn' type='submit'
+                    disabled={ loading || this.validatePassword() }>
+                    Update Password</button>
+                  </div>
+
+                </div>
+
+              </form>
+            )
+
+          }}
+
+        </Mutation>
       </>
     )
   }

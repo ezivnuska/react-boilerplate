@@ -3,7 +3,7 @@ import { Route, withRouter } from 'react-router-dom'
 import withAuth from 'hoc/withAuth'
 import { Helmet } from 'react-helmet'
 import { Heading, Menu, UserProfile } from 'components'
-import ProfileEdit from './profile/ProfileEdit'
+import ProfileEditor from './profile/ProfileEditor'
 import UpdateAccount from './profile/UpdateAccount'
 
 import './Profile.scss'
@@ -22,7 +22,7 @@ class Profile extends PureComponent {
     const { username } = this.props.session.getCurrentUser
 
     return (
-      <>
+      <Fragment>
         {this.head()}
         <Heading level={1}>{username}</Heading>
         <div className='container'>
@@ -36,10 +36,10 @@ class Profile extends PureComponent {
             ]}
           />
           <Route path='/profile' exact render={() => <UserProfile username={username} />} />
-          <Route path='/profile/edit' exact render={() => <ProfileEdit {...this.props} />} />
+          <Route path='/profile/edit' exact render={() => <ProfileEditor {...this.props} />} />
           <Route path='/profile/account' render={() => <UpdateAccount {...this.props} />} />
         </div>
-      </>
+      </Fragment>
     )
   }
 }

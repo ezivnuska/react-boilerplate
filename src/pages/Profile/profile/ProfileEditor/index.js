@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { withRouter } from 'react-router-dom'
+import { Query } from 'react-apollo'
+import { GET_USER_PROFILE } from 'queries'
 import AvatarDropzone from './profileeditor/AvatarDropzone'
 import BioEditor from './profileeditor/BioEditor'
 import NameEditor from './profileeditor/NameEditor'
@@ -13,6 +14,7 @@ const initialState = {
 }
 
 class ProfileEditor extends PureComponent {
+
   state = {
     ...initialState
   }
@@ -33,26 +35,37 @@ class ProfileEditor extends PureComponent {
   }
 
   render() {
-    const { currentUser } = this.state
-
     return (
-      <div id='profile-editor'>
 
-        <FormSection title='Name'>
-          <NameEditor {...this.props} />
-        </FormSection>
+      <Query query={GET_USER_PROFILE}>
+    
+        {({ data, loading, error }) => {
+    
+          if (loading) return <div>Loading</div>
+          if (error) return <div>error</div>
+    
+          return (
+            <div id='profile-editor'>
 
-        <FormSection title='Avatar'>
-          <AvatarDropzone {...this.props} />
-        </FormSection>
+              <FormSection title='Name'>
+                <NameEditor {...this.props} />
+              </FormSection>
 
-        <FormSection title='Bio'>
-          <BioEditor {...this.props} />
-        </FormSection>
+              <FormSection title='Avatar'>
+                <AvatarDropzone {...this.props} />
+              </FormSection>
 
-      </div>
+              <FormSection title='Bio'>
+                <BioEditor {...this.props} />
+              </FormSection>
+
+            </div>
+          )
+        }}
+    
+      </Query>
     )
   }
 }
 
-export default withRouter(ProfileEditor)
+export default ProfileEditor

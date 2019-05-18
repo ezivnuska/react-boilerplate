@@ -4,9 +4,13 @@
   text-align: center;
 
   .page-content {
-    margin: 1rem auto;
+    margin: 0 auto;
     padding: 1rem;
     max-width: 900px;
+    
+    @media only screen and (max-width: 400px) {
+      padding: 1rem 0;
+    }
 
     .flex-container {
       display: flex;
@@ -26,7 +30,6 @@
       aside {
         text-align: center;
         flex: 1;
-        border: 1px solid green;
       }
 
       @media only screen and (max-width: 767px) {

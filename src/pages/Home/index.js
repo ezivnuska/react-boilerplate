@@ -23,7 +23,7 @@ class Home extends PureComponent {
       <Fragment>
         {this.head()}
         {user
-          ? <Dashboard />
+          ? <Dashboard user={user} />
           : <AuthForm {...this.props} />
         }
       </Fragment>

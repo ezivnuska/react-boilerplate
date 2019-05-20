@@ -1,40 +1,60 @@
 @import '~scss/main';
 
 footer {
-  height: auto;
-  margin: 6rem auto 0;
-  border: 1px solid #e8e8e8;
+  height: $footerHeight;
+  margin: 6rem 0 0;
+  background: $footerColor;
+  color: #fff;
 
-  .copyright {
+  .container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
 
-  }
-
-  .social_icons {
-    display: block;
-    text-align: center;
-
-    ul, ul li {
-      margin: 0;
-      padding: 0;
+    > * {
+      display: inline-block;
+      line-height: $footerHeight;
     }
 
-    ul {
-      display: inline-block;
-      width: 100%;
+    .footer-left, .footer-right {
+      flex: 0 0 auto;
+    }
 
-      li {
-        display: inline-block;
-        flex: 0 0 auto;
-        list-style-type: none;
+    .footer-center {
+      flex: 0 0 auto;
+      text-align: center;
 
-        a {
-          font-size: 2rem;
-          line-height: normal;
+      ul, ul li {
+        margin: 0;
+        padding: 0;
+      }
+
+      ul {
+        display: flex;
+        flex-flow: row nowrap;
+        width: 100%;
+
+        li {
+          display: inline-block;
+          flex: 1 0 auto;
+          list-style-type: none;
+
+          a {
+            padding: 0 0.5rem;
+            font-size: 2rem;
+            line-height: normal;
+          }
+
+          // &:last-child {
+          //   margin-right: 0;
+          // }
         }
+      }
+    }
 
-        // &:last-child {
-        //   margin-right: 0;
-        // }
+    .footer-right {
+      a, a:visited {
+        color: #fff;
       }
     }
   }

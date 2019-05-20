@@ -2,14 +2,12 @@
 
 
 #topbar {
-  background: #eee;
-
+  background: #fff;
   #user-status {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
     padding: 0.5rem 1rem;
-    background: #fff;
 
     > * {
       display: inline-block;

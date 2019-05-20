@@ -6,7 +6,6 @@
   flex-flow: column nowrap;
   min-height: 100vh;
   text-align: center;
-  background: #eee;
 
   header, footer {
     flex-shrink: 0;
@@ -18,43 +17,9 @@
     padding: 1rem;
     width: 100%;
     text-align: left;
-    background: #fff;
     
     @media only screen and (max-width: 400px) {
       padding: 1rem 0;
-    }
-
-    .flex-container {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: space-evenly;
-
-      aside, section {
-        display: inline-block;
-      }
-      
-      section {
-        flex: 2;
-        margin-left: 1rem;
-        border: 1px solid red;
-      }
-
-      aside {
-        text-align: center;
-        flex: 1;
-      }
-
-      @media only screen and (max-width: 767px) {
-        aside {
-          width: 100%;
-        }
-
-        section {
-          margin-left: 0;
-          flex: 1 0 auto;
-          width: 100%;
-        }
-      }
     }
   }
 }

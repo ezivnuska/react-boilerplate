@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Dashboard = props => (
+const Dashboard = ({ user }) => (
   <div id='dashboard'>
-    This is the dashboard.
+    <p>{user.username} is signed in.</p>
   </div>
 )
 

@@ -9,13 +9,10 @@ const head = () => (
 )
 
 const NotFound = () => (
-  <>
+  <Fragment>
     {head()}
-    <div className='container'>
-      <Heading level={1}>404 Not Found</Heading>
-      404 Not Found
-    </div>
-  </>
+    <Heading level={1}>404 Not Found</Heading>
+  </Fragment>
 )
 
 export default NotFound

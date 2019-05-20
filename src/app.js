@@ -14,38 +14,28 @@ import {
 } from 'pages'
 
 const Root = ({ refetch, session }) => (
-  <Switch>
-    <Route path='/' exact render={props => (
-      <MainLayout>
-        <Home {...props} session={session} refetch={refetch} />
-      </MainLayout>
-    )} />
-    <Route path='/account-recovery' render={props => (
-      <MainLayout>
+  <MainLayout>
+    <Switch>
+      <Route path='/' exact render={props => (
+          <Home {...props} session={session} refetch={refetch} />
+      )} />
+      <Route path='/account-recovery' render={props => (
         <ForgotPassword {...props} refetch={refetch} />
-      </MainLayout>
-    )} />
-    <Route path='/users' render={props => (
-      <MainLayout>
+      )} />
+      <Route path='/users' render={props => (
         <Users {...props} session={session} />
-      </MainLayout>
-    )} />
-    <Route path={['/profile', '/profile/edit', '/profile/account']} render={props => (
-      <MainLayout>
+      )} />
+      <Route path={['/profile', '/profile/edit', '/profile/account']} render={props => (
         <Profile {...props} session={session} refetch={refetch} />
-      </MainLayout>
-    )} />
-    <Route path='/user/:URL_Param' render={props => (
-      <MainLayout>
+      )} />
+      <Route path='/user/:URL_Param' render={props => (
         <User {...props} session={session} />
-      </MainLayout>
-    )} />
-    <Route path='/' render={props => (
-      <MainLayout>
+      )} />
+      <Route path='/' render={props => (
         <NotFound {...props} refetch={refetch} />
-      </MainLayout>
-    )} />
-  </Switch>
+      )} />
+    </Switch>
+  </MainLayout>
 )
 
 const AppComponent = withSession(Root)

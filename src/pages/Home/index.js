@@ -1,8 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
-import { Mutation } from 'react-apollo'
-import { SIGNIN_USER } from 'queries'
 import { withRouter } from 'react-router-dom'
-import * as Cookies from 'es-cookie'
 import { Helmet } from 'react-helmet'
 import { AuthForm, Dashboard } from 'components'
 
@@ -23,18 +20,13 @@ class Home extends PureComponent {
     const user = (session && session.getCurrentUser) ? session.getCurrentUser : null
     
     return (
-      <>
+      <Fragment>
         {this.head()}
-        <div className='flex-container'>
-          <aside>
-            {user
-              ? <Dashboard />
-              : <AuthForm {...this.props} />
-            }
-          </aside>
-          {null && <section>Extra content here...</section>}
-        </div>
-      </>
+        {user
+          ? <Dashboard />
+          : <AuthForm {...this.props} />
+        }
+      </Fragment>
     )
   }
 }

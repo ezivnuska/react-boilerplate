@@ -25,20 +25,18 @@ class Profile extends PureComponent {
       <Fragment>
         {this.head()}
         <Heading level={1}>{username}</Heading>
-        <div className='container'>
-          <Menu
-            inline
-            itemHeight={40}
-            options={[
-              { label: 'Profile', to: '/profile' },
-              { label: 'Edit Profile', to: '/profile/edit' },
-              { label: 'Update Account', to: '/profile/account' }
-            ]}
-          />
-          <Route path='/profile' exact render={() => <UserProfile username={username} />} />
-          <Route path='/profile/edit' exact render={() => <ProfileEditor {...this.props} />} />
-          <Route path='/profile/account' render={() => <UpdateAccount {...this.props} />} />
-        </div>
+        <Menu
+          inline
+          itemHeight={40}
+          options={[
+            { label: 'Profile', to: '/profile' },
+            { label: 'Edit Profile', to: '/profile/edit' },
+            { label: 'Update Account', to: '/profile/account' }
+          ]}
+        />
+        <Route path='/profile' exact render={() => <UserProfile username={username} />} />
+        <Route path='/profile/edit' exact render={() => <ProfileEditor {...this.props} />} />
+        <Route path='/profile/account' render={() => <UpdateAccount {...this.props} />} />
       </Fragment>
     )
   }

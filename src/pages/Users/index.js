@@ -43,39 +43,37 @@ class Users extends PureComponent {
 
   render() {
     return (
-      <>
+      <Fragment>
         <Heading level={1}>Users</Heading>
-        <div className='container'>
-          <Query query={GET_ALL_USERS}>
+        <Query query={GET_ALL_USERS}>
 
-            {({ data, loading, error }) => {
+          {({ data, loading, error }) => {
 
-              if (loading) return <div></div>
-              if (error) return <div>Error</div>
+            if (loading) return <div></div>
+            if (error) return <div>Error</div>
 
-              return (
-                <div className='users'>
-                  {data.getAllUsers.length == 0 &&
-                    <div>
-                      <h3>Empty... check back soon!</h3>
-                    </div>
-                  }
-                  {data.getAllUsers.length &&
-                    <ul className='users'>
-                      {data.getAllUsers.map((user, index) => (
-                          <li key={index}>
-                            {this.renderUserSignature(user)}
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  }
-                </div>
-              )
-            }}
-          </Query>
-        </div>
-      </>
+            return (
+              <div className='users'>
+                {data.getAllUsers.length == 0 &&
+                  <div>
+                    <h3>Empty... check back soon!</h3>
+                  </div>
+                }
+                {data.getAllUsers.length &&
+                  <ul className='users'>
+                    {data.getAllUsers.map((user, index) => (
+                        <li key={index}>
+                          {this.renderUserSignature(user)}
+                        </li>
+                      )
+                    )}
+                  </ul>
+                }
+              </div>
+            )
+          }}
+        </Query>
+      </Fragment>
     )
   }
 }

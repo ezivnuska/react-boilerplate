@@ -25,9 +25,7 @@ class User extends PureComponent {
       <Fragment>
         {this.head()}
         <Heading level={1}>{username}</Heading>
-        <div className='container'>
-          <UserProfile username={username} />
-        </div>
+        <UserProfile username={username} />
       </Fragment>
     )
   }

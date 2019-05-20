@@ -23,8 +23,10 @@ class Header extends PureComponent {
     return (
       <header>
         { user && <UserStatus />}
-        {this.renderLogo()}
-        {user && <MainNav />}
+        <div className='container'>
+          {this.renderLogo()}
+          {user && <MainNav />}
+        </div>
       </header>
     )
   }

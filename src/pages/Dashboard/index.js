@@ -1,6 +1,5 @@
 import React, { Fragment, PureComponent } from 'react'
 import withAuth from 'hoc/withAuth'
-import { NavLink } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { Heading } from 'components'
 
@@ -18,13 +17,11 @@ class Dashboard extends PureComponent {
   render() {
     const user = this.props.session.getCurrentUser
     return (
-      <>
+      <Fragment>
         {this.head()}
         <Heading level={1}>Dashboard</Heading>
-        <div className='container'>
-          This is the Dashboard.
-        </div>
-      </>
+        <p>{user.username} is logged in.</p>
+      </Fragment>
     )
   }
 }

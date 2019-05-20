@@ -39,10 +39,10 @@ class AuthForm extends PureComponent {
 
   render() {
     return (
-      <>
+      <Fragment>
         {this.renderForm()}
         {this.renderBottomLinks()}
-      </>
+      </Fragment>
     )
   }
 }

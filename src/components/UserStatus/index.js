@@ -11,14 +11,16 @@ const UserStatus = ({ session }) => {
   const user = session.getCurrentUser
   return user ? (
     <div id='topbar'>
-      <div id='user-status'>
-        <UserSignature
-          user={user}
-          size={30}
-          to={`/profile`}
-        />
-        <div style={{ textAlign: 'right' }}>
-          <Signout size={30} />
+      <div className='container'>
+        <div id='user-status'>
+          <UserSignature
+            user={user}
+            size={30}
+            to={`/profile`}
+          />
+          <div style={{ textAlign: 'right' }}>
+            <Signout size={30} />
+          </div>
         </div>
       </div>
     </div>

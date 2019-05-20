@@ -2,15 +2,13 @@
 
 
 #topbar {
-  background: #fff;
+  background: #eee;
+
   #user-status {
     display: flex;
     flex-direction: row;
-    // height: 50px;
-    // overflow: hidden;
     margin: 0 auto;
     padding: 0.5rem 1rem;
-    max-width: $max-content-width;
     background: #fff;
 
     > * {

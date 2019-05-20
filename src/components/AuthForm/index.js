@@ -4,6 +4,8 @@ import SigninForm from './authform/SigninForm'
 import SignupForm from './authform/SignupForm'
 import { Link } from 'components'
 
+import './AuthForm.scss'
+
 const initialState = {
   isSignin: true
 }
@@ -14,10 +16,6 @@ class AuthForm extends PureComponent {
     ...initialState,
   }
 
-  componentWillMount() {
-    // console.log('AuthForm', this.props)
-  }
-
   toggleMode() {
     this.setState({
       isSignin: !this.state.isSignin
@@ -25,15 +23,14 @@ class AuthForm extends PureComponent {
   }
 
   renderForm() {
-    // console.log('renderAuthForm>>>', this.props)
     return this.state.isSignin
       ? <SigninForm {...this.props} />
       : <SignupForm {...this.props} />
   }
 
-  renderFormLinks() {
+  renderBottomLinks() {
     return (
-      <div className='formBottomLinks'>
+      <div className='bottom-links'>
         <p>Don't have an account? <Link onClick={() => this.toggleMode()}>{this.state.isSignin ? 'Sign Up' : 'Sign In'}</Link></p>
         <p>Forgot your password? <NavLink to='/account-recovery'>Reset here</NavLink></p>
       </div>
@@ -44,7 +41,7 @@ class AuthForm extends PureComponent {
     return (
       <>
         {this.renderForm()}
-        {this.renderFormLinks()}
+        {this.renderBottomLinks()}
       </>
     )
   }

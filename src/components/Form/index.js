@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
-import FieldWrapper from'./form/FieldWrapper'
-import { Heading, SubmitButton } from 'components'
+import { Heading } from 'components'
+import SubmitButton from './form/SubmitButton'
 
 import './Form.scss'
 
-const Form = ({ children, disabled, error, onSubmit, title }) => (
+const Form = ({ children, disabled, error, label, onSubmit, title }) => (
   <form className='form' onSubmit={onSubmit}>
     
     {title && <Heading level={3}>{title}</Heading>}
@@ -15,19 +15,15 @@ const Form = ({ children, disabled, error, onSubmit, title }) => (
       {(children && children.length) && (
         <Fragment>
           
-          <section>
-            <ul className='field-wrapper'>
-                {children.map((section, index) => (
-                    <li key={index} className='form-section'>
-                        {section}
-                    </li>
-                ))}
-            </ul>
-          </section>
+          <ul className='field-wrapper'>
+              {children.map((section, index) => (
+                  <li key={index} className='form-section'>
+                      {section}
+                  </li>
+              ))}
+          </ul>
 
-          <aside>
-            <SubmitButton disabled={disabled} />
-          </aside>
+          <SubmitButton label={label} disabled={disabled} />
         
         </Fragment>
       )}

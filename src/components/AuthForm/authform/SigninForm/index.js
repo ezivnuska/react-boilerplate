@@ -67,21 +67,22 @@ class SigninForm extends PureComponent {
   }
 
   render() {
-    const { email, error, password } = this.state
+    const { email, password } = this.state
 
     return (
       <Mutation mutation={SIGNIN_USER} variables={{ email, password }}>
 
         {(signinUser, { data, loading, error }) => {
-
+          console.log('SigninForm:data:', data)
           return (
             <Form
               error={error}
               onSubmit={event => this.handleSubmit(event, signinUser)}
               title='Sign In'
               disabled={loading || this.validateForm()}
-              split='false'
+              label='Sign In'
             >
+
               <div className='form-input'>
                 <input type='email' name='email' placeholder='Email' value={email} onChange={this.handleChange} />
               </div>
@@ -89,6 +90,7 @@ class SigninForm extends PureComponent {
               <div className='form-input'>
                 <input type='password' name='password' placeholder='Password' value={password} onChange={this.handleChange} />
               </div>
+
             </Form>
           )
         }}

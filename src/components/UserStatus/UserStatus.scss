@@ -1,18 +1,22 @@
 @import '~scss/main';
 
 
-#user-status {
-  display: flex;
-  flex-direction: row;
-  // height: 50px;
-  // overflow: hidden;
-  padding: 0.5rem 1rem;
+#topbar {
   background: #fff;
-  border-bottom: 1px solid $darkSlateGray;
+  #user-status {
+    display: flex;
+    flex-direction: row;
+    // height: 50px;
+    // overflow: hidden;
+    margin: 0 auto;
+    padding: 0.5rem 1rem;
+    max-width: $max-content-width;
+    background: #fff;
 
-  > * {
-    display: inline-block;
-    flex: 1 0 auto;
-    vertical-align: top;
+    > * {
+      display: inline-block;
+      flex: 1 0 auto;
+      vertical-align: top;
+    }
   }
 }

@@ -2,12 +2,14 @@
 
 .main-layout {
   text-align: center;
+  background: #eee;
 
   .page-content {
     margin: 0 auto;
     padding: 1rem;
-    max-width: 900px;
+    max-width: $max-content-width;
     text-align: left;
+    background: #fff;
     
     @media only screen and (max-width: 400px) {
       padding: 1rem 0;

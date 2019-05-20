@@ -3,7 +3,7 @@ import { Query } from 'react-apollo'
 import { GET_USER_PROFILE } from 'queries'
 import AvatarDropzone from './profileeditor/AvatarDropzone'
 import BioEditor from './profileeditor/BioEditor'
-import NameEditor from './profileeditor/NameEditor'
+import NameForm from './profileeditor/NameEditor/nameeditor/NameForm'
 import { FormSection } from 'components'
 
 import './ProfileEditor.scss'
@@ -43,21 +43,24 @@ class ProfileEditor extends PureComponent {
     
           if (loading) return <div>Loading</div>
           if (error) return <div>error</div>
-    
+          
           return (
             <div id='profile-editor'>
 
-              <FormSection title='Name'>
-                <NameEditor {...this.props} />
-              </FormSection>
+              <FormSection
+                title='Name'
+                form={<NameForm {...this.props} />}
+              />
 
-              <FormSection title='Avatar'>
-                <AvatarDropzone {...this.props} />
-              </FormSection>
+              <FormSection
+                title='Avatar'
+                form={<AvatarDropzone {...this.props} />}
+              />
 
-              <FormSection title='Bio'>
-                <BioEditor {...this.props} />
-              </FormSection>
+              <FormSection
+                title='Bio'
+                form={<BioEditor {...this.props} />}
+              />
 
             </div>
           )

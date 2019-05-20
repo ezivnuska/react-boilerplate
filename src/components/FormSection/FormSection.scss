@@ -3,6 +3,35 @@ section.form-section {
   padding: 0.5rem 0.5rem 1rem;
   border-bottom: 1px solid purple;
 
+  .header {
+    display: flex;
+    flex-flow: row nowrap;
+    
+    .title, .controls {
+      display: inline-block;
+    }
+
+    .title {
+      flex: 0 1 auto;
+      
+      h3 {
+        display: inline-block;
+        line-height: inherit;
+        margin-right: 1rem;
+      }
+    }
+
+    .controls {
+      flex: 1 0 auto;
+      text-align: left;
+
+      button {
+        border: none;
+      }
+    }
+  }
+  
+
   &:last-child {
     border-bottom: none;
   }

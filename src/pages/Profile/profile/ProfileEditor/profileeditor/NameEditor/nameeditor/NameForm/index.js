@@ -65,6 +65,7 @@ class NameForm extends PureComponent {
     editProfile()
     .then(async ({ data }) => {
       await this.props.refetch()
+      this.props.cancel()
       toastr.success('We have updated your profile!', 'Saved!')
     }).catch(error => {
       console.log('ERROR:', error)
@@ -78,7 +79,7 @@ class NameForm extends PureComponent {
   render() {
 
     const { firstname, lastname } = this.state
-    const { session, split, abort } = this.props
+    const { session } = this.props
     const { bio, email, username } = session.getCurrentUser
 
     return (
@@ -96,9 +97,6 @@ class NameForm extends PureComponent {
             error={error}
             onSubmit={event => this.handleSubmit(event, editProfile)}
             disabled={loading}
-            reverse
-            split={split}
-            abort={abort}
           >
 
             <div className='form-input'>

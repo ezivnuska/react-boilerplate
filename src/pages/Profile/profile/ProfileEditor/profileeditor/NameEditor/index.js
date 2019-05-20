@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import NameForm from './nameeditor/NameForm'
-import { Heading, SplitForm } from 'components'
+import { Heading } from 'components'
 
 import './NameEditor.scss'
 
@@ -11,7 +11,14 @@ class NameEditor extends PureComponent {
   }
 
   componentWillMount() {
+    this.resetForm = this.resetForm.bind(this)
     this.toggleEdit = this.toggleEdit.bind(this)
+  }
+
+  resetForm = () => {
+    this.setState({
+      editing: false
+    })
   }
 
   toggleEdit = e => {
@@ -22,21 +29,11 @@ class NameEditor extends PureComponent {
   render() {
     const { editing } = this.state
     const { firstname, lastname } = this.props.session.getCurrentUser
-    
+
     return (
-      <div className='name-editor'>
-        <SplitForm editing={editing}>
-          <div className='preview'>
-            <Heading level={4}>Current Name:</Heading>
-            <p>{firstname} {lastname}</p>
-          </div>
-          {editing && <NameForm split abort={this.toggleEdit} {...this.props} />}
-          {!editing && <div>
-            <button onClick={e => this.toggleEdit(e)}>
-              <i className='fas fa-edit fa-3x'></i>
-            </button>
-          </div>}
-        </SplitForm>
+      <div id='name-editor'>
+        <Heading level={4}>{firstname} {lastname}</Heading>
+        {editing && <NameForm {...this.props} cancel={this.resetForm} />}
       </div>
     )
   }

@@ -80,6 +80,7 @@ class SigninForm extends PureComponent {
               onSubmit={event => this.handleSubmit(event, signinUser)}
               title='Sign In'
               disabled={loading || this.validateForm()}
+              split='false'
             >
               <div className='form-input'>
                 <input type='email' name='email' placeholder='Email' value={email} onChange={this.handleChange} />

@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react'
 import FieldWrapper from'./form/FieldWrapper'
-import { AbortButton, Heading, SubmitButton } from 'components'
+import { Heading, SubmitButton } from 'components'
 
 import './Form.scss'
 
-const Form = ({ abort, children, disabled, error, onSubmit, reverse, split, title, ...props }) => (
-  <form className={'form' + (reverse ? ' reverse' : '') + (split ? ' split' : '')} onSubmit={onSubmit}>
+const Form = ({ children, disabled, error, onSubmit, title }) => (
+  <form className='form' onSubmit={onSubmit}>
     
     {title && <Heading level={3}>{title}</Heading>}
     
@@ -14,11 +14,21 @@ const Form = ({ abort, children, disabled, error, onSubmit, reverse, split, titl
       
       {(children && children.length) && (
         <Fragment>
-          <FieldWrapper>{children}</FieldWrapper>
+          
+          <section>
+            <ul className='field-wrapper'>
+                {children.map((section, index) => (
+                    <li key={index} className='form-section'>
+                        {section}
+                    </li>
+                ))}
+            </ul>
+          </section>
+
           <aside>
             <SubmitButton disabled={disabled} />
-            {abort && <AbortButton abort={abort}>Cancel</AbortButton>}
           </aside>
+        
         </Fragment>
       )}
 

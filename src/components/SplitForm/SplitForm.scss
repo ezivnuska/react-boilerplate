@@ -6,28 +6,23 @@
 
     > * {
         display: inline-block;
-        flex: 1 0 60%;
-        min-width: auto;
+        flex: 1 0 auto;
         border: 1px dotted green;
+
+        // @media only screen and (max-width: 767px) {
+        //     display: block;
+        // }
     }
 
-    .preview {
+    > section {
         flex: 1 0 40%;
     }
 
-    button {
-        cursor: pointer;
-    }
+    > aside {
+        flex: 1 0 60%;
 
-    @media only screen and (max-width: 767px) {
-        display: block;
-
-        // .preview {
-        //     flex: 100%;
-        // }
-    
-        // .form {
-        //     min-width: 100%;
-        // }
+        button {
+            cursor: pointer;
+        }
     }
 }

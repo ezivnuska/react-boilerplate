@@ -23,11 +23,11 @@ class FormSection extends PureComponent {
     return (
       <div className='controls'>
         {editing ? (
-          <button onClick={e => this.toggleEdit(e)}>
+          <button onClick={e => this.toggleEdit(e)} className='transparent'>
             <i className='fas fa-window-close'></i>
           </button>
         ) : (
-          <button onClick={e => this.toggleEdit(e)}>
+          <button onClick={e => this.toggleEdit(e)} className='transparent'>
             <i className='fas fa-edit'></i>
           </button>
         )}

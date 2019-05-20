@@ -76,6 +76,13 @@ class NameForm extends PureComponent {
     })
   }
 
+  validateForm() {
+    const { firstname, lastname } = this.state
+    const user = this.props.session.getCurrentUser
+    const isInvalid = firstname === user.firstname && lastname === user.lastname
+    return isInvalid
+  }
+
   render() {
 
     const { firstname, lastname } = this.state
@@ -96,7 +103,7 @@ class NameForm extends PureComponent {
           <Form
             error={error}
             onSubmit={event => this.handleSubmit(event, editProfile)}
-            disabled={loading}
+            disabled={loading || this.validateForm()}
           >
 
             <div className='form-input'>

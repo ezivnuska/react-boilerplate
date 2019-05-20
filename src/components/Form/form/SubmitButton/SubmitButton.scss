@@ -1,14 +1,1 @@
 @import '~scss/main';
-
-.submit-button {
-    cursor: pointer;
-    transition: all .25s linear;
-
-    &.borderless {
-        border: none;
-    }
-    
-    &:hover {
-        color: green;
-    }
-}

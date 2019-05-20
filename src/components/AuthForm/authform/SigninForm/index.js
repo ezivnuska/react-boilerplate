@@ -73,7 +73,7 @@ class SigninForm extends PureComponent {
       <Mutation mutation={SIGNIN_USER} variables={{ email, password }}>
 
         {(signinUser, { data, loading, error }) => {
-          console.log('SigninForm:data:', data)
+          // console.log('SigninForm:data:', data)
           return (
             <Form
               error={error}

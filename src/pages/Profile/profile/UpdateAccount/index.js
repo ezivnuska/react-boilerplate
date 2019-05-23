@@ -134,7 +134,7 @@ class UpdateAccount extends PureComponent {
 
                   </div>
 
-                  <div className='form_buttons'>
+                  <div className='form-buttons'>
                     <button className='btn' type='submit'
                     disabled={ loading || this.validateEmail() }>
                     Update email</button>
@@ -197,7 +197,7 @@ class UpdateAccount extends PureComponent {
 
                   </div>
 
-                  <div className='form_buttons'>
+                  <div className='form-buttons'>
                     <button className='btn' type='submit'
                     disabled={ loading || this.validatePassword() }>
                     Update Password</button>

@@ -65,7 +65,7 @@ class NameForm extends PureComponent {
     editProfile()
     .then(async ({ data }) => {
       await this.props.refetch()
-      this.props.cancel()
+      // this.props.cancel()
       toastr.success('We have updated your profile!', 'Saved!')
     }).catch(error => {
       console.log('ERROR:', error)

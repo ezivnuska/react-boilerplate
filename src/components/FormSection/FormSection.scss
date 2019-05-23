@@ -29,6 +29,15 @@ section.form-section {
 
       button {
         border: none;
+
+        &.btn {
+          color: #bbb;
+          transition: color .25s linear;
+
+          &:hover {
+            color: #000;
+          }
+        }
       }
     }
   }

@@ -22,8 +22,10 @@ const Form = ({ children, disabled, error, label, onSubmit, title }) => (
                   </li>
               ))}
           </ul>
-
-          <SubmitButton label={label} disabled={disabled} />
+          
+          <div className='form-buttons'>
+            <SubmitButton label={label} disabled={disabled} />
+          </div>
         
         </Fragment>
       )}

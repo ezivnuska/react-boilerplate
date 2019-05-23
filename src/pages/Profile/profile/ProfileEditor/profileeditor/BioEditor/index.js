@@ -98,7 +98,7 @@ class BioEditor extends PureComponent {
                   />
                 </div>
 
-                <div className='form_buttons'>
+                <div className='form-buttons'>
                   <button type='submit' className='btn'
                     disabled={loading}>
                     Save changes

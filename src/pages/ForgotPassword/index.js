@@ -95,7 +95,7 @@ class ForgotPassword extends PureComponent {
                     </p>
                   </div>
 
-                  <div className='form_buttons'>
+                  <div className='form-buttons'>
                     <button
                       type='submit'
                       className='btn'

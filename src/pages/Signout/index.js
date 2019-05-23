@@ -36,7 +36,7 @@ const Signout = ({ history }) => (
                   <p>Are you sure that you want to sign-out?</p>
                 </div>
 
-                <div className="form_buttons">
+                <div className="form-buttons">
                   <button onClick={() => handleSignout(client, history)} className="btn">
                     Yes, please sign me out
                   </button>

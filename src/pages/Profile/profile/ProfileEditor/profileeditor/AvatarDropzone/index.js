@@ -74,8 +74,8 @@ class AvatarDropzone extends PureComponent {
     }
 
     if (prevState.preview && !this.state.preview) {
-      const { username } = this.props.session.getCurrentUser
-      this.props.history.push(`/profile/${username}/edit`)
+      // const { username } = this.props.session.getCurrentUser
+      // this.props.history.push(`/profile/${username}/edit`)
       toastr.success('We have updated your profile image!', 'Saved!')
     }
   }
@@ -110,12 +110,13 @@ class AvatarDropzone extends PureComponent {
         })
       }
     }).then(async ({ data }) => {
-      this.setState({
-        newFile: null,
-        blob: null,
-        optimizing: false,
-        optimized: false
-      })
+      
+      // this.setState({
+      //   newFile: null,
+      //   blob: null,
+      //   optimizing: false,
+      //   optimized: false
+      // })
     }).catch(err => console.log(err))
   }
 
@@ -242,42 +243,39 @@ class AvatarDropzone extends PureComponent {
               backgroundSize: 'contain'
             }}
           >
-            <div id='display-prompt'>
-              <i
-                className='fa fa-upload fa-5x'
-                style={{ lineHeight: size + 'px' }}
-              ></i>
+            <div id='display-prompt' className={(preview ? 'show' : '')}>
+              <Dropzone
+              id='dropzone'
+              handleDrop={dataUrl => this.handleDrop(dataUrl)}
+              noClick={preview !== null}
+              size={size}
+            >
+              <div id='avatar-editor-wrapper'>
+                {preview ? (
+                  <AvatarEditor
+                    id='avatar-editor'
+                    image={preview}
+                    width={size ? (size - 50) : 263}
+                    height={size ? (size - 50) : 263}
+                    border={25}
+                    color={[0, 0, 0, 0.2]}
+                    scale={1.2}
+                    rotate={0}
+                    ref={this.setEditorRef}
+                  />
+                ) : (
+                  <div style={{ lineHeight: size + 'px' }}>
+                    Drop file here, or click to select file.
+                  </div>
+                )}
+              </div>
+            </Dropzone>
             </div>
           </div>
         )}
 
         <div id='avatar-dropzone-wrapper' className='row_wrap'>
-          <Dropzone
-            id='dropzone'
-            handleDrop={dataUrl => this.handleDrop(dataUrl)}
-            noClick={preview !== null}
-            size={size}
-          >
-            <div id='avatar-editor-wrapper'>
-              {preview ? (
-                <AvatarEditor
-                  id='avatar-editor'
-                  image={preview}
-                  width={size ? (size - 50) : 263}
-                  height={size ? (size - 50) : 263}
-                  border={25}
-                  color={[0, 0, 0, 0.2]}
-                  scale={1.2}
-                  rotate={0}
-                  ref={this.setEditorRef}
-                />
-              ) : (
-                <div style={{ lineHeight: size + 'px' }}>
-                  Drop file here, or click to select file.
-                </div>
-              )}
-            </div>
-          </Dropzone>
+          
 
           {preview && <div
             className='submit-button'

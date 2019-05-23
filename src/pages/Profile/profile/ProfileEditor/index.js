@@ -4,6 +4,7 @@ import { GET_USER_PROFILE } from 'queries'
 import AvatarDropzone from './profileeditor/AvatarDropzone'
 import BioEditor from './profileeditor/BioEditor'
 import NameForm from './profileeditor/NameEditor/nameeditor/NameForm'
+import NamePreview from './profileeditor/NameEditor/nameeditor/NamePreview'
 import { FormSection } from 'components'
 
 import './ProfileEditor.scss'
@@ -29,6 +30,7 @@ class ProfileEditor extends PureComponent {
   componentWillReceiveProps(nextProps) {
     const { currentUser } = this.state
     const updatedUser = nextProps.session.getCurrentUser
+    
     if (currentUser !== updatedUser) {
       this.setState({ currentUser: updatedUser })
     }
@@ -45,11 +47,12 @@ class ProfileEditor extends PureComponent {
           if (error) return <div>error</div>
           
           return (
-            <div id='profile-editor' className={this.props.className}>
+            <div id='profile-editor'>
 
               <FormSection
                 title='Name'
                 form={<NameForm {...this.props} />}
+                preview={<NamePreview {...this.props} />}
               />
 
               <FormSection

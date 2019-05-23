@@ -13,6 +13,14 @@ class FormSection extends PureComponent {
     ...initialState
   }
 
+  componentDidUpdate = prevProps => {
+    const oldUser = prevProps.form.props.session.getCurrentUser
+    const newUser = this.props.form.props.session.getCurrentUser
+    if (oldUser !== newUser) {
+      this.setState({ editing: false })
+    }
+  }
+
   toggleEdit = e => {
     e.preventDefault()
     this.setState({ editing: !this.state.editing })
@@ -37,7 +45,7 @@ class FormSection extends PureComponent {
 
   render() {
     const { editing } = this.state
-    const { form, title, ...props } = this.props
+    const { form, preview, title, ...props } = this.props
 
     return (
       <section className='form-section' {...props}>
@@ -47,7 +55,7 @@ class FormSection extends PureComponent {
           </div>
           {this.renderControls()}
         </div>
-        {editing && form}
+        {editing ? form : preview ? preview : null}
       </section>
     )
   }

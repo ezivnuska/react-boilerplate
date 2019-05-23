@@ -24,7 +24,9 @@ class Profile extends PureComponent {
     return (
       <Fragment>
         {this.head()}
+        
         <Heading level={1}>{username}</Heading>
+        
         <Menu
           inline
           itemHeight={40}
@@ -34,9 +36,11 @@ class Profile extends PureComponent {
             { label: 'Update Account', to: '/profile/account' }
           ]}
         />
+
         <Route path='/profile' exact render={() => <UserProfile username={username} />} />
         <Route path='/profile/edit' exact render={() => <ProfileEditor {...this.props} />} />
         <Route path='/profile/account' render={() => <UpdateAccount {...this.props} />} />
+
       </Fragment>
     )
   }

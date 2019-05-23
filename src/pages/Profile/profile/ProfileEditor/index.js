@@ -45,7 +45,7 @@ class ProfileEditor extends PureComponent {
           if (error) return <div>error</div>
           
           return (
-            <div id='profile-editor'>
+            <div id='profile-editor' className={this.props.className}>
 
               <FormSection
                 title='Name'

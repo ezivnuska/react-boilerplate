@@ -25,12 +25,12 @@ class Header extends PureComponent {
       <header>
         
         {user && <div id='topbar'>
-          <div className='container'>
+          <div className='content-container'>
             <UserStatus />
           </div>
         </div>}
 
-        <div className='container'>
+        <div className='content-container'>
           {this.renderLogo()}
           {user && <MainNav />}
         </div>

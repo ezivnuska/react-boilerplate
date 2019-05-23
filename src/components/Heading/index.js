@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import './Heading.scss'
 
-const Heading = ({ level, children, ...props }) =>
+const Heading = ({ children, level, ...props }) =>
   React.createElement(`h${level}`, props, children)
 
 Heading.propTypes = ({

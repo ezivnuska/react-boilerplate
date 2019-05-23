@@ -13,7 +13,7 @@ class MainLayout extends PureComponent {
       <div id='main'>
         <Header />
         <div className='page-content'>
-          <div className='container'>
+          <div className='content-container'>
             {this.props.children}
           </div>
         </div>

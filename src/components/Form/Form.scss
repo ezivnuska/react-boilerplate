@@ -61,8 +61,8 @@ input:-webkit-autofill {
 }
 
 .form {
-  margin: 0 auto;
-  padding: 1rem;
+  margin: 0;
+  padding: $v-padding $h-padding;
   width: 100%;
   max-width: 400px;
   text-align: left;

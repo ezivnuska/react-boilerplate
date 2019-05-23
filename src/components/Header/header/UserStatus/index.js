@@ -10,7 +10,7 @@ import './UserStatus.scss'
 const UserStatus = ({ session }) => {
   const user = session.getCurrentUser
   return user ? (
-    <div id='user-status'>
+    <div id='user-status' className='padded'>
       <UserSignature
         user={user}
         size={30}

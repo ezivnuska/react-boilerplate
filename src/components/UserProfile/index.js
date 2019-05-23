@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { PROFILE_PAGE } from 'queries'
 import { Query } from 'react-apollo'
@@ -26,17 +26,21 @@ class UserProfile extends PureComponent {
           const { bio, firstname, lastname, profileImage, username } = data.profilePage
           
           return (
-            <Fragment>
-              <Heading level={2}>
-                {username}
-              </Heading>
-              {username && <p>{username}</p>}
-              {firstname && lastname && <p>{firstname} {lastname}</p>}
-              {firstname && !lastname && <p>{firstname}</p>}
-              {lastname && !firstname && <p>{lastname}</p>}
-              {profileImage && <ProfileImage src={profileImage} size={150} />}
-              {bio && <div dangerouslySetInnerHTML={{__html: bio}}></div>}
-            </Fragment>
+            <div className='user-profile'>
+
+              <Heading level={2}>{username}</Heading>
+              
+              <div className='padded'>
+                {username && <p>{username}</p>}
+                
+                {firstname && lastname && <p>{firstname} {lastname}</p>}
+                {firstname && !lastname && <p>{firstname}</p>}
+                {lastname && !firstname && <p>{lastname}</p>}
+                {profileImage && <ProfileImage src={profileImage} size={150} />}
+                {bio && <div dangerouslySetInnerHTML={{__html: bio}}></div>}
+              </div>
+              
+            </div>
           )
         }}
       </Query>

@@ -93,10 +93,15 @@ ul.showList li {
 
 //
 
-.container {
+.content-container {
   margin: 0 auto;
   max-width: $max-content-width;
+  padding: 0;
   border: 1px dotted orange;
+}
+
+.padded {
+  padding: $v-padding $h-padding;
 }
 
 button {

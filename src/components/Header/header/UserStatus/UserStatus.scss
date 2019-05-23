@@ -1,0 +1,14 @@
+@import '~scss/main';
+
+#user-status {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+
+  > * {
+    display: inline-block;
+    flex: 1 0 auto;
+    vertical-align: top;
+  }
+}

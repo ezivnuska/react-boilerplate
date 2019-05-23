@@ -11,6 +11,11 @@ header {
   text-align: right;
   background: $headerColor;
 
+
+  #topbar {
+    background: #fff;
+  }
+
   .logo_wrapper {
     display: inline-block;
     width: 100%;

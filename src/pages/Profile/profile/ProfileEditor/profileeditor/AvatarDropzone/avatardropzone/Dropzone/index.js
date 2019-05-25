@@ -30,7 +30,7 @@ const Dropzone = ({ children, handleDrop, noClick, size, ...props }) => {
     multiple: false,
     noClick
   })
-
+  
   return (
     <div {...getRootProps()} style={styles} {...props}>
       <input {...getInputProps()} />

@@ -1,39 +1,50 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import NameForm from './nameeditor/NameForm'
-import { Heading } from 'components'
+import NamePreview from './nameeditor/NamePreview'
+import { Heading, SplitScreen } from 'components'
 
 import './NameEditor.scss'
 
 class NameEditor extends PureComponent {
   
   state = {
-    editing: false
+    firstname: '',
+    lastname: ''
   }
 
   componentWillMount() {
-    this.resetForm = this.resetForm.bind(this)
-    this.toggleEdit = this.toggleEdit.bind(this)
-  }
-
-  resetForm = () => {
+    const user = this.props.session.getCurrentUser
     this.setState({
-      editing: false
+      firstname: user.firstname,
+      lastname: user.lastname
     })
   }
 
-  toggleEdit = e => {
-    e.preventDefault()
-    this.setState({ editing: !this.state.editing })
+  onChange = (name, value) => {
+    this.setState({
+      [name]: value
+    })
   }
 
   render() {
-    const { editing } = this.state
-    const { firstname, lastname } = this.props.session.getCurrentUser
+    const { firstname, lastname } = this.state
 
     return (
       <div id='name-editor'>
-        <Heading level={4}>{firstname} {lastname}</Heading>
-        {editing && <NameForm {...this.props} cancel={this.resetForm} />}
+        <Heading level={2}>Name</Heading>
+        <SplitScreen>
+          
+          <NamePreview
+            firstname={firstname}
+            lastname={lastname}
+          />
+
+          <NameForm
+            {...this.props}
+            onChange={(name, value) => this.onChange(name, value)}
+          />
+
+        </SplitScreen>
       </div>
     )
   }

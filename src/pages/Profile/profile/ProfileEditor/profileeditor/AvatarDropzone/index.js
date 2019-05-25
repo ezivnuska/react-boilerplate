@@ -1,18 +1,18 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { graphql } from 'react-apollo'
-import webConfig from 'config'
 import {
-  EDIT_PROFILE,
-  GET_ALL_USERS,
-  GET_USER_PROFILE,
   GET_CURRENT_USER,
-  SET_PROFILE_IMAGE,
-  PROFILE_PAGE
+  SET_PROFILE_IMAGE
 } from 'queries'
 import axios from 'axios'
 import toastr from 'toastr'
 import AvatarEditor from 'react-avatar-editor'
 import Dropzone from './avatardropzone/Dropzone'
+import {
+  Heading,
+  ProfileImage,
+  SplitScreen
+} from 'components'
 
 import './AvatarDropzone.scss'
 
@@ -32,7 +32,7 @@ class AvatarDropzone extends PureComponent {
 
   componentWillMount() {
     this.updateDimensions = this.updateDimensions.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDrop = this.handleDrop.bind(this)
   }
 
@@ -93,8 +93,8 @@ class AvatarDropzone extends PureComponent {
       },
       refetchQueries: [
         { query: GET_CURRENT_USER },
-        { query: GET_ALL_USERS },
-        { query: PROFILE_PAGE, variables: { username } }
+        // { query: GET_ALL_USERS },
+        // { query: PROFILE_PAGE, variables: { username } }
       ],
       update: (cache, { data: { setProfileIMG } }) => {
 
@@ -153,7 +153,7 @@ class AvatarDropzone extends PureComponent {
       this.setState({ blob, optimizing: false, optimized: true })
     }
     image.src = src
-    this.setState({ optimizing: true, optimizing: false })
+    this.setState({ optimizing: true, optimized: false })
   }
 
   dataURItoBlob = dataURI => {
@@ -200,7 +200,13 @@ class AvatarDropzone extends PureComponent {
 
   setEditorRef = editor => this.editor = editor
 
-  onSubmit(e) {
+  validateForm = () => {
+    const { uploading, optimizing } = this.state
+    const isInvalid = uploading || optimizing
+    return isInvalid
+  }
+
+  handleSubmit = e => {
 
     e.preventDefault()
     if (this.editor) {
@@ -223,28 +229,21 @@ class AvatarDropzone extends PureComponent {
   }
 
   render() {
-    const {
-      preview,
-      newFile,
-      size,
-    } = this.state
+    const { error, preview, size } = this.state
     const { session } = this.props
-    const { email, username, profileImage } = session.getCurrentUser
+    const { profileImage } = session.getCurrentUser
 
     return (
-      <>
-        {profileImage && (
-          <div
-            id='display'
-            style={{
-              width: size + 'px',
-              height: size + 'px',
-              backgroundImage: `url('${webConfig.assetURL}/user-uploads/profile-images/${profileImage}')`,
-              backgroundSize: 'contain'
-            }}
-          >
-            <div id='display-prompt' className={(preview ? 'show' : '')}>
-              <Dropzone
+      <div id='avatar-editor'>
+        <Heading level={2}>Avatar</Heading>
+        <SplitScreen>
+          <ProfileImage
+            src={profileImage}
+            size={size}
+          />
+          <div id='avatar-dropzone-wrapper'>
+            <Heading level={4}>Upload Avatar</Heading>
+            <Dropzone
               id='dropzone'
               handleDrop={dataUrl => this.handleDrop(dataUrl)}
               noClick={preview !== null}
@@ -270,25 +269,21 @@ class AvatarDropzone extends PureComponent {
                 )}
               </div>
             </Dropzone>
+
+            <div className='form-buttons'>
+              <button
+                type='button'
+                onClick={e => this.handleSubmit(e)}
+                disabled={!preview || this.validateForm()}
+                className='btn'
+              >
+                <i className='fas fa-arrow-circle-right fa-2x'></i>
+              </button>
             </div>
+
           </div>
-        )}
-
-        <div id='avatar-dropzone-wrapper' className='row_wrap'>
-          
-
-          {preview && <div
-            className='submit-button'
-            style={{ width: size + 'px', height: size + 'px', lineHeight: size + 'px' }}
-          >
-            <i
-              className='fas fa-arrow-circle-up'
-              onClick={e => this.onSubmit(e)}
-            />
-          </div>}
-
-        </div>
-      </>
+        </SplitScreen>
+      </div>
     )
   }
 }

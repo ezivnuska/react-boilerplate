@@ -8,6 +8,7 @@ import './SignupForm.scss'
 
 const initialState = {
   email: '',
+  username: '',
   password: '',
   passwordConfirm: '',
   error: '',
@@ -38,12 +39,13 @@ class SignupForm extends PureComponent {
     e.preventDefault()
     signupUser()
     .then(async ({ data }) => {
-      Cookies.set('token', data.signUPUser.token)
+      Cookies.set('token', data.signupUser.token)
       await this.props.refetch()
-      this.clearState()
-      this.props.history.push('/dashboard')
+      // this.clearState()
+      // this.props.history.push('/dashboard')
     })
     .catch(error => {
+      console.log('ERROR', error)
       this.setState({
         error: error.graphQLErrors.map(x => x.message)
       })
@@ -52,13 +54,13 @@ class SignupForm extends PureComponent {
   }
 
   validateForm() {
-    const { email, password, password_confirm } = this.state
-    const isInvalid = !email || !password || password !== password_confirm
+    const { email, password, passwordConfirm, username } = this.state
+    const isInvalid = !email || !username || !password || password !== passwordConfirm
     return isInvalid
   }
 
   render() {
-    const { email, error, password, username } = this.state
+    const { email, error, password, passwordConfirm, username } = this.state
 
     return (
       <Mutation mutation={SIGNUP_USER} variables={{ email, password, username }}>
@@ -73,19 +75,19 @@ class SignupForm extends PureComponent {
               disabled={loading || this.validateForm()}
             >
               <div className='form-input'>
-                <input type='email' name='email' placeholder='Email' value={email} onChange={this.handleChange} />
+                <input type='email' name='email' placeholder='Email' value={email} onChange={e => this.handleChange(e)} />
               </div>
 
               <div className='form-input'>
-                <input type='username' name='username' placeholder='Username' value={username} onChange={this.handleChange} />
+                <input type='text' name='username' placeholder='Username' value={username} onChange={e => this.handleChange(e)} />
               </div>
 
               <div className='form-input'>
-                <input type='password' name='password' placeholder='Password' value={password} onChange={this.handleChange} />
+                <input type='password' name='password' placeholder='Password' value={password} onChange={e => this.handleChange(e)} />
               </div>
 
               <div className='form-input'>
-                <input type='password' name='password_confirm' placeholder='Password' value={password} onChange={this.handleChange} />
+                <input type='password' name='passwordConfirm' placeholder='Password' value={passwordConfirm} onChange={e => this.handleChange(e)} />
               </div>
             </Form>
           )

@@ -28,29 +28,32 @@
 }
 
 #avatar-dropzone-wrapper {
-  display: flex;
-  flex-direction: row;
+  text-align: center;
+  border: 1px solid #ccc;
+  // display: flex;
+  // flex-direction: row;
 
-  & > * {
-    flex: 0 0 auto;
-  }
+  // & > * {
+  //   flex: 0 0 auto;
+  // }
 
-  .submit-button {
-    font-size: 3em;
-    text-align: center;
+  // .submit-button {
+  //   font-size: 3em;
+  //   text-align: center;
 
-    i {
-      color: gray;
-      cursor: pointer;
+  //   i {
+  //     color: gray;
+  //     cursor: pointer;
 
-      &:hover {
-        color: green;
-      }
-    }
-  }
+  //     &:hover {
+  //       color: green;
+  //     }
+  //   }
+  // }
 
   #dropzone {
-    position: relative;
+    // position: relative;
+    margin: 2rem auto 2rem;
     height: 100%;
     cursor: pointer;
 
@@ -59,13 +62,17 @@
     }
 
     #avatar-editor-wrapper {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      bottom: 0;
+      // position: absolute;
+      // top: 0;
+      // right: 0;
+      // left: 0;
+      // bottom: 0;
       text-align: center;
-      border: 1px solid #000;
+      border: 1px solid #ddd;
     }
+  }
+
+  .form-buttons {
+    margin-bottom: 2rem;
   }
 }

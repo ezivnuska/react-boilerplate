@@ -40,7 +40,7 @@ const resolvers = {
   },
   Mutation: {
     signupUser: async (root, { email, username, password }, { User }) => {
-      const user = await User.findOne({ email, username })
+      const user = await User.findOne({ email })
       if (user) {
         throw new Error('User already exists')
       }
@@ -49,6 +49,7 @@ const resolvers = {
         username,
         password,
       }).save()
+      
       return { token: createToken(newUser, process.env.JWT_SECRET, '1hr')}
     },
     signinUser: async (root, { email, password }, { User }) => {

@@ -1,0 +1,14 @@
+@import '~scss/main';
+
+.split-screen {
+    display: flex;
+    flex-flow: row wrap;
+    padding-top: $v-padding;
+    padding-bottom: $v-padding;
+
+    > * {
+        display: inline-block;
+        flex: 1 0 50%;
+        padding: $v-padding $h-padding;
+    }
+}

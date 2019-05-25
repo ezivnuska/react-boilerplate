@@ -7,7 +7,7 @@ import './Form.scss'
 const Form = ({ children, disabled, error, label, onSubmit, title }) => (
   <form className='form' onSubmit={onSubmit}>
     
-    {title && <Heading level={3}>{title}</Heading>}
+    {title && <Heading level={4}>{title}</Heading>}
     
     <div className='form-wrapper'>
       {error && <div className={(error !== '' ? 'error-label' : '')}>{error}</div>}

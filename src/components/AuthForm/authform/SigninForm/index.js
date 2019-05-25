@@ -21,13 +21,13 @@ class SigninForm extends PureComponent {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('receiving props:', nextProps)
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   console.log('receiving props:', nextProps)
+  // }
 
-  componentWillUnmount() {
-    console.log('SigninForm unmounting')
-  }
+  // componentWillUnmount() {
+  //   console.log('SigninForm unmounting')
+  // }
 
   clearState() {
     console.log('SigninForm:clearState')

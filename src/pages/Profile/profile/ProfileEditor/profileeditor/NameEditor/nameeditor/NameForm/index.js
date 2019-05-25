@@ -8,7 +8,7 @@ import {
 import { withRouter } from 'react-router-dom'
 import toastr from 'toastr'
 
-import { Form } from 'components'
+import { Form, Heading } from 'components'
 
 const initialState = {
   firstname: '',
@@ -25,8 +25,8 @@ class NameForm extends PureComponent {
     const { firstname, lastname } = this.props.session.getCurrentUser
     
     this.setState({
-      firstname,
-      lastname
+      firstname: firstname || '',
+      lastname: lastname || ''
     })
   }
 
@@ -55,6 +55,9 @@ class NameForm extends PureComponent {
     e.preventDefault()
     const name = e.target.name
     const value = e.target.value
+    
+    this.props.onChange(name, value)
+
     this.setState({
       [name]: value,
     })
@@ -65,7 +68,6 @@ class NameForm extends PureComponent {
     editProfile()
     .then(async ({ data }) => {
       await this.props.refetch()
-      // this.props.cancel()
       toastr.success('We have updated your profile!', 'Saved!')
     }).catch(error => {
       console.log('ERROR:', error)
@@ -101,6 +103,7 @@ class NameForm extends PureComponent {
         {(editProfile, { data, loading, error }) => (
 
           <Form
+            title='Change Name'
             error={error}
             onSubmit={event => this.handleSubmit(event, editProfile)}
             disabled={loading || this.validateForm()}

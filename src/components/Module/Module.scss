@@ -1,0 +1,10 @@
+@import '~scss/main';
+
+.module {
+    height: 100%;
+    border: 1px solid #ddd;
+
+    .module-content {
+        padding: 2rem $h-padding;
+    }
+}

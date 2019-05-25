@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Module } from 'components'
+
 const NamePreview = ({ firstname, lastname }) => {
     const renderName = () => {
         if (!firstname && !lastname) {
@@ -12,9 +14,9 @@ const NamePreview = ({ firstname, lastname }) => {
 
     }
     return (
-        <div className='name-preview'>
+        <Module title='Current Name'>
             {renderName()}
-        </div>
+        </Module>
     )
 }
 

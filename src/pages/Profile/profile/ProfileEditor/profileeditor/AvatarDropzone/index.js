@@ -10,6 +10,7 @@ import AvatarEditor from 'react-avatar-editor'
 import Dropzone from './avatardropzone/Dropzone'
 import {
   Heading,
+  Module,
   ProfileImage,
   SplitScreen
 } from 'components'
@@ -237,10 +238,12 @@ class AvatarDropzone extends PureComponent {
       <div id='avatar-editor'>
         <Heading level={2}>Avatar</Heading>
         <SplitScreen>
-          <ProfileImage
-            src={profileImage}
-            size={size}
-          />
+          <Module title='Current Avatar' centered>
+            <ProfileImage
+              src={profileImage}
+              size={size}
+            />
+          </Module>
           <div id='avatar-dropzone-wrapper'>
             <Heading level={4}>Upload Avatar</Heading>
             <Dropzone

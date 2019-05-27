@@ -5,9 +5,11 @@ import {
   CHANGE_PASSWORD,
   GET_CURRENT_USER
 } from 'queries'
-import * as Cookies from 'es-cookie'
+// import * as Cookies from 'es-cookie'
 import toastr from 'toastr'
-import { Heading } from 'components'
+import { Form, Module } from 'components'
+
+import './UpdateAccount.scss'
 
 const initialState = {
   newEmail: '',
@@ -55,7 +57,7 @@ class UpdateAccount extends PureComponent {
     })
   }
 
-  confirmPW(){
+  confirmPW() {
     const { password, passwordConfirm } = this.state
     const isMatch = password !== passwordConfirm && password.length <= 7
     this.setState({
@@ -63,7 +65,7 @@ class UpdateAccount extends PureComponent {
     })
   }
 
-  validateEmail(){
+  validateEmail() {
     const { newEmail } = this.state
     return !newEmail
   }
@@ -77,7 +79,7 @@ class UpdateAccount extends PureComponent {
 
   handleChangeEmail(event, changeEmail) {
     event.preventDefault()
-    changeEmail().then(async ({data}) => {
+    changeEmail().then(async ({ data }) => {
       toastr.success('We have updated your email!', 'Saved!')
       this.clearState()
     }).catch(error => {
@@ -89,7 +91,7 @@ class UpdateAccount extends PureComponent {
 
   handleChangePassword(event, changePassword) {
     event.preventDefault()
-    changePassword().then(async ({data}) => {
+    changePassword().then(async ({ data }) => {
       toastr.success('We have updated your password!', 'Saved!')
       this.clearState()
     }).catch(error => {
@@ -105,47 +107,36 @@ class UpdateAccount extends PureComponent {
     const { getCurrentUser } = this.props.session
     
     return (
-      <>
-      <Mutation
+      <Fragment>
+
+        <Module title='Info'>
+          <p>Username: {getCurrentUser.username}</p>
+          <p>Name: {getCurrentUser.firstname} {getCurrentUser.lastname}</p>
+          <p>Email: {getCurrentUser.email}</p>
+        </Module>
+        
+        <Mutation
           mutation={CHANGE_EMAIL}
           variables={{ currentEmail: getCurrentUser.email, newEmail }}
           refetchQueries={() => [
             {query: GET_CURRENT_USER}
-          ]}>
+          ]}
+        >
 
-          {(changeEmail, { data, loading, error }) => {
+          {(changeEmail, { data, loading, error }) => (
+            <Form
+              title='Change Email'
+              error={error}
+              onSubmit={event => this.handleChangeEmail(event, changeEmail)}
+              disabled={loading || this.validateEmail()}
+            >
+              
+              <div className='form-input'>
+                <input type='email' name='newEmail' placeholder='Email' value={newEmail} onChange={this.handleChange.bind(this)} />
+              </div>
 
-            return (
-              <form onSubmit={event => this.handleChangeEmail(event, changeEmail)}>
-
-                <div className='form_wrap updateAccountEmailForm'>
-
-                  <div className='form_row'>
-
-                    <div className='form_item'>
-                      <p>Account holder: {getCurrentUser.firstname} {this.props.session.getCurrentUser.lastname}</p>
-                      <p>Username: {getCurrentUser.username}</p>
-                      <p>Current email: {getCurrentUser.email}</p>
-                      <div className='form-input'>
-                        <input type='email' name='newEmail' placeholder='Email' value={newEmail} onChange={this.handleChange.bind(this)} />
-                        <span className='bottom_border'></span>
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div className='form-buttons'>
-                    <button className='btn' type='submit'
-                    disabled={ loading || this.validateEmail() }>
-                    Update email</button>
-                  </div>
-
-                </div>
-
-              </form>
-            )
-
-          }}
+            </Form>
+          )}
 
         </Mutation>
 
@@ -156,62 +147,29 @@ class UpdateAccount extends PureComponent {
             {query: GET_CURRENT_USER}
           ]}>
 
-          {(changePassword, { data, loading, error }) => {
+          {(changePassword, { data, loading, error }) => (
+            
+            <Form
+              title='Change Password'
+              error={error}
+              onSubmit={event => this.handleChangePassword(event, changePassword)}
+              disabled={loading || this.validatePassword()}
+            >
 
-            return (
-              <form onSubmit={event => this.handleChangePassword(event, changePassword)}>
+              <div className='form-input'>
+                <input type='password' name='password' placeholder='Password' value={password} onChange={this.handleChange.bind(this)} />
+              </div>
 
-                <div className='form_wrap updateAccountPasswordForm'>
+              <div className='form-input'>
+                <input type='password' name='passwordConfirm' placeholder='Password confirm' value={passwordConfirm} onChange={this.handleChange.bind(this)} onBlur={this.confirmPW.bind(this)} />
+              </div>
 
-                  <div className='form_row'>
-
-                    <div className={'error-label' + (!this.state.passwordMatch ? ' passwordMatch' : '')}>
-                      Please check that your passwords match and are at least 8 characters.
-                    </div>
-
-                    <div className='form_item'>
-
-                      <div className='form-input'>
-                        <input type='password' name='password' placeholder='Password' value={password} onChange={this.handleChange.bind(this)} />
-                        <span className='bottom_border'></span>
-                      </div>
-
-                      <div className='helperText'>
-                        Password must be a minium of 8 characters in length.
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <div className='form_row'>
-
-                    <div className='form_item'>
-
-                      <div className='form-input'>
-                        <input type='password' name='passwordConfirm' placeholder='Password confirm' value={passwordConfirm} onChange={this.handleChange.bind(this)} onBlur={this.confirmPW.bind(this)} />
-                        <span className='bottom_border'></span>
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                  <div className='form-buttons'>
-                    <button className='btn' type='submit'
-                    disabled={ loading || this.validatePassword() }>
-                    Update Password</button>
-                  </div>
-
-                </div>
-
-              </form>
-            )
-
-          }}
+            </Form>
+          )}
 
         </Mutation>
-      </>
+
+      </Fragment>
     )
   }
 }

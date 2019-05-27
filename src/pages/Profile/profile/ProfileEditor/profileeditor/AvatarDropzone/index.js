@@ -278,9 +278,9 @@ class AvatarDropzone extends PureComponent {
                 type='button'
                 onClick={e => this.handleSubmit(e)}
                 disabled={!preview || this.validateForm()}
-                className='btn'
+                className='btn transparent'
               >
-                <i className='fas fa-arrow-circle-right fa-2x'></i>
+                <i className='fas fa-arrow-circle-right fa-3x'></i>
               </button>
             </div>
 

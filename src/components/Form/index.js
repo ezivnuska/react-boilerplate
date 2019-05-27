@@ -1,20 +1,19 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Heading } from 'components'
 import SubmitButton from './form/SubmitButton'
 
 import './Form.scss'
 
-const Form = ({ children, disabled, error, label, onSubmit, title, ...props }) => (
-  <form className='form' onSubmit={onSubmit} {...props}>
-    
-    {title && <Heading level={4}>{title}</Heading>}
-    
-    <div className='form-wrapper'>
-      {error && <div className={(error !== '' ? 'error-label' : '')}>{error}</div>}
+const Form = ({ children, disabled, error, label, onSubmit, title, ...props }) => {
+  return (
+    <form className='form' onSubmit={onSubmit} {...props}>
       
-      {(children && children.length) && (
-        <Fragment>
-          
+      {title && <Heading level={4}>{title}</Heading>}
+      
+      <div className='form-wrapper'>
+        {error && <div className={(error !== '' ? 'error-label' : '')}>{error}</div>}
+        
+        {children.length ? (
           <ul className='field-wrapper'>
               {children.map((section, index) => (
                   <li key={index} className='form-section'>
@@ -22,17 +21,22 @@ const Form = ({ children, disabled, error, label, onSubmit, title, ...props }) =
                   </li>
               ))}
           </ul>
-          
-          <div className='form-buttons'>
-            <SubmitButton label={label} disabled={disabled} />
+        ) : (
+          <div className='field-wrapper'>
+            <div className='form-section'>
+              {children}
+            </div>
           </div>
-        
-        </Fragment>
-      )}
-
-    </div>
-    
-  </form>
-)
+        )}
+          
+        <div className='form-buttons'>
+          <SubmitButton label={label} disabled={disabled} />
+        </div>
+  
+      </div>
+      
+    </form>
+  )
+}
 
 export default Form

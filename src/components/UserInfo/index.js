@@ -1,12 +1,42 @@
 import React from 'react'
 
+import { Module, ProfileImage } from 'components'
+
 import './UserInfo.scss'
 
-const UserInfo = ({ user }) => (
-  <ul className='user-info'>
-    <li key={0}>Name: {user.firstname} {user.lastname}</li>
-    <li key={1}>Email: {user.email}</li>
-  </ul>
-)
+const UserInfo = ({ user }) => {
+  const size = 100;
+  const renderName = (firstname, lastname) => (
+    <span>
+      {(firstname && lastname) ? `${firstname} ${lastname}`
+      : (firstname && !lastname) ? `${firstname}`
+      : (lastname && !firstname) ? `${lastname}`
+      : ''}
+    </span>
+  )
+
+  return (
+    <div className='user-info'>
+      
+      <div className='user-info-heading'>
+
+        <ProfileImage src={user.profileImage} size={100} />
+        
+        <div className='full-name' style={{ lineHeight: size + 'px' }}>
+          {renderName(user.firstname, user.lastname)}
+        </div>
+
+      </div>
+
+      <Module
+        className='user-bio'
+        title='About'
+      >
+        {user.bio && <div dangerouslySetInnerHTML={{__html: user.bio}}></div>}
+      </Module>
+      
+    </div>
+  )
+}
 
 export default UserInfo

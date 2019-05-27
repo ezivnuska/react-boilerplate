@@ -91,6 +91,7 @@ export const GET_ALL_USERS = gql`
 export const PROFILE_PAGE = gql`
   query($username: String!) {
     profilePage(username: $username) {
+      email
       firstname
       lastname
       bio

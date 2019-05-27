@@ -10,7 +10,7 @@ import {
 import './UserSignature.scss'
 
 const renderUserFragment = (user, size) => (
-  <>
+  <Fragment>
    <ProfileImage
     src={user.profileImage}
     size={size}
@@ -18,7 +18,7 @@ const renderUserFragment = (user, size) => (
    <div className='username' style={{ lineHeight: size + 'px' }}>
      <span>{user.username}</span>
    </div>
-  </>
+  </Fragment>
 )
 const UserSignature = ({ user, size, to }) => to ? (
   <Link

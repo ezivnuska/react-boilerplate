@@ -1,9 +1,29 @@
 @import '~scss/main';
 
 .user-info {
-  line-height: 1rem;
 
-  li {
-    padding: 2px 0;
+  .user-info-heading {
+    display: flex;
+    flex-flow: row wrap;
+    margin-bottom: 2rem;
+    vertical-align: top;
+  
+    > * {
+      display: inline-block;
+    }
+  
+    .profile-image {
+      flex: 0 0 auto;
+    }
+  
+    .full-name {
+      flex: 1 0 auto;
+      padding: 0 $h-padding;
+      vertical-align: baseline;
+    }
+  }
+
+  .user-bio {
+
   }
 }

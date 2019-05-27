@@ -4,8 +4,8 @@ import SubmitButton from './form/SubmitButton'
 
 import './Form.scss'
 
-const Form = ({ children, disabled, error, label, onSubmit, title }) => (
-  <form className='form' onSubmit={onSubmit}>
+const Form = ({ children, disabled, error, label, onSubmit, title, ...props }) => (
+  <form className='form' onSubmit={onSubmit} {...props}>
     
     {title && <Heading level={4}>{title}</Heading>}
     

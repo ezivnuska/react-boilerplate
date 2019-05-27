@@ -1,4 +1,4 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import SigninForm from './authform/SigninForm'
 import SignupForm from './authform/SignupForm'
@@ -39,10 +39,10 @@ class AuthForm extends PureComponent {
 
   render() {
     return (
-      <Fragment>
+      <div id='auth-form'>
         {this.renderForm()}
         {this.renderBottomLinks()}
-      </Fragment>
+      </div>
     )
   }
 }

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Editor } from 'slate-react'
-import { Value } from 'slate'
+import { KeyUtils, Value } from 'slate'
 import Plain from 'slate-plain-serializer'
 import { isKeyHotkey } from 'is-hotkey'
 import Toolbar from './texteditor/Toolbar'
@@ -34,6 +34,12 @@ const isCodeHotkey = isKeyHotkey('mod+`')
  */
 
 class TextEditor extends PureComponent {
+
+  constructor(props) {
+    super(props)
+    KeyUtils.resetGenerator()
+  }
+
   /**
    * Deserialize the initial editor value.
    *

@@ -220,7 +220,6 @@ class TextEditor extends PureComponent {
 
   renderMark = (props, editor, next) => {
     const { children, mark, attributes } = props
-    console.log('mark.type', mark.type)
     switch (mark.type) {
       case 'bold':
         return <strong {...attributes}>{children}</strong>
@@ -286,7 +285,6 @@ class TextEditor extends PureComponent {
 
   onClickMark = (event, type) => {
     event.preventDefault()
-    console.log('mark clicked', type)
     this.editor.toggleMark(type)
   }
 

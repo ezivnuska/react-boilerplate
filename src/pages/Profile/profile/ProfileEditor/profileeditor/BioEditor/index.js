@@ -7,7 +7,13 @@ import {
 } from 'queries'
 import { withRouter } from 'react-router-dom'
 import toastr from 'toastr'
-import { Form, TextEditor } from 'components'
+import {
+  Form,
+  Heading,
+  TextEditor
+} from 'components'
+
+import './BioEditor.scss'
 
 const initialState = {
   bio: ''
@@ -69,21 +75,23 @@ class BioEditor extends PureComponent {
     const { email, firstname, lastname, username } = session.getCurrentUser
 
     return (
-      <Mutation
-        mutation={EDIT_PROFILE}
-        variables={{ email, bio, firstname, lastname }}
-        refetchQueries={() => [
-          { query: GET_USER_PROFILE },
-          { query: PROFILE_PAGE, variables: { username } }
-        ]}>
+      <div id='bio-editor'>
+        <Heading level={2}>Bio</Heading>
+        <Mutation
+          mutation={EDIT_PROFILE}
+          variables={{ email, bio, firstname, lastname }}
+          refetchQueries={() => [
+            { query: GET_USER_PROFILE },
+            { query: PROFILE_PAGE, variables: { username } }
+          ]}>
 
-        {(editProfile, { data, loading, error }) => (
-
+          {(editProfile, { data, loading, error }) => (
             <Form
               title='Edit About Section'
               error={error}
               onSubmit={event => this.handleSaveBio(event, editProfile)}
               disabled={loading}
+              fullwidth
             >
 
               <div className='form-input'>
@@ -91,10 +99,9 @@ class BioEditor extends PureComponent {
               </div>
 
             </Form>
-          )
-        }
-
-      </Mutation>
+          )}
+        </Mutation>
+      </div>
     )
   }
 }

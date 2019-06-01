@@ -1,16 +1,13 @@
+@import '~scss/main';
 
 .text-editor {
-    background-color: transparent;
+    background: #fff;
 
     .tools {
         margin-bottom: 1rem;
-        padding: 1px;
-
         .toolbar {
             display: inline-block;
             margin-right: 0.5rem;
-            padding: 1px;
-            border: 1px solid #ccc;
 
             a {
                 margin: 0 1px;
@@ -21,6 +18,28 @@
                     margin: 0;
                 }
             }
+        }
+    }
+
+    .text-display {
+        padding: 1rem $h-padding;
+        min-height: 50px;
+        background: #eee;
+        
+        em {
+            font-style: italic;
+        }
+    }
+    
+    &.read-only {
+        background: none;
+        padding: 0;
+
+        .text-display {
+            margin: 1rem 0;
+            border: 0;
+            background: transparent;
+            border: none;
         }
     }
 }

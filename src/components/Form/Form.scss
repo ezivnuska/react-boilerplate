@@ -62,36 +62,26 @@ input:-webkit-autofill {
 
 .form {
   margin: 0;
-  width: 100%;
+  // width: 100%;
   text-align: left;
   border: 1px solid #ddd;
 
   .form-wrapper {
-    // display: flex;
-    // flex-flow: row wrap;
-    // justify-content: center;
-    // width: 100%;
-    margin: 2rem auto;
+    margin: 1rem auto;
     max-width: 480px;
     min-width: 280px;
-
-    // > * {
-    //   display: inline-block;
-    //   flex: 1 0 auto;
-    //   border: 1px solid red;
-    // }
 
     
     .field-wrapper {
       margin: 0 $h-padding;
 
       .form-section {
-        margin-bottom: 2rem;
-        border-bottom: 1px solid #aaa;
+        margin-bottom: 1rem;
+        // padding: $v-padding $h-padding;
     
-        &:last-child {
-          border-bottom: none;
-        }
+        // &:last-child {
+        //   border-bottom: none;
+        // }
     
         .form-label {
           padding-bottom: 1rem;
@@ -108,10 +98,10 @@ input:-webkit-autofill {
         .form-input {
           display: block;
           width: 100%;
-          padding: 0;
           margin: 0;
           position: relative;
           background: #eee;
+          border-bottom: 1px solid #aaa;
     
           input {
             width: 100%;
@@ -248,6 +238,20 @@ input:-webkit-autofill {
     
       .btn, .btn:hover {
         @include transition(all .4s ease-in-out);
+      }
+    }
+  }
+
+  
+
+  &.full-width {
+    
+    .form-wrapper {
+      // margin: 0 0 1rem;
+      max-width: none;
+
+      .field-wrapper {
+        // margin: 0;
       }
     }
   }

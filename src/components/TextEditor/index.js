@@ -102,7 +102,7 @@ class TextEditor extends PureComponent {
   render() {
     const { readOnly } = this.props
     return (
-      <div className='text-editor'>
+      <div className={'text-editor' + (readOnly ? ' read-only' : '')}>
         {!readOnly && (
             <div className='tools'>
                 <Toolbar>
@@ -120,6 +120,7 @@ class TextEditor extends PureComponent {
             </div>
         )}
         <Editor
+          className='text-display'
           spellCheck
           autoFocus
           placeholder="Enter some rich text..."
@@ -219,7 +220,7 @@ class TextEditor extends PureComponent {
 
   renderMark = (props, editor, next) => {
     const { children, mark, attributes } = props
-
+    console.log('mark.type', mark.type)
     switch (mark.type) {
       case 'bold':
         return <strong {...attributes}>{children}</strong>
@@ -285,6 +286,7 @@ class TextEditor extends PureComponent {
 
   onClickMark = (event, type) => {
     event.preventDefault()
+    console.log('mark clicked', type)
     this.editor.toggleMark(type)
   }
 

@@ -34,6 +34,7 @@ const UserInfo = ({ user }) => {
       <Module
         className='user-bio'
         title='About'
+        fullsize
       >
         {user.bio && <TextEditor readOnly={true} value={user.bio} />}
       </Module>

@@ -8,4 +8,10 @@
     .module-content {
         padding: 2rem $h-padding;
     }
+
+    &.full-size {
+        .module-content {
+            padding: 0;
+        }
+    }
 }

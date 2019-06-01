@@ -4,9 +4,9 @@ import SubmitButton from './form/SubmitButton'
 
 import './Form.scss'
 
-const Form = ({ children, disabled, error, label, onSubmit, title, ...props }) => {
+const Form = ({ children, disabled, error, fullwidth, label, onSubmit, title, ...props }) => {
   return (
-    <form className='form' onSubmit={onSubmit} {...props}>
+    <form className={'form' + (fullwidth ? ' full-width' : '')} onSubmit={onSubmit} {...props}>
       
       {title && <Heading level={4}>{title}</Heading>}
       

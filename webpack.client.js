@@ -1,5 +1,4 @@
 const path = require('path')
-const webConfig = require('./config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
@@ -62,7 +61,7 @@ module.exports = {
       { from: 'src/assets/graphics', to: 'assets/graphics' },
       { from: 'src/assets/email_templates', to: 'assets/email_templates' },
       { from: 'user-uploads/profile-images', to: 'assets/user-uploads/profile-images' }
-    ])
+    ]),
   ],
   resolve: {
     modules: ['node_modules', path.resolve(__dirname, 'src', 'assets')],

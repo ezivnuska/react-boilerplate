@@ -9,10 +9,7 @@ const Link = ({ active, children, link, onClick, to, transparent, ...props }) =>
       <a
         className={('link' + (active ? ' active' : ''))}
         href='#'
-        onClick={e => {
-          e.preventDefault()
-          onClick()
-        }}
+        onClick={onClick}
         {...props}
       >
         {children}

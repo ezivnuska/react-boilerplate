@@ -53,7 +53,7 @@ class ProfileEditor extends PureComponent {
               
               <AvatarDropzone {...this.props} />
 
-              <BioEditor {...this.props} />
+              <BioEditor bio={data.getUserProfile.bio} {...this.props} />
 
             </div>
           )

@@ -1,6 +1,9 @@
 import React from 'react'
-
-import { Module, ProfileImage } from 'components'
+import {
+  Module,
+  ProfileImage,
+  TextEditor
+} from 'components'
 
 import './UserInfo.scss'
 
@@ -32,7 +35,7 @@ const UserInfo = ({ user }) => {
         className='user-bio'
         title='About'
       >
-        {user.bio && <div dangerouslySetInnerHTML={{__html: user.bio}}></div>}
+        {user.bio && <TextEditor readOnly={true} value={user.bio} />}
       </Module>
       
     </div>

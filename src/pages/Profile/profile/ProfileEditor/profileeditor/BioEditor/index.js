@@ -6,8 +6,8 @@ import {
   PROFILE_PAGE
 } from 'queries'
 import { withRouter } from 'react-router-dom'
-import CKEditor from 'react-ckeditor-wrapper'
 import toastr from 'toastr'
+import { Form, TextEditor } from 'components'
 
 const initialState = {
   bio: ''
@@ -19,13 +19,12 @@ class BioEditor extends PureComponent {
     ...initialState
   }
 
+  componentWillMount() {
+    const { bio } = this.props
+    if (bio)  this.setState({ bio })
+  }
+
   componentDidMount() {
-    const { profile } = this.props
-    if (profile) {
-      this.setState({
-        bio: profile.bio
-      })
-    }
     toastr.options = {
       'closeButton': false,
       'debug': false,
@@ -45,7 +44,7 @@ class BioEditor extends PureComponent {
     }
   }
 
-  handleEditorChange(bio) {
+  updateBio = bio => {
     this.setState({
       bio
     })
@@ -78,36 +77,22 @@ class BioEditor extends PureComponent {
           { query: PROFILE_PAGE, variables: { username } }
         ]}>
 
-        {(editProfile, { data, loading, error }) => {
+        {(editProfile, { data, loading, error }) => (
 
-          return (
+            <Form
+              title='Edit About Section'
+              error={error}
+              onSubmit={event => this.handleSaveBio(event, editProfile)}
+              disabled={loading}
+            >
 
-            <form onSubmit={event => this.handleSaveBio(event, editProfile)}>
-
-              <div className='form_wrap editBioForm'>
-
-                <div className={{ 'error-label': this.state.error != '' }}>
-                  {this.state.error}
-                </div>
-
-                <div className='form_row'>
-                  <CKEditor
-                    value={bio}
-                    onChange={this.handleEditorChange.bind(this)}
-                    config={{ extraAllowedContent: 'div(*) p(*) strong(*)' }}
-                  />
-                </div>
-
-                <div className='form-buttons'>
-                  <button type='submit' className='btn'
-                    disabled={loading}>
-                    Save changes
-                  </button>
-                </div>
+              <div className='form-input'>
+                <TextEditor value={bio} onChange={value => this.updateBio(value)} />
               </div>
-            </form>
+
+            </Form>
           )
-        }}
+        }
 
       </Mutation>
     )

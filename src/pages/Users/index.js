@@ -44,6 +44,7 @@ class Users extends PureComponent {
   render() {
     return (
       <Fragment>
+        {this.head()}
         <Heading level={1}>Users</Heading>
         <Query query={GET_ALL_USERS}>
 

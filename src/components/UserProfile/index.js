@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react'
+import React, { Fragment, PureComponent } from 'react'
 import { PROFILE_PAGE } from 'queries'
 import { Query } from 'react-apollo'
+import { Helmet } from 'react-helmet'
 import { Module, UserInfo } from 'components'
 
 import './UserProfile.scss'
@@ -14,6 +15,16 @@ class UserProfile extends PureComponent {
   componentWillMount() {
     const username = this.props.username || this.props.session.getCurrentUser.username
     if (username) this.setState({ username })
+  }
+
+
+  head() {
+    const { username } = this.state
+    return (
+      <Helmet bodyAttributes={{ class: 'profile' }}>
+        <title>Profile: {username}</title>
+      </Helmet>
+    )
   }
 
   render() {
@@ -32,12 +43,15 @@ class UserProfile extends PureComponent {
           const { username } = data.profilePage
           
           return (
-            <Module
-              id='user-profile'
-              title={username}
-            >
-                <UserInfo user={data.profilePage} />
-            </Module>
+            <Fragment>
+              {this.head()}
+              <Module
+                id='user-profile'
+                title={username}
+              >
+                  <UserInfo user={data.profilePage} />
+              </Module>
+            </Fragment>
           )
         }}
       </Query>

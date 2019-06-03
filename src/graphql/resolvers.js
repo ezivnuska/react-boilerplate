@@ -50,7 +50,7 @@ const resolvers = {
         password,
       }).save()
       
-      return { token: createToken(newUser, process.env.JWT_SECRET, '1hr')}
+      return { token: createToken(newUser, process.env.JWT_SECRET, '24hr')}
     },
     signinUser: async (root, { email, password }, { User }) => {
       const user = await User.findOne({ email })
@@ -63,7 +63,7 @@ const resolvers = {
         throw new Error('Invalid password')
       }
 
-      return { token: createToken(user, process.env.JWT_SECRET, 10)}
+      return { token: createToken(user, process.env.JWT_SECRET, '24hr')}
     },
     editProfile: async (root, { email, bio, firstname, lastname }, { User }) => {
       const user = await User.findOneAndUpdate({ email }, { $set: { bio, firstname, lastname }}, { new: true })

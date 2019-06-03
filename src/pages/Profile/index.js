@@ -1,7 +1,6 @@
 import React, { Fragment, PureComponent } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 import withAuth from 'hoc/withAuth'
-import { Helmet } from 'react-helmet'
 import { Heading, Menu, UserProfile } from 'components'
 import ProfileEditor from './profile/ProfileEditor'
 import UpdateAccount from './profile/UpdateAccount'
@@ -10,20 +9,11 @@ import './Profile.scss'
 
 class Profile extends PureComponent {
 
-  head() {
-    return (
-      <Helmet bodyAttributes={{ class: 'profilePage' }}>
-        <title>Profile</title>
-      </Helmet>
-    )
-  }
-
   render = () => {
     const { username } = this.props.session.getCurrentUser
 
     return (
       <Fragment>
-        {this.head()}
         
         <Heading level={1}>{username}</Heading>
         

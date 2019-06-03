@@ -6,6 +6,7 @@ import {
   GET_CURRENT_USER
 } from 'queries'
 import toastr from 'toastr'
+import { Helmet } from 'react-helmet'
 import { Form, Module } from 'components'
 
 import './UpdateAccount.scss'
@@ -22,6 +23,15 @@ class UpdateAccount extends PureComponent {
 
   state = {
     ...initialState
+  }
+
+  head() {
+    const { username } = this.props.session.getCurrentUser
+    return (
+      <Helmet bodyAttributes={{ class: 'update-account' }}>
+        <title>Update Account: {username}</title>
+      </Helmet>
+    )
   }
 
   componentWillMount() {
@@ -104,13 +114,15 @@ class UpdateAccount extends PureComponent {
     })
   }
 
-  render(){
+  render() {
 
     const { newEmail, password, passwordConfirm } = this.state
     const { getCurrentUser } = this.props.session
     
     return (
       <Fragment>
+
+        {this.head()}
 
         <Module title='Info'>
           <p><strong>Username:</strong> {getCurrentUser.username}</p>

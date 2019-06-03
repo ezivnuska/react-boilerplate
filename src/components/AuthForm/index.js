@@ -41,7 +41,7 @@ class AuthForm extends PureComponent {
   renderBottomLinks() {
     return (
       <div className='bottom-links'>
-        <p>Don't have an account? <Link onClick={e => this.toggleMode(e)}>{this.state.isSignin ? 'Sign Up' : 'Sign In'}</Link></p>
+        <p>Don't have an account? <Link onClick={this.toggleMode}>{this.state.isSignin ? 'Sign Up' : 'Sign In'}</Link></p>
         <p>Forgot your password? <NavLink to='/account-recovery'>Reset here</NavLink></p>
       </div>
     )

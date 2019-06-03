@@ -8,3 +8,4 @@ package-lock.json
 /user-uploads
 variables.env
 .vs/
+/vs

@@ -18,8 +18,12 @@ const resolvers = {
       if (!currentUser) {
         return null
       }
-      const user = await User.findOne({ email: currentUser.email })
-      return user
+      try {
+        const user = await User.findOne({ email: currentUser.email })
+        return user
+      } catch(err) {
+        console.log(err)
+      }
     },
     getUserProfile: async (root, args, { currentUser, User }) => {
       if (!currentUser) {

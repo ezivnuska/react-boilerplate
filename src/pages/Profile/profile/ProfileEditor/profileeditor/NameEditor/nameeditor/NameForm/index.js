@@ -70,7 +70,6 @@ class NameForm extends PureComponent {
       await this.props.refetch()
       toastr.success('We have updated your profile!', 'Saved!')
     }).catch(error => {
-      console.log('ERROR:', error)
       this.setState({
         error: error.graphQLErrors.map(x => x.message)
       })

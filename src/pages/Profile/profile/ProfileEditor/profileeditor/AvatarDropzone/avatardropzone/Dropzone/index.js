@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react'
-// import PropTypes from 'prop-types'
 import { useDropzone } from 'react-dropzone'
 
 const Dropzone = ({ children, handleDrop, noClick, size, ...props }) => {
@@ -38,11 +37,5 @@ const Dropzone = ({ children, handleDrop, noClick, size, ...props }) => {
     </div>
   )
 }
-
-// Dropzone.propTypes = {
-//   image: PropTypes.string,
-//   onDrop: PropTypes.func.isRequired,
-//   size: PropTypes.number
-// }
 
 export default Dropzone

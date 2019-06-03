@@ -2,7 +2,9 @@ import React, { PureComponent } from 'react'
 import { graphql } from 'react-apollo'
 import {
   GET_CURRENT_USER,
-  SET_PROFILE_IMAGE
+  SET_PROFILE_IMAGE,
+  GET_ALL_USERS,
+  PROFILE_PAGE,
 } from 'queries'
 import axios from 'axios'
 import toastr from 'toastr'
@@ -75,8 +77,6 @@ class AvatarDropzone extends PureComponent {
     }
 
     if (prevState.preview && !this.state.preview) {
-      // const { username } = this.props.session.getCurrentUser
-      // this.props.history.push(`/profile/${username}/edit`)
       toastr.success('We have updated your profile image!', 'Saved!')
     }
   }
@@ -94,8 +94,8 @@ class AvatarDropzone extends PureComponent {
       },
       refetchQueries: [
         { query: GET_CURRENT_USER },
-        // { query: GET_ALL_USERS },
-        // { query: PROFILE_PAGE, variables: { username } }
+        { query: GET_ALL_USERS },
+        { query: PROFILE_PAGE, variables: { username } }
       ],
       update: (cache, { data: { setProfileIMG } }) => {
 
@@ -111,13 +111,7 @@ class AvatarDropzone extends PureComponent {
         })
       }
     }).then(async ({ data }) => {
-      
-      // this.setState({
-      //   newFile: null,
-      //   blob: null,
-      //   optimizing: false,
-      //   optimized: false
-      // })
+      console.log('profile image updated')
     }).catch(err => console.log(err))
   }
 

@@ -18,9 +18,9 @@ class AuthForm extends PureComponent {
   }
 
   componentWillMount() {
-    const sessionExpired = this.props.history.action === 'REPLACE'
-    if (sessionExpired) {
-      this.setState({ error: 'Session terminated due to inactivity. Please sign in.'})
+    const { error } = this.props
+    if (error) {
+      this.setState({ error })
     }
   }
 

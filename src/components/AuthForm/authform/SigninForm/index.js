@@ -9,7 +9,7 @@ import './SigninForm.scss'
 const initialState = {
   email: '',
   password: '',
-  error: '',
+  error: null,
 }
 
 class SigninForm extends PureComponent {
@@ -23,16 +23,7 @@ class SigninForm extends PureComponent {
     this.handleChange = this.handleChange.bind(this)
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   console.log('receiving props:', nextProps)
-  // }
-
-  // componentWillUnmount() {
-  //   console.log('SigninForm unmounting')
-  // }
-
   clearState() {
-    console.log('SigninForm:clearState')
     this.setState({...initialState})
   }
 
@@ -50,15 +41,12 @@ class SigninForm extends PureComponent {
     .then(async ({ data }) => {
       Cookies.set('token', data.signinUser.token)
       await this.props.refetch()
-      // this.clearState()
       this.props.history.push('/')
     })
     .catch(error => {
-      console.log('error', error)
       this.setState({
-        error: error.graphQLErrors.map(x => x.message)
+        error: error.graphQLErrors && error.graphQLErrors.map(x => x.message)
       })
-      console.log('ERR =>', error.graphQLErrors.map(x => x.message))
     })
   }
 
@@ -75,10 +63,9 @@ class SigninForm extends PureComponent {
       <Mutation mutation={SIGNIN_USER} variables={{ email, password }}>
 
         {(signinUser, { data, loading, error }) => {
-          // console.log('SigninForm:data:', data)
           return (
             <Form
-              error={error || this.state.error}
+              error={this.state.error}
               onSubmit={event => this.handleSubmit(event, signinUser)}
               title='Sign In'
               disabled={loading || this.validateForm()}

@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import generator from 'generate-password'
 import axios from 'axios'
 import webConfig from 'config'
+import { AuthenticationError } from 'apollo-server'
 
 const createToken = (user, secret, expiresIn) => {
   const { username, email } = user
@@ -42,7 +43,7 @@ const resolvers = {
     signupUser: async (root, { email, username, password }, { User }) => {
       const user = await User.findOne({ email })
       if (user) {
-        throw new Error('User already exists')
+        throw new AuthenticationError('User already exists')
       }
       const newUser = await new User({
         email,
@@ -55,12 +56,12 @@ const resolvers = {
     signinUser: async (root, { email, password }, { User }) => {
       const user = await User.findOne({ email })
       if (!user) {
-        throw new Error('User not found')
+        throw new AuthenticationError('User not found')
       }
       const isValidPassword = await bcrypt.compare(password, user.password)
 
       if (!isValidPassword) {
-        throw new Error('Invalid password')
+        throw new AuthenticationError('Invalid password')
       }
 
       return { token: createToken(user, process.env.JWT_SECRET, '24hr')}

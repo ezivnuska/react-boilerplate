@@ -69,7 +69,7 @@ module.exports = {
       api: path.resolve(__dirname, './api'),
       assets: path.resolve(__dirname, './src/assets'),
       components: path.resolve(__dirname, './src/components'),
-      config: path.resolve(__dirname, './config'),
+      // config: path.resolve(__dirname, './config'),
       hoc: path.resolve(__dirname, './src/hoc'),
       layouts: path.resolve(__dirname, './src/layouts'),
       queries: path.resolve(__dirname, './src/queries'),

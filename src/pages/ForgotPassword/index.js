@@ -90,7 +90,7 @@ class ForgotPassword extends PureComponent {
 
                   <div className='formBottomLinks'>
                     <p>
-                      Remembered your password? <NavLink to='/signin'>Sign-in</NavLink>
+                      Remembered your password? <NavLink to='/'>Sign-in</NavLink>
                     </p>
                   </div>
 

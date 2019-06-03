@@ -25,7 +25,7 @@ class User extends PureComponent {
       <Fragment>
         {this.head()}
         <Heading level={1}>{username}</Heading>
-        <UserProfile username={username} />
+        <UserProfile username={username} {...this.props} />
       </Fragment>
     )
   }

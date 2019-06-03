@@ -37,9 +37,9 @@ class Profile extends PureComponent {
           ]}
         />
 
-        <Route path='/profile' exact render={() => <UserProfile username={username} />} />
+        <Route path='/profile' exact render={() => <UserProfile {...this.props} />} />
         <Route path='/profile/edit' exact render={() => <ProfileEditor {...this.props} />} />
-        <Route path='/profile/account' render={() => <UpdateAccount {...this.props} />} />
+        <Route path='/profile/account' exact render={() => <UpdateAccount {...this.props} />} />
 
       </Fragment>
     )

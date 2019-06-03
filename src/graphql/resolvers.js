@@ -63,7 +63,7 @@ const resolvers = {
         throw new Error('Invalid password')
       }
 
-      return { token: createToken(user, process.env.JWT_SECRET, '1hr')}
+      return { token: createToken(user, process.env.JWT_SECRET, 10)}
     },
     editProfile: async (root, { email, bio, firstname, lastname }, { User }) => {
       const user = await User.findOneAndUpdate({ email }, { $set: { bio, firstname, lastname }}, { new: true })

@@ -4,7 +4,6 @@ import { GET_USER_PROFILE } from 'queries'
 import AvatarDropzone from './profileeditor/AvatarDropzone'
 import BioEditor from './profileeditor/BioEditor'
 import NameEditor from './profileeditor/NameEditor'
-import { FormSection } from 'components'
 
 import './ProfileEditor.scss'
 
@@ -20,10 +19,11 @@ class ProfileEditor extends PureComponent {
   }
 
   componentWillMount = () => {
-    const { getCurrentUser } = this.props.session
-    if (getCurrentUser) {
-      this.setState({ currentUser: getCurrentUser })
-    }
+    this.props.refetch()
+    // const { getCurrentUser } = this.props.session
+    // if (getCurrentUser) {
+    //   this.setState({ currentUser: getCurrentUser })
+    // }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -53,7 +53,7 @@ class ProfileEditor extends PureComponent {
               
               <AvatarDropzone {...this.props} />
 
-              <BioEditor bio={data.getUserProfile.bio} {...this.props} />
+              {data.getUserProfile && <BioEditor bio={data.getUserProfile.bio} {...this.props} />}
 
             </div>
           )

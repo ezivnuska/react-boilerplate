@@ -20,6 +20,8 @@ class SignupForm extends PureComponent {
   }
 
   componentWillMount() {
+    const { error } = this.props
+    if (error) this.setState({ error })
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -60,7 +62,7 @@ class SignupForm extends PureComponent {
   }
 
   render() {
-    const { email, error, password, passwordConfirm, username } = this.state
+    const { email, password, passwordConfirm, username } = this.state
 
     return (
       <Mutation mutation={SIGNUP_USER} variables={{ email, password, username }}>
@@ -69,7 +71,7 @@ class SignupForm extends PureComponent {
 
           return (
             <Form
-              error={error}
+              error={error || this.state.error}
               onSubmit={event => this.handleSubmit(event, signupUser)}
               title='Sign Up'
               disabled={loading || this.validateForm()}

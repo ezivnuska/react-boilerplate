@@ -18,6 +18,8 @@ class SigninForm extends PureComponent {
   }
 
   componentWillMount() {
+    const { error } = this.props
+    if (error) this.setState({ error })
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -76,7 +78,7 @@ class SigninForm extends PureComponent {
           // console.log('SigninForm:data:', data)
           return (
             <Form
-              error={error}
+              error={error || this.state.error}
               onSubmit={event => this.handleSubmit(event, signinUser)}
               title='Sign In'
               disabled={loading || this.validateForm()}

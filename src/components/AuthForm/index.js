@@ -7,13 +7,21 @@ import { Link } from 'components'
 import './AuthForm.scss'
 
 const initialState = {
-  isSignin: true
+  isSignin: true,
+  error: null,
 }
 
 class AuthForm extends PureComponent {
 
   state = {
     ...initialState,
+  }
+
+  componentWillMount() {
+    const sessionExpired = this.props.history.action === 'REPLACE'
+    if (sessionExpired) {
+      this.setState({ error: 'Session terminated due to inactivity. Please sign in.'})
+    }
   }
 
   toggleMode() {
@@ -23,9 +31,10 @@ class AuthForm extends PureComponent {
   }
 
   renderForm() {
+    const { error } = this.state
     return this.state.isSignin
-      ? <SigninForm {...this.props} />
-      : <SignupForm {...this.props} />
+      ? <SigninForm {...this.props} error={error} />
+      : <SignupForm {...this.props} error={error} />
   }
 
   renderBottomLinks() {

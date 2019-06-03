@@ -5,7 +5,6 @@ import {
   CHANGE_PASSWORD,
   GET_CURRENT_USER
 } from 'queries'
-// import * as Cookies from 'es-cookie'
 import toastr from 'toastr'
 import { Form, Module } from 'components'
 
@@ -23,6 +22,10 @@ class UpdateAccount extends PureComponent {
 
   state = {
     ...initialState
+  }
+
+  componentWillMount() {
+    this.props.refetch()
   }
 
   componentDidMount(){
@@ -110,9 +113,9 @@ class UpdateAccount extends PureComponent {
       <Fragment>
 
         <Module title='Info'>
-          <p>Username: {getCurrentUser.username}</p>
-          <p>Name: {getCurrentUser.firstname} {getCurrentUser.lastname}</p>
-          <p>Email: {getCurrentUser.email}</p>
+          <p><strong>Username:</strong> {getCurrentUser.username}</p>
+          <p><strong>Name:</strong> {getCurrentUser.firstname} {getCurrentUser.lastname}</p>
+          <p><strong>Email:</strong> {getCurrentUser.email}</p>
         </Module>
         
         <Mutation

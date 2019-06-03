@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import { PROFILE_PAGE } from 'queries'
 import { Query } from 'react-apollo'
 import { Module, UserInfo } from 'components'
@@ -8,18 +7,25 @@ import './UserProfile.scss'
 
 class UserProfile extends PureComponent {
 
-  static propTypes = ({
-    username: PropTypes.string.isRequired
-  })
+  state = {
+    username: null,
+  }
+
+  componentWillMount() {
+    const username = this.props.username || this.props.session.getCurrentUser.username
+    if (username) this.setState({ username })
+  }
 
   render() {
-    const { username } = this.props
+    const { username } = this.state
     
+    if (!username) return <div>Loading</div>
+
     return (
       <Query query={PROFILE_PAGE} variables={{ username }}>
 
         {({ data, loading, error }) => {
-
+          
           if (loading) return <div></div>
           if (error) return <div>Error</div>
           

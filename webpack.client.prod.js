@@ -59,7 +59,8 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       { from: 'src/assets/graphics', to: 'assets/graphics' },
-      { from: 'src/assets/email_templates', to: 'assets/email_templates' }
+      { from: 'src/assets/email_templates', to: 'assets/email_templates' },
+      { from: 'user-uploads/profile-images', to: 'assets/user-uploads/profile-images' }
     ])
   ],
   resolve: {
@@ -68,6 +69,7 @@ module.exports = {
       api: path.resolve(__dirname, './api'),
       assets: path.resolve(__dirname, './src/assets'),
       components: path.resolve(__dirname, './src/components'),
+      config: path.resolve(__dirname, './config'),
       hoc: path.resolve(__dirname, './src/hoc'),
       layouts: path.resolve(__dirname, './src/layouts'),
       queries: path.resolve(__dirname, './src/queries'),

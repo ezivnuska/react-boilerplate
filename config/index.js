@@ -5,7 +5,7 @@ console.log('environment:', environment)
 const isDev = environment === 'development'
 const assetPath = isDev ? '/assets' : '/public/assets'
 const profileImagesPath = '/user-uploads/profile-images'
-const siteURL = `http://localhost:${port}`
+const siteURL = isDev ? `http://localhost:${port}` : 'http://ezivnuska.herokuapp.com'
 const assetURL = `${siteURL}${assetPath}`
 const profileImagesURL = `${assetURL}${profileImagesPath}`
 

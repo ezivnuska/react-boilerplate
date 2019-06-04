@@ -19,14 +19,14 @@ import cors from 'cors'
 import nodemailer from 'nodemailer'
 import hbs from 'nodemailer-express-handlebars'
 import { Helmet } from 'react-helmet'
-import fileUpload from 'express-fileupload'
+// import fileUpload from 'express-fileupload'
 // import randomstring from 'randomstring'
 import avatarRoutes from 'api/avatar'
 import AppComponent from './src/app'
 import HTML from 'helpers/renderer'
 
 import server from './src/graphql'
-import { User } from 'models'
+// import { User } from 'models'
 
 // Connect MongoDB
 mongoose.set('useCreateIndex', true)

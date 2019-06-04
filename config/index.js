@@ -1,7 +1,15 @@
-console.log('config', process.env.PORT)
+const environment = process.env.NODE_ENV || 'development'
+const port = process.env.PORT || '3000'
+console.log('environment:', environment)
+const isDev = environment === 'development'
+const assetPath = isDev ? '/assets' : '/public/assets'
+const profileImagesPath = '/user-uploads/profile-images'
+const siteURL = `http://localhost:${port}`
+const assetURL = `${siteURL}${assetPath}`
+const profileImagesURL = `${assetURL}${profileImagesPath}`
+
 export default {
-  siteURL: `http://localhost:${process.env.PORT ? process.env.PORT : '3000'}`,
-  assetURL: `http://localhost:${process.env.PORT ? process.env.PORT : '3000'}/assets`,
-  profileImagesURL: `http://localhost:${process.env.PORT ? process.env.PORT : '3000'}/assets/user-uploads/profile-images`,
-  environment: 'development'
+  siteURL,
+  assetURL,
+  profileImagesURL,
 }

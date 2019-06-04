@@ -4,7 +4,7 @@ import path from 'path'
 import fs from 'fs-extra'
 import multer from 'multer'
 import gm from 'gm'
-import webConfig from '../config'
+import webConfig from 'config'
 
 const avatarStorage = multer.diskStorage({
   destination: function(req, file, callback) {
@@ -52,7 +52,7 @@ export default {
         .extent(50, 50)
         .quality(75)
         .noProfile()
-        .write(`user-uploads/profile-images/small/${filename}`, err => {
+        .write(`${webConfig.profileImagesURL}/small/${filename}`, err => {
           if (err) {
             console.log('error writing thumbnail', err)
             throw err
@@ -65,43 +65,18 @@ export default {
             }
             if (!user) throw('no user found')
 
-            const buildPath = 'build/public/assets/',
-              avatar = `user-uploads/profile-images/${user.profileImage}`,
-              thumb = `user-uploads/profile-images/small/${user.profileImage}`
-
-            fs.pathExists(`${buildPath}${avatar}`)
-            .then(exists => {
-              if (exists) {
-                fs.unlink(`${buildPath}${avatar}`, err => {
-                  if (err) throw err
-                  console.log('avatar deleted from build:', `${buildPath}${avatar}`)
-                })
-              } else {
-                console.log('no avatar to delete from build at path', `${buildPath}${avatar}`)
-              }
-            })
-
-            fs.pathExists(`${buildPath}${thumb}`)
-            .then(exists => {
-              if (exists) {
-                fs.unlink(`${buildPath}${thumb}`, err => {
-                  if (err) throw err
-                  console.log('thumb deleted from build:', `${buildPath}${thumb}`)
-                })
-              } else {
-                console.log('no thumb to delete from build at path', `${buildPath}${thumb}`)
-              }
-            })
+            const avatar = `${webConfig.profileImagesURL}/${user.profileImage}`,
+              thumb = `${webConfig.profileImagesURL}/small/${user.profileImage}`
 
             fs.pathExists(avatar)
             .then(exists => {
               if (exists) {
                 fs.unlink(avatar, err => {
                   if (err) throw err
-                  console.log('avatar deleted:', avatar)
+                  console.log('avatar deleted from build:', avatar)
                 })
               } else {
-                console.log('no avatar to delete at path', avatar)
+                console.log('no avatar to delete from build at path', avatar)
               }
             })
 
@@ -110,12 +85,36 @@ export default {
               if (exists) {
                 fs.unlink(thumb, err => {
                   if (err) throw err
-                  console.log('thumb deleted:', thumb)
+                  console.log('thumb deleted from build:', thumb)
                 })
               } else {
-                console.log('no thumb to delete at path', thumb)
+                console.log('no thumb to delete from build at path', thumb)
               }
             })
+
+            // fs.pathExists(avatar)
+            // .then(exists => {
+            //   if (exists) {
+            //     fs.unlink(avatar, err => {
+            //       if (err) throw err
+            //       console.log('avatar deleted:', avatar)
+            //     })
+            //   } else {
+            //     console.log('no avatar to delete at path', avatar)
+            //   }
+            // })
+
+            // fs.pathExists(thumb)
+            // .then(exists => {
+            //   if (exists) {
+            //     fs.unlink(thumb, err => {
+            //       if (err) throw err
+            //       console.log('thumb deleted:', thumb)
+            //     })
+            //   } else {
+            //     console.log('no thumb to delete at path', thumb)
+            //   }
+            // })
 
             return res.json({
               newFilename: filename

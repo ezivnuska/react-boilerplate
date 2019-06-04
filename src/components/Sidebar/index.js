@@ -35,7 +35,7 @@ class Sidebar extends PureComponent {
       <Fragment>
         <div className="logo_wrapper">
           <NavLink to="/" onClick={() => this.mobile_nav_button()}>
-            <img src={`${webConfig.siteURL}/assets/graphics/logo.png`} />
+            <img src={`${webConfig.assetURL}/graphics/logo.png`} />
           </NavLink>
         </div>
 

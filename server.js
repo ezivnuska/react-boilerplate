@@ -161,7 +161,7 @@ app.post('/password-reset', (req, response) => {
   })
 
   mailer.use('compile', hbs({
-    viewPath: 'build/public/assets/email_templates',
+    viewPath: `${webConfig.assetURL}/email_templates`,
     extName: '.hbs',
   }))
 

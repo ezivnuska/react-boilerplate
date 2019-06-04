@@ -8,8 +8,8 @@ const ProfileImage = ({ src, size }) => {
   const imageSize = size || 50
   const small = imageSize <= 50
   const url = src
-    ? `${webConfig.siteURL}/user-uploads/profile-images/${small ? 'small/' : ''}${src}`
-    : `${webConfig.siteURL}/assets/graphics/default-avatar-small.png`
+    ? `${webConfig.profileImagesURL}/${small ? 'small/' : ''}${src}`
+    : `${webConfig.assetURL}/graphics/default-avatar-small.png`
   return (
     <img
       className='profile-image'

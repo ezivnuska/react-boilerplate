@@ -111,7 +111,7 @@ class AvatarDropzone extends PureComponent {
         })
       }
     }).then(async ({ data }) => {
-      console.log('profile image updated')
+      // console.log('profile image updated')
     }).catch(err => console.log(err))
   }
 
@@ -208,7 +208,7 @@ class AvatarDropzone extends PureComponent {
       // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
       // drawn on another canvas, or added to the DOM.
       const canvas = this.editor.getImage()
-      const context = canvas.getContext('2d')
+      // const context = canvas.getContext('2d')
       const dataURL = canvas.toDataURL('image/png;base64;')
       this.optimizeImage(dataURL)
     }

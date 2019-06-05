@@ -13,8 +13,8 @@ const HTML = ({ content, state, helmet }) => {
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
         <meta http-equiv='X-UA-Compatible' content='ie=edge'>
         ${helmet.meta.toString()}
-        <link rel='shortcut icon' href='assets/graphics/favicon.ico' />
-        <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+        <link rel='shortcut icon' href='${webConfig.assetURL}/graphics/favicon.ico' />
+        <link href="${webConfig.assetURL}/css/main.css" rel="stylesheet" type="text/css" />
         <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         `}}>

@@ -47,16 +47,16 @@ class TextEditor extends PureComponent {
    */
 
  state = {
-    value: Plain.deserialize('')
+    value: null
  }
 
  componentWillMount() {
     const { value } = this.props
-    if (value) {
-        this.setState({
-            value: Value.fromJSON(JSON.parse(value))
-        })
-    }
+    this.setState({
+      value: value
+        ? Value.fromJSON(JSON.parse(value))
+        : Plain.deserialize('')
+    })
  }
 
   /**

@@ -2,7 +2,7 @@ const environment = process.env.NODE_ENV || 'development'
 const port = process.env.PORT || '3000'
 const isDev = environment === 'development'
 
-const siteURL = isDev ? `http://localhost:${port}` : '/'
+const siteURL = isDev ? `http://localhost:${port}` : 'http://ezivnuska.herokuapp.com'
 
 const assetPath = 'assets'
 const assetURL = isDev ? `${siteURL}/${assetPath}` : `/${assetPath}`

@@ -6,7 +6,6 @@ import fs from 'fs'
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
-import webConfig from './config'
 import { StaticRouter } from 'react-router-dom'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import React from 'react'
@@ -19,14 +18,20 @@ import cors from 'cors'
 import nodemailer from 'nodemailer'
 import hbs from 'nodemailer-express-handlebars'
 import { Helmet } from 'react-helmet'
-// import fileUpload from 'express-fileupload'
-// import randomstring from 'randomstring'
-import avatarRoutes from 'api/avatar'
 import AppComponent from './src/app'
 import HTML from 'helpers/renderer'
+import AWS from 'aws-sdk'
+import webConfig from 'config'
+
+AWS.config.update({
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+  region: 'us-west-1'
+})
+
+import avatarRoutes from 'api/avatar'
 
 import server from './src/graphql'
-// import { User } from 'models'
 
 // Connect MongoDB
 mongoose.set('useCreateIndex', true)
@@ -52,47 +57,47 @@ app.use(cookieParser())
 
 app.use('/', express.static('build/public'))
 
-app.get('/user-uploads/profile-images/small/:file', (req, res) => {
+// app.get('/user-uploads/profile-images/small/:file', (req, res) => {
 
-  const file_name = req.params.file
-  const get_file = path.resolve('./user-uploads/profile-images/small/' + req.params.file)
-  const current_files = fs.readdirSync('./user-uploads/profile-images/small/')
-  const fileExists = current_files.includes(file_name)
+//   const file_name = req.params.file
+//   const get_file = path.resolve('./user-uploads/profile-images/small/' + req.params.file)
+//   const current_files = fs.readdirSync('./user-uploads/profile-images/small/')
+//   const fileExists = current_files.includes(file_name)
 
-  if (fileExists) {
-    res.status(200).sendFile(get_file)
-  } else {
-    res.status(404).send('No file found!')
-  }
-})
+//   if (fileExists) {
+//     res.status(200).sendFile(get_file)
+//   } else {
+//     res.status(404).send('No file found!')
+//   }
+// })
 
-app.get('/user-uploads/profile-images/:file', (req, res) => {
+// app.get('/user-uploads/profile-images/:file', (req, res) => {
 
-  const file_name = req.params.file
-  const get_file = path.resolve('./user-uploads/profile-images/' + req.params.file)
-  const current_files = fs.readdirSync('./user-uploads/profile-images/')
-  const fileExists = current_files.includes(file_name)
+//   const file_name = req.params.file
+//   const get_file = path.resolve('./user-uploads/profile-images/' + req.params.file)
+//   const current_files = fs.readdirSync('./user-uploads/profile-images/')
+//   const fileExists = current_files.includes(file_name)
 
-  if (fileExists) {
-    res.status(200).sendFile(get_file)
-  } else {
-    res.status(404).send('No file found!')
-  }
-})
+//   if (fileExists) {
+//     res.status(200).sendFile(get_file)
+//   } else {
+//     res.status(404).send('No file found!')
+//   }
+// })
 
-app.get('/user-uploads/:file', (req, res) => {
+// app.get('/user-uploads/:file', (req, res) => {
 
-  const file_name = req.params.file
-  const get_file = path.resolve('./user-uploads/profile-images/' + req.params.file)
-  const current_files = fs.readdirSync('./user-uploads/profile-images/')
-  const fileExists = current_files.includes(file_name)
+//   const file_name = req.params.file
+//   const get_file = path.resolve('./user-uploads/profile-images/' + req.params.file)
+//   const current_files = fs.readdirSync('./user-uploads/profile-images/')
+//   const fileExists = current_files.includes(file_name)
 
-  if (fileExists) {
-    res.status(200).sendFile(get_file)
-  } else {
-    res.status(404).send('No file found!')
-  }
-})
+//   if (fileExists) {
+//     res.status(200).sendFile(get_file)
+//   } else {
+//     res.status(404).send('No file found!')
+//   }
+// })
 
 // JWT Middleware
 app.use(async (req, res, next) => {

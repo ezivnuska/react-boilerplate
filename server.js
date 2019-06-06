@@ -23,13 +23,13 @@ import HTML from 'helpers/renderer'
 import AWS from 'aws-sdk'
 import webConfig from 'config'
 
-console.log('ACCESS_KEY_ID', webConfig.accessKeyId, process.env.ACCESS_KEY_ID)
-console.log('SECRET_ACCESS_KEY', webConfig.secretAccessKey, process.env.SECRET_ACCESS_KEY)
+console.log('ACCESS_KEY_ID', process.env.ACCESS_KEY_ID)
+console.log('SECRET_ACCESS_KEY', process.env.SECRET_ACCESS_KEY)
 
 AWS.config.update({
   accessKeyId: process.env.ACCESS_KEY_ID,
   secretAccessKey: process.env.SECRET_ACCESS_KEY,
-  region: 'us-west-1'
+  // region: 'us-west-1'
 })
 
 import avatarRoutes from 'api/avatar'

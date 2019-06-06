@@ -5,6 +5,11 @@ import webConfig from 'config'
 import './ProfileImage.scss'
 
 class ProfileImage extends PureComponent {
+
+  state = {
+    size: null,
+    src: null
+  }
   
   static propTypes = {
     src: PropTypes.string,
@@ -12,30 +17,42 @@ class ProfileImage extends PureComponent {
   }
 
   componentWillMount() {
-    console.log('src', this.props.src)
+    const { size, src } = this.props
+    this.setState({
+      size: size || 50,
+      src
+    })
   }
 
-  componentWillReceiveProps = nextProps => {
-    console.log('nextProps', nextProps)
+  componentWillReceiveProps = ({ src }) => {
+    console.log('next src', src)
+    if (this.state.src !== src) {
+      console.log('\nsrc changed')
+      this.setState({ src })
+    }
+  }
+
+  getUrl() {
+    const { size, src } = this.state
+    const small = size <= 50
+    return src
+      ? `/${webConfig.assetPath}/${webConfig.profileImagesPath}/${small ? 'small/' : ''}${src}`
+      : `/${webConfig.assetPath}/graphics/default-avatar-small.png`
   }
 
   render() {
-    const { src, size } = this.props
-
-    const imageSize = size || 50
-    const small = imageSize <= 50
-    const url = src
-      ? `/${webConfig.assetPath}/${webConfig.profileImagesPath}/${small ? 'small/' : ''}${src}`
-      : `/${webConfig.assetPath}/graphics/default-avatar-small.png`
-    
-      return (
+    const { size, src } = this.state
+    console.log('RENDERING', src)
+    const url = this.getUrl()
+    console.log(url)
+    return (
       <div>
         <p>{src}</p>
         <img
           className='profile-image'
           src={url}
           style={{
-            height: imageSize + 'px',
+            height: size + 'px',
             width: 'auto'
           }}
         />

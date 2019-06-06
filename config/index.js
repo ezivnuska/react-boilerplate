@@ -10,6 +10,7 @@ const assetURL = isDev ? `${siteURL}/${assetPath}` : assetPath
 const profileImagesURL = `${assetURL}/${profileImagesPath}`
 
 export default {
+  isDev,
   siteURL,
   assetPath,
   assetURL,

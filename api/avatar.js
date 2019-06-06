@@ -42,12 +42,13 @@ export default {
       const { file, currentUser } = req
       const { filename, path } = file
       
-      console.log('file', file)
+      console.log('\nupload successful', file)
+      console.log('\nattempting to write thumbnail')
 
       try {
         fs.pathExists(path)
         .then(exists => {
-          console.log('file exists at path', path, exists)
+          console.log('ensure file exists at path', path, exists)
           const writePath = `${webConfig.profileImagesPath}/small/${filename}`
           console.log('saving thumbnail at path', writePath)
 

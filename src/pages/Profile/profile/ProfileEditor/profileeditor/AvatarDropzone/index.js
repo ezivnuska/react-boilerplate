@@ -14,6 +14,7 @@ import {
   Heading,
   Module,
   ProfileImage,
+  Spinner,
   SplitScreen
 } from 'components'
 
@@ -25,12 +26,11 @@ class AvatarDropzone extends PureComponent {
     blob: null,
     size: 263,
     preview: null,
-    newFile: null,
     error: '',
     optimizing: false,
     optimized: false,
     uploading: false,
-    uploaded: false
+    uploaded: false,
   }
 
   componentWillMount() {
@@ -62,30 +62,26 @@ class AvatarDropzone extends PureComponent {
       'hideMethod': 'fadeOut'
     }
   }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (!prevState.newFile && this.state.newFile) {
-      this.updateProfileImage()
-    }
-
+  
+  componentDidUpdate(prevProps, prevState) {
+    
     if (!prevState.blob && this.state.blob) {
       this.uploadImage()
     }
-
-    if (!prevState.uploaded && this.state.uploaded) {
-      this.setState({ preview: null, uploaded: false })
-    }
-
+    
     if (prevState.preview && !this.state.preview) {
       toastr.success('We have updated your profile image!', 'Saved!')
     }
   }
 
-  updateProfileImage() {
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions)
+  }
+
+  updateProfileImage(newFile) {
     const { mutate, session } = this.props
     const currentUser = session.getCurrentUser
     const { username } = currentUser
-    const { newFile } = this.state
 
     mutate({
       variables: {
@@ -110,13 +106,16 @@ class AvatarDropzone extends PureComponent {
           }
         })
       }
-    }).then(async ({ data }) => {
+    }).then(({ data }) => {
       // console.log('profile image updated')
-    }).catch(err => console.log(err))
-  }
+    })
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions)
+    this.setState({
+      blob: null,
+      uploading: false,
+      uploaded: true,
+      preview: null
+    })
   }
 
   optimizeImage = src => {
@@ -181,16 +180,10 @@ class AvatarDropzone extends PureComponent {
     const formData = new FormData()
     formData.append('file', this.state.blob)
 
-    axios.post('/upload', formData).then(({ data: { newFilename } }) => {
-
-      this.setState({
-        blob: null,
-        newFile: newFilename,
-        uploading: false,
-        uploaded: true
-      })
-
-    }).catch(err => console.log(err))
+    axios.post('/upload', formData)
+    .then(({ data: { newFilename } }) => {
+      this.updateProfileImage(newFilename)
+    })
   }
 
   setEditorRef = editor => this.editor = editor
@@ -224,10 +217,10 @@ class AvatarDropzone extends PureComponent {
   }
 
   render() {
-    const { error, preview, size } = this.state
+    const { error, preview, size, uploading } = this.state
     const { session } = this.props
     const { profileImage } = session.getCurrentUser
-
+    
     return (
       <div id='avatar-editor'>
         <Heading level={2}>Avatar</Heading>
@@ -274,10 +267,9 @@ class AvatarDropzone extends PureComponent {
                 disabled={!preview || this.validateForm()}
                 className='btn transparent'
               >
-                <i className='fas fa-arrow-circle-right fa-3x'></i>
+                {uploading ? <Spinner /> : <i className='fas fa-arrow-circle-right fa-3x'></i>}
               </button>
             </div>
-
           </div>
         </SplitScreen>
       </div>

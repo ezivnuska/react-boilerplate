@@ -11,8 +11,7 @@ const Footer = () => (
         </div>
         <div className='footer-center'>
           <ul>
-            <li><a href=''><i className='fab fa-facebook-f'></i></a></li>
-            <li><a href=''><i className='fab fa-github'></i></a></li>
+            <li><a href='https://github.com/ezivnuska/react-boilerplate'><i className='fab fa-github'></i></a></li>
           </ul>
         </div>
         <div className='footer-right'>

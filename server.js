@@ -1,8 +1,6 @@
 import 'babel-polyfill'
 import 'isomorphic-unfetch'
 require('dotenv').config({ path: 'variables.env' })
-import path from 'path'
-import fs from 'fs'
 import express from 'express'
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
@@ -22,19 +20,13 @@ import AppComponent from './src/app'
 import HTML from 'helpers/renderer'
 import AWS from 'aws-sdk'
 import webConfig from 'config'
-
-// console.log('AWS_ACCESS_KEY_ID', process.env.AWS_ACCESS_KEY_ID)
-// console.log('AWS_SECRET_ACCESS_KEY', process.env.AWS_SECRET_ACCESS_KEY)
+import avatarRoutes from 'api/avatar'
+import server from './src/graphql'
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  // region: 'us-west-1'
 })
-
-import avatarRoutes from 'api/avatar'
-
-import server from './src/graphql'
 
 // Connect MongoDB
 mongoose.set('useCreateIndex', true)
@@ -60,48 +52,6 @@ app.use(cookieParser())
 
 app.use('/', express.static('build/public'))
 
-// app.get('/user-uploads/profile-images/small/:file', (req, res) => {
-
-//   const file_name = req.params.file
-//   const get_file = path.resolve('./user-uploads/profile-images/small/' + req.params.file)
-//   const current_files = fs.readdirSync('./user-uploads/profile-images/small/')
-//   const fileExists = current_files.includes(file_name)
-
-//   if (fileExists) {
-//     res.status(200).sendFile(get_file)
-//   } else {
-//     res.status(404).send('No file found!')
-//   }
-// })
-
-// app.get('/user-uploads/profile-images/:file', (req, res) => {
-
-//   const file_name = req.params.file
-//   const get_file = path.resolve('./user-uploads/profile-images/' + req.params.file)
-//   const current_files = fs.readdirSync('./user-uploads/profile-images/')
-//   const fileExists = current_files.includes(file_name)
-
-//   if (fileExists) {
-//     res.status(200).sendFile(get_file)
-//   } else {
-//     res.status(404).send('No file found!')
-//   }
-// })
-
-// app.get('/user-uploads/:file', (req, res) => {
-
-//   const file_name = req.params.file
-//   const get_file = path.resolve('./user-uploads/profile-images/' + req.params.file)
-//   const current_files = fs.readdirSync('./user-uploads/profile-images/')
-//   const fileExists = current_files.includes(file_name)
-
-//   if (fileExists) {
-//     res.status(200).sendFile(get_file)
-//   } else {
-//     res.status(404).send('No file found!')
-//   }
-// })
-
 // JWT Middleware
 app.use(async (req, res, next) => {
   const token = req.cookies.token ? req.cookies.token : null
@@ -121,6 +71,7 @@ server.applyMiddleware({ app })
 app.get(['*/:param', '*'], (req, res) => {
 
   const URL_Param = req.params.param ? req.params.param : null
+  
   const client = new ApolloClient({
     ssrMode: true,
     link: createHttpLink({
@@ -190,32 +141,6 @@ app.post('/password-reset', (req, response) => {
   })
 })
 
-// app.use(fileUpload())
 app.post('/upload', avatarRoutes.uploadAvatar)
-// app.post('/upload', (req, res) => {
-//   if (!req.files) return res.status(400).send('No files were uploaded.')
-//   const current_files = fs.readdirSync('./user-uploads/profile-images/')
-//   let profilePic = req.files.selectedFile
-//   console.log('profilePic', profilePic)
-//   let file_ext = getFileType(profilePic.mimetype)
-//   let tempFilename = randomstring.generate(21) + file_ext
-//   const fileExists = current_files.includes(tempFilename)
-//   while (fileExists) {
-//     let string = randomstring.generate(21)
-//     tempFilename = string + file_ext
-//
-//     if (!current_files.includes(tempFilename)) {
-//       break
-//     }
-//   }
-//   let send_filePath = './user-uploads/profile-images/' + tempFilename
-//   profilePic.mv(send_filePath, err => {
-//     if (err) return res.status(500).send(err)
-//     const res_dataObj = {
-//       'newFilename': tempFilename
-//     }
-//     res.send(res_dataObj)
-//   })
-// })
 
 app.listen(PORT, () => console.log(`App running on port ${PORT}`))

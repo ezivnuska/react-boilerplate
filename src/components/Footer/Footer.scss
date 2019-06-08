@@ -6,10 +6,15 @@ footer {
   background: $footerColor;
   color: #fff;
 
-  .container {
+  .footer-container {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
+    padding: 0 $h-padding;
+
+    a, a:link, a:visited {
+      color: #fff;
+    }
 
     > * {
       display: inline-block;
@@ -17,11 +22,11 @@ footer {
     }
 
     .footer-left, .footer-right {
-      flex: 0 0 auto;
+      flex: 0 1 auto;
     }
 
     .footer-center {
-      flex: 0 0 auto;
+      flex: 1 0 auto;
       text-align: center;
 
       ul, ul li {
@@ -30,31 +35,27 @@ footer {
       }
 
       ul {
-        display: flex;
-        flex-flow: row nowrap;
+        // display: flex;
+        // flex-flow: row nowrap;
         width: 100%;
 
         li {
           display: inline-block;
-          flex: 1 0 auto;
+          // flex: 1 0 auto;
           list-style-type: none;
 
           a {
-            padding: 0 0.5rem;
+            display: block;
+            padding: 0 1rem;
+            height: 100%;
             font-size: 2rem;
-            line-height: normal;
+            line-height: $footerHeight;
           }
 
           // &:last-child {
           //   margin-right: 0;
           // }
         }
-      }
-    }
-
-    .footer-right {
-      a, a:visited {
-        color: #fff;
       }
     }
   }

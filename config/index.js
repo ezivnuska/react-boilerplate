@@ -7,11 +7,13 @@ const siteURL = isDev ? `http://localhost:${port}` : 'http://ezivnuska.herokuapp
 const assetPath = 'assets'
 const assetURL = `${siteURL}/${assetPath}`
 
-const profileImagesPath = 'user-uploads/profile-images'
+const bucket = 'ezivnuska'
 const profileImagesURL = 'https://ezivnuska.s3-us-west-1.amazonaws.com'
+const profileImagesPath = 'user-uploads/profile-images'
 
 export default {
   isDev,
+  bucket,
   siteURL,
   assetPath,
   assetURL,

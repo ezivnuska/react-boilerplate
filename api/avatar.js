@@ -1,28 +1,14 @@
-import mongoose from 'mongoose'
-import { Image, User } from 'models'
+// import mongoose from 'mongoose'
+import { User } from 'models'
 import path from 'path'
-import fs from 'fs-extra'
 import AWS from 'aws-sdk'
 import multer from 'multer'
 import multerS3 from 'multer-s3'
 import gm from 'gm'
-import webConfig from 'config'
 
 const im = gm.subClass({ imageMagick: true })
 
 const s3 = new AWS.S3()
-
-// const avatarStorage = multer.diskStorage({
-//   destination: function(req, file, callback) {
-//     callback(null, `user-uploads/profile-images/`)
-//   },
-//   filename: function(req, file, callback) {
-//     const { currentUser } = req
-//     const { username } = currentUser
-//     let ext = path.extname(file.originalname).length ? path.ext(file.originalname) : '.png'
-//     callback(null, username + '-' + Date.now() + ext)
-//   }
-// })
 
 const storage = multerS3({
   s3,

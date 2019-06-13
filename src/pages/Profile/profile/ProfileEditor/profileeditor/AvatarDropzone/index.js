@@ -179,7 +179,7 @@ class AvatarDropzone extends PureComponent {
 
     const formData = new FormData()
     formData.append('file', this.state.blob)
-
+    
     axios.post('/upload', formData)
     .then(({ data: { newFilename } }) => {
       this.updateProfileImage(newFilename)

@@ -81,27 +81,37 @@ export default {
                   
                   if (!user) return res.json({ error: 'Error: no user found' })
                   
-                  // delete old avatar files
+                  // if previous avatar
+                  if (user.profileImage) {
 
-                  s3.deleteObject({
-                    Bucket: bucket,
-                    Key: user.profileImage
-                  }, err => {
-                    if (err)
-                      return res.json({ error: `Error deleting avatar: ${err}` })
-
+                    // delete old avatar files
                     s3.deleteObject({
-                      Bucket: thumbPath,
+                      Bucket: bucket,
                       Key: user.profileImage
                     }, err => {
                       if (err)
-                        return res.json({ error: `Error deleting thumb: ${err}` })
-                      
-                      return res.json({
-                        newFilename: key
+                        return res.json({ error: `Error deleting avatar: ${err}` })
+  
+                      s3.deleteObject({
+                        Bucket: thumbPath,
+                        Key: user.profileImage
+                      }, err => {
+                        if (err) return res.json({
+                          error: `Error deleting thumb: ${err}`
+                        })
+                        
+                        return res.json({
+                          newFilename: key
+                        })
                       })
                     })
-                  })
+                  } else {
+                    // if no previous avatar exists
+                    // return new avatar key
+                    return res.json({
+                      newFilename: key
+                    })
+                  }
                 })
               })
             })

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { Editor } from 'slate-react'
 import { KeyUtils, Value } from 'slate'
 import Plain from 'slate-plain-serializer'
@@ -33,31 +33,20 @@ const isCodeHotkey = isKeyHotkey('mod+`')
  * @type {Component}
  */
 
-class TextEditor extends PureComponent {
+class TextEditor extends Component {
 
   constructor(props) {
     super(props)
     KeyUtils.resetGenerator()
-  }
-
-  /**
-   * Deserialize the initial editor value.
-   *
-   * @type {Object}
-   */
-
- state = {
-    value: null
- }
-
- componentWillMount() {
-    const { value } = this.props
-    this.setState({
+    const { value } = props
+    this.state = {
       value: value
+        ? typeof value === 'string'
         ? Value.fromJSON(JSON.parse(value))
+        : value
         : Plain.deserialize('')
-    })
- }
+    }
+  }
 
   /**
    * Check if the current selection has a mark with `type` in it.
@@ -100,23 +89,23 @@ class TextEditor extends PureComponent {
    */
 
   render() {
-    const { readOnly } = this.props
+    const { editable } = this.props
     return (
-      <div className={'text-editor' + (readOnly ? ' read-only' : '')}>
-        {!readOnly && (
+      <div className={'text-editor' + (editable ? '' : ' read-only')}>
+        {!editable && (
             <div className='tools'>
                 <Toolbar>
                     {this.renderMarkButton('bold', 'bold')}
                     {this.renderMarkButton('italic', 'italic')}
                     {this.renderMarkButton('underlined', 'underline')}
-                    {this.renderMarkButton('code', 'code')}
+                    {/* {this.renderMarkButton('code', 'code')} */}
                 </Toolbar>
-                <Toolbar>
+                {/* <Toolbar>
                     {this.renderBlockButton('heading-one', 'heading')}
                     {this.renderBlockButton('block-quote', 'quote-right')}
                     {this.renderBlockButton('numbered-list', 'list-ol')}
                     {this.renderBlockButton('bulleted-list', 'list-ul')}
-                </Toolbar>
+                </Toolbar> */}
             </div>
         )}
         <Editor
@@ -130,7 +119,7 @@ class TextEditor extends PureComponent {
           onKeyDown={this.onKeyDown}
           renderBlock={this.renderBlock}
           renderMark={this.renderMark}
-          readOnly={readOnly}
+          readOnly={!editable}
         />
       </div>
     )
@@ -241,6 +230,7 @@ class TextEditor extends PureComponent {
    */
 
   onChange = ({ value }) => {
+    console.log('value', typeof value, value)
     if (value.document !== this.state.value.document) {
         const bio = JSON.stringify(value)
         this.props.onChange(bio)

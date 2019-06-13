@@ -38,14 +38,24 @@ class TextEditor extends Component {
   constructor(props) {
     super(props)
     KeyUtils.resetGenerator()
-    const { value } = props
+    
     this.state = {
-      value: value
-        ? typeof value === 'string'
-        ? Value.fromJSON(JSON.parse(value))
-        : value
-        : Plain.deserialize('')
+      value: null
     }
+  }
+
+  componentWillMount() {
+    const { initialValue } = this.props
+    let value
+    if (!initialValue) {
+      value = Plain.deserialize('')
+    } else {
+      value = Value.fromJSON(JSON.parse(initialValue))
+    }
+    
+    this.setState({
+      value
+    })
   }
 
   /**
@@ -92,27 +102,25 @@ class TextEditor extends Component {
     const { editable } = this.props
     return (
       <div className={'text-editor' + (editable ? '' : ' read-only')}>
-        {!editable && (
+        {/* {!editable && (
             <div className='tools'>
                 <Toolbar>
                     {this.renderMarkButton('bold', 'bold')}
                     {this.renderMarkButton('italic', 'italic')}
                     {this.renderMarkButton('underlined', 'underline')}
-                    {/* {this.renderMarkButton('code', 'code')} */}
+                    {this.renderMarkButton('code', 'code')}
                 </Toolbar>
-                {/* <Toolbar>
+                <Toolbar>
                     {this.renderBlockButton('heading-one', 'heading')}
                     {this.renderBlockButton('block-quote', 'quote-right')}
                     {this.renderBlockButton('numbered-list', 'list-ol')}
                     {this.renderBlockButton('bulleted-list', 'list-ul')}
-                </Toolbar> */}
+                </Toolbar>
             </div>
-        )}
+        )} */}
         <Editor
           className='text-display'
-          spellCheck
           autoFocus
-          placeholder="Enter some rich text..."
           ref={this.ref}
           value={this.state.value}
           onChange={this.onChange}
@@ -230,13 +238,13 @@ class TextEditor extends Component {
    */
 
   onChange = ({ value }) => {
-    console.log('value', typeof value, value)
+    
     if (value.document !== this.state.value.document) {
         const bio = JSON.stringify(value)
-        this.props.onChange(bio)
+        this.props.onUpdate(bio)
     }
     
-    this.setState({ value: Value.fromJSON(value) })
+    this.setState({ value })
   }
 
   /**

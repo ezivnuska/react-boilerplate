@@ -27,7 +27,9 @@ class BioEditor extends PureComponent {
 
   componentWillMount() {
     const { bio } = this.props
-    if (bio)  this.setState({ bio })
+    if (bio) {
+      this.setState({ bio })
+    }
   }
 
   componentDidMount() {
@@ -73,7 +75,7 @@ class BioEditor extends PureComponent {
     const { bio } = this.state
     const { session } = this.props
     const { email, firstname, lastname, username } = session.getCurrentUser
-
+    
     return (
       <div id='bio-editor'>
         <Heading level={2}>Bio</Heading>
@@ -95,7 +97,7 @@ class BioEditor extends PureComponent {
             >
 
               <div className='form-input'>
-                <TextEditor value={bio} onChange={value => this.updateBio(value)} />
+                <TextEditor editable initialValue={bio.length ? bio : null} onUpdate={value => this.updateBio(value)} />
               </div>
 
             </Form>

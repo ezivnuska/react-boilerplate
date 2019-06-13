@@ -42,7 +42,7 @@ class ProfileEditor extends PureComponent {
   }
 
   render() {
-
+    
     return (
       <Fragment>
         {this.head()}

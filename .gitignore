@@ -8,3 +8,5 @@ package-lock.json
 variables.env
 .vs/
 /vs
+
+src/components/Slate/

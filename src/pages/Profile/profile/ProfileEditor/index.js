@@ -4,7 +4,6 @@ import { GET_USER_PROFILE } from 'queries'
 import { Helmet } from 'react-helmet'
 import AvatarDropzone from './profileeditor/AvatarDropzone'
 import BioEditor from './profileeditor/BioEditor'
-import NameEditor from './profileeditor/NameEditor'
 
 import './ProfileEditor.scss'
 
@@ -52,11 +51,9 @@ class ProfileEditor extends PureComponent {
       
             if (loading) return <div>Loading</div>
             if (error) return <div>error</div>
-            
+
             return (
               <div id='profile-editor'>
-
-                <NameEditor {...this.props} />
                 
                 <AvatarDropzone {...this.props} />
 

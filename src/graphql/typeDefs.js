@@ -3,8 +3,6 @@ import { gql } from 'apollo-server-express'
 const typeDefs = gql`
   type User {
     _id: ID,
-    firstname: String
-    lastname: String
     password: String!
     bio: String
     profileImage: String
@@ -27,7 +25,7 @@ const typeDefs = gql`
   type Mutation {
     signupUser(email: String!, username: String!, password: String!): Token
     signinUser(email: String!, password: String!): Token
-    editProfile(email: String!, bio: String, firstname: String, lastname: String): User
+    editProfile(email: String!, bio: String): User
     setProfileIMG(email: String!, profileImage: String!): User
     changeEmail(currentEmail: String!, newEmail: String!): User
     changePassword(email: String!, password: String!): User

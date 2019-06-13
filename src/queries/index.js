@@ -9,8 +9,6 @@ export const SIGNUP_USER = gql`
 export const GET_CURRENT_USER = gql`
   query {
     getCurrentUser {
-      firstname
-      lastname
       joinDate
       username
       email
@@ -20,11 +18,9 @@ export const GET_CURRENT_USER = gql`
 `
 
 export const EDIT_PROFILE = gql`
-  mutation($email: String!, $bio: String, $firstname: String, $lastname: String){
-    editProfile(email: $email, bio: $bio, firstname: $firstname, lastname: $lastname) {
+  mutation($email: String!, $bio: String){
+    editProfile(email: $email, bio: $bio) {
       bio
-      firstname
-      lastname
     }
   }
 `
@@ -79,8 +75,6 @@ export const GET_USER_PROFILE = gql`
 export const GET_ALL_USERS = gql`
   query {
     getAllUsers {
-      firstname
-      lastname
       bio
       profileImage
       username
@@ -92,8 +86,6 @@ export const PROFILE_PAGE = gql`
   query($username: String!) {
     profilePage(username: $username) {
       email
-      firstname
-      lastname
       bio
       profileImage
       username

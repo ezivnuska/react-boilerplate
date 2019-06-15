@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-const Dropzone = ({ children, handleDrop, noClick, size, ...props }) => {
+const Dropzone = ({ children, handleDrop, noClick, ...props }) => {
+
   const onDrop = useCallback(acceptedFiles => {
 
     const reader = new FileReader()
@@ -18,11 +19,6 @@ const Dropzone = ({ children, handleDrop, noClick, size, ...props }) => {
     reader.readAsDataURL(acceptedFiles[0])
   }, [])
 
-  const styles = {
-    height: size,
-    width: size
-  }
-
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: 'image/jpeg, image/png',
@@ -31,7 +27,7 @@ const Dropzone = ({ children, handleDrop, noClick, size, ...props }) => {
   })
   
   return (
-    <div {...getRootProps()} style={styles} {...props}>
+    <div {...getRootProps()} {...props}>
       <input {...getInputProps()} />
       {children}
     </div>

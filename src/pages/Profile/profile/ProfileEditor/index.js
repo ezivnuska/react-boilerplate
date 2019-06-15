@@ -2,7 +2,7 @@ import React, { Fragment, PureComponent } from 'react'
 import { Query } from 'react-apollo'
 import { GET_USER_PROFILE } from 'queries'
 import { Helmet } from 'react-helmet'
-import AvatarDropzone from './profileeditor/AvatarDropzone'
+import AvatarEditor from './profileeditor/AvatarEditor'
 import BioEditor from './profileeditor/BioEditor'
 
 import './ProfileEditor.scss'
@@ -55,7 +55,7 @@ class ProfileEditor extends PureComponent {
             return (
               <div id='profile-editor'>
                 
-                <AvatarDropzone {...this.props} />
+                <AvatarEditor {...this.props} />
 
                 {data.getUserProfile && <BioEditor bio={data.getUserProfile.bio} {...this.props} />}
 

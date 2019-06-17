@@ -151,7 +151,7 @@ class AvatarEditor extends Component {
                 })
             }
         }).then(({ data }) => {
-            console.log('calling onComplete')
+            // console.log('calling onComplete')
             onComplete()
             toastr.success('We have updated your profile image!', 'Saved!')
         })

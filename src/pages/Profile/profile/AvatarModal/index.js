@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import AvatarEditor from './avatarModal/AvatarEditor'
+import AvatarEditor from './avatarmodal/AvatarEditor'
 import {
   Modal,
 } from 'components'
@@ -14,9 +14,11 @@ class AvatarModal extends PureComponent {
   render() {
     return (
       <Modal title='Edit Avatar' name='avatar' closeable {...this.props}>
-        <AvatarEditor {...this.props} onComplete={() => {
-          console.log('onComplete')
-          this.props.context.closeModal()}} />
+        <AvatarEditor
+          onComplete={() => 
+            this.props.context.closeModal()}
+          {...this.props}
+        />
       </Modal>
     )
   }

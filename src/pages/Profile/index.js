@@ -6,34 +6,12 @@ import { Route, withRouter } from 'react-router-dom'
 import withAuth from 'hoc/withAuth'
 import { Heading, Menu, ProfileImage, TextEditor, UserProfile } from 'components'
 import AvatarModal from './profile/AvatarModal'
-// import ProfileEditor from './profile/ProfileEditor'
+import BioModal from './profile/BioModal'
 import UpdateAccount from './profile/UpdateAccount'
 
 import './Profile.scss'
 
-const initialState = {
-  error: '',
-  currentUser: null
-}
-
 class Profile extends PureComponent {
-
-  state = {
-    ...initialState
-  }  
-
-  componentWillMount = () => {
-    this.props.refetch()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { currentUser } = this.state
-    const updatedUser = nextProps.session.getCurrentUser
-    
-    if (currentUser !== updatedUser) {
-      this.setState({ currentUser: updatedUser })
-    }
-  }
 
   head() {
     const { username } = this.props.session.getCurrentUser
@@ -74,11 +52,17 @@ class Profile extends PureComponent {
               <Route path='/profile' exact render={() => (
                 <Fragment>
                   <AvatarModal {...this.props} />
+                  <BioModal bio={data.getUserProfile.bio} {...this.props} />
                   <div onClick={() => context.openModal('avatar')}>
                     <ProfileImage size={100} src={data.getUserProfile.profileImage} />
                   </div>
                   <Heading level={3}>{username}</Heading>
-                  {data.getUserProfile && <TextEditor initialValue={data.getUserProfile.bio} />}
+                  
+                  {data.getUserProfile && (
+                    <div onClick={() => context.openModal('bio')}>
+                      <TextEditor initialValue={data.getUserProfile.bio} editable={false} />
+                    </div>
+                  )}
                 </Fragment>
               )} />
               <Route path='/profile/account' exact render={() => <UpdateAccount {...this.props} />} />

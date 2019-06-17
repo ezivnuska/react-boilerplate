@@ -1,36 +1,8 @@
 @import '~scss/main';
 
-#avatar-dropzone-wrapper {
-  padding-bottom: 2rem;
-  text-align: center;
-  border: 1px solid #ccc;
-
-  #dropzone {
-    margin: 2rem auto 2rem;
-    height: 100%;
-    cursor: pointer;
-
-    &:hover {
-      background: #ccc;
-    }
-
-    #avatar-editor-wrapper {
-      text-align: center;
-      border: 1px solid #ddd;
-      position: relative;
+#bio-editor {
     
-      #dropzone-prompt {
-        position: absolute;
-        top: 0;
-        left: 0;
-        text-align: center;
-        color: #fff;
-        font-weight: 500;
-      }
-    }
-  }
-
-  // this code is duplicated in Form.scss... fix
+  // this code is duplicated in Form.scss and BioEditor.scss... fix
   .form-buttons {
     display: block;
     width: 100%;

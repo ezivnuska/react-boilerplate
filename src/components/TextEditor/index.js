@@ -104,7 +104,7 @@ class TextEditor extends Component {
     const { editable } = this.props
     return (
       <div className={'text-editor' + (editable ? '' : ' read-only')}>
-        {/* {!editable && (
+        {editable && (
             <div className='tools'>
                 <Toolbar>
                     {this.renderMarkButton('bold', 'bold')}
@@ -119,7 +119,7 @@ class TextEditor extends Component {
                     {this.renderBlockButton('bulleted-list', 'list-ul')}
                 </Toolbar>
             </div>
-        )} */}
+        )}
         <Editor
           className='text-display'
           autoFocus

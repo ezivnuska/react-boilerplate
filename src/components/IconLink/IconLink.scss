@@ -1,7 +1,8 @@
 @import '~scss/main';
 
 .icon-link {
-  i {
-    margin-right: 0.25rem;
+  
+  .text {
+    margin-left: $h-padding;
   }
 }

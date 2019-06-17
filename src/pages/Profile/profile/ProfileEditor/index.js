@@ -54,6 +54,10 @@ class ProfileEditor extends PureComponent {
 
             return (
               <div id='profile-editor'>
+
+                <button type='button' onClick={() => this.props.context.openModal('eric')}>
+                  Modal
+                </button>
                 
                 <AvatarEditor {...this.props} />
 

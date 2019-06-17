@@ -10,7 +10,7 @@ class IconLink extends PureComponent {
     return (
       <Link {...props} className='icon-link'>
         {iconClass && <i className={iconClass}></i>}
-        <span className='text'>{children}</span>
+        {children && <span className='text'>{children}</span>}
       </Link>
     )
   }

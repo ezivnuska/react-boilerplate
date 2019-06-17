@@ -1,9 +1,8 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { withContext, withState } from 'hoc/withContext'
 import withSession from 'hoc/withSession'
-
 import { MainLayout } from 'layouts'
-
 import {
   ForgotPassword,
   Home,
@@ -13,7 +12,7 @@ import {
   User
 } from 'pages'
 
-const Root = ({ refetch, session }) => (
+const Root = ({ refetch, session, context }) => (
   <MainLayout>
     <Switch>
       <Route path='/' exact render={props => (
@@ -26,7 +25,7 @@ const Root = ({ refetch, session }) => (
         <Users {...props} session={session} />
       )} />
       <Route path={['/profile', '/profile/edit', '/profile/account']} render={props => (
-        <Profile {...props} session={session} refetch={refetch} />
+        <Profile {...props} session={session} refetch={refetch} context={context} />
       )} />
       <Route path='/user/:URL_Param' render={props => (
         <User {...props} session={session} />
@@ -40,4 +39,6 @@ const Root = ({ refetch, session }) => (
 
 const AppComponent = withSession(Root)
 
-export default AppComponent
+const AppWithState = withState(AppComponent)
+
+export default withContext(AppWithState)

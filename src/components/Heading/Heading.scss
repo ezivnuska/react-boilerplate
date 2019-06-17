@@ -6,17 +6,17 @@ h1, h2, h3, h4 {
   color: $black;
   font-weight: 800;
   text-align: left;
+
+  &.dark {
+    color: $white;
+    background-color: $darkSlateGray;
+  }
 }
 
 h1 {
   // font-size: 2rem;
   // line-height: 2rem;
   // margin: 0 0 1rem 0;
-
-  &.dark {
-    color: $white;
-    background-color: $darkSlateGray;
-  }
 }
 
 h2 {

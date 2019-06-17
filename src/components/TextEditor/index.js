@@ -40,12 +40,14 @@ class TextEditor extends Component {
     KeyUtils.resetGenerator()
     
     this.state = {
-      value: null
+      value: null,
     }
   }
 
   componentWillMount() {
+    
     const { initialValue } = this.props
+
     let value
     if (!initialValue) {
       value = Plain.deserialize('')
@@ -54,7 +56,7 @@ class TextEditor extends Component {
     }
     
     this.setState({
-      value
+      value,
     })
   }
 

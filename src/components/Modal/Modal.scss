@@ -1,0 +1,76 @@
+@import '~scss/main';
+
+body.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.modal-overlay {
+  position: fixed;
+  background-color: #fff;//rgba(0, 0, 0, 0.5);
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 9999;
+  transition: opacity 250ms ease-in-out;
+  opacity: 0;
+  &[class*="after-open"] {
+    opacity: 1;
+  }
+  &[class*="before-close"] {
+    opacity: 0;
+  }
+}
+
+.modal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  // border-radius: $border-radius;
+  // background: indianred;
+  overflow: hidden;
+  top: 0;//calc(50%);
+  left: calc(50%);
+  right: auto;
+  bottom: auto;
+  // margin: 1rem calc(-50% + 1rem) 1rem 1rem;
+  transform: translate(-50%, 100%);
+  transition: transform 250ms ease-in-out;
+  outline: none;
+  box-sizing: border-box;
+  max-width: calc(640px - 1rem);
+  max-height: calc(100% - 1rem);
+  // padding-top: ${({ hasHeader }) => hasHeader ? 0 : '1rem'};
+  @media screen and (max-width: 640px) {
+    width: 100%;
+  }
+  &[class*="after-open"] {
+    transform: translate(-50%, 0);//-50%);
+  }
+  &[class*="before-close"] {
+    transform: translate(-50%, 100%);
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+
+  > * {
+    flex: 0 0 auto;
+  }
+
+  > *:first-child {
+    flex: 1 0 auto;
+  }
+
+  > *:last-child {
+    padding: $v-padding $h-padding;
+  }
+}
+
+.modal-content {
+  overflow: auto;
+  padding: 0.5rem;
+}

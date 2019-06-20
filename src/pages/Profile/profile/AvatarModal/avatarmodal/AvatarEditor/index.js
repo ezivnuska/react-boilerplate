@@ -263,6 +263,10 @@ class AvatarEditor extends Component {
             size: (actualWidth > maxWidth) ? maxWidth : actualWidth,
         })
     }
+
+    onLoadSuccess = e => {
+        console.log('e', e)
+    }
     
     render() {
         const { error, preview, size, uploading } = this.state
@@ -303,6 +307,7 @@ class AvatarEditor extends Component {
                                 scale={1.2}
                                 rotate={0}
                                 ref={this.setEditorRef}
+                                onLoadSuccess={e => this.onLoadSuccess(e)}
                             />
                         )}
                     </div>

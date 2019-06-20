@@ -57,10 +57,6 @@ export default {
             return res.json({ error })
 
           im(data.Body)
-            .orientation((err, value) => {
-              if (err) console.log('Error', err)
-              if (value) console.log('value', value)
-            })
             .autoOrient()
             .resize(50, 50)
             .gravity('Center')

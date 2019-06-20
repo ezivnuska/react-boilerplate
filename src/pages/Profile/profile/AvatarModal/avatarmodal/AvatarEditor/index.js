@@ -47,6 +47,7 @@ class AvatarEditor extends Component {
         this.updateDimensions = this.updateDimensions.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.resetEditor = this.resetEditor.bind(this)
+        this.resetOrientation = this.resetOrientation.bind(this)
         this.handleDrop = this.handleDrop.bind(this)
 
         const { size } = this.props
@@ -216,20 +217,21 @@ class AvatarEditor extends Component {
         reader.onload = e => {
             const image = e.target.result
             const exif = EXIF.readFromBinaryFile(image)
-            console.log('exif', exif)
+            
+            if (exif) {
+                console.log('exif.orientation', exif.orientation, exif)
+            }
+
+            resetOrientation(dataUrl, exif.Orientation || null)
+            
             // EXIF.getData(image, () => {
             //     const orientation = EXIF.getTag(this, 'Orientation')
             //     console.log('orientation', orientation)
             //     console.log('EXIF', EXIF.pretty(this))
 
-            //     resetOrientation(image, 5)
             // })
         }
         reader.readAsArrayBuffer(this.dataURItoBlob(dataUrl))
-        // reader.readAsArrayBuffer(this.dataURItoBlob(dataUrl))
-        // var bin = atob(dataUrl.split(',')[1])
-        // var exif = EXIF.readFromBinaryFile(new BinaryFile(bin))
-        // alert(exif.Orientation)
     }
     
     uploadImage = () => {
@@ -283,13 +285,10 @@ class AvatarEditor extends Component {
         })
     }
 
-    onImageReady = e => {
-        console.log('e', e)
-    }
-
     resetOrientation(srcBase64, srcOrientation) {
         const image = new Image()
-    
+        const self = this
+
         image.onload = () => {
           const width = image.width,
                 height = image.height,
@@ -307,21 +306,21 @@ class AvatarEditor extends Component {
         
             // transform context before drawing image
             switch (srcOrientation) {
-                case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
-                case 3: ctx.transform(-1, 0, 0, -1, width, height ); break;
-                case 4: ctx.transform(1, 0, 0, -1, 0, height ); break;
-                case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
-                case 6: ctx.transform(0, 1, -1, 0, height , 0); break;
-                case 7: ctx.transform(0, -1, -1, 0, height , width); break;
-                case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
-                default: break;
+                case 2: ctx.transform(-1, 0, 0, 1, width, 0); break
+                case 3: ctx.transform(-1, 0, 0, -1, width, height ); break
+                case 4: ctx.transform(1, 0, 0, -1, 0, height ); break
+                case 5: ctx.transform(0, 1, 1, 0, 0, 0); break
+                case 6: ctx.transform(0, 1, -1, 0, height , 0); break
+                case 7: ctx.transform(0, -1, -1, 0, height , width); break
+                case 8: ctx.transform(0, -1, 1, 0, 0, width); break
+                default: break
             }
     
             // draw image
             ctx.drawImage(image, 0, 0)
     
             // export base64
-            this.setState({ preview: canvas.toDataURL() })
+            self.setState({ preview: canvas.toDataURL() })
         }
     
         image.src = srcBase64
@@ -374,7 +373,6 @@ class AvatarEditor extends Component {
                                 scale={1.2}
                                 rotate={0}
                                 ref={this.setEditorRef}
-                                onImageReady={e => this.onImageReady(e)}
                             />
                         )}
                     </div>

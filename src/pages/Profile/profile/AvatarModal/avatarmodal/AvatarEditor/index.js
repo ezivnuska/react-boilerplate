@@ -16,6 +16,7 @@ import {
     Heading,
     Spinner,
 } from 'components'
+import EXIF from 'exif-js'
 
 import './AvatarEditor.scss'
 
@@ -157,55 +158,24 @@ class AvatarEditor extends Component {
         })
     }
     
-    optimizeImage = (src, srcOrientation) => {
-
+    optimizeImage = src => {
         const MAX_SIZE = 600
-        
         const image = new Image()
         image.onload = () => {
-
-            const width = image.width,
-                height = image.height,
-                canvas = document.createElement('canvas'),
-                ctx = canvas.getContext('2d')
-            
-            // set proper canvas dimensions before transform & export
-            if (4 < srcOrientation && srcOrientation < 9) {
-                canvas.width = height
-                canvas.height = width
-            } else {
-                canvas.width = width
-                canvas.height = height
-            }
-        
-            // transform context before drawing image
-            switch (srcOrientation) {
-                case 2: ctx.transform(-1, 0, 0, 1, width, 0); break
-                case 3: ctx.transform(-1, 0, 0, -1, width, height ); break
-                case 4: ctx.transform(1, 0, 0, -1, 0, height ); break
-                case 5: ctx.transform(0, 1, 1, 0, 0, 0); break
-                case 6: ctx.transform(0, 1, -1, 0, height , 0); break
-                case 7: ctx.transform(0, -1, -1, 0, height , width); break
-                case 8: ctx.transform(0, -1, 1, 0, 0, width); break
-                default: break
-            }
     
-            // draw image
-            ctx.drawImage(image, 0, 0)
-    
-            // export base64
-            // callback(canvas.toDataURL())
+            const canvas = document.createElement('canvas')
         
-            if (height > MAX_SIZE) {
-                image.width *= MAX_SIZE / height
+            if (image.height > MAX_SIZE) {
+                image.width *= MAX_SIZE / image.height
                 image.height = MAX_SIZE
             }
         
-            if (width > MAX_SIZE) {
-                image.height *= MAX_SIZE / width
+            if (image.width > MAX_SIZE) {
+                image.height *= MAX_SIZE / image.width
                 image.width = MAX_SIZE
             }
         
+            const ctx = canvas.getContext('2d')
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             canvas.width = image.width
             canvas.height = image.height
@@ -241,7 +211,25 @@ class AvatarEditor extends Component {
     }
     
     handleDrop = dataUrl => {
-        this.setState({ preview: dataUrl })
+        const resetOrientation = this.resetOrientation
+        const reader = new FileReader()
+        reader.onload = e => {
+            const image = e.target.result
+            const exif = EXIF.readFromBinaryFile(image)
+            console.log('exif', exif)
+            // EXIF.getData(image, () => {
+            //     const orientation = EXIF.getTag(this, 'Orientation')
+            //     console.log('orientation', orientation)
+            //     console.log('EXIF', EXIF.pretty(this))
+
+            //     resetOrientation(image, 5)
+            // })
+        }
+        reader.readAsArrayBuffer(this.dataURItoBlob(dataUrl))
+        // reader.readAsArrayBuffer(this.dataURItoBlob(dataUrl))
+        // var bin = atob(dataUrl.split(',')[1])
+        // var exif = EXIF.readFromBinaryFile(new BinaryFile(bin))
+        // alert(exif.Orientation)
     }
     
     uploadImage = () => {
@@ -274,7 +262,7 @@ class AvatarEditor extends Component {
             const canvas = this.editor.getImage()
             // const context = canvas.getContext('2d')
             const dataURL = canvas.toDataURL('image/png;base64;')
-            this.optimizeImage(dataURL, 5)
+            this.optimizeImage(dataURL)
         }
     }
 
@@ -294,6 +282,58 @@ class AvatarEditor extends Component {
             size: (actualWidth > maxWidth) ? maxWidth : actualWidth,
         })
     }
+
+    onImageReady = e => {
+        console.log('e', e)
+    }
+
+    resetOrientation(srcBase64, srcOrientation) {
+        const image = new Image()
+    
+        image.onload = () => {
+          const width = image.width,
+                height = image.height,
+                canvas = document.createElement('canvas'),
+                ctx = canvas.getContext('2d')
+            
+            // set proper canvas dimensions before transform & export
+            if (4 < srcOrientation && srcOrientation < 9) {
+                canvas.width = height;
+                canvas.height = width;
+            } else {
+                canvas.width = width;
+                canvas.height = height;
+            }
+        
+            // transform context before drawing image
+            switch (srcOrientation) {
+                case 2: ctx.transform(-1, 0, 0, 1, width, 0); break;
+                case 3: ctx.transform(-1, 0, 0, -1, width, height ); break;
+                case 4: ctx.transform(1, 0, 0, -1, 0, height ); break;
+                case 5: ctx.transform(0, 1, 1, 0, 0, 0); break;
+                case 6: ctx.transform(0, 1, -1, 0, height , 0); break;
+                case 7: ctx.transform(0, -1, -1, 0, height , width); break;
+                case 8: ctx.transform(0, -1, 1, 0, 0, width); break;
+                default: break;
+            }
+    
+            // draw image
+            ctx.drawImage(image, 0, 0)
+    
+            // export base64
+            this.setState({ preview: canvas.toDataURL() })
+        }
+    
+        image.src = srcBase64
+    }
+    
+    // var originalImage = document.getElementById("image-original"),
+    //         resetImage = document.getElementById("image-reset");
+    
+    // resetOrientation(originalImage.src, 5, function(resetBase64Image) {
+    //     resetImage.src = resetBase64Image;
+    // });
+    
     
     render() {
         const { error, preview, size, uploading } = this.state
@@ -334,6 +374,7 @@ class AvatarEditor extends Component {
                                 scale={1.2}
                                 rotate={0}
                                 ref={this.setEditorRef}
+                                onImageReady={e => this.onImageReady(e)}
                             />
                         )}
                     </div>

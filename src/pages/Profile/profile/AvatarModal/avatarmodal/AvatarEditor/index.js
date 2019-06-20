@@ -217,19 +217,7 @@ class AvatarEditor extends Component {
         reader.onload = e => {
             const image = e.target.result
             const exif = EXIF.readFromBinaryFile(image)
-            
-            if (exif) {
-                console.log('exif.orientation', exif.orientation, exif)
-            }
-
             resetOrientation(dataUrl, exif.Orientation || null)
-            
-            // EXIF.getData(image, () => {
-            //     const orientation = EXIF.getTag(this, 'Orientation')
-            //     console.log('orientation', orientation)
-            //     console.log('EXIF', EXIF.pretty(this))
-
-            // })
         }
         reader.readAsArrayBuffer(this.dataURItoBlob(dataUrl))
     }
@@ -262,7 +250,6 @@ class AvatarEditor extends Component {
             // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
             // drawn on another canvas, or added to the DOM.
             const canvas = this.editor.getImage()
-            // const context = canvas.getContext('2d')
             const dataURL = canvas.toDataURL('image/png;base64;')
             this.optimizeImage(dataURL)
         }
@@ -325,14 +312,6 @@ class AvatarEditor extends Component {
     
         image.src = srcBase64
     }
-    
-    // var originalImage = document.getElementById("image-original"),
-    //         resetImage = document.getElementById("image-reset");
-    
-    // resetOrientation(originalImage.src, 5, function(resetBase64Image) {
-    //     resetImage.src = resetBase64Image;
-    // });
-    
     
     render() {
         const { error, preview, size, uploading } = this.state

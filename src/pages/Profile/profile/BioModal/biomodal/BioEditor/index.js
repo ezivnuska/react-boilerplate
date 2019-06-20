@@ -65,7 +65,6 @@ class BioEditor extends PureComponent {
   handleSaveBio(event, editProfile) {
     event.preventDefault()
     editProfile().then(async ({ data }) => {
-      console.log('this.props', this.props)
       this.props.onComplete()
       toastr.success('We have updated your profile!', 'Saved!')
     }).catch(error => {

@@ -9,16 +9,17 @@ class BioModal extends PureComponent {
 
   static propTypes = {
     context: PropTypes.object.isRequired,
+    onComplete: PropTypes.func.isRequired,
   }
 
   render() {
-    const { bio, context } = this.props
+    const { bio, onComplete, ...props } = this.props
     return (
-      <Modal title='Edit Bio' name='bio' closeable {...this.props}>
+      <Modal title='Edit Bio' name='bio' closeable {...props}>
         <BioEditor
           bio={bio}
-          onComplete={() => context.closeModal()}
-          {...this.props}
+          onComplete={onComplete}
+          {...props}
         />
       </Modal>
     )

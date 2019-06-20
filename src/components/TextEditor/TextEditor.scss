@@ -2,6 +2,31 @@
 
 .text-editor {
     background: #fff;
+    font-size: 1.3rem;
+    
+    &.read-only {
+        background: none;
+        padding: 0;
+    }
+
+    .text-display {
+        padding: 1rem $h-padding;
+        min-height: 50px;
+        background: #eee;
+        
+        em {
+            font-style: italic;
+        }
+    
+        &.read-only {
+            .text-display {
+                margin: 1rem 0;
+                border: 0;
+                background: transparent;
+                border: none;
+            }
+        }
+    }
 
     .tools {
         margin-bottom: 1rem;
@@ -18,28 +43,6 @@
                     margin: 0;
                 }
             }
-        }
-    }
-
-    .text-display {
-        padding: 1rem $h-padding;
-        min-height: 50px;
-        background: #eee;
-        
-        em {
-            font-style: italic;
-        }
-    }
-    
-    &.read-only {
-        background: none;
-        padding: 0;
-
-        .text-display {
-            margin: 1rem 0;
-            border: 0;
-            background: transparent;
-            border: none;
         }
     }
 }

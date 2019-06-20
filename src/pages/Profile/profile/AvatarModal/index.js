@@ -9,15 +9,16 @@ class AvatarModal extends PureComponent {
 
   static propTypes = {
     context: PropTypes.object.isRequired,
+    onComplete: PropTypes.func.isRequired,
   }
 
   render() {
+    const { onComplete, ...props } = this.props
     return (
-      <Modal title='Edit Avatar' name='avatar' closeable {...this.props}>
+      <Modal title='Edit Avatar' name='avatar' closeable {...props}>
         <AvatarEditor
-          onComplete={() => 
-            this.props.context.closeModal()}
-          {...this.props}
+          onComplete={onComplete}
+          {...props}
         />
       </Modal>
     )

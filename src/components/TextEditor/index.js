@@ -60,6 +60,22 @@ class TextEditor extends Component {
     })
   }
 
+  componentWillReceiveProps = nextProps => {
+    
+    const { initialValue } = nextProps
+
+    let value
+    if (!initialValue) {
+      value = Plain.deserialize('')
+    } else {
+      value = Value.fromJSON(JSON.parse(initialValue))
+    }
+    
+    this.setState({
+      value,
+    })
+  }
+
   /**
    * Check if the current selection has a mark with `type` in it.
    *

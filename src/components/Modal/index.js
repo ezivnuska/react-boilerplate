@@ -28,7 +28,7 @@ class Modal extends Component {
         overlayClassName='modal-overlay'
         contentLabel={title || 'Modal'}
         closeTimeoutMS={250}
-        onRequestClose={() => context.closeModal(this.state.name)}
+        onRequestClose={() => context.closeModal()}
         hasHeader={hasHeader}
         isOpen={context.modal === this.state.name}
         {...props}
@@ -36,7 +36,7 @@ class Modal extends Component {
         {hasHeader &&
           <header className='modal-header'>
             <Heading level={2} className='dark'>{title}</Heading>
-            {closeable && <IconLink iconClass='fas fa-window-close fa-3x' height={40} onClick={() => context.closeModal(this.state.name)} />}
+            {closeable && <IconLink iconClass='fas fa-window-close fa-3x' height={40} onClick={() => context.closeModal()} />}
           </header>
         }
         <div className='modal-content'>

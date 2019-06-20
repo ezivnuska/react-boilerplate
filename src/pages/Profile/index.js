@@ -4,7 +4,7 @@ import { GET_USER_PROFILE } from 'queries'
 import { Helmet } from 'react-helmet'
 import { Route, withRouter } from 'react-router-dom'
 import withAuth from 'hoc/withAuth'
-import { Heading, Menu, ProfileImage, TextEditor, UserProfile } from 'components'
+import { Heading, Menu, ProfileImage, TextEditor } from 'components'
 import AvatarModal from './profile/AvatarModal'
 import BioModal from './profile/BioModal'
 import UpdateAccount from './profile/UpdateAccount'
@@ -22,6 +22,11 @@ class Profile extends PureComponent {
     )
   }
 
+  onUpdate = refetch => {
+    refetch()
+    this.props.context.closeModal()
+  }
+
   render = () => {
     const { context, session } = this.props
     const { username } = session.getCurrentUser
@@ -29,13 +34,13 @@ class Profile extends PureComponent {
     return (
       <Fragment>
         {this.head()}
-        <Query query={GET_USER_PROFILE}>
+        <Query
+          query={GET_USER_PROFILE}
+          notifyOnNetworkStatusChange
+        >
       
-        {({ data, loading, error }) => {
-    
-          if (loading) return <div>Loading</div>
-          if (error) return <div>error</div>
-
+        {({ data, loading, error, refetch, networkStatus }) => {
+          
           return (
             <Fragment>
               <Heading level={1}>{username}</Heading>
@@ -51,15 +56,37 @@ class Profile extends PureComponent {
   
               <Route path='/profile' exact render={() => (
                 <Fragment>
-                  <AvatarModal {...this.props} />
-                  <BioModal bio={data.getUserProfile.bio} {...this.props} />
-                  <div onClick={() => context.openModal('avatar')}>
-                    <ProfileImage size={100} src={data.getUserProfile.profileImage} />
+                  
+                  <AvatarModal
+                    onComplete={() => this.onUpdate(refetch)}
+                    {...this.props}
+                  />
+
+                  <BioModal
+                    bio={data.getUserProfile.bio}
+                    onComplete={() => this.onUpdate(refetch)}
+                    {...this.props}
+                  />
+
+                  {error && <div className='error'>{error}</div>}
+                  
+                  <div
+                    onClick={() => context.openModal('avatar')}
+                    style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
+                  >
+                    <ProfileImage
+                      size={100}
+                      src={data.getUserProfile.profileImage}
+                    />
                   </div>
+
                   <Heading level={3}>{username}</Heading>
                   
-                  {data.getUserProfile && (
-                    <div onClick={() => context.openModal('bio')}>
+                  {data && data.getUserProfile && (
+                    <div
+                      onClick={() => context.openModal('bio')}
+                      style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
+                    >
                       <TextEditor initialValue={data.getUserProfile.bio} editable={false} />
                     </div>
                   )}

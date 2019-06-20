@@ -157,24 +157,55 @@ class AvatarEditor extends Component {
         })
     }
     
-    optimizeImage = src => {
+    optimizeImage = (src, srcOrientation) => {
+
         const MAX_SIZE = 600
+        
         const image = new Image()
         image.onload = () => {
-    
-            const canvas = document.createElement('canvas')
+
+            const width = image.width,
+                height = image.height,
+                canvas = document.createElement('canvas'),
+                ctx = canvas.getContext('2d')
+            
+            // set proper canvas dimensions before transform & export
+            if (4 < srcOrientation && srcOrientation < 9) {
+                canvas.width = height
+                canvas.height = width
+            } else {
+                canvas.width = width
+                canvas.height = height
+            }
         
-            if (image.height > MAX_SIZE) {
-                image.width *= MAX_SIZE / image.height
+            // transform context before drawing image
+            switch (srcOrientation) {
+                case 2: ctx.transform(-1, 0, 0, 1, width, 0); break
+                case 3: ctx.transform(-1, 0, 0, -1, width, height ); break
+                case 4: ctx.transform(1, 0, 0, -1, 0, height ); break
+                case 5: ctx.transform(0, 1, 1, 0, 0, 0); break
+                case 6: ctx.transform(0, 1, -1, 0, height , 0); break
+                case 7: ctx.transform(0, -1, -1, 0, height , width); break
+                case 8: ctx.transform(0, -1, 1, 0, 0, width); break
+                default: break
+            }
+    
+            // draw image
+            ctx.drawImage(image, 0, 0)
+    
+            // export base64
+            // callback(canvas.toDataURL())
+        
+            if (height > MAX_SIZE) {
+                image.width *= MAX_SIZE / height
                 image.height = MAX_SIZE
             }
         
-            if (image.width > MAX_SIZE) {
-                image.height *= MAX_SIZE / image.width
+            if (width > MAX_SIZE) {
+                image.height *= MAX_SIZE / width
                 image.width = MAX_SIZE
             }
         
-            const ctx = canvas.getContext('2d')
             ctx.clearRect(0, 0, canvas.width, canvas.height)
             canvas.width = image.width
             canvas.height = image.height
@@ -243,7 +274,7 @@ class AvatarEditor extends Component {
             const canvas = this.editor.getImage()
             // const context = canvas.getContext('2d')
             const dataURL = canvas.toDataURL('image/png;base64;')
-            this.optimizeImage(dataURL)
+            this.optimizeImage(dataURL, 5)
         }
     }
 
@@ -262,10 +293,6 @@ class AvatarEditor extends Component {
         this.setState({
             size: (actualWidth > maxWidth) ? maxWidth : actualWidth,
         })
-    }
-
-    onLoadSuccess = e => {
-        console.log('e', e)
     }
     
     render() {
@@ -307,7 +334,6 @@ class AvatarEditor extends Component {
                                 scale={1.2}
                                 rotate={0}
                                 ref={this.setEditorRef}
-                                onLoadSuccess={e => this.onLoadSuccess(e)}
                             />
                         )}
                     </div>

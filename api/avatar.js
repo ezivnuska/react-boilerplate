@@ -57,6 +57,7 @@ export default {
             return res.json({ error })
 
           im(data.Body)
+            .autoOrient()
             .resize(50, 50)
             .gravity('Center')
             .extent(50, 50)

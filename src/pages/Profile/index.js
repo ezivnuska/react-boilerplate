@@ -75,7 +75,7 @@ class Profile extends PureComponent {
                     style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
                   >
                     <ProfileImage
-                      size={100}
+                      size={75}
                       src={data.getUserProfile.profileImage}
                     />
                   </div>

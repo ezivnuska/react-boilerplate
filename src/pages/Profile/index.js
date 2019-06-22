@@ -4,10 +4,17 @@ import { GET_USER_PROFILE } from 'queries'
 import { Helmet } from 'react-helmet'
 import { Route, withRouter } from 'react-router-dom'
 import withAuth from 'hoc/withAuth'
-import { Heading, Menu, ProfileImage, TextEditor } from 'components'
 import AvatarModal from './profile/AvatarModal'
 import BioModal from './profile/BioModal'
 import UpdateAccount from './profile/UpdateAccount'
+import {
+  EditableContainer,
+  Heading,
+  Link,
+  Module,
+  ProfileImage,
+  TextEditor
+} from 'components'
 
 import './Profile.scss'
 
@@ -43,16 +50,6 @@ class Profile extends PureComponent {
             
             return (
               <Fragment>
-                <Heading level={1}>{username}</Heading>
-                
-                <Menu
-                  inline
-                  itemHeight={40}
-                  options={[
-                    { label: 'Profile', to: '/profile' },
-                    { label: 'Update Account', to: '/profile/account' }
-                  ]}
-                />
     
                 <Route path='/profile' exact render={() => data.getUserProfile ? (
                   <Fragment>
@@ -70,25 +67,42 @@ class Profile extends PureComponent {
 
                     {error && <div className='error'>{error}</div>}
                     
-                    <div
-                      onClick={() => context.openModal('avatar')}
-                      style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
-                    >
-                      <ProfileImage
-                        size={75}
-                        src={data.getUserProfile.profileImage}
-                      />
+                    <div className='profile-header'>
+                      <EditableContainer
+                        onClick={() => context.openModal('avatar')}
+                        style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
+                      >
+                        <ProfileImage
+                          size={150}
+                          src={data.getUserProfile.profileImage}
+                        />
+                      </EditableContainer>
+
+                      <Heading level={3}>{username}</Heading>
+
+                      <Link to='/profile/account'>Account details</Link>
+
                     </div>
 
-                    <Heading level={3}>{username}</Heading>
+                    {data.getUserProfile.bio ? (
+                      <Module title='Bio'>
+                        <EditableContainer
+                          onClick={() => context.openModal('bio')}
+                          block
+                          style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
+                        >
+                          <TextEditor initialValue={data.getUserProfile.bio} editable={false} />
+                        </EditableContainer>
+                      </Module>
+                    ) : (
+                      <button
+                        className='btn'
+                        onClick={() => context.openModal('bio')}
+                      >
+                        Add Bio
+                      </button>
+                    )}
                     
-                    <div
-                      onClick={() => context.openModal('bio')}
-                      style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
-                    >
-                      <TextEditor initialValue={data.getUserProfile.bio} editable={false} />
-                    </div>
-
                   </Fragment>
                 ) : null} />
 
@@ -100,32 +114,6 @@ class Profile extends PureComponent {
       </Fragment>
     )
   }
-
-  // render = () => {
-  //   const { username } = this.props.session.getCurrentUser
-
-  //   return (
-  //     <Fragment>
-        
-  //       <Heading level={1}>{username}</Heading>
-        
-  //       <Menu
-  //         inline
-  //         itemHeight={40}
-  //         options={[
-  //           { label: 'Profile', to: '/profile' },
-  //           { label: 'Edit Profile', to: '/profile/edit' },
-  //           { label: 'Update Account', to: '/profile/account' }
-  //         ]}
-  //       />
-
-  //       <Route path='/profile' exact render={() => <UserProfile {...this.props} />} />
-  //       <Route path='/profile/edit' exact render={() => <ProfileEditor {...this.props} />} />
-  //       <Route path='/profile/account' exact render={() => <UpdateAccount {...this.props} />} />
-
-  //     </Fragment>
-  //   )
-  // }
 }
 
 export default withAuth(session => session && session.getCurrentUser)(withRouter(Profile))

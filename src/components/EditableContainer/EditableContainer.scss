@@ -1,0 +1,39 @@
+@import '~scss/main';
+
+.editable {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    margin: 0 auto;
+
+    &.block {
+        display: block;
+    }
+
+    .edit-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 100;
+        padding: 0.5rem;
+        background: rgba(255, 255, 255, 0.5);
+        opacity: 1;
+        @include transition(all .4s ease-in-out);
+    }
+
+    @media only screen and (min-width: 400px) {
+        .edit-button {
+            opacity: 0;
+        }
+
+        &:hover {
+            .edit-button {
+                opacity: 1;
+            }
+        }
+    }
+
+    .editable-content {
+        z-index: 10;
+    }
+}

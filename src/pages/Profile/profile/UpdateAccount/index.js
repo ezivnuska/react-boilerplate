@@ -7,7 +7,7 @@ import {
 } from 'queries'
 import toastr from 'toastr'
 import { Helmet } from 'react-helmet'
-import { Form, Module } from 'components'
+import { Form, Heading, Module } from 'components'
 
 import './UpdateAccount.scss'
 
@@ -124,9 +124,10 @@ class UpdateAccount extends PureComponent {
 
         {this.head()}
 
+        <Heading level={3}>Account Details</Heading>
+
         <Module title='Info'>
           <p><strong>Username:</strong> {getCurrentUser.username}</p>
-          <p><strong>Name:</strong> {getCurrentUser.firstname} {getCurrentUser.lastname}</p>
           <p><strong>Email:</strong> {getCurrentUser.email}</p>
         </Module>
         

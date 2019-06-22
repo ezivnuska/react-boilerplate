@@ -48,6 +48,7 @@ class UserProfile extends PureComponent {
               <Module
                 id='user-profile'
                 title={username}
+                fullsize
               >
                   <UserInfo user={data.profilePage} />
               </Module>

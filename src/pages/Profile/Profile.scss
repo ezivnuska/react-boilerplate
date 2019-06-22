@@ -1,0 +1,11 @@
+@import '~scss/main';
+
+.profile-header {
+    margin-bottom: $h-padding;
+    text-align: center;
+
+    > * {
+        margin: 0 auto;
+        text-align: center;
+    }
+}

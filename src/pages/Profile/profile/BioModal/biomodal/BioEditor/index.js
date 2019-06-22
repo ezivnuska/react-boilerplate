@@ -95,10 +95,10 @@ class BioEditor extends PureComponent {
           {(editProfile, { data, loading, error }) => {
     
             if (error) return <div>error</div>
-
+            
             return (
               <Fragment>
-                <TextEditor editable initialValue={bio || data.getCurrentUser.bio} onUpdate={value => this.updateBio(value)} />
+                <TextEditor editable initialValue={bio || (data && data.getCurrentUser.bio)} onUpdate={value => this.updateBio(value)} />
                 <div className='form-buttons'>
                   {loading ? <Spinner /> : (
                     <Fragment>

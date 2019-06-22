@@ -1,7 +1,7 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withRouter } from 'react-router-dom'
 import withAuth from 'hoc/withAuth'
-import { Heading, UserProfile } from 'components'
+import { UserProfile } from 'components'
 
 import './User.scss'
 
@@ -13,7 +13,6 @@ class User extends PureComponent {
     
     return (
       <Fragment>
-        <Heading level={1}>{username}</Heading>
         <UserProfile username={username} {...this.props} />
       </Fragment>
     )

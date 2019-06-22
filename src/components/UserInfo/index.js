@@ -36,7 +36,7 @@ const UserInfo = ({ user }) => {
         title='About'
         fullsize
       >
-        {user.bio && <TextEditor editable={false} initialValue={user.bio} />}
+        <TextEditor editable={false} initialValue={user.bio} />
       </Module>
       
     </div>

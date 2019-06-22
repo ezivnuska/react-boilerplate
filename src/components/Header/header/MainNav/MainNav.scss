@@ -15,6 +15,50 @@
       display: inline-block;
       flex: 1 0 auto;
       list-style-type: none;
+
+      .menu-button {
+        display: block;
+        width: 100%;
+        text-decoration: none;
+        padding: 0.5rem;
+        font-size: 1.8rem;
+        line-height: normal;
+        font-weight: 400;
+        text-align: center;
+        cursor: pointer;
+        color: $menu-color;
+        background: $menu-bg-color;
+        @include transition(all .4s ease-in-out);
+      
+        .text {
+          display: inline-block;
+          margin-left: 0.5rem;
+      
+          @media only screen and (max-width: 728px) {
+            display: none;
+          }
+        }
+      
+        i {
+      
+        }
+
+        &:visited {
+          color: $menu-color;
+          background: $menu-bg-color;
+        }
+      
+        &:hover {
+          color: $menu-color-hover;
+          background: $menu-bg-color-hover;
+        }
+      
+        &.active {
+          color: $menu-color-active;
+          background: $menu-bg-color-active;
+          cursor: default;
+        }
+      }
     }
   }
 }

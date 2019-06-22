@@ -9,9 +9,10 @@ $lightGrey: #ccc;
 $lightBlue: #69b3d0;
 
 // admin colors
+$lightSlateGray: rgb(187, 187, 187);
 $darkSlateGray: #272F37;
 $sandyBrown: #EDB33D;
-$whiteSmoke: #F9F9F9;
+$whiteSmoke: rgb(129, 129, 129);
 $mediumSeaGreen: #43BE7D;
 $Violet: #EFA5C3;
 
@@ -25,3 +26,15 @@ $footerColor: $darkSlateGray;
 $button-color-hover: green;
 $v-padding: 1rem;
 $h-padding: 1rem;
+
+// link colors
+$link-color: rgb(28, 92, 230);
+$link-color-hover: rgb(10, 122, 0);
+
+$menu-color: rgb(199, 217, 255);
+$menu-color-hover: rgb(10, 122, 0);
+$menu-color-active: $darkSlateGray;
+
+$menu-bg-color: $darkSlateGray;
+$menu-bg-color-hover: $lightSlateGray;
+$menu-bg-color-active: #fff;

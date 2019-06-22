@@ -10,7 +10,6 @@ const SignoutButton = ({ context }) => (
     <SignoutModal context={context} />
    
     <div
-      id='signout-button'
       className='menu-button'
       onClick={() => context.openModal('signout')}
     >

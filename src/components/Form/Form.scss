@@ -183,63 +183,6 @@ input:-webkit-autofill {
         }
       }
     }
-
-    .form-buttons {
-      display: block;
-      width: 100%;
-      text-align: center;
-    
-      .btn {
-        display: inline-block;
-        font-size: 1.3rem;
-        line-height: normal;
-        color: #ffffff;
-        font-weight: 700;
-        font-style: normal;
-        letter-spacing: 2px;
-        text-decoration: none;
-        text-transform: uppercase;
-        text-align: center;
-        padding: 1.3846153846153846em 1.9230769230769231em;
-        margin: 0;
-        border: 1px solid #000000;
-        border-radius: 3px;
-        background-color: #171717;
-        -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,0.4);
-        -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,0.4);
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.4);
-        cursor: pointer;
-
-        &.transparent {
-          color: #000;
-          padding: 0;
-          border: none;
-          border-radius: unset;
-          background-color: unset;
-          box-shadow: none;
-
-          &:hover {
-            background: none;
-          }
-        }
-  
-        &:hover {
-          background: rgba(0,0,0,.7);
-          border-color:  rgba(0,0,0,.7);
-          color: green;
-        }
-  
-        &:disabled {
-          opacity: .6;
-          pointer-events: none;
-        }
-  
-      }
-    
-      .btn, .btn:hover {
-        @include transition(all .4s ease-in-out);
-      }
-    }
   }
 
   

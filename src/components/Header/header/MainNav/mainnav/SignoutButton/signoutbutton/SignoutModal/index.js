@@ -20,8 +20,8 @@ const SignoutModal = ({ history, ...props }) => (
           <div className='signout-modal'>
             <p>Are you sure you want to sign out?</p>
 
-            <div className="form-buttons">
-              <button onClick={() => handleSignout(client, history)} className="btn">
+            <div className='form-buttons'>
+              <button onClick={() => handleSignout(client, history)} className='btn'>
                 Yes, please sign me out
               </button>
             </div>

@@ -39,63 +39,63 @@ class Profile extends PureComponent {
           notifyOnNetworkStatusChange
         >
       
-        {({ data, loading, error, refetch, networkStatus }) => {
-          
-          return (
-            <Fragment>
-              <Heading level={1}>{username}</Heading>
-              
-              <Menu
-                inline
-                itemHeight={40}
-                options={[
-                  { label: 'Profile', to: '/profile' },
-                  { label: 'Update Account', to: '/profile/account' }
-                ]}
-              />
-  
-              <Route path='/profile' exact render={() => (
-                <Fragment>
-                  
-                  <AvatarModal
-                    onComplete={() => this.onUpdate(refetch)}
-                    {...this.props}
-                  />
-
-                  <BioModal
-                    bio={data.getUserProfile.bio}
-                    onComplete={() => this.onUpdate(refetch)}
-                    {...this.props}
-                  />
-
-                  {error && <div className='error'>{error}</div>}
-                  
-                  <div
-                    onClick={() => context.openModal('avatar')}
-                    style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
-                  >
-                    <ProfileImage
-                      size={75}
-                      src={data.getUserProfile.profileImage}
+          {({ data, loading, error, refetch, networkStatus }) => {
+            
+            return (
+              <Fragment>
+                <Heading level={1}>{username}</Heading>
+                
+                <Menu
+                  inline
+                  itemHeight={40}
+                  options={[
+                    { label: 'Profile', to: '/profile' },
+                    { label: 'Update Account', to: '/profile/account' }
+                  ]}
+                />
+    
+                <Route path='/profile' exact render={() => data.getUserProfile ? (
+                  <Fragment>
+                                    
+                    <AvatarModal
+                      onComplete={() => this.onUpdate(refetch)}
+                      {...this.props}
                     />
-                  </div>
+                    
+                    <BioModal
+                      bio={data.getUserProfile.bio}
+                      onComplete={() => this.onUpdate(refetch)}
+                      {...this.props}
+                    />
 
-                  <Heading level={3}>{username}</Heading>
-                  
-                  {data && data.getUserProfile && (
+                    {error && <div className='error'>{error}</div>}
+                    
+                    <div
+                      onClick={() => context.openModal('avatar')}
+                      style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
+                    >
+                      <ProfileImage
+                        size={75}
+                        src={data.getUserProfile.profileImage}
+                      />
+                    </div>
+
+                    <Heading level={3}>{username}</Heading>
+                    
                     <div
                       onClick={() => context.openModal('bio')}
                       style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
                     >
                       <TextEditor initialValue={data.getUserProfile.bio} editable={false} />
                     </div>
-                  )}
-                </Fragment>
-              )} />
-              <Route path='/profile/account' exact render={() => <UpdateAccount {...this.props} />} />
-            </Fragment>
-          )
-        }}
+
+                  </Fragment>
+                ) : null} />
+
+                <Route path='/profile/account' exact render={() => <UpdateAccount {...this.props} />} />
+              </Fragment>
+            )
+          }}
         </Query>
       </Fragment>
     )

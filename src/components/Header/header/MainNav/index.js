@@ -1,8 +1,7 @@
-import React, { Fragment, PureComponent } from 'react'
-import { NavLink } from 'react-router-dom'
-import webConfig from 'config'
+import React, { PureComponent } from 'react'
 import withSession from 'hoc/withSession'
 import { MenuButton } from 'components'
+import SignoutButton from './mainnav/SignoutButton'
 
 import './MainNav.scss'
 
@@ -41,27 +40,21 @@ class MainNav extends PureComponent {
   }
 
   render() {
-    return (
-
+    const { getCurrentUser } = this.props.session
+    return getCurrentUser ? (
       <nav className='main-nav'>
-        {this.props.session.getCurrentUser === null &&
-          <ul>
-          <li>
-            <MenuButton
-              to='/users'
-              iconClass='fas fa-users'
-              onClick={() => this.mobile_nav_button()}
-            >
-              Users
-            </MenuButton>
-          </li>
-        </ul>
-      }
-
-      {this.props.session.getCurrentUser != null &&
         <ul>
           <li>
             <MenuButton
+              to='/profile'
+              iconClass='fas fa-user'
+              onClick={() => this.mobile_nav_button()}
+            >
+              {getCurrentUser.username}
+            </MenuButton>
+          </li>
+          <li>
+            <MenuButton
               to='/users'
               iconClass='fas fa-users'
               onClick={() => this.mobile_nav_button()}
@@ -69,10 +62,12 @@ class MainNav extends PureComponent {
               Users
             </MenuButton>
           </li>
+          <li>
+            <SignoutButton />
+          </li>
         </ul>
-      }
-    </nav>
-    )
+      </nav>
+    ) : null
   }
 }
 

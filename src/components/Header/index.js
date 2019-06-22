@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { NavLink } from 'react-router-dom'
 import withSession from 'hoc/withSession'
-import UserStatus from './header/UserStatus'
 import MainNav from './header/MainNav'
 import { Icon } from 'components'
 
@@ -20,19 +19,14 @@ class Header extends PureComponent {
   }
 
   render() {
-    const user = this.props.session.getCurrentUser
+    const { session } = this.props
+    const { getCurrentUser } = session
     return (
       <header>
-        
-        {user && <div id='topbar'>
-          <div className='content-container'>
-            <UserStatus />
-          </div>
-        </div>}
 
         <div className='content-container'>
           {this.renderLogo()}
-          {user && <MainNav />}
+          {getCurrentUser && <MainNav />}
         </div>
         
       </header>

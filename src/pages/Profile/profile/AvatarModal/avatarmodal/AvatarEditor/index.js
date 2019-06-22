@@ -319,67 +319,72 @@ class AvatarEditor extends Component {
         const { profileImage } = session.getCurrentUser
 
         return (
-            <div id='avatar-dropzone-wrapper'>
+            <Fragment>
+
+                {error && <div className='error'>{error}</div>}
                 
-                <Dropzone
-                    id='dropzone'
-                    handleDrop={dataUrl => this.handleDrop(dataUrl)}
-                    noClick={preview !== null}
-                    style={{
-                        width: size + 'px',
-                        height: size + 'px'
-                    }}
-                >
-                    <div id='avatar-editor-wrapper'>
-                        {!preview ? (
-                            <div id='dropzone-prompt' style={{
-                                    width: size + 'px',
-                                    height: size + 'px',
-                                    lineHeight: size + 'px',
-                                    background: profileImage ? `url(${webConfig.profileImagesURL}/${webConfig.profileImagesPath}/${profileImage})` : 'none',
-                                    backgroundSize: 'cover'
-                                }}
-                            >
-                                Drop file here, or click to select file.
-                            </div>
-                        ) : (
-                            <ReactAvatarEditor
-                                image={preview}
-                                width={size - 50}
-                                height={size - 50}
-                                border={25}
-                                color={[0, 0, 0, 0.2]}
-                                scale={1.2}
-                                rotate={0}
-                                ref={this.setEditorRef}
-                            />
+                <div id='avatar-dropzone-wrapper'>
+                    
+                    <Dropzone
+                        id='dropzone'
+                        handleDrop={dataUrl => this.handleDrop(dataUrl)}
+                        noClick={preview !== null}
+                        style={{
+                            width: size + 'px',
+                            height: size + 'px'
+                        }}
+                    >
+                        <div id='avatar-editor-wrapper'>
+                            {!preview ? (
+                                <div id='dropzone-prompt' style={{
+                                        width: size + 'px',
+                                        height: size + 'px',
+                                        lineHeight: size + 'px',
+                                        background: profileImage ? `url(${webConfig.profileImagesURL}/${webConfig.profileImagesPath}/${profileImage})` : 'none',
+                                        backgroundSize: 'cover'
+                                    }}
+                                >
+                                    Drop file here, or click to select file.
+                                </div>
+                            ) : (
+                                <ReactAvatarEditor
+                                    image={preview}
+                                    width={size - 50}
+                                    height={size - 50}
+                                    border={25}
+                                    color={[0, 0, 0, 0.2]}
+                                    scale={1.2}
+                                    rotate={0}
+                                    ref={this.setEditorRef}
+                                />
+                            )}
+                        </div>
+                    </Dropzone>
+        
+                    <div className='form-buttons'>
+                        {uploading ? <Spinner /> : (
+                            <Fragment>
+                                <button
+                                    type='button'
+                                    onClick={e => this.resetEditor(e)}
+                                    disabled={!preview}
+                                    className='btn transparent'
+                                >
+                                    <i className='fas fa-times-circle fa-3x'></i>
+                                </button>
+                                <button
+                                    type='button'
+                                    onClick={e => this.handleSubmit(e)}
+                                    disabled={!preview || this.validateForm()}
+                                    className='btn transparent'
+                                >
+                                    <i className='fas fa-arrow-circle-right fa-3x'></i>
+                                </button>
+                            </Fragment>
                         )}
                     </div>
-                </Dropzone>
-    
-                <div className='form-buttons'>
-                    {uploading ? <Spinner /> : (
-                        <Fragment>
-                            <button
-                                type='button'
-                                onClick={e => this.resetEditor(e)}
-                                disabled={!preview}
-                                className='btn transparent'
-                            >
-                                <i className='fas fa-times-circle fa-3x'></i>
-                            </button>
-                            <button
-                                type='button'
-                                onClick={e => this.handleSubmit(e)}
-                                disabled={!preview || this.validateForm()}
-                                className='btn transparent'
-                            >
-                                <i className='fas fa-arrow-circle-right fa-3x'></i>
-                            </button>
-                        </Fragment>
-                    )}
                 </div>
-            </div>
+            </Fragment>
         )
     }
 }

@@ -22,15 +22,12 @@ class Provider extends Component {
         )
     }
 }
-
-export const withContext = Component => props => (
+const withContext = Component => props => (
     <Provider>
-        <Component {...props} />
+        <Context.Consumer>
+            {context => <Component context={context} {...props} />}
+        </Context.Consumer>
     </Provider>
 )
 
-export const withState = Component => props => (
-    <Context.Consumer>
-        {context => <Component context={context} {...props} />}
-    </Context.Consumer>
-)
+export default withContext

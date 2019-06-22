@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import BioEditor from './biomodal/BioEditor'
-import {
-  Modal,
-} from 'components'
+import { Modal } from 'components'
 
 class BioModal extends PureComponent {
 

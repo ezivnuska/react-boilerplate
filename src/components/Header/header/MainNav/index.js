@@ -40,7 +40,8 @@ class MainNav extends PureComponent {
   }
 
   render() {
-    const { getCurrentUser } = this.props.session
+    const { session } = this.props
+    const { getCurrentUser } = session
     return getCurrentUser ? (
       <nav className='main-nav'>
         <ul>

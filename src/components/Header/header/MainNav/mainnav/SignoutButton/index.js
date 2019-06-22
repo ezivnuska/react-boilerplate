@@ -1,30 +1,23 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
-import * as Cookies from 'es-cookie'
-import { ApolloConsumer } from 'react-apollo'
-import { IconLink } from 'components'
+import withContext from 'hoc/withContext'
+import SignoutModal from './signoutbutton/SignoutModal'
 
 import './SignoutButton.scss'
 
-const handleSignout = (client, history) => {
-  Cookies.remove('token')
-  client.resetStore()
-  history.push('/')
-}
-
-const SignoutButton = ({ history, size }) => (
-  <ApolloConsumer>
-    {client => (
-      <div
-        id='signout-button'
-        className='menu-button'
-        onClick={() => handleSignout(client, history)}
-      >
-        <i className='fas fa-sign-out-alt'></i>
-        <span className='text'>Sign out</span>
-      </div>
-    )}
-  </ApolloConsumer>
+const SignoutButton = ({ context }) => (
+  <Fragment>
+    <SignoutModal context={context} />
+   
+    <div
+      id='signout-button'
+      className='menu-button'
+      onClick={() => context.openModal('signout')}
+    >
+      <i className='fas fa-sign-out-alt'></i>
+      <span className='text'>Sign out</span>
+    </div>
+  </Fragment>
 )
 
-export default withRouter(SignoutButton)
+export default withContext(withRouter(SignoutButton))

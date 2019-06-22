@@ -5,30 +5,24 @@ import MainNav from './header/MainNav'
 import { Icon } from 'components'
 
 import './Header.scss'
-// <img src={`${webConfig.siteURL}/assets/graphics/logo.png`} />
+
 class Header extends PureComponent {
 
-  renderLogo() {
-    return (
-      <div className='logo_wrapper'>
-        <NavLink to='/'>
-          <Icon iconClass='fas fa-map fa-5x' />
-        </NavLink>
-      </div>
-    )
-  }
-
   render() {
-    const { session } = this.props
-    const { getCurrentUser } = session
+    const { getCurrentUser } = this.props.session
     return (
       <header>
-
         <div className='content-container'>
-          {this.renderLogo()}
+          
+          <div className='logo_wrapper'>
+            <NavLink to='/'>
+              <Icon iconClass='fas fa-map fa-5x' />
+            </NavLink>
+          </div>
+
           {getCurrentUser && <MainNav />}
+          
         </div>
-        
       </header>
     )
   }

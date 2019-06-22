@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { withContext, withState } from 'hoc/withContext'
+import withContext from 'hoc/withContext'
 import withSession from 'hoc/withSession'
 import { MainLayout } from 'layouts'
 import {
@@ -39,6 +39,4 @@ const Root = ({ refetch, session, context }) => (
 
 const AppComponent = withSession(Root)
 
-const AppWithState = withState(AppComponent)
-
-export default withContext(AppWithState)
+export default withContext(AppComponent)

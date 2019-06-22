@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 
 import {
   Header,
@@ -7,20 +7,16 @@ import {
 
 import './MainLayout.scss'
 
-class MainLayout extends PureComponent {
-  render() {
-    return (
-      <div id='main'>
-        <Header />
-        <div className='page-content'>
-          <div className='content-container'>
-            {this.props.children}
-          </div>
-        </div>
-        <Footer />
+const MainLayout = ({ children }) => (
+  <div id='main'>
+    <Header />
+    <div className='page-content'>
+      <div className='content-container'>
+        {children}
       </div>
-    )
-  }
-}
+    </div>
+    <Footer />
+  </div>
+)
 
 export default MainLayout

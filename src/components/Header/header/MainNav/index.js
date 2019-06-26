@@ -11,10 +11,10 @@ class MainNav extends PureComponent {
   }
 
   componentWillMount() {
-    this.setMobileNavState = this.setMobileNavState.bind(this)
   }
 
   componentDidMount() {
+    this.setMobileNavState = this.setMobileNavState.bind(this)
     window.addEventListener('resize', this.setMobileNavState)
   }
 

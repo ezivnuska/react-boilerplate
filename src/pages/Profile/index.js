@@ -12,8 +12,7 @@ import {
   Heading,
   Link,
   Module,
-  ProfileImage,
-  TextEditor
+  ProfileImage
 } from 'components'
 
 import './Profile.scss'
@@ -91,7 +90,7 @@ class Profile extends PureComponent {
                           block
                           style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
                         >
-                          <TextEditor initialValue={data.getUserProfile.bio} editable={false} />
+                          <div dangerouslySetInnerHTML={{ __html: data.getUserProfile.bio }} />
                         </EditableContainer>
                       </Module>
                     ) : (

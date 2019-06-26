@@ -98,7 +98,7 @@ class BioEditor extends PureComponent {
             
             return (
               <Fragment>
-                <TextEditor editable initialValue={bio || (data && data.getCurrentUser.bio)} onUpdate={value => this.updateBio(value)} />
+                <TextEditor value={bio || (data && data.getCurrentUser.bio)} onUpdate={value => this.updateBio(value)} />
                 <div className='form-buttons'>
                   {loading ? <Spinner /> : (
                     <Fragment>

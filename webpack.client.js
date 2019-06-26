@@ -60,7 +60,7 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: 'src/assets/graphics', to: 'assets/graphics' },
       { from: 'src/assets/email_templates', to: 'assets/email_templates' },
-    ]),
+    ])
   ],
   resolve: {
     modules: ['node_modules', path.resolve(__dirname, 'src', 'assets')],

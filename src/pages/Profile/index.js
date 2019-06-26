@@ -90,7 +90,10 @@ class Profile extends PureComponent {
                           block
                           style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
                         >
-                          <div dangerouslySetInnerHTML={{ __html: data.getUserProfile.bio }} />
+                          <div
+                            className='text-display'
+                            dangerouslySetInnerHTML={{ __html: data.getUserProfile.bio }}
+                          />
                         </EditableContainer>
                       </Module>
                     ) : (

@@ -25,15 +25,4 @@ class TextEditor extends PureComponent {
     }
 }
 
-// {/* <CKEditor
-//                 editor={ClassicEditor}
-//                 name='bio'
-//                 id='editor'
-//                 data={bio}
-//                 onInit={editor => {
-//                     console.log('editor', editor)
-//                 }}
-//                 onChange={this.onChange}
-//             /> * */}
-
 export default TextEditor

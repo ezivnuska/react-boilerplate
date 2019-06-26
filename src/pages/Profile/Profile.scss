@@ -9,3 +9,7 @@
         text-align: center;
     }
 }
+
+.text-display {
+    padding: $v-padding $h-padding * 2 $v-padding $h-padding;
+}

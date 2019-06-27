@@ -23,6 +23,11 @@ const BondSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  actionerId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  }
 },
 {
   timestamps: true

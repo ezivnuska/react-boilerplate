@@ -41,6 +41,57 @@ const resolvers = {
     profilePage: async (root, { username }, { User }) => {
       const profile = await User.findOne({ username })
       return profile
+    },
+    getBond: async (root, args, { userId }, { Bond }) => {
+      const bond = await Bond.findOne({
+        $or: [
+          { $and: [{ sender: userId }, { responder: _id }] },
+          { $and: [{ sender: _id }, { responder: userId }] },
+        ]
+      })
+      .select('_id sender responder')
+      .populate('sender responder', '_id username')
+      
+      console.log('booooond', bond)
+      
+      return res.json({
+        bond
+      })
+    },
+    getMutualBond: async (root, { user1, user2 }, { Bond }) => {
+      const bond = await Bond.findOne({
+        $or: [
+          { $and: [{ sender: user1 }, { responder: user2 }] },
+          { $and: [{ sender: user2 }, { responder: user1 }] },
+        ]
+      })
+
+      return res.json({
+        bond,
+      })
+    },
+    getMutualBonds: async (root, { username }, { Bond, User }) => {
+      const user = await User.findOne({ username }).select('_id')
+      const bonds = await Bond.find({
+        $or: [{ sender: user._id }, { responder: user._id }],
+        confirmed: true,
+      })
+      .select('_id sender responder confirmed declined')
+      .populate('sender responder', '_id username')
+
+      return res.json({
+        bonds
+      })
+    },
+    getBonds: async (root, args, { currentUser, Bond }) => {
+      const bonds = await Bond.find({
+        $or: [{ sender: currentUser._id }, { responder: currentUser._id }]
+      })
+      .select('_id sender responder confirmed declined')
+      
+      return res.json({
+        bonds,
+      })
     }
   },
   Mutation: {
@@ -123,6 +174,90 @@ const resolvers = {
         }
         return user
       })
+    },
+    addBond: async (root, { responder }, { currentUser, Bond }) => {
+      const existingBond = await Bond.findOne({
+        $or: [
+          { $and: [{ sender }, { responder }] },
+          { $and: [{ sender: responder }, { responder: sender }] },
+        ]
+      })
+
+      if (!existingBond) {
+        let newBond = new Bond({
+          sender,
+          responder,
+          confirmed: false,
+          declined: false,
+          actionerId: sender,
+        })
+
+        const savedBond = await newBond.save()
+
+        const bond = await Bond.findById(savedBond._id)
+        .select('_id sender responder confirmed declined actionerId')
+
+        return res.json({ bond })
+      }
+    },
+    confirmBond: async (root, { id }, { Bond, currentUser }) => {
+      const existingBond = await Bond.findByIdAndUpdate(id, {
+        confirmed: true,
+        declined: false,
+        actionerId: currentUser._id,
+      })
+
+      const bond = await Bond.findOne({ _id: existingBond._id })
+      .select('_id sender responder confirmed declined actionerId')
+
+      return res.json({ bond })
+    },
+    removeBond: async (root, { id }, { Bond, currentUser }) => {
+      const bondToRemove = await Bond.findByIdAndUpdate(id, {
+        confirmed: false,
+        declined: true,
+        actionerId: currentUser._id,
+      })
+
+      const bond = await Bond.findOne({ _id: bondToRemove._id })
+      .select('_id sender responder confirmed declined actionerId')
+
+      return res.json({
+        bond
+      })
+    },
+    cancelBond: async (root, { id }, { Bond, currentUser }) => {
+      const bondToCancel = await Bond.findByIdAndUpdate(id, {
+        confirmed: false,
+        declined: false,
+        actionerId: currentUser._id,
+      })
+
+      const bond = Bond.findOne({ _id: bondToCancel._id })
+      .select('_id sender responder confirmed declined actionerId')
+
+      return res.json({ bond })
+    },
+    declineBond: async (root, { bondId }, { Bond, currentUser }) => {
+      const existingBond = await Bond.findById(bondId)
+      .select('_id sender responder updater confirmed declined actionerId')
+
+      const updatedBond = await Bond.update({ _id: existingBond._id }, {
+          declined: true,
+          confirmed: false,
+          actionerId: currentUser._id,
+      })
+
+      const bond = await Bond.findById(updatedBond._id)
+      .select('_id sender responder confirmed declined actionerId')
+
+      return res.json({ bond })
+    },
+    deleteBond: async (root, { id }, { Bond }) => {
+      const bond = await Bond.findOneAndRemove({ _id: id })
+      .select('_id sender responder updatedAt actionerId')
+
+      return res.json({ bond })
     }
   }
 }

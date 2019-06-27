@@ -93,3 +93,86 @@ export const PROFILE_PAGE = gql`
     }
   }
 `
+
+export const ADD_BOND = gql`
+  mutation($sender: String!) {
+    addBond(sender: $sender) {
+      bond
+    }
+  }
+`
+
+export const GET_BOND = gql`
+  query($userId: String!) {
+    getBond(userId: $userId) {
+      bond
+    }
+  }
+`
+
+export const GET_MUTUAL_BOND = gql`
+  query($user1: String!, $user2: String!) {
+    getMutualBond(user1: $user1, user2: $user2) {
+      bond
+    }
+  }
+`
+
+export const GET_MUTUAL_BONDS = gql`
+  query($username: String!) {
+    getMutualBonds(username: $username) {
+      bonds,
+      username
+    }
+  }
+`
+
+export const GET_BONDS = gql`
+  query {
+    getBonds {
+      bonds
+    }
+  }
+`
+
+export const CONFIRM_BOND = gql`
+  query($id: String!) {
+    confirmBond(id: $id) {
+      bond
+    }
+  }
+`
+
+export const REMOVE_BOND = gql`
+  mutation($id: String!) {
+    removeBond(id: $id) {
+      bond,
+      actionerId
+    }
+  }
+`
+
+export const CANCEL_BOND = gql`
+  mutation($bondId: String!) {
+    cancelBond(bondId: $bondId) {
+      bond
+    }
+  }
+`
+
+export const  DECLINE_BOND = gql`
+  mutation($bondId: String!) {
+    declineBond(bondId: $bondId) {
+      bond
+    }
+  } 
+`
+
+export const  DELETE_BOND = gql`
+  mutation($id: String!) {
+    deeteBond(id: $id) {
+      bond
+    }
+  } 
+`
+

@@ -15,11 +15,24 @@ const typeDefs = gql`
     token: String!
   }
 
+  type Bond {
+    _id: ID!,
+    sender: ID!,
+    responder: ID!,
+    confirmed: Boolean,
+    declined: Boolean,
+    cancelled: Boolean
+  }
+
   type Query {
     getCurrentUser: User
     getUserProfile: User
     getAllUsers: [User]
     profilePage(username: String!): User
+    getBond(userId: ID!): Bond
+    getMutualBond(user1: ID!, user2: ID!): Bond
+    getMutualBonds(username: String!): [Bond]
+    getBonds: [Bond]
   }
 
   type Mutation {
@@ -30,6 +43,12 @@ const typeDefs = gql`
     changeEmail(currentEmail: String!, newEmail: String!): User
     changePassword(email: String!, password: String!): User
     passwordReset(email: String!): User
+    addBond(responder: ID!): Bond
+    confirmBond(id: ID!): Bond
+    removeBond(id: ID!): Bond
+    cancelBond(id: ID!): Bond
+    declineBond(bondId: ID!): Bond
+    deleteBond(id: ID!): Bond
   }
 `
 

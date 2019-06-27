@@ -1,0 +1,15 @@
+@import '~sass/main';
+
+.bond-controls {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  white-space: nowrap;
+  display: table;
+  height: 55px;
+
+  li {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}

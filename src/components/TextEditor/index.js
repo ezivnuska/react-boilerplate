@@ -10,6 +10,10 @@ class TextEditor extends PureComponent {
         editor.on('change', e => this.onChange(e))
     }
 
+    componentWillReceiveProps = ({ value }) => {
+        this.setState({ value })
+    }
+
     onChange = ({ editor }) => {
         const { onUpdate } = this.props
         const value = editor.getData()
@@ -18,10 +22,7 @@ class TextEditor extends PureComponent {
     }
 
     render() {
-        const bio = this.state.value
-        return (
-            <textarea name='editor' defaultValue={bio}></textarea>
-        )
+        return <textarea name='editor' defaultValue={this.state.value}></textarea>
     }
 }
 

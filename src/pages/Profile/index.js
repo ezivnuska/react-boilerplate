@@ -40,6 +40,7 @@ class Profile extends PureComponent {
     return (
       <Fragment>
         {this.head()}
+        
         <Query
           query={GET_USER_PROFILE}
           notifyOnNetworkStatusChange
@@ -83,27 +84,19 @@ class Profile extends PureComponent {
 
                     </div>
 
-                    {data.getUserProfile.bio ? (
-                      <Module title='Bio'>
-                        <EditableContainer
-                          onClick={() => context.openModal('bio')}
-                          block
-                          style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
-                        >
-                          <div
-                            className='text-display'
-                            dangerouslySetInnerHTML={{ __html: data.getUserProfile.bio }}
-                          />
-                        </EditableContainer>
-                      </Module>
-                    ) : (
-                      <button
-                        className='btn'
+                    
+                    <Module title='Bio'>
+                      <EditableContainer
                         onClick={() => context.openModal('bio')}
+                        block
+                        style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
                       >
-                        Add Bio
-                      </button>
-                    )}
+                        <div
+                          className='text-display'
+                          dangerouslySetInnerHTML={{ __html: data.getUserProfile.bio || '<p>Click here to add a bio</p>' }}
+                        />
+                      </EditableContainer>
+                    </Module>
                     
                   </Fragment>
                 ) : null} />

@@ -36,7 +36,10 @@ const UserInfo = ({ user }) => {
         title='About'
         fullsize
       >
-        <TextEditor editable={false} initialValue={user.bio} />
+        <div
+          className='text-display'
+          dangerouslySetInnerHTML={{ __html: user.bio }}
+        />
       </Module>
       
     </div>

@@ -15,21 +15,11 @@ import {
 
 import './BioEditor.scss'
 
-const initialState = {
-  bio: ''
-}
-
 class BioEditor extends PureComponent {
 
   state = {
-    ...initialState
-  }
-
-  componentWillMount() {
-    const { bio } = this.props
-    if (bio) {
-      this.setState({ bio })
-    }
+    bio: this.props.bio,
+    initialValue: this.props.bio
   }
 
   componentDidMount() {
@@ -58,8 +48,8 @@ class BioEditor extends PureComponent {
 
   resetBio = e => {
     e.preventDefault()
-    const { bio } = this.props
-    this.setState({ bio })
+    this.setState({ bio: this.state.initialValue })
+    CKEDITOR.instances['editor'].setData(this.state.initialValue)
   }
 
   handleSaveBio(event, editProfile) {
@@ -80,7 +70,6 @@ class BioEditor extends PureComponent {
     const { bio } = this.state
     const { session } = this.props
     const { email, username } = session.getCurrentUser
-
     return (
       <div id='bio-editor'>
         <Heading level={2}>Bio</Heading>
@@ -98,10 +87,12 @@ class BioEditor extends PureComponent {
             
             return (
               <Fragment>
-                <TextEditor value={bio || (data && data.getCurrentUser.bio)} onUpdate={value => this.updateBio(value)} />
+                <TextEditor value={bio} onUpdate={value => this.updateBio(value)} />
+
                 <div className='form-buttons'>
                   {loading ? <Spinner /> : (
                     <Fragment>
+                      
                       <button
                         type='button'
                         onClick={e => this.resetBio(e)}
@@ -110,6 +101,7 @@ class BioEditor extends PureComponent {
                       >
                         <i className='fas fa-times-circle fa-3x'></i>
                       </button>
+
                       <button
                         type='button'
                         onClick={e => this.handleSaveBio(e, editProfile)}
@@ -118,9 +110,11 @@ class BioEditor extends PureComponent {
                       >
                         <i className='fas fa-arrow-circle-right fa-3x'></i>
                       </button>
+
                     </Fragment>
                   )}
                 </div>
+
               </Fragment>
             )
           }}

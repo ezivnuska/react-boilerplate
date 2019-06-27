@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 
+
 class TextEditor extends PureComponent {
     state = {
         value: this.props.value || ''

@@ -1,4 +1,4 @@
-@import '~sass/main';
+@import '~scss/main';
 
 .bond-controls {
   margin: 0;
@@ -6,7 +6,7 @@
   list-style-type: none;
   white-space: nowrap;
   display: table;
-  height: 55px;
+  height: 50px;
 
   li {
     display: table-cell;

@@ -16,12 +16,13 @@ const typeDefs = gql`
   }
 
   type Bond {
-    _id: ID!,
-    sender: ID!,
-    responder: ID!,
-    confirmed: Boolean,
-    declined: Boolean,
+    _id: ID!
+    sender: ID!
+    responder: ID!
+    confirmed: Boolean
+    declined: Boolean
     cancelled: Boolean
+    actionerId: ID
   }
 
   type Query {
@@ -47,7 +48,7 @@ const typeDefs = gql`
     confirmBond(id: ID!): Bond
     removeBond(id: ID!): Bond
     cancelBond(id: ID!): Bond
-    declineBond(bondId: ID!): Bond
+    declineBond(id: ID!): Bond
     deleteBond(id: ID!): Bond
   }
 `

@@ -20,7 +20,6 @@ const BondControl = ({ children, onClick, ...rest }) => {
 }
 
 BondControl.propTypes = ({
-  children: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 })
 

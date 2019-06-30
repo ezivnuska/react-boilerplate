@@ -9,6 +9,7 @@ export const SIGNUP_USER = gql`
 export const GET_CURRENT_USER = gql`
   query {
     getCurrentUser {
+      _id
       joinDate
       username
       email
@@ -67,6 +68,7 @@ export const RESET_PASSWORD = gql`
 export const GET_USER_PROFILE = gql`
   query {
     getUserProfile {
+      _id
       bio
       profileImage
     }
@@ -76,6 +78,7 @@ export const GET_USER_PROFILE = gql`
 export const GET_ALL_USERS = gql`
   query {
     getAllUsers {
+      _id
       bio
       profileImage
       username
@@ -86,6 +89,7 @@ export const GET_ALL_USERS = gql`
 export const PROFILE_PAGE = gql`
   query($username: String!) {
     profilePage(username: $username) {
+      _id
       email
       bio
       profileImage
@@ -94,26 +98,30 @@ export const PROFILE_PAGE = gql`
   }
 `
 
-export const ADD_BOND = gql`
-  mutation($sender: String!) {
-    addBond(sender: $sender) {
-      bond
-    }
-  }
-`
-
 export const GET_BOND = gql`
-  query($userId: String!) {
+  query($userId: ID!) {
     getBond(userId: $userId) {
-      bond
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
+      actionerId
     }
   }
 `
 
 export const GET_MUTUAL_BOND = gql`
-  query($user1: String!, $user2: String!) {
+  query($user1: ID!, $user2: ID!) {
     getMutualBond(user1: $user1, user2: $user2) {
-      bond
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
+      actionerId
     }
   }
 `
@@ -121,8 +129,13 @@ export const GET_MUTUAL_BOND = gql`
 export const GET_MUTUAL_BONDS = gql`
   query($username: String!) {
     getMutualBonds(username: $username) {
-      bonds,
-      username
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
+      actionerId
     }
   }
 `
@@ -130,48 +143,97 @@ export const GET_MUTUAL_BONDS = gql`
 export const GET_BONDS = gql`
   query {
     getBonds {
-      bonds
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
+      actionerId
+    }
+  }
+`
+
+export const ADD_BOND = gql`
+  mutation($responder: ID!) {
+    addBond(responder: $responder) {
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
+      actionerId
     }
   }
 `
 
 export const CONFIRM_BOND = gql`
-  query($id: String!) {
+  mutation($id: ID!) {
     confirmBond(id: $id) {
-      bond
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
+      actionerId
     }
   }
 `
 
 export const REMOVE_BOND = gql`
-  mutation($id: String!) {
+  mutation($id: ID!) {
     removeBond(id: $id) {
-      bond,
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
       actionerId
     }
   }
 `
 
 export const CANCEL_BOND = gql`
-  mutation($bondId: String!) {
-    cancelBond(bondId: $bondId) {
-      bond
+  mutation($id: ID!) {
+    cancelBond(id: $id) {
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
+      actionerId
     }
   }
 `
 
 export const  DECLINE_BOND = gql`
-  mutation($bondId: String!) {
-    declineBond(bondId: $bondId) {
-      bond
+  mutation($id: ID!) {
+    declineBond(id: $id) {
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
+      actionerId
     }
   } 
 `
 
 export const  DELETE_BOND = gql`
-  mutation($id: String!) {
-    deeteBond(id: $id) {
-      bond
+  mutation($id: ID!) {
+    deleteBond(id: $id) {
+      _id
+      sender
+      responder
+      confirmed
+      declined
+      cancelled
+      actionerId
     }
   } 
 `

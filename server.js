@@ -30,7 +30,7 @@ AWS.config.update({
 
 // Connect MongoDB
 mongoose.set('useCreateIndex', true)
-mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true })
+mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useFindAndModify: false })
 .then(() => {
   console.log('Connection to DB successful')
 })

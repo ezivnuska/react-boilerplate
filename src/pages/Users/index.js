@@ -3,6 +3,7 @@ import { GET_ALL_USERS } from 'queries'
 import { Query } from 'react-apollo'
 import { Helmet } from 'react-helmet'
 import withAuth from 'hoc/withAuth'
+import UsersList from './users/UsersList'
 import {
   Heading,
   UserSignature
@@ -42,6 +43,7 @@ class Users extends PureComponent {
   }
 
   render() {
+    const { getCurrentUser } = this.props.session
     return (
       <Fragment>
         {this.head()}
@@ -61,14 +63,7 @@ class Users extends PureComponent {
                   </div>
                 }
                 {data.getAllUsers.length &&
-                  <ul className='users'>
-                    {data.getAllUsers.map((user, index) => (
-                        <li key={index}>
-                          {this.renderUserSignature(user)}
-                        </li>
-                      )
-                    )}
-                  </ul>
+                  <UsersList users={data.getAllUsers} currentUser={getCurrentUser} />
                 }
               </div>
             )

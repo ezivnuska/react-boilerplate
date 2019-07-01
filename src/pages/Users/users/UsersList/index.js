@@ -46,14 +46,14 @@ class UsersList extends PureComponent {
         const { currentUser } = this.props
         const menuOptions = [
             {
-                label: 'Following',
-                onClick: () => this.setFilter('bonded'),
-                active: this.state.filter === 'bonded'
-            },
-            {
                 label: 'All',
                 onClick: () => this.setFilter(null),
                 active: !this.state.filter
+            },
+            {
+                label: 'Following',
+                onClick: () => this.setFilter('bonded'),
+                active: this.state.filter === 'bonded'
             }
         ]
         return (

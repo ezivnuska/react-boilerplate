@@ -1,15 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { NavLink } from 'react-router-dom'
-
 import './MenuItem.scss'
 
-const MenuItem = ({ children, ...props }) => (
+const MenuItem = ({ children, active, ...props }) => (
   <li>
-    <NavLink {...props} exact className='menu-item' activeClassName='active'>
+    <a {...props} className={'menu-item' + (active ? ' active' : '')}>
       {children}
-    </NavLink>
+    </a>
   </li>
 )
 

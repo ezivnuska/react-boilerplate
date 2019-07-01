@@ -340,7 +340,7 @@ class AvatarEditor extends Component {
                                         width: size + 'px',
                                         height: size + 'px',
                                         lineHeight: size + 'px',
-                                        background: profileImage ? `url(${webConfig.profileImagesURL}/${webConfig.profileImagesPath}/${profileImage})` : 'none',
+                                        background: profileImage ? `url(${webConfig.profileImagesURL}/${webConfig.profileImagesPath}/${profileImage})` : `url(${webConfig.assetURL}/graphics/default-avatar.png)`,
                                         backgroundSize: 'cover'
                                     }}
                                 >

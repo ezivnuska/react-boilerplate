@@ -1,22 +1,15 @@
-.userProfilePage {
-  margin: 3rem 0;
+@import '~scss/main';
 
-  .profileImage {
-    img {
-      // display: block;
-      // width: 100%;
-      // border-bottom-right-radius: 50px;
-      // border-top-left-radius: 50px;
-    }
-  }
+.user-header {
+  margin: 0 $h-padding 2rem;
+  text-align: center;
 
-  .user {
-    font-size: 1.8rem;
-    line-height: 2.4rem;
-    font-weight: 700;
-    padding: 1.5rem 10px;
-    text-align: center;
-    display: block;
-    width: 100%;
+  > * {
+      margin: 0 auto;
+      text-align: center;
   }
+}
+
+.text-display {
+  padding: $v-padding $h-padding;
 }

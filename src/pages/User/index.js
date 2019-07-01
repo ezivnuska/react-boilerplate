@@ -1,19 +1,73 @@
 import React, { Fragment, PureComponent } from 'react'
 import { withRouter } from 'react-router-dom'
 import withAuth from 'hoc/withAuth'
-import { UserProfile } from 'components'
+import { Query } from 'react-apollo'
+import { PROFILE_PAGE } from 'queries'
+import { Helmet } from 'react-helmet'
+import { Heading, Module, ProfileImage, Spinner } from 'components'
 
 import './User.scss'
 
 class User extends PureComponent {
 
-  render = () => {
-    const { match } = this.props
-    const username = match.params.URL_Param
+  state = {
+    username: null
+  }
+
+  componentWillMount() {
+    const username = this.props.match.params.URL_Param
+    this.setState({ username })
+  }
+
+
+  head() {
+    const { username } = this.state
+    return (
+      <Helmet bodyAttributes={{ class: 'profile' }}>
+        <title>Profile: {username}</title>
+      </Helmet>
+    )
+  }
+
+  render() {
+    const { username } = this.state
     
+    if (!username) return <div>Loading</div>
+
     return (
       <Fragment>
-        <UserProfile username={username} {...this.props} />
+        {this.head()}
+        <Query
+          query={PROFILE_PAGE}
+          variables={{ username }}
+        >
+
+          {({ data, loading, error }) => {
+            
+            if (loading) return <Spinner />
+            if (error) return <div>Error</div>
+            
+            const { bio, username, profileImage } = data.profilePage
+            
+            return (
+              <Fragment>
+                <div className='user-header'>
+                  <ProfileImage
+                    size={150}
+                    src={profileImage}
+                  />
+                  <Heading level={3}>{username}</Heading>
+                </div>
+                <Module title='Bio'>
+                  <div
+                    className='text-display'
+                    dangerouslySetInnerHTML={{ __html: bio }}
+                  />
+                </Module>
+              </Fragment>
+            )
+          }}
+        </Query>
       </Fragment>
     )
   }

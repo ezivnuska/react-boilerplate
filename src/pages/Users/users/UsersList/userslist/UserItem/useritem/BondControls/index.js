@@ -4,7 +4,6 @@ import { compose, graphql, withApollo } from 'react-apollo'
 import toastr from 'toastr'
 import {
   ADD_BOND,
-  GET_BOND,
   CANCEL_BOND,
   CONFIRM_BOND,
   DECLINE_BOND,
@@ -66,13 +65,8 @@ class BondControls extends PureComponent {
         height={30}
         onClick={async () => {
           
-          const removedBond = await removeBond({
-            variables: { id: _id }
-          })
-
-          const deletedBond = await deleteBond({
-            variables: { id: _id }
-          })
+          await removeBond({ variables: { id: _id } })
+          await deleteBond({ variables: { id: _id } })
 
           this.setState({ bond: null })
 
@@ -91,11 +85,10 @@ class BondControls extends PureComponent {
         height={30}
         onClick={async () => {
           
-          const { data } = await addBond({
-            variables: { responder: _id }
-          })
+          const { data } = await addBond({ variables: { responder: _id } })
 
           this.setState({ bond: data.addBond })
+
           toastr.success(`An invitation has been sent to ${user.username}!`, 'Invitation Sent!')
         }}
       >
@@ -111,15 +104,11 @@ class BondControls extends PureComponent {
         height={30}
         onClick={async () => {
           
-          const cancelledBond = await cancelBond({
-            variables: { id: _id }
-          })
-        
-          const deletedBond = await deleteBond({
-            variables: { id: _id }
-          })
+          await cancelBond({ variables: { id: _id } })
+          await deleteBond({ variables: { id: _id } })
           
           this.setState({ bond: null })
+          
           toastr.success(`Invitation with ${user.username} has been revoked!`, 'Invitation Revoked!')
         }}
       >
@@ -138,12 +127,13 @@ class BondControls extends PureComponent {
           <BondControl
             height={30}
             onClick={async () => {
-              const { data } = await confirmBond({
-                variables: { id: bond._id }
-              })
+              
+              const { data } = await confirmBond({ variables: { id: bond._id } })
 
               this.setState({ bond: data.confirmBond })
-              toastr.success(`${user.username} has accepted your invitation!`, 'Invitation Accepted!')
+              
+              toastr.success(`Invitation from ${user.username} accepted!`, 'Invitation Accepted!')
+
             }}
           >
             <i className='fas fa-check-circle fa-lg'></i>
@@ -153,16 +143,14 @@ class BondControls extends PureComponent {
           <BondControl
             height={30}
             onClick={async () => {
-              const { data } = await declineBond({
-                variables: { id: bond._id }
-              })
 
-              const deletedBond = await deleteBond({
-                variables: { id: bond._id }
-              })
+              await declineBond({ variables: { id: bond._id } })
+              await deleteBond({ variables: { id: bond._id } })
 
               this.setState({ bond: null })
-              toastr.success(`${user.username} has declined your invitation!`, 'Invitation Declined!')
+              
+              toastr.success(`You have declined the invitation from ${user.username}!`, 'Invitation Declined!')
+
             }}
           >
             <i className='fas fa-times-circle fa-lg'></i>

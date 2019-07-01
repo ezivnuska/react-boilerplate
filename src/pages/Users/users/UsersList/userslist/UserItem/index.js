@@ -16,9 +16,11 @@ class UserItem extends PureComponent {
 
   renderSignature = () => {
     const { bond, isCurrentUser, user } = this.props
-    return (!isCurrentUser && bond && bond.confirmed)
-      ? <UserSignature user={user} size={50} to={`/users/${user.username}`} />
+    return !isCurrentUser
+      ? (bond && bond.confirmed)
+      ? <UserSignature user={user} size={50} to={`/user/${user.username}`} />
       : <UserSignature user={user} size={50} />
+      : <UserSignature user={user} size={50} to={'/profile'} />
     }
 
   render() {

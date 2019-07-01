@@ -2,6 +2,14 @@
 
 .main-nav {
 
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+  overflow: hidden;
+
+  @media only screen and (max-width: 480px) {
+    border-radius: unset;
+  }
+
   ul, ul li {
     margin: 0;
     padding: 0;
@@ -20,8 +28,8 @@
         display: block;
         width: 100%;
         text-decoration: none;
-        padding: 0.5rem;
-        font-size: 1.8rem;
+        padding: 1rem $h-padding;
+        font-size: 1.5rem;
         line-height: normal;
         font-weight: 400;
         text-align: center;

@@ -14,12 +14,13 @@
   .page-content {
     flex: 1;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 0 1rem 1rem;
     width: 100%;
     text-align: left;
+    background-color: $darkSlateGray;
     
     @media only screen and (max-width: 400px) {
-      padding: 1rem 0;
+      padding: 0;
     }
   }
 }

@@ -1,18 +1,13 @@
 @import '~scss/main';
 
 #avatar-dropzone-wrapper {
-  padding-bottom: 2rem;
+  display: inline-block;
+  margin: 1rem auto;
   text-align: center;
-  border: 1px solid #ccc;
 
   #dropzone {
-    margin: 2rem auto 2rem;
     height: 100%;
     cursor: pointer;
-
-    &:hover {
-      background: #ccc;
-    }
 
     #avatar-editor-wrapper {
       text-align: center;

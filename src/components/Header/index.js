@@ -12,9 +12,9 @@ class Header extends PureComponent {
     const { getCurrentUser } = this.props.session
     return (
       <header>
-        <div className='content-container'>
+        <div className='container'>
           
-          <div className='logo_wrapper'>
+          <div id='logo-wrapper'>
             <NavLink to='/'>
               <Icon iconClass='fas fa-map fa-5x' />
             </NavLink>

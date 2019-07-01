@@ -11,8 +11,10 @@ const MainLayout = ({ children }) => (
   <div id='main'>
     <Header />
     <div className='page-content'>
-      <div className='content-container'>
-        {children}
+      <div className='container'>
+        <div className='content'>
+          {children}
+        </div>
       </div>
     </div>
     <Footer />

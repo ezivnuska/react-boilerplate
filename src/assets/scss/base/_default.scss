@@ -93,11 +93,24 @@ ul.showList li {
 
 //
 
-.content-container {
+.content {
+  padding: 2rem 0;
+  height: 100%;
+  background: #fff;
+  border-bottom-right-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
+  overflow: hidden;
+
+  @media only screen and (max-width: 480px) {
+    border-radius: unset;
+  }
+}
+
+.container {
   margin: 0 auto;
+  height: 100%;
   max-width: $max-content-width;
   padding: 0;
-  // border: 1px dotted orange;
 }
 
 .centered {
@@ -149,6 +162,8 @@ button {
 .form-buttons {
   display: block;
   width: 100%;
+  margin-top: $v-padding;
+  margin-bottom: $v-padding;
   text-align: center;
 
   .btn {

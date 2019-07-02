@@ -26,7 +26,7 @@ class UserItem extends PureComponent {
   render() {
     const { bond, isCurrentUser, user } = this.props
     return (
-      <div className='user-item'>
+      <li className='user-item'>
         {this.renderSignature()}
         {!isCurrentUser && (
           <BondControls
@@ -34,7 +34,7 @@ class UserItem extends PureComponent {
             user={user}
           />
         )}
-      </div>
+      </li>
     )
   }
 }

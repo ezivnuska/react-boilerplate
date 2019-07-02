@@ -8,31 +8,11 @@ import UserItem from './userslist/UserItem'
 class UsersList extends PureComponent {
 
     state = {
-        filter: null,
-    }
-
-    componentWillReceiveProps = nextProps => {
-        console.log('nextProps', nextProps)
-    }
-
-    toggleFilter = () => {
-        this.setState({ filter: this.state.filter ? null : 'bonded' })
+        filter: null
     }
 
     setFilter = filter => {
         this.setState({ filter })
-    }
-
-    filterUsers = bonds => {
-        const { filter } = this.state
-        const { users } = this.props
-        if (filter === 'bonded') {
-            return users.filter(user => {
-                const bond = this.getBond(user, bonds)
-                return bond && bond.confirmed
-            })
-        }
-        return users
     }
 
     getBond = (user, bonds) => {
@@ -43,7 +23,7 @@ class UsersList extends PureComponent {
     }
 
     render() {
-        const { currentUser } = this.props
+        const { currentUser, users } = this.props
         const menuOptions = [
             {
                 label: 'All',
@@ -68,22 +48,21 @@ class UsersList extends PureComponent {
                         
                         if (loading) return <Spinner />
                         if (error) return <div className='error'>Error: {error}</div>
-
-                        const bonds = data.getBonds
-                        const filteredUsers = this.filterUsers(bonds)
                         
                         return (
                             <ul className='users'>
-                                {filteredUsers && filteredUsers.map((user, index) => {
-                                    const bond = this.getBond(user, bonds)
+                                {users.map((user, index) => {
+                                    const bond = this.getBond(user, data.getBonds)
+                                    if (this.state.filter === 'bonded') {
+                                        if (!bond || (bond && !bond.confirmed)) return null
+                                    }
                                     return (
-                                        <li key={index}>
-                                            <UserItem
-                                                user={user}
-                                                bond={bond}
-                                                isCurrentUser={user._id === currentUser._id}
-                                            />
-                                        </li>
+                                        <UserItem
+                                            key={index}
+                                            user={user}
+                                            bond={bond}
+                                            isCurrentUser={user._id === currentUser._id}
+                                        />
                                     )
                                 })}
                             </ul>

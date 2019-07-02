@@ -58,12 +58,16 @@ class User extends PureComponent {
                   />
                   <Heading level={3}>{username}</Heading>
                 </div>
-                <Module title='Bio'>
-                  <div
-                    className='text-display'
-                    dangerouslySetInnerHTML={{ __html: bio }}
-                  />
-                </Module>
+                {bio ? (
+                  <Module title='Bio'>
+                    <div
+                      className='text-display'
+                      dangerouslySetInnerHTML={{ __html: bio }}
+                    />
+                  </Module>
+                ) : (
+                  <div className='text-placeholder'>Oops! {username} has not added a bio.</div>
+                )}
               </Fragment>
             )
           }}

@@ -3,7 +3,8 @@ import { model, Schema } from 'mongoose'
 const MemorySchema = new Schema({
     author: {
         type: Schema.Types.ObjectId, 
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     day: {
         type: Number,
@@ -27,7 +28,6 @@ const MemorySchema = new Schema({
     },
     shared: {
         type: Boolean,
-        required: true,
         default: false
     },
     images: [{

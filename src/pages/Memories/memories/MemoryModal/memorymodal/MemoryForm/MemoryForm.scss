@@ -1,0 +1,30 @@
+@import '~sass/main';
+
+form#memory-form {
+  box-sizing: border-box;
+
+  .control-group {
+    display: flex;
+    flex-flow: row nowrap;
+
+
+    .select-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      margin-right: 0.25rem;
+
+      select {
+        text-align-last: center;
+        background: linear-gradient(
+          to right,
+          $form-input-bg-color-shadow, $form-input-bg-color, $form-input-bg-color-shadow
+        );
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}

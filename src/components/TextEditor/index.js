@@ -3,11 +3,13 @@ import React, { PureComponent } from 'react'
 
 class TextEditor extends PureComponent {
     state = {
+        name: this.props.name || 'editor',
         value: this.props.value || ''
     }
 
     componentDidMount() {
-        const editor = CKEDITOR.replace('editor')
+        const { name } = this.state
+        const editor = CKEDITOR.replace(name)
         editor.on('change', e => this.onChange(e))
     }
 
@@ -23,7 +25,7 @@ class TextEditor extends PureComponent {
     }
 
     render() {
-        return <textarea name='editor' defaultValue={this.state.value}></textarea>
+        return <textarea name={name} defaultValue={this.state.value}></textarea>
     }
 }
 

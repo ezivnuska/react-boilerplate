@@ -90,9 +90,20 @@ const resolvers = {
         // .select('_id sender responder confirmed declined')
         
         return bonds
-      } catch (e) {
-        console.log('e', e)
-        return []
+      } catch(e) {
+        throw new Error(e)
+      }
+    },
+    getAllSharedMemories: async (root, args, { Memory }) => {
+      try {
+        const memories = await Memory.find({ shared: true })
+        .select('_id author year month day title body shared')
+        .populate('author', '_id username profileImage')
+        .sort({ year: -1, month: -1, day: -1 })
+        
+        return memories
+      } catch(e) {
+        throw new Error(e)
       }
     }
   },
@@ -275,6 +286,25 @@ const resolvers = {
       .select('_id sender responder confirmed declined cancelled actionerId')
 
       return bond
+    },
+    addMemory: async (root, { author, day, month, year, title, body, shared }, { Memory }) => {
+      const newMemory = new Memory({
+        author,
+        day,
+        month,
+        year,
+        title,
+        body,
+        shared,
+      })
+      const savedMemory = await newMemory.save()
+      console.log('savedMemory', savedMemory)
+      const memory = await Memory.findOne({ _id: savedMemory._id })
+      .select('_id author year month day title body shared')
+      .populate('author', '_id username profileImage')
+      
+      console.log('savedMemory', savedMemory)
+      return memory
     }
   }
 }

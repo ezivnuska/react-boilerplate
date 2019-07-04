@@ -6,8 +6,9 @@ import { MainLayout } from 'layouts'
 import {
   ForgotPassword,
   Home,
-  NotFound,
+  Memories,
   Profile,
+  NotFound,
   Users,
   User
 } from 'pages'
@@ -20,6 +21,9 @@ const Root = ({ refetch, session, context }) => (
       )} />
       <Route path='/account-recovery' render={props => (
         <ForgotPassword {...props} refetch={refetch} />
+      )} />
+      <Route path='/memories' render={props => (
+        <Memories {...props} session={session} />
       )} />
       <Route path='/users' render={props => (
         <Users {...props} session={session} />

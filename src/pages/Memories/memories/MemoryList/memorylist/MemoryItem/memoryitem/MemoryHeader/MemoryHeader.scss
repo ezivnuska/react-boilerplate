@@ -1,0 +1,30 @@
+@import '~scss/main';
+
+.memory-header {
+  display: inline-grid;
+  grid-template-columns: auto 30px;
+  grid-gap: 10px;
+  width: 100%;
+
+  .memory-heading {
+    margin: 0;
+    line-height: 30px;
+  }
+
+  .arrow-button {
+    border: none;
+    transform: rotate(0deg);
+
+    &.up {
+      transform: rotate(180deg);
+    }
+
+    &.left {
+      transform: rotate(90deg);
+    }
+
+    &.right {
+      transform: rotate(270deg);
+    }
+  }
+}

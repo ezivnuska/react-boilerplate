@@ -1,8 +1,6 @@
-import mongoose from 'mongoose'
+import { model, Schema } from 'mongoose'
 
-const Schema = mongoose.Schema
-
-const imageSchema = Schema({
+const ImageSchema = new Schema({
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -23,4 +21,4 @@ const imageSchema = Schema({
   timestamps: true,
 })
 
-export default mongoose.model('Image', imageSchema)
+export default model('Image', ImageSchema)

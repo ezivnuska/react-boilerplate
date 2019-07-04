@@ -25,6 +25,25 @@ const typeDefs = gql`
     actionerId: ID
   }
 
+  type Image {
+    _id: ID!
+    userId: ID!
+    memoryId: ID!
+    filename: String!
+  }
+
+  type Memory {
+    _id: ID!
+    author: ID!
+    day: Int!
+    month: Int!
+    year: Int!
+    title: String
+    body: String!
+    shared: Boolean
+    images: [Image]
+  }
+
   type Query {
     getCurrentUser: User
     getUserProfile: User
@@ -34,6 +53,7 @@ const typeDefs = gql`
     getMutualBond(user1: ID!, user2: ID!): Bond
     getMutualBonds(username: String!): [Bond]
     getBonds: [Bond]
+    getAllSharedMemories: [Memory]
   }
 
   type Mutation {
@@ -50,6 +70,7 @@ const typeDefs = gql`
     cancelBond(id: ID!): Bond
     declineBond(id: ID!): Bond
     deleteBond(id: ID!): Bond
+    addMemory(author: ID!, day: Int!, month: Int!, year: Int!, title: String, body: String!): Memory
   }
 `
 

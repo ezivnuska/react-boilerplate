@@ -224,7 +224,7 @@ export const  DECLINE_BOND = gql`
   } 
 `
 
-export const  DELETE_BOND = gql`
+export const DELETE_BOND = gql`
   mutation($id: ID!) {
     deleteBond(id: $id) {
       _id
@@ -236,5 +236,28 @@ export const  DELETE_BOND = gql`
       actionerId
     }
   } 
+  ` 
+  
+export const GET_ALL_SHARED_MEMORIES = gql`
+  query {
+    getAllSharedMemories {
+      _id
+      author
+      day
+      month
+      year
+      title
+      body
+      shared
+      images {
+        _id
+      }
+    }
+  }
 `
 
+export const ADD_MEMORY = gql`
+  mutation($author: ID!, $day: Int!, $month: Int!, $year: Int!, $title: String, $body: String!, $shared: Boolean){
+    addMemory(author: $author, day: $day, month: $month, year: $year, title: $title, body: $body, shared: $shared) { Memory }
+  }
+`

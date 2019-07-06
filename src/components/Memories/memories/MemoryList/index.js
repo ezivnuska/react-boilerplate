@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import MemoryItem from './memorylist/MemoryItem'
 
+import './MemoryList.scss'
+
 class MemoryList extends PureComponent {
 
     render() {

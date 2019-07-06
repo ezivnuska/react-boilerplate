@@ -1,14 +1,15 @@
 @import '~scss/main';
 
 .memory-header {
-  display: inline-grid;
-  grid-template-columns: auto 30px;
-  grid-gap: 10px;
-  width: 100%;
 
   .memory-heading {
     margin: 0;
+    padding: 0;
     line-height: 30px;
+  }
+
+  .date {
+
   }
 
   .arrow-button {

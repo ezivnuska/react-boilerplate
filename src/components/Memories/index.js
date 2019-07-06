@@ -8,6 +8,8 @@ import MemoryList from './memories/MemoryList'
 
 import { Spinner } from 'components'
 
+import './Memories.scss'
+
 const Memories = ({ context, currentUser }) => (
   <Query query={GET_ALL_SHARED_MEMORIES}>
 
@@ -18,7 +20,7 @@ const Memories = ({ context, currentUser }) => (
       if (!data.getAllSharedMemories) return null
 
       return (
-        <div className='memories-page'>
+        <div className='memories'>
           
           <RememberButton
             context={context}

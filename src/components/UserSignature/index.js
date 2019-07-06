@@ -20,6 +20,7 @@ const renderUserFragment = (user, size) => (
    </div>
   </Fragment>
 )
+
 const UserSignature = ({ user, size, to }) => to ? (
   <Link
     className='user-signature'

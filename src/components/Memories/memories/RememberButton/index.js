@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import MemoryModal from './rememberbutton/MemoryModal'
 
@@ -21,18 +21,18 @@ class RememberButton extends PureComponent {
     const { context } = this.props
     
     return (
-      <div>
-        <div
-          className='remember-button'
-          onClick={e => context.openModal('memory')}
-        >
-          Remember
-        </div>
+      <Fragment>
         <MemoryModal
           onComplete={this.onMemoryAdded}
           context={context}
         />
-      </div>
+        <button
+          className='btn remember-button'
+          onClick={e => context.openModal('memory')}
+        >
+          Remember
+        </button>
+      </Fragment>
     )
   }
 }

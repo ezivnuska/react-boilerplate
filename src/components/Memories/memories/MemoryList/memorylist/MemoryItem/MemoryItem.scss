@@ -1,26 +1,6 @@
 @import '~scss/main';
 
-.user-item {
-  display: flex;
-  // margin-bottom: 0.25rem;
-  // display: block;
-  padding: 2px $h-padding;
-  // grid-template-columns: 57% auto;
-  // grid-gap: 1rem;
-  // width: 100%;
-  // border-bottom: 1px solid #ccc;
-
-  // @media screen and (max-width: 420px) {
-  //   padding: 0.25rem 0.5rem 0;
-  // }
+.memory-item {
+  padding: $v-padding $h-padding 0;
   border-bottom: 1px solid #ccc;
-
-  .user-signature {
-    flex: 1;
-  }
-
-
-  .bond-controls {
-    flex: 0;
-  }
 }

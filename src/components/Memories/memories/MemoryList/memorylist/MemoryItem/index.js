@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { GET_AUTHOR } from 'queries'
 import { NavLink } from 'react-router-dom'
-import moment from 'moment'
+
 // import {
 //   memoryDetailReadRequest,
 //   memoryDeleteRequest
@@ -21,7 +21,7 @@ import {
   UserSignature
 } from 'components'
 
-// import './MemoryItem.scss';
+import './MemoryItem.scss';
 
 class MemoryItem extends Component {
 
@@ -32,19 +32,6 @@ class MemoryItem extends Component {
       author: null,
       memory: props.memory,
     }
-  }
-
-  formatDate = (month, day, year) =>
-    moment([year, month - 1, day]).format('MMM Do YYYY')
-
-  renderSignature = author => {
-    const { memory } = this.state
-    return (
-      <div className='memory-signature'>
-        <UserSignature user={author} size={50} linked />
-        <div className='date' level={5}>{this.formatDate(memory.month, memory.day, memory.year)}</div>
-      </div>
-    )
   }
 
   toggleOptions = () => {
@@ -79,7 +66,7 @@ class MemoryItem extends Component {
             <div className={'memory-item show' + (isMine ? ' mine' : '')}>
               <div className={'memory-item-container' + (showOptions ? ' show' : '') + (memory.shared ? ' shared' : '')}>
                 {data.getAuthor
-                  ? this.renderSignature(data.getAuthor)
+                  ? <UserSignature user={author} size={50} linked />
                   : <Spinner />
                 }
                 <MemoryHeader
@@ -87,6 +74,7 @@ class MemoryItem extends Component {
                   mine={isMine}
                   showOptions={() => this.toggleOptions()}
                   optionsShown={showOptions}
+                  
                 />
                 <MemoryBody body={memory.body} />
               </div>

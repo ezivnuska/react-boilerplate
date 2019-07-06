@@ -16,7 +16,7 @@ const Root = ({ refetch, session, context }) => (
   <MainLayout>
     <Switch>
       <Route path='/' exact render={props => (
-          <Home {...props} session={session} context={context} />
+          <Home {...props} session={session} refetch={refetch} context={context} />
       )} />
       <Route path='/account-recovery' render={props => (
         <ForgotPassword {...props} refetch={refetch} />

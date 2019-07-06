@@ -18,7 +18,7 @@ const Memories = ({ context, currentUser }) => (
       if (loading) return <Spinner />
       if (error) return <div>Error: {error}</div>
       if (!data.getAllSharedMemories) return null
-
+      
       return (
         <div className='memories'>
           

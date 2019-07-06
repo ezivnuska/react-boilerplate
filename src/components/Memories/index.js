@@ -33,6 +33,7 @@ const Memories = ({ context, currentUser }) => (
               <MemoryList
                 memories={data.getAllSharedMemories}
                 currentUser={currentUser}
+                refetch={refetch}
               />
             )
           }

@@ -49,7 +49,7 @@ class MemoryItem extends Component {
     moment([year, month - 1, day]).format('MMM Do YYYY')
 
   render = () => {
-    const { currentUser, memory } = this.props
+    const { currentUser, memory, refetch } = this.props
     const { body, title } = memory
     const { showOptions } = this.state
     
@@ -67,26 +67,23 @@ class MemoryItem extends Component {
           const isMine = author._id === currentUser._id
 
           return (
-            <div className={'memory-item show' + (isMine ? ' mine' : '')}>
-              <div className={'memory-item-container' + (showOptions ? ' show' : '') + (memory.shared ? ' shared' : '')}>
-                {author
-                  ? <MemorySignature
-                      user={author}
-                      title={title}
-                      date={this.formatDate(memory.month, memory.day, memory.year)}
-                      size={50}
-                      linked
-                    />
-                  : <Spinner />
-                }
-                <MemoryHeader memory={memory} />
-                <MemoryBody body={body} />
-              </div>
-              {/*<div className='options'>
-                <NavLink to={`/memories/view/${memory._id}`}>
-                  <label>Edit</label>
-                </NavLink>
-              </div>*/}
+            <div className={'memory-item'}>
+              {author
+                ? <MemorySignature
+                    user={author}
+                    title={title}
+                    date={this.formatDate(memory.month, memory.day, memory.year)}
+                    size={50}
+                    linked
+                  />
+                : <Spinner />
+              }
+              <MemoryHeader
+                memory={memory}
+                mine={isMine}
+                refetch={refetch}
+              />
+              <MemoryBody body={body} />
             </div>
           )
         }}

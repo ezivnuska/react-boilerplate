@@ -298,7 +298,6 @@ const resolvers = {
       return bond
     },
     addMemory: async (root, { author, day, month, year, title, body, shared }, { Memory }) => {
-      console.log('adding memory', author, day, month, year, title, body, shared)
       
       try {
         const newMemory = new Memory({
@@ -316,10 +315,19 @@ const resolvers = {
         .select('_id author year month day title body shared')
         // .populate('author', '_id username profileImage')
         
-        console.log('memory', memory)
         return memory
       } catch(e) {
         throw new Error(e)
+      }
+    },
+    deleteMemory: async (root, { id }, { Memory }) => {
+      try {
+        const deletedMemory = Memory.findOneAndRemove({ _id: id })
+        .select('_id')
+
+        return deletedMemory
+      } catch (e) {
+        throw new Error('Error deleting memory', e)
       }
     }
   }

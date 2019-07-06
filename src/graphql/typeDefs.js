@@ -70,7 +70,8 @@ const typeDefs = gql`
     cancelBond(id: ID!): Bond
     declineBond(id: ID!): Bond
     deleteBond(id: ID!): Bond
-    addMemory(author: ID!, day: Int!, month: Int!, year: Int!, title: String, body: String!, shared: Boolean): Memory
+    addMemory(author: ID!, day: String!, month: String!, year: String!, title: String, body: String!, shared: Boolean): Memory
+    deleteMemory(id: ID!): Memory
   }
 `
 

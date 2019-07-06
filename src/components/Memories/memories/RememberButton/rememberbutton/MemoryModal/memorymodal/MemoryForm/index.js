@@ -85,9 +85,9 @@ class MemoryForm extends PureComponent {
                 title: memory ? memory.title : '',
                 body: memory ? memory.body : '',
                 shared: memory ? memory.shared : false,
-                month,
-                day,
-                year,
+                month: month.toString(),
+                day: day.toString(),
+                year: year.toString(),
             },
         })
     }
@@ -125,7 +125,7 @@ class MemoryForm extends PureComponent {
             : null
         const formData = {
             ...this.state.formData,
-            month: e.target.month,
+            month: e.target.value,
             day: newDay || currentDate.day
         }
         this.setState({

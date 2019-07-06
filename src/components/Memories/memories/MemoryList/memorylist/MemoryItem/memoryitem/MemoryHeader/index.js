@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-
+import { compose, graphql } from 'react-apollo'
+import { DELETE_MEMORY } from 'queries'
 import {
   Heading,
   IconLink,
@@ -8,17 +9,42 @@ import {
 
 import './MemoryHeader.scss'
 
-const MemoryHeader = ({ memory, mine, bodyShown, optionsShown, showBody, showOptions }) => (
-  <div className='memory-header'>
-    <Heading className='memory-heading' level={3}>{memory.title}</Heading>
-    {mine && <IconLink icon='arrow-down' height={30} transparent onClick={showOptions} className={'arrow-button' + (optionsShown ? ' right' : ' left')} />}
-  </div>
-)
+class MemoryHeader extends PureComponent {
 
-MemoryHeader.propTypes = {
-  memory: PropTypes.object.isRequired,
-  mine: PropTypes.bool,
-  showOptions: PropTypes.func,
+  static propTypes = {
+    memory: PropTypes.object.isRequired,
+    mine: PropTypes.bool,
+    showOptions: PropTypes.func,
+  }
+
+  onDeleteClicked = e => {
+    e.preventDefault()
+    const { deleteMemory, memory, refetch } = this.props
+    deleteMemory({ variables: { id: memory._id } })
+    .then(() => refetch())
+  }
+
+  render() {
+    const { memory, mine, bodyShown, optionsShown, showBody, showOptions } = this.props
+    return (
+      <div className='memory-header'>
+        <Heading className='memory-heading' level={3}>{memory.title}</Heading>
+        {mine && (
+          <div className='controls'>
+            <IconLink
+              iconClass='fas fa-window-close fa-lg'
+              height={30}
+              onClick={e => this.onDeleteClicked(e)}
+            />
+          </div>
+        )}
+      </div>
+    )
+  }
 }
 
-export default MemoryHeader
+const MemoryHeaderWithMutation = compose(
+  graphql(DELETE_MEMORY, { name: 'deleteMemory' })
+)(MemoryHeader)
+
+export default MemoryHeaderWithMutation

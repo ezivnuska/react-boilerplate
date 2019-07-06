@@ -6,7 +6,7 @@ import './MemoryList.scss'
 class MemoryList extends PureComponent {
 
     render() {
-        const { currentUser, memories } = this.props
+        const { currentUser, memories, refetch } = this.props
         
         return memories && memories.length ? (
             <ul className='memory-list'>
@@ -15,6 +15,7 @@ class MemoryList extends PureComponent {
                         <MemoryItem
                             currentUser={currentUser}
                             memory={memory}
+                            refetch={refetch}
                         />
                     </li>
                 ))}

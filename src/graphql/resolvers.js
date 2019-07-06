@@ -97,13 +97,23 @@ const resolvers = {
     getAllSharedMemories: async (root, args, { Memory }) => {
       try {
         const memories = await Memory.find({ shared: true })
-        .select('_id author year month day title body shared')
-        .populate('author', '_id username profileImage')
         .sort({ year: -1, month: -1, day: -1 })
-        
+        // .select('_id author year month day title body shared')
+        // .populate('author', '_id username profileImage')
+
         return memories
       } catch(e) {
-        throw new Error(e)
+        throw new Error('Error: ', e)
+      }
+    },
+    getAuthor: async (root, { userId }, { User }) => {
+      try {
+        const author = await User.findOne({ _id: userId })
+        .select('_id username profileImage')
+        
+        return author
+      } catch (e) {
+        throw new Error('Error getting author info', e)
       }
     }
   },
@@ -288,23 +298,29 @@ const resolvers = {
       return bond
     },
     addMemory: async (root, { author, day, month, year, title, body, shared }, { Memory }) => {
-      const newMemory = new Memory({
-        author,
-        day,
-        month,
-        year,
-        title,
-        body,
-        shared,
-      })
-      const savedMemory = await newMemory.save()
-      console.log('savedMemory', savedMemory)
-      const memory = await Memory.findOne({ _id: savedMemory._id })
-      .select('_id author year month day title body shared')
-      .populate('author', '_id username profileImage')
+      console.log('adding memory', author, day, month, year, title, body, shared)
       
-      console.log('savedMemory', savedMemory)
-      return memory
+      try {
+        const newMemory = new Memory({
+          author,
+          day,
+          month,
+          year,
+          title,
+          body,
+          shared,
+        })
+        const savedMemory = await newMemory.save()
+        
+        const memory = await Memory.findOne({ _id: savedMemory._id })
+        .select('_id author year month day title body shared')
+        // .populate('author', '_id username profileImage')
+        
+        console.log('memory', memory)
+        return memory
+      } catch(e) {
+        throw new Error(e)
+      }
     }
   }
 }

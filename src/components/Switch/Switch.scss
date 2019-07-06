@@ -1,21 +1,24 @@
 @import '~scss/main';
 
-.checkbox {
+.switch {
   display: block;
   position: relative;
-  // margin: 15px 0;
-  height: 27px;
   cursor: pointer;
   font-size: 18px;
-  // border: 1px solid $form-input-border-color;
+  border: 1px solid $form-input-border-color;
   border-radius: $border-radius;
   overflow: hidden;
   width: auto;
-  // background: $form-input-bg-color;
-
+  background: $form-input-bg-color;
+  
   &:hover {
     .control-indicator {
-      // background: darkgray;
+      background: lightgray;
+    }
+    background: darkgray;
+
+    .labels {
+      color: #fff;
     }
   }
 
@@ -34,27 +37,11 @@
     }
   }
 
-  input {
+  .switch-checkbox {
     position: absolute;
     z-index: -1;
     opacity: 0;
-
-    &:focus {
-      .control-indicator {
-        // background: darkgray;
-      }
-    }
-
-    &[value=true] {
-      + .control-indicator {
-        // background-color: darkgray;
-        left: 50%;
-        // &:after {
-        //   display: block;
-        // }
-      }
-    }
-
+  
     &:disabled {
       opacity: 0.5;
     }
@@ -66,22 +53,22 @@
     left: 0;
     height: 100%;
     width: 50%;
-    // background: lighten($form-input-bg-color, 10%);
+    background: lighten($form-input-bg-color, 10%);
     z-index: 1;
     transition: left 0.15s ease-out;
     border-radius: $border-radius;
-
-    // &:after {
-    //   content: '';
-    //   position: absolute;
-    //   left: 8px;
-    //   top: 4px;
-    //   width: 5px;
-    //   height: 10px;
-    //   border: solid white;
-    //   border-width: 0 2px 2px 0;
-    //   transform: rotate(45deg);
-    //   display: none; // Hide check
-    // }
   }
+
+  &.checked {
+    .control-indicator {
+      // background-color: darkgray;
+      left: 50%;
+    }
+  }
+
+  // &:focus {
+  //   .control-indicator {
+  //     background: darkgray;
+  //   }
+  // }
 }

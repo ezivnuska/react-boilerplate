@@ -21,7 +21,7 @@ class Modal extends Component {
   render() {
     const { children, className, title, closeable, context, ...props } = this.props
     const hasHeader = title || closeable
-
+    
     return (
       <ReactModal
         className='modal'

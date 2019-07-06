@@ -4,6 +4,7 @@ import { Query } from 'react-apollo'
 import { Helmet } from 'react-helmet'
 import withAuth from 'hoc/withAuth'
 import MemoryList from './memories/MemoryList'
+import RememberButton from './memories/RememberButton'
 import {
   Heading,
   Spinner
@@ -22,23 +23,36 @@ class Memories extends PureComponent {
   }
 
   render() {
+    const { context, session } = this.props
+    const { getCurrentUser } = session
     return (
       <Fragment>
         {this.head()}
         <Heading level={1}>Memories</Heading>
         <Query query={GET_ALL_SHARED_MEMORIES}>
 
-          {({ data, loading, error }) => {
-
+          {({ data, loading, error, refetch }) => {
+            
             if (loading) return <Spinner />
             if (error) return <div>Error: {error}</div>
             if (!data.getAllSharedMemories) return null
 
             return (
               <div className='memories-page'>
+                
+                <RememberButton
+                  context={context}
+                  refetch={refetch}
+                />
+                
                 {!data.getAllSharedMemories.length
-                    ? <h3>Empty... Check back soon!</h3>
-                    : <MemoryList memories={data.getAllSharedMemories} />
+                  ? <h3>Empty... Check back soon!</h3>
+                  : (
+                    <MemoryList
+                      memories={data.getAllSharedMemories}
+                      currentUser={getCurrentUser}
+                    />
+                  )
                 }
               </div>
             )

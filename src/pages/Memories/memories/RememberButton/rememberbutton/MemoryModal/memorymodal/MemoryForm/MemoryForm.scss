@@ -1,9 +1,9 @@
-@import '~sass/main';
+@import '~scss/main';
 
 form#memory-form {
   box-sizing: border-box;
 
-  .control-group {
+  .form-input-group {
     display: flex;
     flex-flow: row nowrap;
 

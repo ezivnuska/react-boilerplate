@@ -40,3 +40,16 @@ $menu-color-active: $darkSlateGray;
 $menu-bg-color: $darkGrey;
 $menu-bg-color-hover: $darkGrey;
 $menu-bg-color-active: #fff;
+
+/// Form
+$form-input-text-color: rgb(100, 100, 100) !default;
+$form-input-bg-color: rgb(222, 222, 222) !default;
+$form-input-bg-color-shadow: darken($form-input-bg-color, 10%) !default;
+
+/// FormError
+$form-error-bg-color: rgb(255, 200, 200) !default;
+$form-error-border-width: 2px !default;
+$form-error-border-color: rgb(200, 0, 0) !default;
+
+/// Form border
+$form-input-border-color: rgb(222, 222, 222) !default;

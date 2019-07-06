@@ -1,8 +1,8 @@
 import React from 'react'
 import {
+  Html,
   Module,
-  ProfileImage,
-  TextEditor
+  ProfileImage
 } from 'components'
 
 import './UserInfo.scss'
@@ -36,10 +36,7 @@ const UserInfo = ({ user }) => {
         title='About'
         fullsize
       >
-        <div
-          className='text-display'
-          dangerouslySetInnerHTML={{ __html: user.bio }}
-        />
+        <Html html={user.bio} />
       </Module>
       
     </div>

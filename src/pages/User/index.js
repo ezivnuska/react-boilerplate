@@ -4,7 +4,13 @@ import withAuth from 'hoc/withAuth'
 import { Query } from 'react-apollo'
 import { PROFILE_PAGE } from 'queries'
 import { Helmet } from 'react-helmet'
-import { Heading, Module, ProfileImage, Spinner } from 'components'
+import {
+  Heading,
+  Html,
+  Module,
+  ProfileImage,
+  Spinner
+} from 'components'
 
 import './User.scss'
 
@@ -60,10 +66,7 @@ class User extends PureComponent {
                 </div>
                 {bio ? (
                   <Module title='Bio'>
-                    <div
-                      className='text-display'
-                      dangerouslySetInnerHTML={{ __html: bio }}
-                    />
+                    <Html html={bio} />
                   </Module>
                 ) : (
                   <div className='text-placeholder'>Oops! {username} has not added a bio.</div>

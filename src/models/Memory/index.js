@@ -40,7 +40,7 @@ const MemorySchema = new Schema({
     timestamps: true
 })
 
-MemorySchema.pre('save', next => {
+MemorySchema.pre('save', function(next) {
     this.title = this.title || 'Untitled'
     next()
 })

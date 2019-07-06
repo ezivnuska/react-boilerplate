@@ -4,12 +4,16 @@ import MemoryItem from './memorylist/MemoryItem'
 class MemoryList extends PureComponent {
 
     render() {
-        const { memories } = this.props
+        const { currentUser, memories } = this.props
+        
         return memories && memories.length ? (
             <ul className='memory-list'>
                 {memories.map((memory, index) => (
                     <li key={index}>
-                        <MemoryItem memory={memory} />)
+                        <MemoryItem
+                            currentUser={currentUser}
+                            memory={memory}
+                        />
                     </li>
                 ))}
             </ul>

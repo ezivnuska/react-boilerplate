@@ -137,7 +137,7 @@ class TextEditor extends Component {
             </div>
         )}
         <Editor
-          className='text-display'
+          className='html'
           autoFocus
           ref={this.ref}
           value={this.state.value}

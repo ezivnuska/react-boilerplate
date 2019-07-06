@@ -249,15 +249,31 @@ export const GET_ALL_SHARED_MEMORIES = gql`
       title
       body
       shared
-      images {
-        _id
-      }
+    }
+  }
+`
+
+export const GET_AUTHOR = gql`
+  query($userId: ID!) {
+    getAuthor(userId: $userId) {
+      _id
+      username
+      profileImage
     }
   }
 `
 
 export const ADD_MEMORY = gql`
   mutation($author: ID!, $day: Int!, $month: Int!, $year: Int!, $title: String, $body: String!, $shared: Boolean){
-    addMemory(author: $author, day: $day, month: $month, year: $year, title: $title, body: $body, shared: $shared) { Memory }
+    addMemory(author: $author, day: $day, month: $month, year: $year, title: $title, body: $body, shared: $shared) {
+      _id
+      author
+      day
+      month
+      year
+      title
+      body
+      shared
+    }
   }
 `

@@ -10,6 +10,7 @@ import UpdateAccount from './profile/UpdateAccount'
 import {
   EditableContainer,
   Heading,
+  Html,
   Link,
   Module,
   ProfileImage
@@ -91,10 +92,7 @@ class Profile extends PureComponent {
                         block
                         style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
                       >
-                        <div
-                          className='text-display'
-                          dangerouslySetInnerHTML={{ __html: data.getUserProfile.bio || '<p>Click here to add a bio</p>' }}
-                        />
+                        <Html html={data.getUserProfile.bio || '<p>Click here to add a bio</p>' } />
                       </EditableContainer>
                     </Module>
                     

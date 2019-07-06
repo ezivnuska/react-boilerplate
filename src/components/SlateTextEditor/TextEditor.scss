@@ -9,7 +9,7 @@
         padding: 0;
     }
 
-    .text-display {
+    .html {
         padding: 1rem $h-padding;
         min-height: 50px;
         background: #eee;
@@ -19,7 +19,7 @@
         }
     
         &.read-only {
-            .text-display {
+            .html {
                 margin: 1rem 0;
                 border: 0;
                 background: transparent;

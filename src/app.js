@@ -23,7 +23,7 @@ const Root = ({ refetch, session, context }) => (
         <ForgotPassword {...props} refetch={refetch} />
       )} />
       <Route path='/memories' render={props => (
-        <Memories {...props} session={session} />
+        <Memories {...props} session={session} context={context} />
       )} />
       <Route path='/users' render={props => (
         <Users {...props} session={session} />

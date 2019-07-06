@@ -1,5 +1,7 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { Query } from 'react-apollo'
+import { GET_AUTHOR } from 'queries'
 import { NavLink } from 'react-router-dom'
 import moment from 'moment'
 // import {
@@ -15,26 +17,31 @@ import MemoryHeader from './memoryitem/MemoryHeader'
 import MemoryBody from './memoryitem/MemoryBody'
 
 import {
-  Heading,
-  IconButton,
+  Spinner,
   UserSignature
 } from 'components'
 
 // import './MemoryItem.scss';
 
-class MemoryItem extends PureComponent {
+class MemoryItem extends Component {
 
-  state = {
-    showOptions: false,
+  constructor(props) {
+    super(props)
+    this.state = {
+      showOptions: false,
+      author: null,
+      memory: props.memory,
+    }
   }
 
   formatDate = (month, day, year) =>
     moment([year, month - 1, day]).format('MMM Do YYYY')
 
-  renderSignature = memory => {
+  renderSignature = author => {
+    const { memory } = this.state
     return (
       <div className='memory-signature'>
-        <UserSignature user={memory.author} linked />
+        <UserSignature user={author} size={50} linked />
         <div className='date' level={5}>{this.formatDate(memory.month, memory.day, memory.year)}</div>
       </div>
     )
@@ -52,26 +59,46 @@ class MemoryItem extends PureComponent {
   }
 
   render = () => {
-    const { isMine, memory } = this.props
+    const { currentUser, memory } = this.props
     const { showOptions } = this.state
+    
     return (
-      <div className={'memory-item show' + (isMine ? ' mine' : '')}>
-        <div className={'memory-item-container' + (showOptions ? ' show' : '') + (memory.shared ? ' shared' : '')}>
-          {this.renderSignature(memory)}
-          <MemoryHeader
-            memory={memory}
-            mine={isMine}
-            showOptions={() => this.toggleOptions()}
-            optionsShown={showOptions}
-          />
-          <MemoryBody body={memory.body} />
-        </div>
-        {0 && <div className='options'>
-          <NavLink to={`/memories/view/${memory._id}`}>
-            <label>Edit</label>
-          </NavLink>
-        </div>}
-      </div>
+      <Query
+        query={GET_AUTHOR}
+        variables={{userId: memory.author}}
+      >
+        {({ data, loading, error }) => {
+          
+          if (error) return <div className='error'>{error}</div>
+          if (loading) return <Spinner />
+
+          const author = data.getAuthor
+          const isMine = author._id === currentUser._id
+
+          return (
+            <div className={'memory-item show' + (isMine ? ' mine' : '')}>
+              <div className={'memory-item-container' + (showOptions ? ' show' : '') + (memory.shared ? ' shared' : '')}>
+                {data.getAuthor
+                  ? this.renderSignature(data.getAuthor)
+                  : <Spinner />
+                }
+                <MemoryHeader
+                  memory={memory}
+                  mine={isMine}
+                  showOptions={() => this.toggleOptions()}
+                  optionsShown={showOptions}
+                />
+                <MemoryBody body={memory.body} />
+              </div>
+              {/*<div className='options'>
+                <NavLink to={`/memories/view/${memory._id}`}>
+                  <label>Edit</label>
+                </NavLink>
+              </div>*/}
+            </div>
+          )
+        }}
+      </Query>
     )
   }
 }

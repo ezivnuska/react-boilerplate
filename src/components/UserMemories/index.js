@@ -1,38 +1,34 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { GET_ALL_SHARED_MEMORIES } from 'queries'
+import { GET_USER_MEMORIES } from 'queries'
 import { Query } from 'react-apollo'
 
-import RememberButton from './memories/RememberButton'
 import { MemoryList } from 'components'
 
 import { Spinner } from 'components'
 
-import './Memories.scss'
+import './UserMemories.scss'
 
-const Memories = ({ context, currentUser }) => (
-  <Query query={GET_ALL_SHARED_MEMORIES}>
+const UserMemories = ({ user }) => (
+  <Query
+    query={GET_USER_MEMORIES}
+    variables={{ userId: user._id }}
+  >
 
     {({ data, loading, error, refetch }) => {
       
       if (loading) return <Spinner />
       if (error) return <div>Error: {error}</div>
-      if (!data.getAllSharedMemories) return null
+      if (!data.getUserMemories) return null
       
       return (
         <div className='memories'>
           
-          <RememberButton
-            context={context}
-            refetch={refetch}
-          />
-          
-          {!data.getAllSharedMemories.length
+          {!data.getUserMemories.length
             ? <h3>Empty... Check back soon!</h3>
             : (
               <MemoryList
-                memories={data.getAllSharedMemories}
-                currentUser={currentUser}
+                memories={data.getUserMemories}
                 refetch={refetch}
               />
             )
@@ -43,4 +39,4 @@ const Memories = ({ context, currentUser }) => (
   </Query>
 )
 
-export default Memories
+export default UserMemories

@@ -251,6 +251,21 @@ export const GET_ALL_SHARED_MEMORIES = gql`
       shared
     }
   }
+` 
+  
+export const GET_USER_MEMORIES = gql`
+  query($userId: ID!) {
+    getUserMemories(userId: $userId) {
+      _id
+      author
+      day
+      month
+      year
+      title
+      body
+      shared
+    }
+  }
 `
 
 export const GET_AUTHOR = gql`

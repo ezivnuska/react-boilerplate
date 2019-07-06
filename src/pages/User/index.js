@@ -9,7 +9,8 @@ import {
   Html,
   Module,
   ProfileImage,
-  Spinner
+  Spinner,
+  UserMemories
 } from 'components'
 
 import './User.scss'
@@ -71,6 +72,7 @@ class User extends PureComponent {
                 ) : (
                   <div className='text-placeholder'>Oops! {username} has not added a bio.</div>
                 )}
+                <UserMemories user={data.profilePage} />
               </Fragment>
             )
           }}

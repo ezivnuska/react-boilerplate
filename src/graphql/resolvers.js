@@ -106,6 +106,18 @@ const resolvers = {
         throw new Error('Error: ', e)
       }
     },
+    getUserMemories: async (root, { userId }, { Memory }) => {
+      try {
+        const memories = await Memory.find({ author: userId, shared: true })
+        .sort({ year: -1, month: -1, day: -1 })
+        // .select('_id author year month day title body shared')
+        // .populate('author', '_id username profileImage')
+
+        return memories
+      } catch(e) {
+        throw new Error('Error: ', e)
+      }
+    },
     getAuthor: async (root, { userId }, { User }) => {
       try {
         const author = await User.findOne({ _id: userId })

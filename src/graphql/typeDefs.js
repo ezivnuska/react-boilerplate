@@ -53,6 +53,7 @@ const typeDefs = gql`
     getMutualBonds(username: String!): [Bond]
     getBonds: [Bond]
     getAllSharedMemories: [Memory]
+    getUserMemories(userId: ID!): [Memory]
     getAuthor(userId: ID!): User
   }
 

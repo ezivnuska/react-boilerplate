@@ -1,4 +1,7 @@
+@import '~scss/main';
+
 .remember-button {
+  margin: $v-padding $h-padding;
   padding: 0.5rem;
   cursor: pointer;
 }

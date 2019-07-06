@@ -1,0 +1,33 @@
+@import '~scss/main';
+
+.memory-signature {
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  text-align: left;
+
+  > * {
+    display: inline-block;
+    flex: 0 0 auto;
+  }
+
+  .profile-image {
+    // display: inline-block;
+    margin-right: 0.5rem;
+    // border-radius: 50%;
+
+    &.small {
+      height: 30px;
+      width: 30px;
+    }
+  }
+
+  .info {
+    white-space: nowrap;
+    vertical-align: top;
+
+    > * {
+      display: block;
+    }
+  }
+}

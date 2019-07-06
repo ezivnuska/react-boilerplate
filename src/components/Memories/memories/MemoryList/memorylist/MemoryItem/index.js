@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Query } from 'react-apollo'
 import { GET_AUTHOR } from 'queries'
 import { NavLink } from 'react-router-dom'
-
+import moment from 'moment'
 // import {
 //   memoryDetailReadRequest,
 //   memoryDeleteRequest
@@ -13,12 +13,12 @@ import { NavLink } from 'react-router-dom'
 //   fromMemory
 // } from 'store/selectors'
 
+import MemorySignature from './memoryitem/MemorySignature'
 import MemoryHeader from './memoryitem/MemoryHeader'
 import MemoryBody from './memoryitem/MemoryBody'
 
 import {
-  Spinner,
-  UserSignature
+  Spinner
 } from 'components'
 
 import './MemoryItem.scss';
@@ -45,8 +45,12 @@ class MemoryItem extends Component {
     // this.props.edit(memoryId)
   }
 
+  formatDate = (month, day, year) =>
+    moment([year, month - 1, day]).format('MMM Do YYYY')
+
   render = () => {
     const { currentUser, memory } = this.props
+    const { body, title } = memory
     const { showOptions } = this.state
     
     return (
@@ -65,18 +69,18 @@ class MemoryItem extends Component {
           return (
             <div className={'memory-item show' + (isMine ? ' mine' : '')}>
               <div className={'memory-item-container' + (showOptions ? ' show' : '') + (memory.shared ? ' shared' : '')}>
-                {data.getAuthor
-                  ? <UserSignature user={author} size={50} linked />
+                {author
+                  ? <MemorySignature
+                      user={author}
+                      title={title}
+                      date={this.formatDate(memory.month, memory.day, memory.year)}
+                      size={50}
+                      linked
+                    />
                   : <Spinner />
                 }
-                <MemoryHeader
-                  memory={memory}
-                  mine={isMine}
-                  showOptions={() => this.toggleOptions()}
-                  optionsShown={showOptions}
-                  
-                />
-                <MemoryBody body={memory.body} />
+                <MemoryHeader memory={memory} />
+                <MemoryBody body={body} />
               </div>
               {/*<div className='options'>
                 <NavLink to={`/memories/view/${memory._id}`}>

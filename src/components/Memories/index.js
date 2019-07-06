@@ -1,20 +1,43 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { GET_ALL_SHARED_MEMORIES } from 'queries'
+import { Query } from 'react-apollo'
 
-import {
-  RememberButton,
-  MemoryList,
-} from 'components'
+import RememberButton from './memories/RememberButton'
+import MemoryList from './memories/MemoryList'
 
-const Memories = ({ user }) => (
-  <div className='memories'>
-    <RememberButton />
-    {user && <MemoryList userId={user._id} />}
-  </div>
+import { Spinner } from 'components'
+
+const Memories = ({ context, currentUser }) => (
+  <Query query={GET_ALL_SHARED_MEMORIES}>
+
+    {({ data, loading, error, refetch }) => {
+      
+      if (loading) return <Spinner />
+      if (error) return <div>Error: {error}</div>
+      if (!data.getAllSharedMemories) return null
+
+      return (
+        <div className='memories-page'>
+          
+          <RememberButton
+            context={context}
+            refetch={refetch}
+          />
+          
+          {!data.getAllSharedMemories.length
+            ? <h3>Empty... Check back soon!</h3>
+            : (
+              <MemoryList
+                memories={data.getAllSharedMemories}
+                currentUser={currentUser}
+              />
+            )
+          }
+        </div>
+      )
+    }}
+  </Query>
 )
-
-// const mapStateToProps = state => ({
-//   user: fromUser.getUser(state),
-// })
 
 export default Memories

@@ -18,7 +18,7 @@ class RememberButton extends PureComponent {
   }
 
   render() {
-    const { context, refetch } = this.props
+    const { context } = this.props
     
     return (
       <div>

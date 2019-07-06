@@ -1,6 +1,7 @@
 import React, { Fragment, PureComponent } from 'react'
 import { Helmet } from 'react-helmet'
-import { AuthForm, Dashboard } from 'components'
+
+import { AuthForm, Memories } from 'components'
 
 import './Home.scss'
 
@@ -31,14 +32,14 @@ class Home extends PureComponent {
   }
 
   render() {
-    const { session } = this.props
+    const { context, session } = this.props
     const user = (session && session.getCurrentUser) ? session.getCurrentUser : null
     
     return (
       <Fragment>
         {this.head()}
         {user
-          ? <Dashboard user={user} />
+          ? <Memories context={context} currentUser={user} />
           : <AuthForm {...this.props} error={this.state.error} />
         }
       </Fragment>

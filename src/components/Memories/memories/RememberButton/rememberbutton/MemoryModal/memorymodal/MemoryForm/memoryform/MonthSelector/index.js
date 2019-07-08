@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import './SelectorMonth.scss'
+import './MonthSelector.scss'
 
 const today = moment()
 const currentMonth = today.month()
@@ -18,7 +18,7 @@ const renderOptions = () => {
   })
 }
 
-const SelectorMonth = ({ meta, input, ...props }) => {
+const MonthSelector = ({ meta, input, ...props }) => {
   console.log('Month', props)
   return (
     <Select defaultValue={currentMonth} {...{...props, ...input, invalid: meta.touched && !!meta.error, error: meta.error}}>
@@ -27,4 +27,4 @@ const SelectorMonth = ({ meta, input, ...props }) => {
   )
 }
 
-export default SelectorMonth
+export default MonthSelector

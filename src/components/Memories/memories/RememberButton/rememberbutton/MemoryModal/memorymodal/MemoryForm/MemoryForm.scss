@@ -2,28 +2,39 @@
 
 form#memory-form {
   box-sizing: border-box;
-
-  .form-input-group {
+  
+  .control-group {
     display: flex;
     flex-flow: row nowrap;
 
-
     .select-wrapper {
-      position: relative;
       display: inline-block;
-      width: 100%;
-      margin-right: 0.25rem;
+      flex: 1 0 auto;
 
       select {
+        padding: $v-padding 0;
+        width: 100%;
         text-align-last: center;
-        background: linear-gradient(
-          to right,
-          $form-input-bg-color-shadow, $form-input-bg-color, $form-input-bg-color-shadow
-        );
+        background: $form-input-bg-color;
+        cursor: pointer;
+      }
+
+      &:first-child {
+        select {
+          background: linear-gradient(
+            to right,
+            $form-input-bg-color-shadow, $form-input-bg-color
+          );
+        }
       }
 
       &:last-child {
-        margin-right: 0;
+        select {
+          background: linear-gradient(
+            to right,
+            $form-input-bg-color, $form-input-bg-color-shadow
+          );
+        }
       }
     }
   }

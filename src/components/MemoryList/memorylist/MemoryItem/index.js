@@ -73,7 +73,7 @@ class MemoryItem extends Component {
                     user={author}
                     title={title}
                     date={this.formatDate(memory.month, memory.day, memory.year)}
-                    size={50}
+                    size={40}
                     linked
                   />
                 : <Spinner />

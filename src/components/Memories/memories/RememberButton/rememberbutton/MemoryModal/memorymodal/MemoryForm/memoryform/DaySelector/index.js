@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import './SelectorDay.scss'
+import './DaySelector.scss'
 
-class SelectorDay extends Component {
+class DaySelector extends Component {
 
   constructor(props) {
     super(props)
@@ -49,4 +49,4 @@ class SelectorDay extends Component {
   }
 }
 
-export default SelectorDay
+export default DaySelector

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
-import './SelectorYear.scss'
+import './YearSelector.scss'
 
 const today = moment()
 const currentYear = today.year()
@@ -29,8 +29,7 @@ const renderOptions = () => {
   })
 }
 
-const SelectorYear = ({ meta, input, ...props }) => {
-  console.log('Year', props)
+const YearSelector = ({ meta, input, ...props }) => {
   return (
     <Select {...{ ...props, ...input, invalid: meta.touched && !!meta.error, error: meta.error }}>
       {renderOptions()}
@@ -38,4 +37,4 @@ const SelectorYear = ({ meta, input, ...props }) => {
   )
 }
 
-export default SelectorYear
+export default YearSelector

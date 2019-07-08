@@ -3,4 +3,8 @@
 .memory-item {
   padding: $v-padding $h-padding 0;
   border-bottom: 1px solid #ccc;
+
+  &:last-child {
+    border-bottom: none;
+  }
 }

@@ -2,8 +2,14 @@ import React, { PureComponent } from 'react'
 import { compose, graphql, withApollo } from 'react-apollo'
 import { ADD_MEMORY } from 'queries'
 import moment from 'moment'
-
-import { Form, Switch, TextEditor } from 'components'
+// import DaySelector from './memoryform/DaySelector'
+// import MonthSelector from './memoryform/MonthSelector'
+// import YearSelector from './memoryform/YearSelector'
+import {
+    Form,
+    Switch,
+    TextEditor
+} from 'components'
 
 import './MemoryForm.scss'
 
@@ -204,16 +210,18 @@ class MemoryForm extends PureComponent {
                 onSubmit={e => this.handleSubmit(e)}
             >
                 <div className='form-input'>
+                    
                     <input
                         type='text'
                         name='title'
                         placeholder='Untitled'
                         defaultValue={title || ''}
                         onChange={e => this.onChange(e)}
+                        autoComplete='off'
                     />
                 </div>
                 
-                <div className='form-input-group'>
+                <div className='control-group'>
                     <div className='select-wrapper'>
                         <select
                             name='year'

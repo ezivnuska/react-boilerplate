@@ -67,23 +67,30 @@ class MemoryItem extends Component {
           const isMine = (currentUser !== null) && (author._id === currentUser._id)
 
           return (
-            <div className={'memory-item'}>
-              {author
-                ? <MemorySignature
-                    user={author}
-                    title={title}
-                    date={this.formatDate(memory.month, memory.day, memory.year)}
-                    size={40}
-                    linked
-                  />
-                : <Spinner />
-              }
-              <MemoryHeader
-                memory={memory}
-                mine={isMine}
-                refetch={refetch}
-              />
-              <MemoryBody body={body} />
+            <div className='memory-item'>
+              <aside>
+                {author
+                  ? <MemorySignature
+                      user={author}
+                      title={title}
+                      date={this.formatDate(memory.month, memory.day, memory.year)}
+                      size={40}
+                      linked
+                    />
+                  : <Spinner />
+                }
+              </aside>
+
+              <div className='memory-content'>
+                <MemoryHeader
+                  memory={memory}
+                  mine={isMine}
+                  refetch={refetch}
+                />
+                
+                <MemoryBody body={body} />
+              </div>
+
             </div>
           )
         }}

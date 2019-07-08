@@ -1,8 +1,29 @@
 @import '~scss/main';
 
 .memory-item {
+  display: flex;
+  flex-flow: row wrap;
   padding: $v-padding $h-padding 0;
   border-bottom: 1px solid #ccc;
+
+  > * {
+    display: inline-block;
+  }
+
+  aside {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 25%;
+    padding-right: $h-padding;
+    min-width: 200px;
+  }
+
+  .memory-content {
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 0;
+    min-width: 300px;
+  }
 
   &:last-child {
     border-bottom: none;

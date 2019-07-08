@@ -66,19 +66,16 @@ class MemoryItem extends Component {
           const author = data.getAuthor
           const isMine = (currentUser !== null) && (author._id === currentUser._id)
 
-          return (
+          return author ? (
             <div className='memory-item'>
               <aside>
-                {author
-                  ? <MemorySignature
-                      user={author}
-                      title={title}
-                      date={this.formatDate(memory.month, memory.day, memory.year)}
-                      size={40}
-                      linked
-                    />
-                  : <Spinner />
-                }
+                <MemorySignature
+                    user={author}
+                    title={title}
+                    date={this.formatDate(memory.month, memory.day, memory.year)}
+                    size={40}
+                    linked
+                  />
               </aside>
 
               <div className='memory-content'>
@@ -90,9 +87,8 @@ class MemoryItem extends Component {
                 
                 <MemoryBody body={body} />
               </div>
-
             </div>
-          )
+          ) : <Spinner />
         }}
       </Query>
     )

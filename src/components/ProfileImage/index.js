@@ -17,7 +17,7 @@ const ProfileImage = ({ size, src }) => {
       src={url}
       style={{
         height: size + 'px',
-        width: 'auto'
+        width: size + 'px'
       }}
     />
   )

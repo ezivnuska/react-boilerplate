@@ -1,45 +1,5 @@
 @import '~scss/main';
 
-.pageHeaderSection {
-  margin-top: 3rem;
-}
-
-.users_wrap {
-  display: inline-block;
-  width: 100%;
-  margin-top: 4rem;
-  border: 1px solid blue;
-
-  .users {
-
-    // .column { margin: 0; }
-
-    .user {
-      display: block;
-      width: 100%;
-      margin: 0 auto 2rem;
-      padding: 0 10px;
-      max-width: 42.5rem;
-
-      .wrap {
-        width: 100%;
-        height: auto;
-        display: block;
-        background: $darkSlateGray;
-        overflow: hidden;
-
-        .title {
-          font-size: 1.8rem;
-          line-height: 2.4rem;
-          color: $whiteSmoke;
-          font-weight: 700;
-          display: block;
-          width: 100%;
-          padding: 2rem 10px;
-          text-align: center;
-          text-transform: uppercase;
-        }
-      }
-    }
-  }
+.users {
+  
 }

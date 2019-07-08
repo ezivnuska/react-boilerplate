@@ -13,7 +13,8 @@ import {
   Html,
   Link,
   Module,
-  ProfileImage
+  ProfileImage,
+  UserMemories
 } from 'components'
 
 import './Profile.scss'
@@ -36,7 +37,8 @@ class Profile extends PureComponent {
 
   render = () => {
     const { context, session } = this.props
-    const { username } = session.getCurrentUser
+    const { getCurrentUser } = session
+    const { username } = getCurrentUser
     
     return (
       <Fragment>
@@ -104,6 +106,9 @@ class Profile extends PureComponent {
             )
           }}
         </Query>
+        <Module title='Memories'>
+          <UserMemories user={getCurrentUser} />
+        </Module>
       </Fragment>
     )
   }

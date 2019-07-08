@@ -27,15 +27,14 @@ const Memories = ({ context, currentUser }) => (
             refetch={refetch}
           />
           
-          {!data.getAllSharedMemories.length
-            ? <h3>Empty... Check back soon!</h3>
-            : (
+          {data.getAllSharedMemories.length
+            ? (
               <MemoryList
                 memories={data.getAllSharedMemories}
                 currentUser={currentUser}
                 refetch={refetch}
               />
-            )
+            ) : <h3>Empty... Check back soon!</h3>
           }
         </div>
       )

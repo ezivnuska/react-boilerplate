@@ -5,6 +5,8 @@ import { findIndex } from 'lodash'
 import { Menu, Spinner } from 'components'
 import UserItem from './userslist/UserItem'
 
+import './UsersList.scss'
+
 class UsersList extends PureComponent {
 
     state = {
@@ -50,7 +52,7 @@ class UsersList extends PureComponent {
                         if (error) return <div className='error'>Error: {error}</div>
                         
                         return (
-                            <ul className='users'>
+                            <ul className='users-list'>
                                 {users.map((user, index) => {
                                     const bond = this.getBond(user, data.getBonds)
                                     if (this.state.filter === 'bonded') {

@@ -12,13 +12,13 @@ const MainLayout = ({ children, session }) => (
     <Header />
     
     <div className='container main'>
-      <Page>
 
-        {session.getCurrentUser && <MainNav />}
-        
+      {session.getCurrentUser && <MainNav />}
+
+      <Page>  
         {children}
-
       </Page>
+      
     </div>
 
     <Footer />

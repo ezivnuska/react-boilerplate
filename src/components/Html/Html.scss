@@ -1,6 +1,6 @@
 @import '~scss/main';
 
 .html {
-    padding: 0;
+    padding: $v-padding $h-padding;
     width: 100%;
 }

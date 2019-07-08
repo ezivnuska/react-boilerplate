@@ -3,7 +3,7 @@
 .memory-item {
   display: flex;
   flex-flow: row wrap;
-  padding: $v-padding $h-padding 0;
+  padding: $v-padding $h-padding;
   border-bottom: 1px solid #ccc;
 
   > * {

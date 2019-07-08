@@ -26,12 +26,12 @@ class RememberButton extends PureComponent {
           onComplete={this.onMemoryAdded}
           context={context}
         />
-        <button
-          className='btn remember-button'
+        <div
+          className='remember-button'
           onClick={e => context.openModal('memory')}
         >
           Remember
-        </button>
+        </div>
       </Fragment>
     )
   }

@@ -77,7 +77,7 @@ class SignupForm extends PureComponent {
               disabled={loading || this.validateForm()}
             >
               <div className='form-input'>
-                <input type='email' name='email' placeholder='Email' value={email} onChange={e => this.handleChange(e)} />
+                <input type='email' name='email' placeholder='Email' value={email} onChange={e => this.handleChange(e)} autoFocus />
               </div>
 
               <div className='form-input'>

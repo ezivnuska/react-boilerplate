@@ -1,5 +1,11 @@
 @import '~scss/main';
 
 .users {
-  
+  .menu {
+      margin: 0 $h-padding;
+
+      @media only screen and (min-width: 480px) {
+          margin: 0;
+      }
+  }
 }

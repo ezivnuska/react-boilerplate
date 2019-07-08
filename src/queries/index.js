@@ -15,6 +15,7 @@ export const GET_CURRENT_USER = gql`
       email
       profileImage
       bio
+      connected
     }
   }
 `
@@ -38,6 +39,15 @@ export const SET_PROFILE_IMAGE = gql`
 export const SIGNIN_USER = gql`
   mutation($email: String!, $password: String!){
     signinUser(email: $email, password: $password){ token }
+  }
+`
+
+export const SIGNOUT_USER = gql`
+  mutation {
+    signoutUser {
+      _id
+      connected
+    }
   }
 `
 
@@ -71,6 +81,7 @@ export const GET_USER_PROFILE = gql`
       _id
       bio
       profileImage
+      connected
     }
   }
 `
@@ -82,6 +93,7 @@ export const GET_ALL_USERS = gql`
       bio
       profileImage
       username
+      connected
     }
   }
 `
@@ -94,6 +106,7 @@ export const PROFILE_PAGE = gql`
       bio
       profileImage
       username
+      connected
     }
   }
 `

@@ -23,7 +23,7 @@ const UserMemories = ({ user }) => (
         <div className='user-memories'>
           
           {!data.getUserMemories.length
-            ? <div className='placeholder'>Empty... Check back soon!</div>
+            ? <div className='placeholder'><p>Empty... Check back soon!</p></div>
             : (
               <MemoryList
                 memories={data.getUserMemories}

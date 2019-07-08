@@ -6,6 +6,7 @@ form#memory-form {
   .control-group {
     display: flex;
     flex-flow: row nowrap;
+    border: 1px solid #333;
 
     .select-wrapper {
       display: inline-block;
@@ -16,6 +17,8 @@ form#memory-form {
         width: 100%;
         text-align-last: center;
         background: $form-input-bg-color;
+        border: none;
+        border-right: 1px solid #aaa;
         cursor: pointer;
       }
 
@@ -34,6 +37,7 @@ form#memory-form {
             to right,
             $form-input-bg-color, $form-input-bg-color-shadow
           );
+          border: none;
         }
       }
     }

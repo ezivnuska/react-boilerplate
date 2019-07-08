@@ -72,7 +72,7 @@ class SigninForm extends PureComponent {
             >
 
               <div className='form-input'>
-                <input type='email' name='email' placeholder='Email' value={email} onChange={this.handleChange} />
+                <input type='email' name='email' placeholder='Email' value={email} onChange={this.handleChange} autoFocus />
               </div>
 
               <div className='form-input'>

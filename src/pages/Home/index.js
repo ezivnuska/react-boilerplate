@@ -26,15 +26,14 @@ class Home extends PureComponent {
   componentWillMount() {
     const sessionExpired = this.props.history.action === 'REPLACE'
     if (sessionExpired) {
-      this.setState({ error: 'Session terminated due to inactivity. Please sign in.'})
-      this.props.refetch()
+      // this.setState({ error: 'Session terminated due to inactivity. Please sign in.'})
+      // this.props.refetch()
     }
   }
 
   render() {
     const { context, session } = this.props
     const user = (session && session.getCurrentUser) ? session.getCurrentUser : null
-    
     return (
       <Fragment>
         {this.head()}

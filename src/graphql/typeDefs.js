@@ -8,6 +8,7 @@ const typeDefs = gql`
     profileImage: String
     email: String!
     username: String!
+    connected: Boolean
     joinDate: String
   }
 
@@ -60,6 +61,7 @@ const typeDefs = gql`
   type Mutation {
     signupUser(email: String!, username: String!, password: String!): Token
     signinUser(email: String!, password: String!): Token
+    signoutUser: User
     editProfile(email: String!, bio: String): User
     setProfileIMG(email: String!, profileImage: String!): User
     changeEmail(currentEmail: String!, newEmail: String!): User

@@ -22,6 +22,9 @@ const UserSchema = new Schema({
     profileImage: {
         type: String
     },
+    connected: {
+      type: Boolean
+    },
     joinDate: {
         type: Date,
         default: Date.now

@@ -218,6 +218,7 @@ class MemoryForm extends PureComponent {
                         defaultValue={title || ''}
                         onChange={e => this.onChange(e)}
                         autoComplete='off'
+                        autoFocus
                     />
                 </div>
                 

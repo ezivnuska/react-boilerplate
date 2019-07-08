@@ -139,6 +139,7 @@ const resolvers = {
         email,
         username,
         password,
+        connected: true
       }).save()
       
       return { token: createToken(newUser, process.env.JWT_SECRET, '24hr')}
@@ -154,10 +155,20 @@ const resolvers = {
         throw new AuthenticationError('Invalid password')
       }
 
-      return { token: createToken(user, process.env.JWT_SECRET, '24hr')}
+      const connectedUser = await User.findOneAndUpdate({ _id: user._id }, { $set: { connected: true } })
+
+      return { token: createToken(connectedUser, process.env.JWT_SECRET, '24hr')}
+    },
+    signoutUser: async (root, args, { currentUser, User }) => {
+      try {
+        const user = await User.findOneAndUpdate({ _id: currentUser._id }, { $set: { connected: false } })
+        return user
+      } catch (e) {
+        throw new Error('Error signing out', e)
+      }
     },
     editProfile: async (root, { email, bio }, { User }) => {
-      const user = await User.findOneAndUpdate({ email }, { $set: { bio }}, { new: true })
+      const user = await User.findOneAndUpdate({ email }, { $set: { bio } }, { new: true })
       if (!user) {
         throw new Error('User not found')
       }

@@ -3,5 +3,9 @@
 .user-memories {
     .placeholder {
         padding: $v-padding $h-padding;
+
+        @media only screen and (max-width: 480px) {
+            padding: $v-padding 0;
+        }
     }
 }

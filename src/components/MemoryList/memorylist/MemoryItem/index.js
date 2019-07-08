@@ -64,7 +64,7 @@ class MemoryItem extends Component {
           if (loading) return <Spinner />
 
           const author = data.getAuthor
-          const isMine = author._id === currentUser._id
+          const isMine = (currentUser !== null) && (author._id === currentUser._id)
 
           return (
             <div className={'memory-item'}>

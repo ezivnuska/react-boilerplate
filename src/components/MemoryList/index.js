@@ -13,7 +13,7 @@ class MemoryList extends PureComponent {
                 {memories.map((memory, index) => (
                     <li key={index}>
                         <MemoryItem
-                            currentUser={currentUser}
+                            currentUser={currentUser || null}
                             memory={memory}
                             refetch={refetch}
                         />

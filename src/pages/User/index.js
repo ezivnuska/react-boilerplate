@@ -72,7 +72,9 @@ class User extends PureComponent {
                 ) : (
                   <div className='text-placeholder'>Oops! {username} has not added a bio.</div>
                 )}
-                <UserMemories user={data.profilePage} />
+                <Module title='Memories'>
+                  <UserMemories user={data.profilePage} />
+                </Module>
               </Fragment>
             )
           }}

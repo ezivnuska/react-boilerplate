@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import { GET_USER_MEMORIES } from 'queries'
 import { Query } from 'react-apollo'
 
-import { MemoryList } from 'components'
-
-import { Spinner } from 'components'
+import { MemoryList, Spinner } from 'components'
 
 import './UserMemories.scss'
 
@@ -25,7 +23,7 @@ const UserMemories = ({ user }) => (
         <div className='memories'>
           
           {!data.getUserMemories.length
-            ? <h3>Empty... Check back soon!</h3>
+            ? <div>Empty... Check back soon!</div>
             : (
               <MemoryList
                 memories={data.getUserMemories}

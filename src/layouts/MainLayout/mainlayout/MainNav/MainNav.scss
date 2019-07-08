@@ -1,14 +1,7 @@
 @import '~scss/main';
 
 .main-nav {
-
-  border-top-left-radius: $border-radius;
-  border-top-right-radius: $border-radius;
-  overflow: hidden;
-
-  @media only screen and (max-width: 480px) {
-    border-radius: unset;
-  }
+  margin-bottom: 1rem;
 
   ul, ul li {
     margin: 0;

@@ -1,0 +1,26 @@
+@import '~scss/main';
+
+header {
+  display: block;
+  margin: 0 auto $v-padding;
+  padding: 0 10px;
+  width: 100%;
+  background: $headerColor;
+
+  @media only screen and (max-width: 480px) {
+    margin-bottom: 0;
+  }
+
+  #logo-wrapper {
+    display: inline-block;
+    width: 100%;
+    margin: 1rem 0;
+    text-align: center;
+
+    img {
+      display: inline-block;
+      max-width: 6rem;
+      margin: 0 auto;
+    }
+  }
+}

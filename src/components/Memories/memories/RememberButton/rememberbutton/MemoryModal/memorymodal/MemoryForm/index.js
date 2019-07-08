@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { compose, graphql, withApollo } from 'react-apollo'
 import { ADD_MEMORY } from 'queries'
+import toastr from 'toastr'
 import moment from 'moment'
 // import DaySelector from './memoryform/DaySelector'
 // import MonthSelector from './memoryform/MonthSelector'
@@ -98,6 +99,26 @@ class MemoryForm extends PureComponent {
         })
     }
 
+    componentDidMount() {
+        toastr.options = {
+            'closeButton': false,
+            'debug': false,
+            'newestOnTop': true,
+            'progressBar': true,
+            'positionClass': 'toast-bottom-right',
+            'preventDuplicates': false,
+            'onclick': null,
+            'showDuration': '300',
+            'hideDuration': '1000',
+            'timeOut': '5000',
+            'extendedTimeOut': '1000',
+            'showEasing': 'swing',
+            'hideEasing': 'linear',
+            'showMethod': 'fadeIn',
+            'hideMethod': 'fadeOut'
+        }
+    }
+
     clearState = () => {
         this.stateState({ ...initialState })
     }
@@ -169,7 +190,10 @@ class MemoryForm extends PureComponent {
         e.preventDefault()
         const { addMemory, onComplete } = this.props
         addMemory({ variables: this.state.formData })
-        .then(() => onComplete())
+        .then(() => {
+            onComplete()
+            toastr.success('Memory added.', 'Success!')
+        })
     }
 
     toggleShared = () => {

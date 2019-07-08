@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { compose, graphql } from 'react-apollo'
 import { DELETE_MEMORY } from 'queries'
+import toastr from 'toastr'
 import {
   Heading,
   IconLink,
@@ -17,11 +18,34 @@ class MemoryHeader extends PureComponent {
     showOptions: PropTypes.func,
   }
 
+  componentDidMount() {
+    toastr.options = {
+        'closeButton': false,
+        'debug': false,
+        'newestOnTop': true,
+        'progressBar': true,
+        'positionClass': 'toast-bottom-right',
+        'preventDuplicates': false,
+        'onclick': null,
+        'showDuration': '300',
+        'hideDuration': '1000',
+        'timeOut': '5000',
+        'extendedTimeOut': '1000',
+        'showEasing': 'swing',
+        'hideEasing': 'linear',
+        'showMethod': 'fadeIn',
+        'hideMethod': 'fadeOut'
+    }
+}
+
   onDeleteClicked = e => {
     e.preventDefault()
     const { deleteMemory, memory, refetch } = this.props
     deleteMemory({ variables: { id: memory._id } })
-    .then(() => refetch())
+    .then(() => {
+      refetch()
+      toastr.success('Memory deleted.', 'Success!')
+    })
   }
 
   render() {

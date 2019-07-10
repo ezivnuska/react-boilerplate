@@ -18,6 +18,8 @@ import MemoryHeader from './memoryitem/MemoryHeader'
 import MemoryBody from './memoryitem/MemoryBody'
 
 import {
+  Cloud,
+  Heading,
   Spinner
 } from 'components'
 
@@ -79,13 +81,10 @@ class MemoryItem extends Component {
               </aside>
 
               <div className='memory-content'>
-                <MemoryHeader
-                  memory={memory}
-                  mine={isMine}
-                  refetch={refetch}
-                />
-                
-                <MemoryBody body={body} />
+                <Cloud>
+                  <Heading level={3}>{title}</Heading>
+                  <MemoryBody body={body} />
+                </Cloud>
               </div>
             </div>
           ) : <Spinner />

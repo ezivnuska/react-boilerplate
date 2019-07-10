@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { Html, Link } from 'components'
+import { Cloud, Heading, Html, Link } from 'components'
 
 import './MemoryBody.scss'
 
@@ -49,7 +49,7 @@ class MemoryBody extends Component {
   }
 
   render() {
-    const { body } = this.props
+    const { body, title } = this.props
     return (
       <div className='memory-body'>
         <Html html={body} />

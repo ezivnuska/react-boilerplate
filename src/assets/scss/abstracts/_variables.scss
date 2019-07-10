@@ -9,9 +9,6 @@ $lightGrey: #ccc;
 $darkGrey: #aaa;
 $lightBlue: #69b3d0;
 
-// Theme
-$main-bg-color: #000;
-
 // admin colors
 $lightSlateGray: rgb(187, 187, 187);
 $darkSlateGray: #272F37;
@@ -19,6 +16,10 @@ $sandyBrown: #EDB33D;
 $whiteSmoke: rgb(129, 129, 129);
 $mediumSeaGreen: #43BE7D;
 $Violet: #EFA5C3;
+
+
+// Theme
+$main-bg-color: $darkSlateGray;
 
 //
 
@@ -29,9 +30,6 @@ $footerColor: $darkSlateGray;
 $button-color-hover: green;
 $v-padding: 0.75rem;
 $h-padding: 1rem;
-
-$border-radius: 12px;
-$button-border-radius: 3px;
 
 // link colors
 $link-color: rgb(28, 92, 230);
@@ -44,6 +42,12 @@ $menu-color-active: $darkSlateGray;
 $menu-bg-color: $darkGrey;
 $menu-bg-color-hover: $darkGrey;
 $menu-bg-color-active: #fff;
+
+/// Corners
+
+$border-radius: 12px;
+$button-border-radius: 3px;
+$cloud-border-radius: 24px;
 
 /// Form
 $form-input-text-color: rgb(100, 100, 100) !default;

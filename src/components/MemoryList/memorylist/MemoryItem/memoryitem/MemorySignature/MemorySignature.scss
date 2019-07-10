@@ -14,7 +14,7 @@
 
   .profile-image {
     // display: inline-block;
-    margin-right: 0.5rem;
+    margin-right: 1rem;
     // border-radius: 50%;
 
     &.small {
@@ -29,6 +29,8 @@
 
     > * {
       display: block;
+      line-height: 18px;
+      margin-bottom: 0.5rem;
     }
   }
 }

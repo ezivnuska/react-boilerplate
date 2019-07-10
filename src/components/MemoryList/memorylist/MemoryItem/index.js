@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Query } from 'react-apollo'
-import { GET_AUTHOR } from 'queries'
+import { compose, graphql, Query } from 'react-apollo'
+import { DELETE_MEMORY, GET_AUTHOR } from 'queries'
 import { NavLink } from 'react-router-dom'
+import toastr from 'toastr'
 import moment from 'moment'
 // import {
 //   memoryDetailReadRequest,
@@ -20,6 +21,7 @@ import MemoryBody from './memoryitem/MemoryBody'
 import {
   Cloud,
   Heading,
+  IconLink,
   Spinner
 } from 'components'
 
@@ -33,6 +35,26 @@ class MemoryItem extends Component {
       showOptions: false,
       author: null,
       memory: props.memory,
+    }
+  }
+
+  componentDidMount() {
+    toastr.options = {
+      'closeButton': false,
+      'debug': false,
+      'newestOnTop': true,
+      'progressBar': true,
+      'positionClass': 'toast-bottom-right',
+      'preventDuplicates': false,
+      'onclick': null,
+      'showDuration': '300',
+      'hideDuration': '1000',
+      'timeOut': '5000',
+      'extendedTimeOut': '1000',
+      'showEasing': 'swing',
+      'hideEasing': 'linear',
+      'showMethod': 'fadeIn',
+      'hideMethod': 'fadeOut'
     }
   }
 
@@ -50,10 +72,19 @@ class MemoryItem extends Component {
   formatDate = (month, day, year) =>
     moment([year, month - 1, day]).format('MMM Do YYYY')
 
+  onDeleteClicked = e => {
+    e.preventDefault()
+    const { deleteMemory, memory, refetch } = this.props
+    deleteMemory({ variables: { id: memory._id } })
+    .then(() => {
+      refetch()
+      toastr.success('Memory deleted.', 'Success!')
+    })
+  }
+
   render = () => {
-    const { currentUser, memory, refetch } = this.props
+    const { currentUser, memory } = this.props
     const { body, title } = memory
-    const { showOptions } = this.state
     
     return (
       <Query
@@ -72,13 +103,21 @@ class MemoryItem extends Component {
             <div className='memory-item'>
               <aside>
                 <MemorySignature
-                    user={author}
-                    title={title}
-                    date={this.formatDate(memory.month, memory.day, memory.year)}
-                    size={40}
-                    linked
-                  />
+                  user={author}
+                  title={title}
+                  date={this.formatDate(memory.month, memory.day, memory.year)}
+                  size={40}
+                  linked
+                />
               </aside>
+
+              {isMine ? (
+                <IconLink
+                  iconClass='fas fa-times-circle fa-lg'
+                  onClick={e => this.onDeleteClicked(e)}
+                />
+              ) : <div className='bubble' />}
+              
 
               <div className='memory-content'>
                 <Cloud>
@@ -120,4 +159,8 @@ class MemoryItem extends Component {
 //   delete: dispatchProps.delete,
 // })
 
-export default MemoryItem
+const MemoryItemWithMutation = compose(
+  graphql(DELETE_MEMORY, { name: 'deleteMemory' })
+)(MemoryItem)
+
+export default MemoryItemWithMutation

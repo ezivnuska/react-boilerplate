@@ -20,6 +20,47 @@
     flex-basis: 25%;
     padding-right: $h-padding;
     min-width: 200px;
+    order: 0;
+
+    @media only screen and (max-width: 480px) {
+      order: 1;
+    }
+  }
+
+  .bubble {
+    margin: 0 1rem 0;
+    width: 20px;
+    height: 20px;
+    border-radius: $border-radius;
+    text-align: center;
+    background: #fff;
+    order: 1;
+  }
+
+  .icon-link {
+    margin: 0 1rem 0;
+    color: #fff;
+    text-align: center;
+    order: 1;
+    width: 20px;
+    height: 20px;
+    // line-height: 20px;
+
+    // i {
+    //   width: $border-radius * 2;
+    //   height: $border-radius * 2;
+    //   line-height: $border-radius * 2;
+    // }
+
+    &:hover {
+      color: #399df0;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .bubble, .icon-link {
+      order: 0;
+    }
   }
 
   .memory-content {
@@ -27,6 +68,7 @@
     flex-grow: 1;
     flex-shrink: 0;
     min-width: 300px;
+    order: 2;
   }
 
   &:last-child {

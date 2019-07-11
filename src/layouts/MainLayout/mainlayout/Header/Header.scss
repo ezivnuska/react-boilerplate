@@ -17,6 +17,10 @@ header {
     margin: 1rem 0;
     text-align: center;
 
+    a {
+      color: $sky-blue;
+    }
+
     img {
       display: inline-block;
       max-width: 6rem;

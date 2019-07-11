@@ -7,6 +7,14 @@
   min-height: 100vh;
   text-align: center;
 
+  background: linear-gradient(
+    to bottom,
+    $darkSlateGray,
+    $sky-blue 40%,
+    $sky-blue 60%,
+    $darkSlateGray
+  );
+
   header, footer {
     flex-shrink: 0;
   }
@@ -16,7 +24,7 @@
     display: flex;
     flex-flow: column nowrap;
     margin: 1.5rem auto;
-    background: #000;
+    // background: $sky-blue;
     border-radius: $border-radius;
     overflow: hidden;
 

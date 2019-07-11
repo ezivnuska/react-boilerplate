@@ -28,9 +28,9 @@
   }
 
   .bubble {
-    margin: 0 1rem 0;
-    width: 20px;
-    height: 20px;
+    margin: 0 1.25rem 0 0;
+    width: 24px;
+    height: 24px;
     border-radius: $border-radius;
     text-align: center;
     background: #fff;
@@ -38,19 +38,20 @@
   }
 
   .icon-link {
-    margin: 0 1rem 0;
+    margin: 0 1.25rem 0 0;
     color: #fff;
     text-align: center;
     order: 1;
-    width: 20px;
-    height: 20px;
+    // width: 20px;
+    // height: 20px;
+    font-size: 24px;
     // line-height: 20px;
 
-    // i {
+    i {
     //   width: $border-radius * 2;
     //   height: $border-radius * 2;
     //   line-height: $border-radius * 2;
-    // }
+    }
 
     &:hover {
       color: #399df0;
@@ -60,13 +61,14 @@
   @media only screen and (max-width: 480px) {
     .bubble, .icon-link {
       order: 0;
+      margin-top: 2rem;
     }
   }
 
   .memory-content {
     flex-basis: auto;
     flex-grow: 1;
-    flex-shrink: 0;
+    flex-shrink: 1;
     min-width: 300px;
     order: 2;
   }

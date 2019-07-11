@@ -10,40 +10,123 @@
     .cloud-fragment {
 
         position: absolute;
-        top: 0;
+        top: 0.5rem;
         right: 2rem;
-        bottom: 2rem;
-        left: 0;
+        left: 2.5rem;
+        // height: 70px;
+        bottom: 0.25rem;
         border-radius: $cloud-border-radius;
-        background: #fff;
-        // border: 2px solid #fff;
-        z-index: 20;
+        border-bottom-left-radius: $cloud-border-radius * 2;
+        border-top-right-radius: $cloud-border-radius * 2;
+        background: #fff linear-gradient(
+            to right,
+            rgba(21, 114, 191, 0.25),
+            #fff 45%,
+            #fff 75%,
+            rgba(21, 114, 191, 0.25)
 
-        &:first-child {
-            width: $cloud-border-radius * 2;
-            height: $cloud-border-radius * 2;
-            border-radius: $cloud-border-radius;
-            top: -3px;
-            right: auto;
-            bottom: auto;
-            left: -3px;
-            z-index: 50;
-        }
+        );
+        border: 2px solid #fff;
+        z-index: 10;
 
         &:last-child {
             top: 2rem;
             right: 0;
-            bottom: 0;
-            left: 2rem;
-            z-index: 10;
+            bottom: 1rem;
+            left: 1rem;
+            height: unset;
+            z-index: 20;
+            border-top-right-radius: $cloud-border-radius * 2;
+            border-top-right-radius: $cloud-border-radius * 2;
+            border-bottom-left-radius: $cloud-border-radius * 2;
+            border-bottom-right-radius: $cloud-border-radius * 2;
+            background: linear-gradient(
+                170deg,
+                #fff 40%,
+                $sky-blue
+            );
+
+            > div {
+                margin: 2px 2px 4px 2px;
+                height: 100%;
+                background: #fff;
+                border-radius: $cloud-border-radius;
+                border-top-right-radius: $cloud-border-radius * 2;
+                border-bottom-left-radius: $cloud-border-radius * 2;
+                border-bottom-right-radius: $cloud-border-radius * 2;
+            }
         }
     }
 
     .cloud-content {
-        
         position: relative;
-        padding: 1.5rem 2rem 2rem;
+        padding: 1.5rem 2.5rem 2rem;
         // border: 2px solid blue;
         z-index: 100;
+
+        > div {
+            margin-left: 0.25rem;
+            margin-bottom: 3rem;
+            max-width: 420px;
+        }
+        
+        .cloud-heading {
+            display: inline-block;
+            margin: -2.25rem 0 0 -2.5rem;
+            height: $cloud-border-radius * 2;
+            line-height: $cloud-border-radius * 2;
+            border-radius: $cloud-border-radius;
+            background: linear-gradient(
+                to bottom,
+                $sky-blue,
+                transparent
+            );
+
+            h3 {
+                margin: 2px;
+                padding: 0 2rem;
+                height: 100%;
+                background: #fff;
+                // background: linear-gradient(
+                //     to bottom,
+                //     #fff,
+                //     #fff 80%,
+                //     rgba(21, 114, 191, 0.05)
+                // );
+                // opacity: 0.3;
+                border-radius: $cloud-border-radius;
+            }
+        }
+    }
+
+    $radius: 22px;
+    $borderWidth: 2px;
+
+    .cloud-controls {
+        position: absolute;
+        bottom: 0;
+        right: 3rem;
+        // margin: 0 4rem 1rem;
+        height: $radius * 2;
+        width: 40%;
+        z-index: 200;
+
+        .main-controls {
+            border-radius: $radius;
+            // background: $sky-blue;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                $sky-blue
+            );
+            // border: 2px solid #fff;
+
+            > div {
+                margin: 4px;
+                border-radius: $radius - $borderWidth;
+                background: #fff;
+                height: ($radius - $borderWidth) * 2;
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ const MemorySignature = ({ user, size, date }) => (
     </Link>
     <div className='info'>
       <Link to={`/user/${user.username}`}>{user.username}</Link>
-      <span>{date}</span>
+      <span className='memory-date'>{date}</span>
     </div>
   </div>
 )

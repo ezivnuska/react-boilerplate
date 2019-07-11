@@ -113,17 +113,17 @@ class MemoryItem extends Component {
 
               {isMine ? (
                 <IconLink
-                  iconClass='fas fa-times-circle fa-lg'
+                  iconClass='fas fa-times-circle'
                   onClick={e => this.onDeleteClicked(e)}
                 />
               ) : <div className='bubble' />}
               
 
               <div className='memory-content'>
-                <Cloud>
-                  <Heading level={3}>{title}</Heading>
-                  <MemoryBody body={body} />
-                </Cloud>
+                <Cloud
+                  title={title}
+                  body={body}
+                />
               </div>
             </div>
           ) : <Spinner />

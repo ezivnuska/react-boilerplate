@@ -104,7 +104,6 @@ class MemoryItem extends Component {
 
           const author = data.getAuthor
           const isMine = (currentUser !== null) && (author._id === currentUser._id)
-
           return author ? (
             <div className='memory-item'>
               <aside>

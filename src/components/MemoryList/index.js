@@ -7,13 +7,12 @@ class MemoryList extends PureComponent {
 
     render() {
         const { currentUser, onEdit, memories, refetch } = this.props
-        
         return memories && memories.length ? (
             <ul className='memory-list'>
                 {memories.map((memory, index) => (
                     <li key={index}>
                         <MemoryItem
-                            currentUser={currentUser || null}
+                            currentUser={currentUser}
                             memory={memory}
                             refetch={refetch}
                             onEdit={onEdit}

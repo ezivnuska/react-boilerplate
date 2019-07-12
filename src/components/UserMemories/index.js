@@ -7,7 +7,7 @@ import { MemoryList, Spinner } from 'components'
 
 import './UserMemories.scss'
 
-const UserMemories = ({ user }) => (
+const UserMemories = ({ currentUser, user }) => (
   <Query
     query={GET_USER_MEMORIES}
     variables={{ userId: user._id }}
@@ -26,6 +26,7 @@ const UserMemories = ({ user }) => (
             ? <div className='placeholder'><p>Empty... Check back soon!</p></div>
             : (
               <MemoryList
+                currentUser={currentUser}
                 memories={data.getUserMemories}
                 refetch={refetch}
               />

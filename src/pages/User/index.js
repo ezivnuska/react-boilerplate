@@ -38,6 +38,8 @@ class User extends PureComponent {
 
   render() {
     const { username } = this.state
+    const { session } = this.props
+    const currentUser = session.getCurrentUser
     
     if (!username) return <div>Loading</div>
 
@@ -73,7 +75,10 @@ class User extends PureComponent {
                   <div className='text-placeholder'>Oops! {username} has not added a bio.</div>
                 )}
                 <Module title='Memories'>
-                  <UserMemories user={data.profilePage} />
+                  <UserMemories
+                    currentUser={currentUser}
+                    user={data.profilePage}
+                  />
                 </Module>
               </Fragment>
             )

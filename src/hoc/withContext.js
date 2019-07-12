@@ -7,10 +7,21 @@ class Provider extends Component {
         super(props)
         this.state = {
             modal: null,
+            memory: null,
             closeModal: () => 
                 this.setState({ modal: null }),
             openModal: name =>
-                this.setState({ modal: name })
+                this.setState({ modal: name }),
+            openMemoryModal: memoryId =>
+                this.setState({
+                    memory: memoryId,
+                    modal: 'memory'
+                }),
+            closeMemoryModal: () =>
+                this.setState({
+                    memory: null,
+                    modal: null
+                })
         }
     }
 

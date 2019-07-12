@@ -74,7 +74,6 @@ class MemoryForm extends PureComponent {
         const { memory, currentUser } = this.props
         const { formData } = this.state
         const { year, month, day } = formData
-        
         this.setState({
             options: {
                 year: getYearOptions(),
@@ -88,7 +87,8 @@ class MemoryForm extends PureComponent {
             },
             memory: memory || null,
             formData: {
-                author: memory ? memory.author._id : currentUser._id,
+                id: memory ? memory._id : null,
+                author: memory ? memory.author : currentUser._id,
                 title: memory ? memory.title : '',
                 body: memory ? memory.body : '',
                 shared: memory ? memory.shared : false,
@@ -190,9 +190,13 @@ class MemoryForm extends PureComponent {
         e.preventDefault()
         const { addMemory, onComplete } = this.props
         addMemory({ variables: this.state.formData })
-        .then(() => {
+        .then(({ data }) => {
             onComplete()
-            toastr.success('Memory added.', 'Success!')
+            if (data.addMemory)
+                toastr.success('Memory added.', 'Success!')
+            else
+                toastr.error('Not Authorized.', 'Failed!')
+
         })
     }
 
@@ -243,6 +247,7 @@ class MemoryForm extends PureComponent {
                         onChange={e => this.onChange(e)}
                         autoComplete='off'
                         autoFocus
+                        maxLength={50}
                     />
                 </div>
                 
@@ -283,7 +288,12 @@ class MemoryForm extends PureComponent {
                 </div>
 
                 <div className='form-input'>
-                    <TextEditor value={body} name='body' placeholder='I remember...' onUpdate={value => this.onChangeBody(value)} />
+                    <TextEditor
+                        value={body}
+                        name='body'
+                        placeholder='I remember...'
+                        onUpdate={value => this.onChangeBody(value)}
+                    />
                 </div>
 
                 <Switch

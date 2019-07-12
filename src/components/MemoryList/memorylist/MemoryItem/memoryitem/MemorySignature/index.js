@@ -10,18 +10,15 @@ import {
 import './MemorySignature.scss'
 
 const MemorySignature = ({ user, size, date }) => (
-  <div className='memory-signature'>
-    <Link to={`/user/${user.username}`}>
+  <Link to={`/user/${user.username}`}>
+    <div className='memory-signature'>
       <ProfileImage
         src={user.profileImage}
         size={size}
       />
-    </Link>
-    <div className='info'>
-      <Link to={`/user/${user.username}`}>{user.username}</Link>
-      <span className='memory-date'>{date}</span>
+      {user.username}
     </div>
-  </div>
+  </Link>
 )
 
 MemorySignature.propTypes = ({

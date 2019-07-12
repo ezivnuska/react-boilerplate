@@ -4,11 +4,17 @@ import withSession from 'hoc/withSession'
 import MemoryForm from './memorymodal/MemoryForm'
 import { Modal } from 'components'
 
-const MemoryModal = ({ memory, onComplete, session, ...props }) => (
-    <Modal title='Add Memory' name='memory' closeable {...props}>
+const MemoryModal = ({ context, onComplete, session, ...props }) => (
+    <Modal
+      title='Add Memory'
+      name='memory'
+      context={context}
+      closeable
+      {...props}
+    >
         <MemoryForm
           currentUser={session.getCurrentUser}
-          memory={memory}
+          memory={context.memory}
           onComplete={onComplete}
         />
     </Modal>

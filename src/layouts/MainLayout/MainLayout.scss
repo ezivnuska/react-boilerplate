@@ -10,10 +10,8 @@
   
   background: linear-gradient(
     to bottom,
-    $darkSlateGray,
-    $sky-blue 40%,
-    $sky-blue 60%,
-    $darkSlateGray
+    darken($sky-blue, 10%),
+    $sky-blue
   );
 
   header, footer {

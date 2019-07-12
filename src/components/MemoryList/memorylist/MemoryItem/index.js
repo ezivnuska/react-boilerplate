@@ -82,9 +82,15 @@ class MemoryItem extends Component {
     })
   }
 
+  onEditClicked = e => {
+    e.preventDefault()
+    const { memory, onEdit } = this.props
+    onEdit(memory)
+  }
+
   render = () => {
     const { currentUser, memory } = this.props
-    const { body, title } = memory
+    const { body, date, title } = memory
     
     return (
       <Query
@@ -104,14 +110,14 @@ class MemoryItem extends Component {
               <aside>
                 <MemorySignature
                   user={author}
-                  title={title}
                   date={this.formatDate(memory.month, memory.day, memory.year)}
-                  size={40}
+                  size={75}
                   linked
                 />
               </aside>
 
               <div className='bubbles'>
+                <div className='bubble' />
                 <div className='bubble' />
                 <div className='bubble' />
               </div>
@@ -120,7 +126,10 @@ class MemoryItem extends Component {
                 <Cloud
                   title={title}
                   body={body}
-                  onClick={e => this.onDeleteClicked(e)}
+                  date={this.formatDate(memory.month, memory.day, memory.year)}
+                  isMine={isMine}
+                  onDelete={e => this.onDeleteClicked(e)}
+                  onEdit={e => this.onEditClicked(e)}
                 />
               </div>
             </div>

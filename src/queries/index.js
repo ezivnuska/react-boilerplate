@@ -292,8 +292,8 @@ export const GET_AUTHOR = gql`
 `
 
 export const ADD_MEMORY = gql`
-  mutation($author: ID!, $day: String!, $month: String!, $year: String!, $title: String, $body: String!, $shared: Boolean){
-    addMemory(author: $author, day: $day, month: $month, year: $year, title: $title, body: $body, shared: $shared) {
+  mutation($id: ID, $author: ID!, $day: String!, $month: String!, $year: String!, $title: String, $body: String!, $shared: Boolean){
+    addMemory(id: $id, author: $author, day: $day, month: $month, year: $year, title: $title, body: $body, shared: $shared) {
       _id
       author
       day

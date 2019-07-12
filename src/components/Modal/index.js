@@ -36,7 +36,12 @@ class Modal extends Component {
         {hasHeader &&
           <header className='modal-header'>
             <Heading level={2} className='dark'>{title}</Heading>
-            {closeable && <IconLink iconClass='fas fa-window-close fa-lg' height={40} onClick={() => context.closeModal()} />}
+            {closeable &&
+              <IconLink
+                iconClass='fas fa-window-close fa-lg'
+                height={40}
+                onClick={() => context.closeModal()}
+              />}
           </header>
         }
         <div className='modal-content'>

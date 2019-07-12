@@ -320,19 +320,26 @@ const resolvers = {
 
       return bond
     },
-    addMemory: async (root, { author, day, month, year, title, body, shared }, { Memory }) => {
+    addMemory: async (root, { id, author, day, month, year, title, body, shared }, { currentUser, Memory }) => {
       
+      if (currentUser._id !== author) return null
+
       try {
-        const newMemory = new Memory({
-          author,
-          day,
-          month,
-          year,
-          title,
-          body,
-          shared,
-        })
-        const savedMemory = await newMemory.save()
+        let savedMemory
+        if (id) {
+          savedMemory = await Memory.findOneAndUpdate({ _id: id }, { $set: { day, month, year, title, body, shared } })
+        } else {
+          const newMemory = new Memory({
+            author,
+            day,
+            month,
+            year,
+            title,
+            body,
+            shared,
+          })
+          savedMemory = await newMemory.save()
+        }
         
         const memory = await Memory.findOne({ _id: savedMemory._id })
         .select('_id author year month day title body shared')

@@ -6,6 +6,7 @@
   margin-bottom: $v-padding;
   overflow: hidden;
   text-align: left;
+  flex-wrap: wrap;
 
   > * {
     display: inline-block;
@@ -30,6 +31,7 @@
   .info {
     white-space: nowrap;
     vertical-align: top;
+    text-align: right;
 
     > * {
       display: block;
@@ -38,9 +40,9 @@
     }
 
     a {
-      color: #000;
+      color: #fff;
 
-      &:hover {
+      &:hover, &:visited {
         color: #fff;
       }
     }
@@ -49,6 +51,12 @@
       font-size: 1.25rem;
       font-weight: 900;
       color: #444;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .info {
+      text-align: left;
     }
   }
 }

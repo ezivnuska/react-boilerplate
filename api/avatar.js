@@ -58,9 +58,9 @@ export default {
 
           im(data.Body)
             .autoOrient()
-            .resize(50, 50)
+            .resize(100, 100)
             .gravity('Center')
-            .extent(50, 50)
+            .extent(100, 100)
             .quality(75)
             .noProfile()
             .toBuffer('png', (err, buffer) => {

@@ -18,7 +18,7 @@ const Link = ({ active, block, children, link, onClick, to, transparent, ...prop
               : ''
           )
         )}
-        href='#'
+        href='javascript:;'
         onClick={onClick}
         {...props}
       >

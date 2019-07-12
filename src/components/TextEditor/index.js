@@ -25,7 +25,8 @@ class TextEditor extends PureComponent {
     }
 
     render() {
-        return <textarea name={this.state.name} defaultValue={this.state.value}></textarea>
+        const { onUpdate, value, ...props } = this.props
+        return <textarea name={this.state.name} defaultValue={this.state.value} {...props}></textarea>
     }
 }
 

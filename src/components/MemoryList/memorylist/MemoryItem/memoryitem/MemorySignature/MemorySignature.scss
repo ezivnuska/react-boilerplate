@@ -2,7 +2,7 @@
 
 .memory-signature {
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   margin-bottom: $v-padding;
   overflow: hidden;
   text-align: left;
@@ -12,14 +12,18 @@
     flex: 0 0 auto;
   }
 
+  @media only screen and (max-width: 480px) {
+    flex-direction: row;
+  }
+
   .profile-image {
     // display: inline-block;
-    margin-right: 1rem;
+    margin: 0 1rem;
     // border-radius: 50%;
 
     &.small {
-      height: 30px;
-      width: 30px;
+      // width: 30px;
+      // height: auto;
     }
   }
 

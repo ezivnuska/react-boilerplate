@@ -27,41 +27,47 @@
     }
   }
 
-  .bubble {
-    margin: 0 1.25rem 0 0;
-    width: 24px;
-    height: 24px;
-    border-radius: $border-radius;
-    text-align: center;
-    background: #fff;
+  .bubbles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 0 0 auto;
     order: 1;
-  }
+    text-align: right;
 
-  .icon-link {
-    margin: 0 1.25rem 0 0;
-    color: #fff;
-    text-align: center;
-    order: 1;
-    // width: 20px;
-    // height: 20px;
-    font-size: 24px;
-    // line-height: 20px;
+    .bubble {
+      display: inline-block;
+      background: #fff;
 
-    i {
-    //   width: $border-radius * 2;
-    //   height: $border-radius * 2;
-    //   line-height: $border-radius * 2;
-    }
+      &:first-child {
+        margin: 1rem 0 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 6px;
+      }
 
-    &:hover {
-      color: #399df0;
+      &:last-child {
+        margin: 0.5rem 0.25rem 0 0.5rem;
+        width: 24px;
+        height: 24px;
+        border-radius: 12px;
+      }
     }
   }
-
+  
   @media only screen and (max-width: 480px) {
-    .bubble, .icon-link {
+    .bubbles {
       order: 0;
-      margin-top: 2rem;
+      flex-direction: column;
+      padding-right: 0.5rem;
+
+      .bubble:first-child {
+        margin: 0.5rem 0 0.5rem 1.25rem;
+      }
+
+      .bubble:last-child {
+        margin: 0 0.5rem 0 0;
+      }
     }
   }
 

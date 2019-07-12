@@ -17,4 +17,8 @@
   &:hover {
     // color: $link-text-color-hover;
   }
+
+  &.block {
+    display: inline-block;
+  }
 }

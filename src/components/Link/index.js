@@ -3,11 +3,21 @@ import PropTypes from 'prop-types'
 
 import './Link.scss'
 
-const Link = ({ active, children, link, onClick, to, transparent, ...props }) => {
+const Link = ({ active, block, children, link, onClick, to, transparent, ...props }) => {
   return onClick
     ? (
       <a
-        className={('link' + (active ? ' active' : ''))}
+        className={(
+          'link' + (
+            active
+              ? ' active'
+              : ''
+          ) + (
+            block
+              ? ' block'
+              : ''
+          )
+        )}
         href='#'
         onClick={onClick}
         {...props}

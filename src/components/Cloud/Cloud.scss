@@ -3,8 +3,6 @@
 .cloud {
     position: relative;
     margin: 0;
-    // border-radius: $border-radius;
-    // background: rgba(0, 0, 0, 0.5);
     overflow: visible;
 
     .cloud-fragment {
@@ -13,7 +11,6 @@
         top: 0.5rem;
         right: 2rem;
         left: 2.5rem;
-        // height: 70px;
         bottom: 0.25rem;
         border-radius: $cloud-border-radius;
         border-bottom-left-radius: $cloud-border-radius * 2;
@@ -61,7 +58,6 @@
     .cloud-content {
         position: relative;
         padding: 1.5rem 2.5rem 2rem;
-        // border: 2px solid blue;
         z-index: 100;
 
         > div {
@@ -87,45 +83,42 @@
                 padding: 0 2rem;
                 height: 100%;
                 background: #fff;
-                // background: linear-gradient(
-                //     to bottom,
-                //     #fff,
-                //     #fff 80%,
-                //     rgba(21, 114, 191, 0.05)
-                // );
-                // opacity: 0.3;
                 border-radius: $cloud-border-radius;
             }
         }
     }
 
+    // cloud control vars
     $radius: 22px;
     $borderWidth: 2px;
 
     .cloud-controls {
         position: absolute;
-        bottom: 0;
-        right: 3rem;
-        // margin: 0 4rem 1rem;
+        bottom: -0.25rem;
+        right: 4rem;
         height: $radius * 2;
         width: 40%;
         z-index: 200;
 
         .main-controls {
             border-radius: $radius;
-            // background: $sky-blue;
             background: linear-gradient(
                 to bottom,
                 transparent,
                 $sky-blue
             );
-            // border: 2px solid #fff;
 
             > div {
-                margin: 4px;
+                margin: 2px;
+                padding: 0 $h-padding;
                 border-radius: $radius - $borderWidth;
                 background: #fff;
-                height: ($radius - $borderWidth) * 2;
+                height: $radius * 2;
+
+                a {
+                    margin-top: 0.5rem;
+                    color: $sky-blue;
+                }
             }
         }
     }

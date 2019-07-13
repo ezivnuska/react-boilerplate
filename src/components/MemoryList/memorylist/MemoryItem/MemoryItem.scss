@@ -3,12 +3,8 @@
 .memory-item {
   display: flex;
   flex-flow: row wrap;
-  padding: $v-padding $h-padding;
-  border-bottom: 1px solid #ccc;
-
-  // @media only screen and (min-width: 480px) {
-  //   padding: $v-padding 0;
-  // }
+  padding: 0;
+  margin-bottom: 0.5rem;
 
   > * {
     display: inline-block;
@@ -81,21 +77,14 @@
         }
       }
     }
-
-    .memory-content {
-      margin-top: 1rem;
-    }
   }
 
   .memory-content {
+    margin-top: 1rem;
     flex-basis: 50%;
     flex-grow: 1;
     flex-shrink: 1;
     min-width: 300px;
     order: 2;
-  }
-
-  &:last-child {
-    border-bottom: none;
   }
 }

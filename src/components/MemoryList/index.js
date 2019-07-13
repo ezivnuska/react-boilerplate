@@ -25,7 +25,7 @@ class MemoryList extends PureComponent {
             className='remember-button'
             onClick={e => this.props.context.openModal('memory')}
         >
-            Remember Something
+            Remember Something?
         </div>
     )
 

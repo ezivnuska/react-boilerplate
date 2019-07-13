@@ -27,7 +27,7 @@
         z-index: 10;
 
         &:last-child {
-            top: 3.5rem;
+            top: 3rem;
             right: 0;
             bottom: 1rem;
             left: 1rem;
@@ -61,12 +61,9 @@
         z-index: 100;
 
         > div {
-            margin: 2rem 0 0 0.25rem;
+            margin: 1rem 0 0 0.25rem;
             max-width: 420px;
-
-            @media only screen and (min-width: 480px) {
-                clear:left;
-            }
+            line-height: 1rem;
 
             &.mine {
                 margin-bottom: 3rem;
@@ -76,10 +73,9 @@
         .cloud-heading {
             display: block;
             float: left;
-            margin: -2.25rem 1rem 0 -2.5rem;
-            max-width: 65%;
+            margin: -2.25rem 1rem -0.25rem -2.5rem;
+            max-width: 60%;
             min-height: $cloud-border-radius * 2;
-            line-height: 2.5rem;
             border-radius: $cloud-border-radius;
             background: linear-gradient(
                 to bottom,
@@ -89,7 +85,9 @@
 
             h3 {
                 margin: 2px;
-                padding: 1rem 2.5rem;
+                padding: 1rem 1.5rem;
+                font-size: 1.7rem;
+                line-height: 2.25rem;
                 background: #fff;
                 border-radius: $cloud-border-radius;
             }
@@ -99,19 +97,7 @@
             margin-top: -0.4rem;
             display: inline-block;
             font-weight: 900;
-            width: 30%;
             vertical-align: top;
-        }
-
-        @media only screen and (max-width: 480px) {
-            .cloud-heading {
-                max-width: 60%;
-            }
-
-            .cloud-date {
-                margin-top: -0.4rem;
-                width: 40%;
-            }
         }
     }
 
@@ -137,7 +123,7 @@
 
             > div {
                 margin: 2px;
-                padding: 0 $h-padding;
+                padding: 0 1rem;
                 border-radius: $radius - $borderWidth;
                 background: #fff;
                 height: $radius * 2;

@@ -12,7 +12,7 @@ const Cloud = ({ body, date, isMine, onEdit, onDelete, title }) => (
             <div className='cloud-date'>
                 {date}
             </div>
-            <div className={isMine ? ' mine' : ''}>
+            <div className={isMine ? 'mine' : ''}>
                 <Html html={body}></Html>
             </div>
         </div>

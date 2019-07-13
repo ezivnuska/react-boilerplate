@@ -74,8 +74,6 @@ class MemoryForm extends PureComponent {
         const { memory, currentUser } = this.props
         const { formData } = this.state
         const { year, month, day } = formData
-        console.log('memory', memory)
-        console.log('date', year, month, day)
         this.setState({
             options: {
                 year: getYearOptions(),

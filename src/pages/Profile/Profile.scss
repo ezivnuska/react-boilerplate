@@ -1,11 +1,40 @@
 @import '~scss/main';
 
-.profile-header {
-    margin: 0 $h-padding 2rem;
-    text-align: center;
+#profile-page {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0 $h-padding;
 
-    > * {
-        margin: 0 auto;
-        text-align: center;
+    .profile-info {
+        flex: 1 0 50%;
+
+        .profile-header {
+            display: flex;
+            flex-flow: row wrap;
+            
+            > * {
+                display: inline-block;
+            }
+
+            .profile-avatar {
+                flex: 0 0 auto;
+                padding: 0 2rem 0 0;
+            }
+    
+            .profile-heading {
+                flex: 1 0 auto;
+            }
+        }
+
+        .profile-content {
+            margin-top: 1.5rem;
+            .profile-bio {
+                color: #fff;
+            }
+        }
+    }
+
+    .profile-memories {
+        flex: 1 0 50%;
     }
 }

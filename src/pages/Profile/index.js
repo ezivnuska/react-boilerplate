@@ -12,8 +12,8 @@ import {
   Heading,
   Html,
   Link,
-  Module,
   ProfileImage,
+  Spinner,
   UserMemories
 } from 'components'
 
@@ -51,26 +51,18 @@ class Profile extends PureComponent {
       
           {({ data, loading, error, refetch, networkStatus }) => {
             
-            return (
-              <Fragment>
-    
-                <Route path='/profile' exact render={() => data.getUserProfile ? (
-                  <Fragment>
-                                    
-                    <AvatarModal
-                      onComplete={() => this.onUpdate(refetch)}
-                      {...this.props}
-                    />
-                    
-                    <BioModal
-                      bio={data.getUserProfile.bio}
-                      onComplete={() => this.onUpdate(refetch)}
-                      {...this.props}
-                    />
+            if (loading) return <Spinner />
+            if (error) return <div className='error'>Error: {error}</div>
+            if (!data.getUserProfile) return null
 
-                    {error && <div className='error'>{error}</div>}
-                    
-                    <div className='profile-header'>
+            return (
+              <div id='profile-page'>
+
+                <div className='profile-info'>
+                  
+                  <div className='profile-header'>
+
+                    <div className='profile-avatar'>
                       <EditableContainer
                         onClick={() => context.openModal('avatar')}
                         style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
@@ -80,38 +72,63 @@ class Profile extends PureComponent {
                           src={data.getUserProfile.profileImage}
                         />
                       </EditableContainer>
-
-                      <Heading level={3}>{username}</Heading>
-
-                      <Link to='/profile/account'>Account details</Link>
-
                     </div>
 
-                    
-                    <Module title='Bio'>
-                      <EditableContainer
-                        onClick={() => context.openModal('bio')}
-                        block
-                        style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
-                      >
-                        <Html html={data.getUserProfile.bio || '<p>Click here to add a bio</p>' } />
-                      </EditableContainer>
-                    </Module>
-                    
-                  </Fragment>
-                ) : null} />
+                    <div className='profile-heading'>
+                      <Heading level={3}>{username}</Heading>
+                      <Link to='/profile/account'>Account details</Link>
+                    </div>
 
-                <Route path='/profile/account' exact render={() => <UpdateAccount {...this.props} />} />
-              </Fragment>
+                  </div>
+
+                  <div className='profile-content'>
+                    <Fragment>
+                      <Route path='/profile' exact render={() => data.getUserProfile ? (
+                        <Fragment>
+                          
+                          <AvatarModal
+                            onComplete={() => this.onUpdate(refetch)}
+                            {...this.props}
+                          />
+                          
+                          <BioModal
+                            bio={data.getUserProfile.bio}
+                            onComplete={() => this.onUpdate(refetch)}
+                            {...this.props}
+                          />
+
+                          {error && <div className='error'>{error}</div>}
+
+                          <EditableContainer
+                            onClick={() => context.openModal('bio')}
+                            block
+                            style={{ opacity: ((networkStatus === 4 || loading) ? '0.5' : '1') }}
+                          >
+                            <Html
+                              className='profile-bio'
+                              html={data.getUserProfile.bio || '<p>Click here to add a bio</p>' }
+                            />
+                          </EditableContainer>
+                          
+                        </Fragment>
+                      ) : null} />
+
+                      <Route path='/profile/account' exact render={() => <UpdateAccount {...this.props} />} />
+                    </Fragment>
+                  </div>
+                </div>
+
+                <div className='profile-memories'>
+                  <UserMemories
+                    context={context}
+                    currentUser={getCurrentUser}
+                    user={getCurrentUser} />
+                </div>
+              </div>
             )
           }}
         </Query>
-        <Module title='Memories'>
-          <UserMemories
-            context={context}
-            currentUser={getCurrentUser}
-            user={getCurrentUser} />
-        </Module>
+        
       </Fragment>
     )
   }

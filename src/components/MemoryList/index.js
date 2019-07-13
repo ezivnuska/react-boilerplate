@@ -10,7 +10,8 @@ class MemoryList extends PureComponent {
     static propTypes = {
         context: PropTypes.object.isRequired,
         refetch: PropTypes.func.isRequired,
-        userId: PropTypes.string
+        userId: PropTypes.string,
+        unsigned: PropTypes.bool
     }
 
     onModalClose = () => {
@@ -29,7 +30,7 @@ class MemoryList extends PureComponent {
     )
 
     render() {
-        const { context, currentUser, memories, refetch, userId } = this.props
+        const { context, currentUser, memories, refetch, unsigned, userId } = this.props
         return (
             <Fragment>
                 
@@ -49,6 +50,7 @@ class MemoryList extends PureComponent {
                                     currentUser={currentUser}
                                     memory={memory}
                                     refetch={refetch}
+                                    unsigned={unsigned}
                                 />
                             </li>
                         ))}

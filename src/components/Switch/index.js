@@ -5,21 +5,14 @@ import './Switch.scss'
 
 class Switch extends PureComponent {
 
-  state = {
-    checked: false
-  }
-
   static propTypes = {
     labels: PropTypes.arrayOf(PropTypes.string).isRequired,
-    height: PropTypes.number.isRequired
+    height: PropTypes.number.isRequired,
+    checked: PropTypes.bool
   }
 
   static defaultProps = {
     height: 30
-  }
-
-  componentWillReceiveProps = ({ checked }) => {
-    this.setState({ checked })
   }
 
   handleClick = e => {
@@ -28,8 +21,8 @@ class Switch extends PureComponent {
   }
 
   render() {
-    const { height, labels, name } = this.props
-    const { checked } = this.state
+    const { checked, height, labels, name } = this.props
+    
     return (
       <div
         className={'switch' + (checked ? ' checked' : '')}

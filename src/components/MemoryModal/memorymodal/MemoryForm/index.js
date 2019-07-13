@@ -74,6 +74,7 @@ class MemoryForm extends PureComponent {
         const { memory, currentUser } = this.props
         const { formData } = this.state
         const { year, month, day } = formData
+        
         this.setState({
             options: {
                 year: getYearOptions(),
@@ -188,12 +189,13 @@ class MemoryForm extends PureComponent {
 
     handleSubmit = e => {
         e.preventDefault()
-        const { addMemory, onComplete } = this.props
+        const { addMemory, memory, onComplete } = this.props
         addMemory({ variables: this.state.formData })
         .then(({ data }) => {
             onComplete()
             if (data.addMemory)
-                toastr.success('Memory added.', 'Success!')
+                if (memory) toastr.success('Memory updated.', 'Success!')
+                else toastr.success('Memory added.', 'Success!')
             else
                 toastr.error('Not Authorized.', 'Failed!')
 
@@ -230,7 +232,7 @@ class MemoryForm extends PureComponent {
         const { currentDate, formData, options } = this.state
         const { title, body, shared } = formData
         const { day, month, year } = currentDate
-        
+
         return (
             <Form
                 id='memory-form'

@@ -55,6 +55,8 @@ class Profile extends PureComponent {
             if (error) return <div className='error'>Error: {error}</div>
             if (!data.getUserProfile) return null
 
+            const { bio, profileImage } = data.getUserProfile
+
             return (
               <div id='profile-page'>
 
@@ -69,7 +71,7 @@ class Profile extends PureComponent {
                       >
                         <ProfileImage
                           size={150}
-                          src={data.getUserProfile.profileImage}
+                          src={profileImage}
                         />
                       </EditableContainer>
                     </div>
@@ -92,7 +94,7 @@ class Profile extends PureComponent {
                           />
                           
                           <BioModal
-                            bio={data.getUserProfile.bio}
+                            bio={bio}
                             onComplete={() => this.onUpdate(refetch)}
                             {...this.props}
                           />
@@ -106,7 +108,7 @@ class Profile extends PureComponent {
                           >
                             <Html
                               className='profile-bio'
-                              html={data.getUserProfile.bio || '<p>Click here to add a bio</p>' }
+                              html={bio || '<p>Click here to add a bio</p>' }
                             />
                           </EditableContainer>
                           

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { compose, graphql, Query } from 'react-apollo'
 import { DELETE_MEMORY, GET_AUTHOR } from 'queries'
@@ -84,7 +84,7 @@ class MemoryItem extends Component {
   }
 
   render = () => {
-    const { currentUser, memory } = this.props
+    const { currentUser, memory, unsigned } = this.props
     const { body, title } = memory
     
     return (
@@ -101,20 +101,24 @@ class MemoryItem extends Component {
           const isMine = (currentUser !== null) && (author._id === currentUser._id)
           return author ? (
             <div className='memory-item'>
-              <aside>
-                <MemorySignature
-                  user={author}
-                  date={this.formatDate(memory.month, memory.day, memory.year)}
-                  size={50}
-                  linked
-                />
-              </aside>
+              {!unsigned && (
+                <Fragment>
+                  <aside>
+                    <MemorySignature
+                      user={author}
+                      date={this.formatDate(memory.month, memory.day, memory.year)}
+                      size={50}
+                      linked
+                    />
+                  </aside>
 
-              <div className='bubbles'>
-                <div className='bubble' />
-                <div className='bubble' />
-                <div className='bubble' />
-              </div>
+                  <div className='bubbles'>
+                    <div className='bubble' />
+                    <div className='bubble' />
+                    <div className='bubble' />
+                  </div>
+                </Fragment>
+              )}
 
               <div className='memory-content'>
                 <Cloud

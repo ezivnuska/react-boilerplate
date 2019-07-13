@@ -46,6 +46,7 @@ class User extends PureComponent {
     return (
       <Fragment>
         {this.head()}
+
         <Query
           query={PROFILE_PAGE}
           variables={{ username }}
@@ -54,34 +55,46 @@ class User extends PureComponent {
           {({ data, loading, error }) => {
             
             if (loading) return <Spinner />
-            if (error) return <div>Error</div>
+            if (error) return <div className='error'>Error: {error}</div>
+            if (!data.profilePage) return null
             
             const { bio, username, profileImage } = data.profilePage
             
             return (
-              <Fragment>
-                <div className='user-header'>
-                  <ProfileImage
-                    size={150}
-                    src={profileImage}
-                  />
-                  <Heading level={3}>{username}</Heading>
+              <div id='user-page'>
+                
+                <div className='user-info'>
+
+                  <div className='user-header'>
+                    <div className='user-avatar'>
+                      <ProfileImage
+                        size={150}
+                        src={profileImage}
+                      />
+                    </div>
+                    <div className='user-heading'>
+                      <Heading level={3}>{username}</Heading>
+                    </div>
+                  </div>
+
+                
+
+                  <div className='user-content'>
+                    {bio
+                      ? <Html className='user-bio' html={bio} />
+                      : <div className='text-placeholder'>Oops! {username} has not added a bio.</div>}
+                  </div>
+
                 </div>
-                {bio ? (
-                  <Module title='Bio'>
-                    <Html html={bio} />
-                  </Module>
-                ) : (
-                  <div className='text-placeholder'>Oops! {username} has not added a bio.</div>
-                )}
-                <Module title='Memories'>
+                
+                <div className='user-memories'>
                   <UserMemories
                     context={context}
                     currentUser={currentUser}
                     user={data.profilePage}
                   />
-                </Module>
-              </Fragment>
+                </div>
+              </div>
             )
           }}
         </Query>

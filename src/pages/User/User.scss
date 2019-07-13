@@ -1,15 +1,41 @@
 @import '~scss/main';
 
-.user-header {
-  margin: 0 $h-padding 1rem;
-  text-align: center;
+#user-page {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0 $h-padding;
 
-  > * {
-      margin: 0 auto;
-      text-align: center;
-  }
-}
+    .user-info {
+        flex: 1 0 50%;
 
-.text-placeholder {
-  padding: $v-padding $h-padding * 2;
+        .user-header {
+            display: flex;
+            flex-flow: row wrap;
+            
+            > * {
+                display: inline-block;
+            }
+
+            .user-avatar {
+                flex: 0 0 auto;
+                padding: 0 2rem 0 0;
+            }
+    
+            .user-heading {
+                flex: 1 0 auto;
+            }
+        }
+
+        .user-content {
+            margin-top: 1.5rem;
+            
+            .user-bio {
+                color: #fff;
+            }
+        }
+    }
+
+    .user-memories {
+        flex: 1 0 50%;
+    }
 }

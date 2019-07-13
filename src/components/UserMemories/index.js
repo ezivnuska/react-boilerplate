@@ -29,6 +29,7 @@ const UserMemories = ({ context, currentUser, user }) => (
             refetch={refetch}
             context={context}
             userId={userId}
+            unsigned
           />
         </div>
       )

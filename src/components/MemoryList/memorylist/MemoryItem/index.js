@@ -69,9 +69,10 @@ class MemoryItem extends Component {
 
   onDeleteClicked = e => {
     e.preventDefault()
-    const { deleteMemory, memory } = this.props
+    const { deleteMemory, memory, refetch } = this.props
     deleteMemory({ variables: { id: memory._id } })
     .then(() => {
+      refetch()
       toastr.success('Memory deleted.', 'Success!')
     })
   }

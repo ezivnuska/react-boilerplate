@@ -1,10 +1,16 @@
 import React, { Fragment, PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import MemoryItem from './memorylist/MemoryItem'
 import { MemoryModal } from 'components'
 
 import './MemoryList.scss'
 
 class MemoryList extends PureComponent {
+
+    static propTypes = {
+        context: PropTypes.object.isRequired,
+        refetch: PropTypes.func.isRequired,
+    }
 
     onModalClose = () => {
       const { context, refetch } = this.props
@@ -24,10 +30,10 @@ class MemoryList extends PureComponent {
                     {memories.map((memory, index) => (
                         <li key={index}>
                             <MemoryItem
+                                context={context}
                                 currentUser={currentUser}
                                 memory={memory}
                                 refetch={refetch}
-                                context={context}
                             />
                         </li>
                     ))}

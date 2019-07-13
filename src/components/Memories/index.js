@@ -33,10 +33,10 @@ class Memories extends PureComponent {
               {data.getAllSharedMemories.length
                 ? (
                   <MemoryList
-                    memories={data.getAllSharedMemories}
-                    currentUser={currentUser}
-                    refetch={refetch}
                     context={context}
+                    currentUser={currentUser}
+                    memories={data.getAllSharedMemories}
+                    refetch={refetch}
                   />
                 ) : <h3>Empty... Check back soon!</h3>
               }

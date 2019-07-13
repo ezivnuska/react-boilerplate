@@ -1,7 +1,12 @@
 @import '~scss/main';
 
 .icon-link {
+  color: #fff;
   
+  &:hover {
+    color: #000;
+  }
+
   .text {
     margin-left: $h-padding;
   }

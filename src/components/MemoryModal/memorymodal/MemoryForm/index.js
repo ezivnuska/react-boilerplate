@@ -74,6 +74,8 @@ class MemoryForm extends PureComponent {
         const { memory, currentUser } = this.props
         const { formData } = this.state
         const { year, month, day } = formData
+        console.log('memory', memory)
+        console.log('date', year, month, day)
         this.setState({
             options: {
                 year: getYearOptions(),
@@ -81,9 +83,9 @@ class MemoryForm extends PureComponent {
                 day: getDayOptions(year, month),
             },
             currentDate: {
-                year,
-                month,
-                day,
+                year: memory ? memory.year : year,
+                month: memory ?memory.month : month,
+                day: memory ? memory.day : day,
             },
             memory: memory || null,
             formData: {
@@ -92,9 +94,9 @@ class MemoryForm extends PureComponent {
                 title: memory ? memory.title : '',
                 body: memory ? memory.body : '',
                 shared: memory ? memory.shared : false,
-                month: month.toString(),
-                day: day.toString(),
-                year: year.toString(),
+                month: memory ? memory.month.toString() : month.toString(),
+                day: memory ? memory.day.toString() : day.toString(),
+                year: memory ? memory.year.toString() : year.toString(),
             },
         })
     }
@@ -256,7 +258,7 @@ class MemoryForm extends PureComponent {
                         <select
                             name='year'
                             type='select'
-                            defaultValue={year}
+                            defaultValue={formData.year || year}
                             onChange={e => this.handleChangeYear(e)}
                         >
                             {options.year.map(({ value, label }, index) => 
@@ -267,7 +269,7 @@ class MemoryForm extends PureComponent {
                         <select
                             name='month'
                             type='select'
-                            defaultValue={month}
+                            defaultValue={formData.month || month}
                             onChange={e => this.handleChangeMonth(e)}
                         >
                             {options.month.map(({ value, label }, index) =>
@@ -278,7 +280,7 @@ class MemoryForm extends PureComponent {
                         <select
                             name='day'
                             type='select'
-                            defaultValue={day}
+                            defaultValue={formData.day || day}
                             onChange={e => this.handleChangeDay(e)}
                         >
                             {options.day.map(({ value, label }, index) =>

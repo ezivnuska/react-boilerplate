@@ -8,7 +8,6 @@ import {
 import { withRouter } from 'react-router-dom'
 import toastr from 'toastr'
 import {
-  Heading,
   Spinner,
   TextEditor
 } from 'components'
@@ -72,7 +71,6 @@ class BioEditor extends PureComponent {
     const { email, username } = session.getCurrentUser
     return (
       <div id='bio-editor'>
-        <Heading level={2}>Bio</Heading>
         <Mutation
           mutation={EDIT_PROFILE}
           variables={{ email, bio }}
@@ -87,7 +85,11 @@ class BioEditor extends PureComponent {
             
             return (
               <Fragment>
-                <TextEditor value={bio} onUpdate={value => this.updateBio(value)} />
+                
+                <TextEditor
+                  value={bio}
+                  onUpdate={value => this.updateBio(value)}
+                />
 
                 <div className='form-buttons'>
                   {loading ? <Spinner /> : (

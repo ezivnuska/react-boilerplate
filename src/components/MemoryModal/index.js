@@ -16,6 +16,7 @@ const MemoryModal = ({ context, onClose, session, ...props }) => (
           currentUser={session.getCurrentUser}
           memory={context.memory}
           onComplete={onClose}
+          memory={context.memory}
         />
     </Modal>
 )

@@ -6,9 +6,9 @@ import './IconLink.scss'
 class IconLink extends PureComponent {
 
   render() {
-    const { children, iconClass, ...props } = this.props
+    const { children, className, iconClass, ...props } = this.props
     return (
-      <Link {...props} className='icon-link'>
+      <Link {...props} className={'icon-link' + (className ? ` ${className}` : '')}>
         {iconClass && <i className={iconClass}></i>}
         {children && <span className='text'>{children}</span>}
       </Link>

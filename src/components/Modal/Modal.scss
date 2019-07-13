@@ -76,17 +76,21 @@ body.ReactModal__Body--open {
 .modal-header {
   display: flex;
   align-items: center;
+  background: $sky-blue;
 
   > * {
     flex: 0 0 auto;
-  }
-
-  > *:first-child {
-    flex: 1 0 auto;
-  }
-
-  > *:last-child {
     padding: $v-padding $h-padding;
+  }
+
+  > .modal-heading {
+    flex: 1 0 auto;
+    color: #fff;
+    background: transparent;
+  }
+
+  .modal-close-button {
+    color: #fff;
   }
 }
 

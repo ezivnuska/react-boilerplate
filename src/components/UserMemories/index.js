@@ -19,24 +19,27 @@ const UserMemories = ({ context, currentUser, user }) => (
       if (error) return <div>Error: {error}</div>
       if (!data.getUserMemories) return null
       
+      const userId = user._id === currentUser._id ? null : user._id
+
       return (
         <div className='user-memories'>
-          
-          {!data.getUserMemories.length
-            ? <div className='placeholder'><p>Empty... Check back soon!</p></div>
-            : (
-              <MemoryList
-                currentUser={currentUser}
-                memories={data.getUserMemories}
-                refetch={refetch}
-                context={context}
-              />
-            )
-          }
+          <MemoryList
+            currentUser={currentUser}
+            memories={data.getUserMemories}
+            refetch={refetch}
+            context={context}
+            userId={userId}
+          />
         </div>
       )
     }}
   </Query>
 )
+
+UserMemories.propTypes = {
+  context: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+}
 
 export default UserMemories

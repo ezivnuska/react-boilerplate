@@ -105,7 +105,7 @@ class MemoryItem extends Component {
                 <MemorySignature
                   user={author}
                   date={this.formatDate(memory.month, memory.day, memory.year)}
-                  size={75}
+                  size={50}
                   linked
                 />
               </aside>

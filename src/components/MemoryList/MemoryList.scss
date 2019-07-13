@@ -1,5 +1,21 @@
 @import '~scss/main';
 
+.remember-button {
+    box-sizing: border-box;
+    display: block;
+    margin: 0 0 $v-padding;
+    padding: 1rem $h-padding;
+    text-align: center;
+    background: #000;
+    color: #fff;
+    border-radius: $button-border-radius;
+    cursor: pointer;
+  
+    @media only screen and (max-width: 480px) {
+        margin: 0 $h-padding $v-padding;
+    }
+}
+
 .memory-list {
     list-style-type: none;
     margin: 10px 0;

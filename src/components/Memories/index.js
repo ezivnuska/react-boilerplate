@@ -23,13 +23,6 @@ class Memories extends PureComponent {
           return (
             <div className='memories'>
               
-              <div
-                className='remember-button'
-                onClick={e => context.openModal('memory')}
-              >
-                Remember
-              </div>
-              
               {data.getAllSharedMemories.length
                 ? (
                   <MemoryList

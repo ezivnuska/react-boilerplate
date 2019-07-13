@@ -38,7 +38,7 @@ class User extends PureComponent {
 
   render() {
     const { username } = this.state
-    const { session } = this.props
+    const { context, session } = this.props
     const currentUser = session.getCurrentUser
     
     if (!username) return <div>Loading</div>
@@ -76,6 +76,7 @@ class User extends PureComponent {
                 )}
                 <Module title='Memories'>
                   <UserMemories
+                    context={context}
                     currentUser={currentUser}
                     user={data.profilePage}
                   />

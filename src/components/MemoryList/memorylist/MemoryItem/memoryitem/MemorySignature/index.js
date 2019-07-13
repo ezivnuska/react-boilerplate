@@ -9,7 +9,7 @@ import {
 
 import './MemorySignature.scss'
 
-const MemorySignature = ({ user, size, date }) => (
+const MemorySignature = ({ user, size }) => (
   <Link to={`/user/${user.username}`}>
     <div className='memory-signature'>
       <ProfileImage
@@ -23,8 +23,7 @@ const MemorySignature = ({ user, size, date }) => (
 
 MemorySignature.propTypes = ({
   user: PropTypes.object.isRequired,
-  date: PropTypes.string.isRequired,
-  size: PropTypes.number.isRequired,
+  size: PropTypes.number.isRequired
 })
 
 MemorySignature.defaultProps = ({

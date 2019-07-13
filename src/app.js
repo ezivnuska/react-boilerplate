@@ -28,7 +28,7 @@ const Root = ({ refetch, session, context }) => (
         <Profile {...props} session={session} refetch={refetch} context={context} />
       )} />
       <Route path='/user/:URL_Param' render={props => (
-        <User {...props} session={session} />
+        <User {...props} session={session} context={context} />
       )} />
       <Route path='/' render={props => (
         <NotFound {...props} refetch={refetch} />

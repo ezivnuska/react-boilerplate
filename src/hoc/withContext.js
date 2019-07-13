@@ -12,10 +12,10 @@ class Provider extends Component {
                 this.setState({ modal: null }),
             openModal: name =>
                 this.setState({ modal: name }),
-            openMemoryModal: memoryId =>
+            openMemoryModal: memory =>
                 this.setState({
-                    memory: memoryId,
-                    modal: 'memory'
+                    modal: 'memory',
+                    memory
                 }),
             closeMemoryModal: () =>
                 this.setState({

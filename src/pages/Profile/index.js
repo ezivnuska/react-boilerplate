@@ -108,6 +108,7 @@ class Profile extends PureComponent {
         </Query>
         <Module title='Memories'>
           <UserMemories
+            context={context}
             currentUser={getCurrentUser}
             user={getCurrentUser} />
         </Module>

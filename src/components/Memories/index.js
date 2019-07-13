@@ -3,25 +3,11 @@ import PropTypes from 'prop-types'
 import { GET_ALL_SHARED_MEMORIES } from 'queries'
 import { Query } from 'react-apollo'
 
-import MemoryModal from './memories/MemoryModal'
-import { MemoryList } from 'components'
-
-import { Spinner } from 'components'
+import { MemoryList, Spinner } from 'components'
 
 import './Memories.scss'
 
 class Memories extends PureComponent {
-
-  onEditClicked = memory => {
-    const { context } = this.props
-    context.openMemoryModal(memory)
-  }
-
-  onComplete = refetch => {
-    const { context } = this.props
-    refetch()
-    context.closeMemoryModal()
-  }
 
   render() {
     const { context, currentUser } = this.props
@@ -36,11 +22,6 @@ class Memories extends PureComponent {
           
           return (
             <div className='memories'>
-      
-              <MemoryModal
-                onComplete={() => this.onComplete(refetch)}
-                context={context}
-              />
               
               <div
                 className='remember-button'
@@ -55,7 +36,7 @@ class Memories extends PureComponent {
                     memories={data.getAllSharedMemories}
                     currentUser={currentUser}
                     refetch={refetch}
-                    onEdit={memory => this.onEditClicked(memory)}
+                    context={context}
                   />
                 ) : <h3>Empty... Check back soon!</h3>
               }

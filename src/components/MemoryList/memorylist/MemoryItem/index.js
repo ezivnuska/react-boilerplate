@@ -64,33 +64,27 @@ class MemoryItem extends Component {
     })
   }
 
-  onEdit = memoryId => {
-    this.toggleOptions()
-    // this.props.edit(memoryId)
-  }
-
   formatDate = (month, day, year) =>
     moment([year, month - 1, day]).format('MMM Do YYYY')
 
   onDeleteClicked = e => {
     e.preventDefault()
-    const { deleteMemory, memory, refetch } = this.props
+    const { deleteMemory, memory } = this.props
     deleteMemory({ variables: { id: memory._id } })
     .then(() => {
-      refetch()
       toastr.success('Memory deleted.', 'Success!')
     })
   }
 
-  onEditClicked = e => {
+  onEditClicked = (e, memory) => {
     e.preventDefault()
-    const { memory, onEdit } = this.props
-    onEdit(memory)
+    const { context } = this.props
+    context.openMemoryModal(memory)
   }
 
   render = () => {
     const { currentUser, memory } = this.props
-    const { body, date, title } = memory
+    const { body, title } = memory
     
     return (
       <Query
@@ -128,7 +122,7 @@ class MemoryItem extends Component {
                   date={this.formatDate(memory.month, memory.day, memory.year)}
                   isMine={isMine}
                   onDelete={e => this.onDeleteClicked(e)}
-                  onEdit={e => this.onEditClicked(e)}
+                  onEdit={e => this.onEditClicked(e, memory)}
                 />
               </div>
             </div>

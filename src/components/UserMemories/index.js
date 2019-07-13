@@ -7,7 +7,7 @@ import { MemoryList, Spinner } from 'components'
 
 import './UserMemories.scss'
 
-const UserMemories = ({ currentUser, user }) => (
+const UserMemories = ({ context, currentUser, user }) => (
   <Query
     query={GET_USER_MEMORIES}
     variables={{ userId: user._id }}
@@ -29,6 +29,7 @@ const UserMemories = ({ currentUser, user }) => (
                 currentUser={currentUser}
                 memories={data.getUserMemories}
                 refetch={refetch}
+                context={context}
               />
             )
           }

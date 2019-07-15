@@ -2,7 +2,7 @@ import React, { Fragment, PureComponent } from 'react'
 import { Query } from 'react-apollo'
 import { GET_BONDS } from 'queries'
 import { findIndex } from 'lodash'
-import { Menu, Spinner } from 'components'
+import { Spinner, SwitchMenu } from 'components'
 import UserItem from './userslist/UserItem'
 
 import './UsersList.scss'
@@ -40,7 +40,7 @@ class UsersList extends PureComponent {
         ]
         return (
             <Fragment>
-                <Menu
+                <SwitchMenu
                     itemHeight={40}
                     options={menuOptions}
                     inline

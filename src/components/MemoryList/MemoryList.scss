@@ -5,15 +5,15 @@
     display: block;
     padding: 1rem $h-padding;
     text-align: center;
-    background: #000;
+    background: lighten($sky-blue, 25%);
     color: #fff;
     border-radius: $button-border-radius;
     cursor: pointer;
     transition: background 0.25s linear;
-    
+
     &:hover {
-        color: #fff;
-        background: $sky-blue;
+        color: $sky-blue;
+        background: lighten($sky-blue, 50%);
     }
 }
 

@@ -61,10 +61,10 @@ input:-webkit-autofill {
 }
 
 .form {
-  margin: 0;
+  margin: 0 auto;
   // width: 100%;
   text-align: left;
-  border: 1px solid #ddd;
+  // border: 1px solid #ddd;
 
   @media only screen and (max-width: 480px) {
     border: none;

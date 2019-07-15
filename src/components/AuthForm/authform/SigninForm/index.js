@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { Mutation } from 'react-apollo'
 import { SIGNIN_USER } from 'queries'
 import * as Cookies from 'es-cookie'
-import { Form } from 'components'
+import { Form, FormCloud, FormInput } from 'components'
 
 import './SigninForm.scss'
 
@@ -64,22 +64,20 @@ class SigninForm extends PureComponent {
 
         {(signinUser, { data, loading, error }) => {
           return (
-            <Form
-              error={this.state.error}
-              onSubmit={event => this.handleSubmit(event, signinUser)}
-              title='Sign In'
-              disabled={loading || this.validateForm()}
-            >
+            <FormCloud title='Sign In'>
+              <Form
+                error={this.state.error}
+                onSubmit={event => this.handleSubmit(event, signinUser)}
+                title='Sign In'
+                disabled={loading || this.validateForm()}
+              >
 
-              <div className='form-input'>
-                <input type='email' name='email' placeholder='Email' value={email} onChange={this.handleChange} autoFocus />
-              </div>
+                <FormInput type='email' name='email' placeholder='email' value={email} onChange={this.handleChange} autoFocus />
 
-              <div className='form-input'>
-                <input type='password' name='password' placeholder='Password' value={password} onChange={this.handleChange} />
-              </div>
+                <FormInput type='password' name='password' placeholder='password' value={password} onChange={this.handleChange} />
 
-            </Form>
+              </Form>
+            </FormCloud>
           )
         }}
       </Mutation>

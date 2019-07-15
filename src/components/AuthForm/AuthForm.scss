@@ -1,3 +1,5 @@
+@import '~scss/main';
+
 #auth-form {
     text-align: center;
 
@@ -7,6 +9,15 @@
     
     .bottom-links {
         // border: 1px solid red;
+        color: lighten($sky-blue, 50%);
         text-align: center;
+
+        a {
+            color: lighten($sky-blue, 25%);
+
+            &:hover, &:visited {
+                color: #fff;
+            }
+        }
     }
 }

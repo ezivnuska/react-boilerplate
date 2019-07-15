@@ -1,0 +1,95 @@
+@import '~scss/main';
+
+.form-cloud {
+    position: relative;
+    margin: 0 auto 1rem;
+    overflow: visible;
+    max-width: 400px;
+
+    .form-cloud-fragment {
+
+        position: absolute;
+        top: 0;
+        right: 2rem;
+        left: 2.5rem;
+        bottom: 0.25rem;
+        border-radius: $cloud-border-radius;
+        border-bottom-left-radius: $cloud-border-radius * 2;
+        border-top-right-radius: $cloud-border-radius * 2;
+        background: #fff linear-gradient(
+            to right,
+            rgba(21, 114, 191, 0.25),
+            #fff 45%,
+            #fff 75%,
+            rgba(21, 114, 191, 0.25)
+
+        );
+        border: 2px solid #fff;
+        z-index: 10;
+
+        &:last-child {
+            top: 1rem;
+            right: 0;
+            bottom: 1rem;
+            left: 1rem;
+            height: unset;
+            z-index: 20;
+            border-top-right-radius: $cloud-border-radius * 2;
+            border-top-right-radius: $cloud-border-radius * 2;
+            border-bottom-left-radius: $cloud-border-radius * 2;
+            border-bottom-right-radius: $cloud-border-radius * 2;
+            background: linear-gradient(
+                170deg,
+                #fff 40%,
+                $sky-blue
+            );
+
+            > div {
+                margin: 2px 2px 4px 2px;
+                height: 100%;
+                background: #fff;
+                border-radius: $cloud-border-radius;
+                border-top-right-radius: $cloud-border-radius * 2;
+                border-bottom-left-radius: $cloud-border-radius * 2;
+                border-bottom-right-radius: $cloud-border-radius * 2;
+            }
+        }
+    }
+
+    .form-cloud-content {
+        position: relative;
+        padding: 1.5rem 2.5rem 2rem;
+        z-index: 100;
+        text-align: center;
+
+        > div {
+            margin: 3.5rem 0 0 0.25rem;
+            max-width: 420px;
+            line-height: 1rem;
+        }
+        
+        .form-cloud-heading {
+            display: block;
+            float: left;
+            margin: -2.25rem 1rem -0.25rem -2.5rem;
+            max-width: 60%;
+            min-height: $cloud-border-radius * 2;
+            color: $sky-blue;
+            border-radius: $cloud-border-radius;
+            background: linear-gradient(
+                to bottom,
+                $sky-blue,
+                transparent
+            );
+
+            h3 {
+                margin: 2px;
+                padding: 1rem 1.5rem;
+                font-size: 1.7rem;
+                line-height: 2.25rem;
+                background: #fff;
+                border-radius: $cloud-border-radius;
+            }
+        }
+    }
+}

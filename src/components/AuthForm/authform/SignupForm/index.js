@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { Mutation } from 'react-apollo'
 import { SIGNUP_USER } from 'queries'
 import * as Cookies from 'es-cookie'
-import { Form } from 'components'
+import { Form, FormCloud, FormInput } from 'components'
 
 import './SignupForm.scss'
 
@@ -70,28 +70,22 @@ class SignupForm extends PureComponent {
         {(signupUser, { data, loading, error }) => {
 
           return (
-            <Form
-              error={error || this.state.error}
-              onSubmit={event => this.handleSubmit(event, signupUser)}
-              title='Sign Up'
-              disabled={loading || this.validateForm()}
-            >
-              <div className='form-input'>
-                <input type='email' name='email' placeholder='Email' value={email} onChange={e => this.handleChange(e)} autoFocus />
-              </div>
-
-              <div className='form-input'>
-                <input type='text' name='username' placeholder='Username' value={username} onChange={e => this.handleChange(e)} />
-              </div>
-
-              <div className='form-input'>
-                <input type='password' name='password' placeholder='Password' value={password} onChange={e => this.handleChange(e)} />
-              </div>
-
-              <div className='form-input'>
-                <input type='password' name='passwordConfirm' placeholder='Password' value={passwordConfirm} onChange={e => this.handleChange(e)} />
-              </div>
-            </Form>
+            <FormCloud title='Sign Up'>
+              <Form
+                error={error || this.state.error}
+                onSubmit={event => this.handleSubmit(event, signupUser)}
+                disabled={loading || this.validateForm()}
+              >
+                <FormInput type='email' name='email' placeholder='email' value={email} onChange={e => this.handleChange(e)} autoFocus />
+                  
+                <FormInput type='text' name='username' placeholder='username' value={username} onChange={e => this.handleChange(e)} />
+                  
+                <FormInput type='password' name='password' placeholder='password' value={password} onChange={e => this.handleChange(e)} />
+                
+                <FormInput type='password' name='passwordConfirm' placeholder='confirm password' value={passwordConfirm} onChange={e => this.handleChange(e)} />
+                
+              </Form>
+            </FormCloud>
           )
         }}
       </Mutation>

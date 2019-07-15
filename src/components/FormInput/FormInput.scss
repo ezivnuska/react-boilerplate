@@ -1,0 +1,43 @@
+@import '~scss/main';
+
+.cloud-input {
+    display: block;
+    width: 100%;
+    margin: 0 2px 2rem 0;
+    text-align: center;
+    border-radius: $cloud-border-radius;
+    background: linear-gradient(
+        to right,
+        lighten($sky-blue, 25%) 15%,
+        lighten($sky-blue, 50%),
+        lighten($sky-blue, 25%) 85%,
+    );
+
+    input {
+        width: 98%;
+        margin: 1px auto;
+        padding: 1rem 1.5rem;
+        font-size: 1.5rem;
+        font-weight: 400;
+        font-style: normal;
+        color: $txtCol;
+        border: none;
+        border-radius: $cloud-border-radius;
+        background: linear-gradient(
+            to right,
+            lighten($sky-blue, 50%),
+            lighten($sky-blue, 65%) 25%,
+            lighten($sky-blue, 65%) 75%,
+            lighten($sky-blue, 50%)
+            
+            );
+            
+        &:hover,
+        &:focus {
+            background: lighten($sky-blue, 50%);
+        
+        // width: 100%;
+        // @include transition(all .4s ease-in-out);
+      }
+    }
+  }

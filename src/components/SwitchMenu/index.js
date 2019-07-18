@@ -20,8 +20,10 @@ class SwitchMenu extends PureComponent {
 
   handleClick = (e, onClick, index) => {
     e.preventDefault()
-    this.setState({ currentIndex: index })
-    onClick(index)
+    if (index !== this.state.currentIndex) {
+      this.setState({ currentIndex: index })
+      onClick(index)
+    }
   }
 
   render() {
@@ -37,7 +39,7 @@ class SwitchMenu extends PureComponent {
           {options.map((option, i) => (
             <span
               key={i}
-              className={'switch-menu-option'}
+              className={`switch-menu-option option-${i}` + (i === currentIndex ? ' active' : '')}
               style={{ height, lineHeight: (height - 3) + 'px' }}
               onClick={e => this.handleClick(e, option.onClick, i)}
             >

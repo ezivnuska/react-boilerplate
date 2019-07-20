@@ -8,8 +8,12 @@ class Provider extends Component {
         this.state = {
             modal: null,
             memory: null,
-            closeModal: () => 
-                this.setState({ modal: null }),
+            closeModal: () => {
+                this.setState({
+                    memory: null,
+                    modal: null
+                })
+            },
             openModal: name =>
                 this.setState({ modal: name }),
             openMemoryModal: memory =>
@@ -17,11 +21,6 @@ class Provider extends Component {
                     modal: 'memory',
                     memory
                 }),
-            closeMemoryModal: () =>
-                this.setState({
-                    memory: null,
-                    modal: null
-                })
         }
     }
 

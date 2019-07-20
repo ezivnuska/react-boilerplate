@@ -17,7 +17,7 @@ class MemoryList extends PureComponent {
     onModalClose = () => {
       const { context, refetch } = this.props
       refetch()
-      context.closeMemoryModal()
+      context.closeModal()
     }
 
     renderRememberButton = () => (

@@ -18,15 +18,13 @@ class TextEditor extends PureComponent {
                 { name: 'editing', groups: [ 'find', 'selection', 'editing' ] },
                 { name: 'paragraph', groups: [ 'list', 'blocks', 'indent', 'align', 'bidi', 'paragraph' ] }
             ],
-
             removeButtons: 'Underline,Subscript,Superscript,Cut,Copy,Paste,PasteText,PasteFromWord,Link,Unlink,Anchor,SpecialChar,Table,Maximize,Source,About,Styles,Format,Outdent,Indent',
-        
             format_tags: 'p;h1;h2;h3;pre',
-        
             removeDialogTabs: 'image:advanced;link:advanced',
-        
-            removePlugins: 'floatingspace, maximize, resize'
+            removePlugins: 'elementspath,floatingspace,maximize,resize',
+            resize_enabled: false
         })
+
         editor.on('change', e => this.onChange(e))
     }
 

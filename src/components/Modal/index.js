@@ -33,7 +33,7 @@ class Modal extends Component {
         isOpen={context.modal === this.state.name}
         {...props}
       >
-        {hasHeader &&
+        {hasHeader && (
           <header className='modal-header'>
             
             <Heading
@@ -50,7 +50,7 @@ class Modal extends Component {
                 onClick={() => context.closeModal()}
               />}
           </header>
-        }
+        )}
         <div className='modal-content'>
           {children}
         </div>

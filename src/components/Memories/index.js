@@ -11,7 +11,8 @@ const Memories  = ({ context, currentUser }) => (
   <Query query={GET_ALL_SHARED_MEMORIES}>
 
     {({ data, loading, error, refetch }) => {
-      
+      console.log('data', data)
+      console.log('loading', loading)
       if (loading) return <Spinner />
       if (error) return <div>Error: {error}</div>
       if (!data.getAllSharedMemories) return null

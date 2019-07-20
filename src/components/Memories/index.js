@@ -9,19 +9,19 @@ import './Memories.scss'
 
 class Memories extends PureComponent {
 
-  componentWillReceiveProps = nextProps => {
-    console.log('Memories:nextProps:', nextProps)
-  }
   render() {
     const { context, currentUser } = this.props
-    console.log('rendering Memories')
-    return (
-      <Query query={GET_ALL_SHARED_MEMORIES}>
     
-        {({ data, loading, error, networkStatus, refetch }) => {
-          console.log('networkStatus', networkStatus)
-          console.log('data', data)
-          console.log('loading', loading)
+    return (
+      <Query
+        notifyOnNetworkStatusChange={true}
+        query={GET_ALL_SHARED_MEMORIES}
+      >
+    
+        {({ data, error, networkStatus, refetch }) => {
+          
+          const loading = !(networkStatus === 7 || networkStatus === 8)
+
           if (loading) return <Spinner />
           if (error) return <div>Error: {error}</div>
           if (!data.getAllSharedMemories) return null

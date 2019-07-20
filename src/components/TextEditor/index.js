@@ -1,15 +1,32 @@
 import React, { PureComponent } from 'react'
 
+import './TextEditor.scss'
 
 class TextEditor extends PureComponent {
     state = {
         name: this.props.name || 'editor',
         value: this.props.value || ''
     }
-
+    
     componentDidMount() {
         const { name } = this.state
-        const editor = CKEDITOR.replace(name)
+
+        const editor = CKEDITOR.replace(name, {
+            toolbarGroups: [
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                { name: 'insert', groups: [ 'insert' ] },
+                { name: 'editing', groups: [ 'find', 'selection', 'editing' ] },
+                { name: 'paragraph', groups: [ 'list', 'blocks', 'indent', 'align', 'bidi', 'paragraph' ] }
+            ],
+
+            removeButtons: 'Underline,Subscript,Superscript,Cut,Copy,Paste,PasteText,PasteFromWord,Link,Unlink,Anchor,SpecialChar,Table,Maximize,Source,About,Styles,Format,Outdent,Indent',
+        
+            format_tags: 'p;h1;h2;h3;pre',
+        
+            removeDialogTabs: 'image:advanced;link:advanced',
+        
+            removePlugins: 'floatingspace, maximize, resize'
+        })
         editor.on('change', e => this.onChange(e))
     }
 
@@ -26,7 +43,14 @@ class TextEditor extends PureComponent {
 
     render() {
         const { onUpdate, value, ...props } = this.props
-        return <textarea name={this.state.name} defaultValue={this.state.value} {...props}></textarea>
+        return (
+            <textarea
+                id={this.state.name}
+                name={this.state.name}
+                defaultValue={this.state.value}
+                {...props}
+            ></textarea>
+        )
     }
 }
 

@@ -10,6 +10,7 @@ const assetURL = `${siteURL}/${assetPath}`
 const bucket = 'ezivnuska'
 const profileImagesURL = 'https://ezivnuska.s3-us-west-1.amazonaws.com'
 const profileImagesPath = 'user-uploads/profile-images'
+const userImagesPath = 'user-uploads/user-images'
 
 export default {
   isDev,
@@ -19,4 +20,5 @@ export default {
   assetURL,
   profileImagesPath,
   profileImagesURL,
+  userImagesPath,
 }

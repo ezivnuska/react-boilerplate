@@ -86,5 +86,13 @@
     flex-shrink: 1;
     min-width: 300px;
     order: 2;
+
+    p {
+      width: 100%;
+    }
+    img {
+      width: 100% !important;
+      height: auto !important;
+    }
   }
 }

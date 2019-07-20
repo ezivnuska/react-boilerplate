@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { compose, graphql, Query } from 'react-apollo'
 import { DELETE_MEMORY, GET_AUTHOR } from 'queries'
-import { NavLink } from 'react-router-dom'
 import toastr from 'toastr'
 import moment from 'moment'
 // import {
@@ -15,13 +14,9 @@ import moment from 'moment'
 // } from 'store/selectors'
 
 import MemorySignature from './memoryitem/MemorySignature'
-import MemoryHeader from './memoryitem/MemoryHeader'
-import MemoryBody from './memoryitem/MemoryBody'
 
 import {
   Cloud,
-  Heading,
-  IconLink,
   Spinner
 } from 'components'
 

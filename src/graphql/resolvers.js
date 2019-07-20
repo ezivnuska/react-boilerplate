@@ -100,7 +100,7 @@ const resolvers = {
         .sort({ year: -1, month: -1, day: -1 })
         // .select('_id author year month day title body shared')
         // .populate('author', '_id username profileImage')
-
+        console.log('memories found', memories)
         return memories
       } catch(e) {
         throw new Error('Error: ', e)

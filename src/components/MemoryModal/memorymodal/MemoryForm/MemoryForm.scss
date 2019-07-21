@@ -3,10 +3,22 @@
 form#memory-form {
   box-sizing: border-box;
   
+  .form-input {
+    &.error {
+      border: 1px solid red;
+    }
+  }
+
   .control-group {
     display: flex;
     flex-flow: row nowrap;
     border: 1px solid #333;
+    background: linear-gradient(
+      to right,
+      $form-input-bg-color,
+      $form-input-bg-color-shadow,
+      $form-input-bg-color
+    );
 
     .select-wrapper {
       display: inline-block;
@@ -16,27 +28,27 @@ form#memory-form {
         padding: $v-padding 0;
         width: 100%;
         text-align-last: center;
-        background: $form-input-bg-color;
+        font-weight: 500;
+        background: none;
         border: none;
         border-right: 1px solid #aaa;
         cursor: pointer;
+
+        &:focus {
+          background: rgba(255, 255, 255, 30%);
+          font-weight: 900;
+        }
       }
 
-      &:first-child {
+      &:hover {
         select {
-          background: linear-gradient(
-            to right,
-            $form-input-bg-color-shadow, $form-input-bg-color
-          );
+          background: rgba(255, 255, 255, 30%);
+          font-weight: 900;
         }
       }
 
       &:last-child {
         select {
-          background: linear-gradient(
-            to right,
-            $form-input-bg-color, $form-input-bg-color-shadow
-          );
           border: none;
         }
       }

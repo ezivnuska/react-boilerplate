@@ -1,6 +1,16 @@
+
+
 textarea {
     img {
         width: 100% !important;
         height: auto !important;
+    }
+}
+
+#file-upload {
+    visibility: hidden;
+
+    &:focus {
+        visibility: visible;
     }
 }

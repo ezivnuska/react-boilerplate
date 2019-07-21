@@ -57,11 +57,12 @@ const initialState = {
         month: [],
         day: []
     },
+    error: false,
     formData: {
         year: today.year(),
         month: today.month() + 1,
         day: today.date(),
-    },
+    }
 }
 
 class MemoryForm extends PureComponent {
@@ -187,10 +188,22 @@ class MemoryForm extends PureComponent {
         })
     }
 
+    isValidBody = value => {
+        const error = !(value && value.length)
+        this.setState({ error })
+        return error ? false : true
+    }
+
     handleSubmit = e => {
         e.preventDefault()
+        const { formData } = this.state
+        
+        if (!this.isValidBody(formData.body))
+            return
+
         const { addMemory, memory, onComplete } = this.props
-        addMemory({ variables: this.state.formData })
+
+        addMemory({ variables: formData })
         .then(({ data }) => {
             onComplete()
             if (data.addMemory)
@@ -221,18 +234,22 @@ class MemoryForm extends PureComponent {
     }
 
     onChangeBody = value => {
+        if (!this.isValidBody(value))
+            return
+
         const formData = {
             ...this.state.formData,
             body: value
         }
+
         this.setState({ formData })
     }
 
     render() {
-        const { currentDate, formData, options } = this.state
+        const { currentDate, error, formData, options } = this.state
         const { title, body, shared } = formData
         const { day, month, year } = currentDate
-
+        
         return (
             <Form
                 id='memory-form'
@@ -289,7 +306,7 @@ class MemoryForm extends PureComponent {
                     </div>
                 </div>
 
-                <div className='form-input'>
+                <div className={'form-input' + (error ? ' error' : '')}>
                     <TextEditor
                         value={body}
                         name='body'

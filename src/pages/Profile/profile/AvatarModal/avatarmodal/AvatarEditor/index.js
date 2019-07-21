@@ -177,9 +177,9 @@ class AvatarEditor extends Component {
             }
         
             const ctx = canvas.getContext('2d')
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
             canvas.width = image.width
             canvas.height = image.height
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
             ctx.drawImage(image, 0, 0, image.width, image.height)
         
             const dataURL = canvas.toDataURL('image/png;base64;')

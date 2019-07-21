@@ -100,15 +100,16 @@ const resolvers = {
         .sort({ year: -1, month: -1, day: -1 })
         // .select('_id author year month day title body shared')
         // .populate('author', '_id username profileImage')
-        console.log('memories found', memories)
+
         return memories
       } catch(e) {
         throw new Error('Error: ', e)
       }
     },
-    getUserMemories: async (root, { userId }, { Memory }) => {
+    getUserMemories: async (root, { userId }, { currentUser, Memory }) => {
       try {
-        const memories = await Memory.find({ author: userId, shared: true })
+        const userIsCurrentUser = userId === currentUser._id
+        const memories = await Memory.find({ author: userId, shared: !userIsCurrentUser })
         .sort({ year: -1, month: -1, day: -1 })
         // .select('_id author year month day title body shared')
         // .populate('author', '_id username profileImage')

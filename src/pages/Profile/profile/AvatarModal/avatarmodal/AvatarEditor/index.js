@@ -228,7 +228,7 @@ class AvatarEditor extends Component {
         const formData = new FormData()
         formData.append('file', this.state.blob)
         
-        axios.post('/upload', formData)
+        axios.post('/upload/avatar', formData)
         .then(({ data: { newFilename } }) => {
             this.setState({ uploading: false, uploaded: true})
             this.updateProfileImage(newFilename)
@@ -340,7 +340,7 @@ class AvatarEditor extends Component {
                                         width: size + 'px',
                                         height: size + 'px',
                                         lineHeight: size + 'px',
-                                        background: profileImage ? `url(${webConfig.profileImagesURL}/${webConfig.profileImagesPath}/${profileImage})` : `url(${webConfig.assetURL}/graphics/default-avatar.png)`,
+                                        background: profileImage ? `url(${webConfig.bucketUrl}/${webConfig.profileImagesPath}/${profileImage})` : `url(${webConfig.assetURL}/graphics/default-avatar.png)`,
                                         backgroundSize: 'cover'
                                     }}
                                 >

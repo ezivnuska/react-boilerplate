@@ -21,6 +21,7 @@ import HTML from 'helpers/renderer'
 import AWS from 'aws-sdk'
 import webConfig from 'config'
 import avatarRoutes from 'api/avatar'
+import imageRoutes from 'api/image'
 import server from './src/graphql'
 
 AWS.config.update({
@@ -141,6 +142,7 @@ app.post('/password-reset', (req, response) => {
   })
 })
 
-app.post('/upload', avatarRoutes.uploadAvatar)
+app.post('/upload/avatar', avatarRoutes.uploadAvatar)
+app.post('/upload/image', imageRoutes.uploadImage)
 
 app.listen(PORT, () => console.log(`App running on port ${PORT}`))

@@ -26,7 +26,7 @@ const storage = multerS3({
 })
 
 export default {
-  uploadAvatar: async (req, res, next) => {
+  uploadImage: async (req, res, next) => {
     const upload = multer({
       storage,
       limits: {
@@ -45,10 +45,10 @@ export default {
         if (err)
           return res.status(400).json({ error: `Error uploading file. ${err}` })
         
-        const { file, currentUser } = req
+        const { currentUser, file } = req
         const { key, bucket } = file
         const thumbPath = `${bucket}/small`
-
+        
         s3.getObject({
           Bucket: bucket,
           Key: key
@@ -58,9 +58,9 @@ export default {
 
           im(data.Body)
             .autoOrient()
-            .resize(100, 100)
+            .resize(300, 300)
             .gravity('Center')
-            .extent(100, 100)
+            .extent(300, 300)
             .quality(75)
             .noProfile()
             .toBuffer('png', (err, buffer) => {
@@ -76,44 +76,48 @@ export default {
                 if (err) return res.json({
                   error: `Unable to resize ${bucket}/${key} and upload to ${thumbPath}/${key} due to an error: ${err}`
                 })
-
-                User.findOne({ email: currentUser.email }, (err, user) => {
-                  if (err) return res.json({ error: `Error finding user with email ${currentUser.email}` })
-                  
-                  if (!user) return res.json({ error: 'Error: no user found' })
-                  
-                  // if previous avatar
-                  if (user.profileImage) {
-
-                    // delete old avatar files
-                    s3.deleteObject({
-                      Bucket: bucket,
-                      Key: user.profileImage
-                    }, err => {
-                      if (err)
-                        return res.json({ error: `Error deleting avatar: ${err}` })
-  
-                      s3.deleteObject({
-                        Bucket: thumbPath,
-                        Key: user.profileImage
-                      }, err => {
-                        if (err) return res.json({
-                          error: `Error deleting thumb: ${err}`
-                        })
-                        
-                        return res.json({
-                          newFilename: key
-                        })
-                      })
-                    })
-                  } else {
-                    // if no previous avatar exists
-                    // return new avatar key
-                    return res.json({
-                      newFilename: key
-                    })
-                  }
+                
+                return res.json({
+                  newFilename: key
                 })
+
+                // User.findOne({ email: currentUser.email }, (err, user) => {
+                //   if (err) return res.json({ error: `Error finding user with email ${currentUser.email}` })
+                  
+                //   if (!user) return res.json({ error: 'Error: no user found' })
+                  
+                //   // if previous avatar
+                //   if (user.profileImage) {
+
+                //     // delete old avatar files
+                //     s3.deleteObject({
+                //       Bucket: bucket,
+                //       Key: user.profileImage
+                //     }, err => {
+                //       if (err)
+                //         return res.json({ error: `Error deleting avatar: ${err}` })
+  
+                //       s3.deleteObject({
+                //         Bucket: thumbPath,
+                //         Key: user.profileImage
+                //       }, err => {
+                //         if (err) return res.json({
+                //           error: `Error deleting thumb: ${err}`
+                //         })
+                        
+                //         return res.json({
+                //           newFilename: key
+                //         })
+                //       })
+                //     })
+                //   } else {
+                //     // if no previous avatar exists
+                //     // return new avatar key
+                //     return res.json({
+                //       newFilename: key
+                //     })
+                //   }
+                // })
               })
             })
         })

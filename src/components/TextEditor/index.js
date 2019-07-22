@@ -1,17 +1,31 @@
-import React, { Fragment, PureComponent } from 'react'
+import React, { Fragment, Component } from 'react'
+import axios from 'axios'
 import EXIF from 'exif-js'
+import webConfig from 'config'
 
 import './TextEditor.scss'
 
-class TextEditor extends PureComponent {
-    state = {
-        name: this.props.name || 'editor',
-        value: this.props.value || '',
-        images: []
+class TextEditor extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: this.props.name || 'editor',
+            value: this.props.value || ''
+        }
     }
     
     componentDidMount() {
         const { name } = this.state
+
+        CKEDITOR.stylesSet.add( 'bodyMargin', [
+            {
+                name: 'Body Margin',
+                element: 'body',
+                attributes: {
+                    style: 'margin: 0;'
+                }
+            }
+        ])
 
         const editor = CKEDITOR.replace(name, {
             toolbarGroups: [
@@ -27,6 +41,7 @@ class TextEditor extends PureComponent {
             removePlugins: 'elementspath,floatingspace,maximize,resize',
             resize_enabled: false,
             filebrowserBrowseUrl: 'javascript:void(0)',
+            bodyId: 'editor-body'
         })
 
         editor.on('change', e => this.onChange(e))
@@ -36,6 +51,13 @@ class TextEditor extends PureComponent {
             editorInstance.commands.image.exec = editor => this.insertImage()
         })
         
+    }
+
+    shouldComponentUpdate = (nextProps, nextState) => {
+        if (this.state.uploading && nextState.uploaded) {
+            return true
+        }
+        return true
     }
 
     insertImage = () => {
@@ -52,18 +74,15 @@ class TextEditor extends PureComponent {
     }
 
     onChange = ({ editor }) => {
-        const { images, name } = this.state
+        const { name } = this.state
         const { onUpdate } = this.props
-        const filteredImages = images.filter((image, i) => {
-            const editor = CKEDITOR.instances[name]
-            return editor.document.getById(`temp-${i}`) !== null
-        })
+        // const filteredImages = images.filter((image, i) => {
+        //     const editor = CKEDITOR.instances[name]
+        //     return editor.document.getById(`temp-${i}`) !== null
+        // })
         
         const value = editor.getData()
-        this.setState({
-            images: filteredImages,
-            value
-        })
+        this.setState({ value })
 
         onUpdate(value)
     }
@@ -142,7 +161,8 @@ class TextEditor extends PureComponent {
     }
 
     resizeImage = src => {
-        const { name, images } = this.state
+        const { name } = this.state
+        
         const MAX_SIZE = 600
         const image = new Image()
         image.onload = () => {
@@ -166,25 +186,36 @@ class TextEditor extends PureComponent {
             ctx.drawImage(image, 0, 0, image.width, image.height)
         
             const dataUrl = canvas.toDataURL('image/png;base64;')
+            const blob = this.dataURItoBlob(dataUrl)
             
-            const editor = CKEDITOR.instances[name]
-            const img = new CKEDITOR.dom.element('img')
-            img.setAttributes({
-                src: dataUrl,
-                id: `temp-${images.length}`
-            })
-            editor.insertElement(img)
-            
-            this.setState({
-                images: [...images, dataUrl],
-                resizing: false,
-                resized: true
-            })
+            this.uploadImage(blob)
         }
 
-        this.setState({ resizing: true, resized: false })
-
         image.src = src
+    }
+
+    uploadImage = blob => {
+        
+        this.setState({ uploading: true, uploaded: false })
+    
+        const formData = new FormData()
+        formData.append('file', blob)
+        
+        axios.post('/upload/image', formData)
+        .then(({ data: { newFilename } }) => {
+            this.setState({ uploading: false, uploaded: true})
+            // this.updateProfileImage(newFilename)
+            console.log('newFilename', newFilename)
+            
+            const editor = CKEDITOR.instances[this.state.name]
+            const imageContainer = new CKEDITOR.dom.element('div')
+            imageContainer.setStyle('text-align', 'center')
+            const img = new CKEDITOR.dom.element('img')
+            img.setAttribute('src', `${webConfig.bucketUrl}/${webConfig.userImagesPath}/small/${newFilename}`)
+            img.setStyle('margin', '0 auto')
+            imageContainer.append(img)
+            editor.insertElement(imageContainer)
+        })
     }
 
     onInputChanged = e => {

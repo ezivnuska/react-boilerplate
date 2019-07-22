@@ -1,6 +1,8 @@
 import { gql } from 'apollo-server-express'
 
 const typeDefs = gql`
+  scalar Date
+
   type User {
     _id: ID,
     password: String!
@@ -42,6 +44,8 @@ const typeDefs = gql`
     title: String
     body: String!
     shared: Boolean
+    createdAt: Date!
+    updatedAt: Date!
   }
 
   type Query {
@@ -56,6 +60,7 @@ const typeDefs = gql`
     getAllSharedMemories: [Memory]
     getUserMemories(userId: ID!): [Memory]
     getAuthor(userId: ID!): User
+    getBondedMemories: [Memory]
   }
 
   type Mutation {

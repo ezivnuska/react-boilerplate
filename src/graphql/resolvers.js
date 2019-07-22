@@ -106,11 +106,54 @@ const resolvers = {
         throw new Error('Error: ', e)
       }
     },
+    getBondedMemories: async (root, args, { Bond, currentUser, Memory }) => {
+      
+      if (!currentUser)
+        throw new Error('Error fetching bonded memories. currentUser not found.')
+      
+      try {
+        const bonds = await Bond.find({
+          confirmed: true,
+          $or: [
+            { sender: currentUser._id },
+            { responder: currentUser._id },
+          ],
+        })
+        .select('sender responder')
+
+        const authors = bonds.map(bond => {
+          return (bond.sender == currentUser._id) ? bond.responder : bond.sender;
+        })
+
+        const memories = await Memory.find({
+          $and: [
+            {
+              $or: [
+                { author: { $in: authors }, shared: true },
+                { author: currentUser._id },
+              ]
+            }
+          ]
+        })
+        .sort({ year: -1, month: -1, day: -1, createdAt: -1, updatedAt: -1 })
+        
+        return memories
+
+      } catch (e) {
+        throw new Error('Error fetching bonded memories', e)
+      }
+    },
     getUserMemories: async (root, { userId }, { currentUser, Memory }) => {
       try {
         const userIsCurrentUser = userId === currentUser._id
-        const memories = await Memory.find({ author: userId, shared: !userIsCurrentUser })
-        .sort({ year: -1, month: -1, day: -1 })
+        let memories
+        if (userIsCurrentUser)
+          memories = await Memory.find({ author: userId })
+          .sort({ year: -1, month: -1, day: -1 })
+        else {
+          memories = await Memory.find({ author: userId, shared: true })
+          .sort({ year: -1, month: -1, day: -1 })
+        }
         // .select('_id author year month day title body shared')
         // .populate('author', '_id username profileImage')
 

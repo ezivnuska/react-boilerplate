@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { GET_ALL_SHARED_MEMORIES } from 'queries'
+import { GET_BONDED_MEMORIES } from 'queries'
 import { Query } from 'react-apollo'
 
 import { MemoryList, Spinner } from 'components'
@@ -15,26 +15,27 @@ class Memories extends PureComponent {
     return (
       <Query
         notifyOnNetworkStatusChange={true}
-        query={GET_ALL_SHARED_MEMORIES}
+        query={GET_BONDED_MEMORIES}
       >
     
         {({ data, error, networkStatus, refetch }) => {
           
           const loading = !(networkStatus === 7 || networkStatus === 8)
-
+          const memories = data.getBondedMemories
+          
           if (loading) return <Spinner />
           if (error) return <div>Error: {error}</div>
-          if (!data.getAllSharedMemories) return null
+          if (!memories) return null
           
           return (
             <div className='memories'>
               
-              {data.getAllSharedMemories.length
+              {memories.length
                 ? (
                   <MemoryList
                     context={context}
                     currentUser={currentUser}
-                    memories={data.getAllSharedMemories}
+                    memories={memories}
                     refetch={refetch}
                   />
                 ) : <h3>Empty... Check back soon!</h3>

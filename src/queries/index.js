@@ -264,7 +264,24 @@ export const GET_ALL_SHARED_MEMORIES = gql`
       shared
     }
   }
-` 
+`
+
+export const GET_BONDED_MEMORIES = gql`
+  query {
+    getBondedMemories {
+      _id
+      author
+      day
+      month
+      year
+      title
+      body
+      shared
+      createdAt
+      updatedAt
+    }
+  }
+`
   
 export const GET_USER_MEMORIES = gql`
   query($userId: ID!) {

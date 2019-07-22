@@ -97,22 +97,21 @@ class MemoryItem extends Component {
           return author ? (
             <div className='memory-item'>
               {!unsigned && (
-                <Fragment>
-                  <aside>
-                    <MemorySignature
-                      user={author}
-                      date={this.formatDate(memory.month, memory.day, memory.year)}
-                      size={50}
-                      linked
-                    />
-                  </aside>
+                <aside>
 
                   <div className='bubbles'>
                     <div className='bubble' />
                     <div className='bubble' />
-                    <div className='bubble' />
                   </div>
-                </Fragment>
+                  
+                  <MemorySignature
+                    user={author}
+                    date={this.formatDate(memory.month, memory.day, memory.year)}
+                    size={50}
+                    linked
+                  />
+                  
+                </aside>
               )}
 
               <div className='memory-content'>

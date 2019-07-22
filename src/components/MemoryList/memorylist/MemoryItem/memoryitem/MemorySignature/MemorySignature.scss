@@ -1,30 +1,53 @@
 @import '~scss/main';
 
 .memory-signature {
-  display: flex;
-  flex-direction: row-reverse;
-  margin-bottom: $v-padding;
+  display: block;
   overflow: hidden;
-  text-align: left;
-  flex-wrap: wrap;
+  text-align: right;
 
   > * {
-    display: inline-block;
-    flex: 0 0 auto;
+    display: block;
   }
 
-  @media only screen and (max-width: 480px) {
-    flex-direction: row;
+  a {
+    h3, &:visited & {
+      color: lighten($sky-blue, 25%);
+    }
+
+    &:hover {
+      h3 {
+        color: #fff;
+      }
+    }
+  }
+
+  .username {
+    padding: 0 0 0 1rem;
+    text-align: right;
+    vertical-align: super;
   }
 
   .profile-image {
-    // display: inline-block;
-    margin: 0 1rem;
+    margin-right: 0;
     border-radius: $border-radius;
 
     &.small {
       // width: 30px;
       // height: auto;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    display: inline-block;
+    text-align: left;
+
+    a {
+      display: block;
+      line-height: unset;
+      > * {
+        display: inline-block;
+        text-align: left;
+      }
     }
   }
 

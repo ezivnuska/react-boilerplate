@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -10,15 +10,23 @@ import {
 import './MemorySignature.scss'
 
 const MemorySignature = ({ user, size }) => (
-  <Link to={`/user/${user.username}`}>
-    <div className='memory-signature'>
+  <div className='memory-signature'>
+    <Link to={`/user/${user.username}`}>
+      
       <ProfileImage
         src={user.profileImage}
         size={size}
       />
-      {user.username}
-    </div>
-  </Link>
+      
+      <Heading
+        level={3}
+        className='username'
+      >
+        {user.username}
+      </Heading>
+
+    </Link>
+  </div>
 )
 
 MemorySignature.propTypes = ({

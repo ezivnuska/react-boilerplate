@@ -8,6 +8,7 @@ textarea {
 }
 
 #file-upload {
+    display: none;
     visibility: hidden;
 
     &:focus {

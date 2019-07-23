@@ -78,9 +78,21 @@
     p {
       width: 100%;
     }
+
     img {
-      width: 100% !important;
+      width: auto;
+      max-width: 100% !important;
       height: auto !important;
+    }
+
+    ul {
+      margin: 0 0 0 1rem;
+      padding: 0 0 0 1rem;
+      list-style-type: disc;
+      li {
+        padding: 0 0 0.5rem 0;
+        line-height: 2rem;
+      }
     }
   }
 }

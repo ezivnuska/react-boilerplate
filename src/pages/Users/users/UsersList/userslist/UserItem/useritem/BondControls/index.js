@@ -62,6 +62,7 @@ class BondControls extends PureComponent {
     const { deleteBond, removeBond, user } = this.props
     return (
       <BondControl
+        type='forget'
         height={30}
         onClick={async () => {
           
@@ -82,6 +83,7 @@ class BondControls extends PureComponent {
     const { addBond, user } = this.props
     return (
       <BondControl
+        type='connect'
         height={30}
         onClick={async () => {
           
@@ -101,6 +103,7 @@ class BondControls extends PureComponent {
     const { cancelBond, deleteBond, user } = this.props
     return (
       <BondControl
+        type='cancel'
         height={30}
         onClick={async () => {
           
@@ -125,6 +128,7 @@ class BondControls extends PureComponent {
       <Fragment>
         <li key={1}>
           <BondControl
+            type='confirm'
             height={30}
             onClick={async () => {
               
@@ -141,6 +145,7 @@ class BondControls extends PureComponent {
         </li>
         <li key={2}>
           <BondControl
+            type='decline'
             height={30}
             onClick={async () => {
 

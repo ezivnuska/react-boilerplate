@@ -16,16 +16,18 @@ class TextEditor extends Component {
     
     componentDidMount() {
         const { name } = this.state
-
-        CKEDITOR.stylesSet.add( 'bodyMargin', [
-            {
-                name: 'Body Margin',
-                element: 'body',
-                attributes: {
-                    style: 'margin: 0;'
+        
+        if (!CKEDITOR.stylesSet.get('body')) {
+            CKEDITOR.stylesSet.add('body', [
+                {
+                    name: 'Body',
+                    element: 'body',
+                    attributes: {
+                        style: 'margin: 0;'
+                    }
                 }
-            }
-        ])
+            ])
+        }
 
         const editor = CKEDITOR.replace(name, {
             toolbarGroups: [

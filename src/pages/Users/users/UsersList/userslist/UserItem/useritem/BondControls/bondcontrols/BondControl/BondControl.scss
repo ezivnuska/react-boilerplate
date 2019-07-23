@@ -3,5 +3,21 @@
 .bond-control {
   // border-radius: 0;
   display: block;
+  padding: 1rem;
+  background: #fff;
+  // background: lighten($sky-blue, 25%);
+  border-width: 1px;
+  border-style: solid;
+  color: #fff;
   cursor: pointer;
+  
+  &.connect, &.confirm {
+    background: green;
+    border-color:  darken(green, 50%);
+  }
+
+  &.forget, &.cancel, &.decline {
+    background: #900;
+    border-color: darken(#900, 50%);
+  }
 }
